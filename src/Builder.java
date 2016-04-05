@@ -188,6 +188,8 @@ public class Builder {
 		JLabel lblPressFFor = new JLabel("Press F1 for Help");
 		lblPressFFor.setFont(new Font("Lucida Grande", Font.ITALIC, 13));
 		
+		JButton btnChangeLevel = new JButton("New Level");
+		
 		
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
@@ -222,14 +224,15 @@ public class Builder {
 									.addGap(6)
 									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 										.addGroup(groupLayout.createSequentialGroup()
-											.addComponent(setComboBox, 0, 80, Short.MAX_VALUE)
+											.addComponent(setComboBox, 0, 86, Short.MAX_VALUE)
 											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(spinner_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-											.addGap(191))
-										.addGroup(groupLayout.createSequentialGroup()
-											.addComponent(levelComboBox, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(btnGenerate))))
+											.addComponent(spinner_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+										.addComponent(levelComboBox, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE))
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+										.addComponent(btnChangeLevel, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+										.addComponent(btnGenerate, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE))
+									.addGap(77))
 								.addComponent(board, GroupLayout.PREFERRED_SIZE, 520, GroupLayout.PREFERRED_SIZE)
 								.addComponent(inventory, GroupLayout.PREFERRED_SIZE, 575, GroupLayout.PREFERRED_SIZE))
 							.addPreferredGap(ComponentPlacement.RELATED)))
@@ -255,7 +258,7 @@ public class Builder {
 							.addGap(6))))
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(toolBar, GroupLayout.DEFAULT_SIZE, 742, Short.MAX_VALUE)
+					.addComponent(toolBar, GroupLayout.DEFAULT_SIZE, 743, Short.MAX_VALUE)
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -281,13 +284,17 @@ public class Builder {
 								.addComponent(btnTest)
 								.addComponent(btnCreate)
 								.addComponent(levelComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnGenerate))
+								.addComponent(btnChangeLevel))
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addComponent(lblBullPin)
 								.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-									.addComponent(spinner_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-									.addComponent(setComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+									.addComponent(setComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addGroup(groupLayout.createSequentialGroup()
+										.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+											.addComponent(btnGenerate)
+											.addComponent(spinner_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+										.addPreferredGap(ComponentPlacement.RELATED))))
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addGroup(groupLayout.createSequentialGroup()
 									.addPreferredGap(ComponentPlacement.RELATED)
@@ -376,7 +383,7 @@ public class Builder {
 		frame.getContentPane().setLayout(groupLayout);
 	}
 	
-	 public static boolean isCellVisible(JTable table, int rowIndex, int vColIndex) {
+	/* public static boolean isCellVisible(JTable table, int rowIndex, int vColIndex) {
 		    if (!(table.getParent() instanceof JViewport)) {
 		      return false;
 		    }
@@ -393,4 +400,5 @@ public class Builder {
 		    rect.setLocation(rect.x - pt.x, rect.y - pt.y);
 		    viewport.scrollRectToVisible(rect);
 		  }
+		  */
 }
