@@ -120,22 +120,22 @@ public class LevelSelection {
 		JButton button_11 = new JButton("3");
 		panel_1.add(button_11);
 		
-		JLabel label_12 = new JLabel("\u2605     ");
+		JLabel label_12 = new JLabel("         ");
 		panel_1.add(label_12);
 		
 		JButton button_12 = new JButton("4");
 		panel_1.add(button_12);
 		
-		JLabel lblnoStars = new JLabel("(no stars)");
+		JLabel lblnoStars = new JLabel("locked    ");
 		lblnoStars.setFont(new Font("Lucida Grande", Font.PLAIN, 8));
 		panel_1.add(lblnoStars);
 		
 		JButton button_13 = new JButton("5");
 		panel_1.add(button_13);
 		
-		JLabel label_14 = new JLabel("(no stars)");
-		label_14.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
-		panel_1.add(label_14);
+		JLabel lblLocked_2 = new JLabel("locked   ");
+		lblLocked_2.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
+		panel_1.add(lblLocked_2);
 		
 		JButton button_4 = new JButton("1");
 		panel.add(button_4);
@@ -158,15 +158,15 @@ public class LevelSelection {
 		JButton button_7 = new JButton("4");
 		panel.add(button_7);
 		
-		JLabel label_8 = new JLabel("\u2605\u2605   ");
+		JLabel label_8 = new JLabel("          ");
 		panel.add(label_8);
 		
 		JButton button_8 = new JButton("5");
 		panel.add(button_8);
 		
-		JLabel label_9 = new JLabel("(no stars)");
-		label_9.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
-		panel.add(label_9);
+		JLabel lblLocked_1 = new JLabel("locked    ");
+		lblLocked_1.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
+		panel.add(lblLocked_1);
 		
 		JButton btnNewButton = new JButton("1");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -197,13 +197,14 @@ public class LevelSelection {
 		JButton button_2 = new JButton("4");
 		panel_2.add(button_2);
 		
-		JLabel label_1 = new JLabel("\u2605\u2605   ");
-		panel_2.add(label_1);
+		JLabel lblLocked = new JLabel("            ");
+		lblLocked.setFont(new Font("Lucida Grande", Font.PLAIN, 8));
+		panel_2.add(lblLocked);
 		
 		JButton button_3 = new JButton("5");
 		panel_2.add(button_3);
 		
-		JLabel lblNoStars = new JLabel("(no stars)");
+		JLabel lblNoStars = new JLabel("locked    ");
 		lblNoStars.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
 		panel_2.add(lblNoStars);
 		frame.getContentPane().setLayout(groupLayout);

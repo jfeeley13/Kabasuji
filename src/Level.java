@@ -31,12 +31,12 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JToggleButton;
 import javax.swing.JSplitPane;
+import javax.swing.JPanel;
 
 
 public class Level {
 
 	private JFrame frame;
-	private JTable board;
 	private JTable table_c;
 	private JTable table;
 
@@ -69,32 +69,9 @@ public class Level {
 	private void initialize() {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(UIManager.getColor("Desktop.background"));
-		frame.setSize(600,500);
+		frame.setBounds(100, 100, 760, 550);
+
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		board = new JTable();
-		board.setRowSelectionAllowed(false);
-		board.setBackground(UIManager.getColor("FormattedTextField.inactiveForeground"));
-		board.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null, null},
-			},
-			new String[] {
-				"New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column"
-			}
-		));
-		board.setBorder(new LineBorder(new Color(0, 0, 0)));
 		
 		JToolBar toolBar = new JToolBar();
 		toolBar.setBackground(UIManager.getColor("MenuBar.selectionBackground"));
@@ -107,7 +84,7 @@ public class Level {
 
 	    scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 	    
-	    scrollPane.setViewportBorder(new LineBorder(Color.RED));
+	   // scrollPane.setViewportBorder(new LineBorder(Color.RED));
         //scrollpane.setColumnHeaderView(table.getTableHeader());
 
 		
@@ -126,21 +103,27 @@ public class Level {
 		));
 		table_c.setRowSelectionAllowed(false);
 		table_c.setBackground(UIManager.getColor("List.dropLineColor"));
+		
+		JLabel lblPressFFor = new JLabel("Press F1 for Help");
+		lblPressFFor.setFont(new Font("Lucida Grande", Font.ITALIC, 13));
+		
+		JPanel panel = new JPanel();
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addComponent(toolBar, GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(51, Short.MAX_VALUE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-							.addComponent(table_c, GroupLayout.PREFERRED_SIZE, 315, GroupLayout.PREFERRED_SIZE)
-							.addGap(88))
-						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-							.addComponent(board, GroupLayout.PREFERRED_SIZE, 334, GroupLayout.PREFERRED_SIZE)
-							.addGap(51)))
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnExit, Alignment.TRAILING)
+				.addComponent(toolBar, GroupLayout.DEFAULT_SIZE, 760, Short.MAX_VALUE)
+				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+					.addContainerGap(17, Short.MAX_VALUE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 546, GroupLayout.PREFERRED_SIZE)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(table_c, GroupLayout.PREFERRED_SIZE, 315, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblPressFFor))
+							.addGap(227)))
+					.addGap(51)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(btnExit)
 						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
 		);
@@ -148,18 +131,22 @@ public class Level {
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addComponent(toolBar, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+					.addGap(22)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 380, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnExit))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(53)
-							.addComponent(board, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGap(64)
-							.addComponent(table_c, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-					.addGap(10))
+							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 410, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED))
+						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+							.addGap(36)
+							.addComponent(panel, GroupLayout.PREFERRED_SIZE, 268, GroupLayout.PREFERRED_SIZE)
+							.addGap(31)
+							.addComponent(table_c, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)))
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblPressFFor)
+						.addComponent(btnExit))
+					.addGap(34))
 		);
 		
 		JSplitPane splitPane = new JSplitPane();
@@ -179,6 +166,9 @@ public class Level {
 			}
 		});
 		splitPane.setRightComponent(flipButton);
+		
+		JPanel panel_1 = new JPanel();
+		scrollPane.setViewportView(panel_1);
 		
 
 		
@@ -201,7 +191,7 @@ public class Level {
 		JLabel label = new JLabel("  00:00");
 		toolBar.add(label);
 		
-		JLabel label_1 = new JLabel("                               ");
+		JLabel label_1 = new JLabel("                                                                       ");
 		toolBar.add(label_1);
 		
 		JLabel lblLevel = new JLabel("\"Release Level\"");
