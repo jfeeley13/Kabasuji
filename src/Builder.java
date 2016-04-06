@@ -121,18 +121,6 @@ public class Builder {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-
-		JToggleButton tglbtnAddTile = new JToggleButton("Add Tile");	//change board size and add a tile
-		tglbtnAddTile.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {	
-			}
-		});
-		
-		JButton deltTileButton = new JButton("Delete Tile");		//change board size and delete a tile
-		deltTileButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		row = 6;
 		col = 6;
 		
@@ -190,6 +178,9 @@ public class Builder {
 		
 		JButton btnChangeLevel = new JButton("New Level");
 		
+		JLabel lblRightClickTo = new JLabel("Right click to add/delete tile");
+		lblRightClickTo.setFont(new Font("Lucida Grande", Font.ITALIC, 13));
+		
 		
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
@@ -217,10 +208,7 @@ public class Builder {
 											.addComponent(spinner_1, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
 											.addPreferredGap(ComponentPlacement.RELATED)
 											.addComponent(btnCreate, GroupLayout.PREFERRED_SIZE, 72, GroupLayout.PREFERRED_SIZE))
-										.addGroup(groupLayout.createSequentialGroup()
-											.addComponent(tglbtnAddTile, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(deltTileButton)))
+										.addComponent(lblRightClickTo))
 									.addGap(6)
 									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 										.addGroup(groupLayout.createSequentialGroup()
@@ -267,17 +255,7 @@ public class Builder {
 					.addContainerGap()
 					.addComponent(toolBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblX)
-						.addComponent(spinner_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblBoardSize)
-								.addComponent(spinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(tglbtnAddTile)
-								.addComponent(deltTileButton)))
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 								.addComponent(btnUndo)
@@ -294,26 +272,40 @@ public class Builder {
 										.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 											.addComponent(btnGenerate)
 											.addComponent(spinner_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-										.addPreferredGap(ComponentPlacement.RELATED))))
+										.addPreferredGap(ComponentPlacement.RELATED)))))
+						.addGroup(groupLayout.createSequentialGroup()
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(bullPin, GroupLayout.PREFERRED_SIZE, 375, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-										.addComponent(btnSave)
-										.addComponent(btnExit)))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGap(11)
-									.addComponent(board, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(lblInventory)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(inventory, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-										.addComponent(btnQuit)
-										.addComponent(lblPressFFor))))))
+								.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+									.addComponent(lblX)
+									.addGap(24))
+								.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+									.addComponent(spinner_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addGap(12))
+								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+									.addComponent(lblBoardSize)
+									.addComponent(spinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(lblRightClickTo)
+							.addGap(12)))
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(bullPin, GroupLayout.PREFERRED_SIZE, 375, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(btnSave)
+								.addComponent(btnExit)))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(11)
+							.addComponent(board, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblInventory)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(inventory, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(btnQuit)
+								.addComponent(lblPressFFor))))
 					.addContainerGap())
 		);
 		

@@ -68,10 +68,12 @@ public class LevelSelection {
 		JLabel label_4 = new JLabel("Release Level");
 		label_4.setFont(new Font("Meiryo", Font.BOLD, 13));
 		
+		JButton btnExit = new JButton("Exit");
+		
 		
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
+			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(14)
 					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 126, GroupLayout.PREFERRED_SIZE)
@@ -80,7 +82,7 @@ public class LevelSelection {
 					.addGap(18)
 					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 126, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(22, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(37)
 					.addComponent(lblPuzzleLevel)
 					.addPreferredGap(ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
@@ -88,11 +90,14 @@ public class LevelSelection {
 					.addGap(43)
 					.addComponent(label_4, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
 					.addGap(37))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap(333, Short.MAX_VALUE)
+					.addComponent(btnExit))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(21, Short.MAX_VALUE)
+					.addContainerGap(17, Short.MAX_VALUE)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(label_4)
 						.addComponent(lblPuzzleLevel)
@@ -102,7 +107,8 @@ public class LevelSelection {
 						.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
 						.addComponent(panel, GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
 						.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-					.addGap(37))
+					.addGap(8)
+					.addComponent(btnExit))
 		);
 		
 		JButton button_9 = new JButton("1");
