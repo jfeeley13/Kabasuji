@@ -51,7 +51,7 @@ public class Credits {
 		JTextPane txtpnAthenaProjectCs = new JTextPane();
 		txtpnAthenaProjectCs.setBackground(UIManager.getColor("Desktop.background"));
 		txtpnAthenaProjectCs.setEditable(false);
-		txtpnAthenaProjectCs.setText("\t\t\t\t\t\t\t\tAthena Project CS3733 \n\t\t\t\t\t\t\t\t       Tyler Chaulk\n\t\t\t\t\t\t\t\t        Jordan Feeley\n\t\t\t\t\t\t\t\t        Juan Guerrero\n\t\t\t\t\t\t\t\t       Alex Perucic ");
+		txtpnAthenaProjectCs.setText("\t\t\t\t\t\t\t\tAthena Project CS3733 \n\t\t\t\t\t\t\t\t       Tyler Chaulk\n\t\t\t\t\t\t\t                          Juan Chaves\n\t\t\t\t\t\t\t\t        Jordan Feeley\n\t\t\t\t\t\t\t\t       Alex Perucic ");
 		frame.getContentPane().add(txtpnAthenaProjectCs, BorderLayout.CENTER);
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

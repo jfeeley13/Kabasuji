@@ -53,6 +53,13 @@ public class SplashScreen {
 		lblKabasuji.setFont(new Font("Lucida Grande", Font.BOLD, 36));
 		
 		JButton btnPlay = new JButton("PLAY");
+		btnPlay.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				 LevelSelection newLevelSelectionWindow = new LevelSelection();
+				 frame.dispose();													//closes current window
+				 newLevelSelectionWindow.openWindow();
+			}
+		});
 		
 		JButton btnCustomLevels = new JButton("Custom Levels");
 		
