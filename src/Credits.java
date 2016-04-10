@@ -43,7 +43,7 @@ public class Credits {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(UIManager.getColor("Desktop.background"));
 		
-		JLabel lblCredits = new JLabel("Credits");
+		JLabel lblCredits = new JLabel("KABASUJI");
 		lblCredits.setFont(new Font("Lucida Grande", Font.BOLD, 21));
 		lblCredits.setHorizontalAlignment(SwingConstants.CENTER);
 		frame.getContentPane().add(lblCredits, BorderLayout.NORTH);

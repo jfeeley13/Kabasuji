@@ -84,7 +84,7 @@ public class Builder {
 		
 		
 		
-		JToolBar toolBar = new JToolBar();	//toolbar
+		JToolBar toolBar = new JToolBar();
 		toolBar.setFloatable(false);
 		toolBar.setBackground(UIManager.getColor("MenuBar.selectionBackground"));
 		
