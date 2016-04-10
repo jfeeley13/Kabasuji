@@ -76,7 +76,8 @@ public class Builder {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.getContentPane().setBackground(UIManager.getColor("Desktop.background"));
+		Color myColor = Color.decode("#4169aa");
+		frame.getContentPane().setBackground(myColor);
 		frame.setBounds(100, 100, 760, 550);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -85,8 +86,9 @@ public class Builder {
 		
 		
 		JToolBar toolBar = new JToolBar();
+		Color myToolbarColor = Color.decode("#4b89d0");
+		toolBar.setBackground(myToolbarColor);
 		toolBar.setFloatable(false);
-		toolBar.setBackground(UIManager.getColor("MenuBar.selectionBackground"));
 		
 		JLabel lblBoardSize = new JLabel("Board Size:");	
 		lblBoardSize.setHorizontalAlignment(SwingConstants.CENTER);

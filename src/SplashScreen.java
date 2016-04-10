@@ -49,8 +49,7 @@ public class SplashScreen {
 	private void initialize() {
 		frame = new JFrame();
 		Color myColor = Color.decode("#4169aa");
-		frame.getContentPane().setBackground(myColor);
-		//frame.getContentPane().setBackground(UIManager.getColor("Desktop.background")); //#4169aa
+		frame.getContentPane().setBackground(myColor); //frame.getContentPane().setBackground(UIManager.getColor("Desktop.background")); //#4169aa
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -84,7 +83,8 @@ public class SplashScreen {
 		});
 		
 		JToolBar toolBar = new JToolBar();
-		toolBar.setBackground(UIManager.getColor("MenuBar.selectionBackground"));
+		Color myToolbarColor = Color.decode("#4b89d0");
+		toolBar.setBackground(myToolbarColor);		//toolBar.setBackground(UIManager.getColor("MenuBar.selectionBackground"));
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -92,7 +92,7 @@ public class SplashScreen {
 					.addGap(144)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(btnLevelBuilder, GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
-						.addComponent(btnCustomLevels)
+						.addComponent(btnCustomLevels, GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
 						.addComponent(button, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE))
 					.addGap(170))
 				.addGroup(groupLayout.createSequentialGroup()

@@ -1,13 +1,19 @@
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.JLabel;
+
 import java.awt.BorderLayout;
+
 import javax.swing.SwingConstants;
+
 import java.awt.Font;
+
 import javax.swing.JTextPane;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Rectangle;
@@ -45,7 +51,8 @@ public class HelpScreen {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.getContentPane().setBackground(UIManager.getColor("Desktop.background"));
+		Color myColor = Color.decode("#4169aa");
+		frame.getContentPane().setBackground(myColor);
 		
 		JLabel lblHelp = new JLabel("Help");
 		lblHelp.setFont(new Font("Lucida Grande", Font.BOLD, 20));

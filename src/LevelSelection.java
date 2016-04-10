@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -5,11 +6,15 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JPanel;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
 import java.awt.Font;
+
 import javax.swing.UIManager;
 
 
@@ -45,18 +50,20 @@ public class LevelSelection {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.getContentPane().setBackground(UIManager.getColor("ComboBox.selectionBackground"));
+		Color myColor = Color.decode("#4b89d0");
+		frame.getContentPane().setBackground(myColor); //frame.getContentPane().setBackground(UIManager.getColor("ComboBox.selectionBackground"));
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel panel_2 = new JPanel();
-		panel_2.setBackground(UIManager.getColor("Desktop.background"));
+		Color myColor2 = Color.decode("#4169aa");
+		panel_2.setBackground(myColor2);
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(UIManager.getColor("Desktop.background"));
+		panel.setBackground(myColor2);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(UIManager.getColor("Desktop.background"));
+		panel_1.setBackground(myColor2);
 		
 		JLabel lblPuzzleLevel = new JLabel("Puzzle Level");
 		lblPuzzleLevel.setFont(new Font("Meiryo", Font.BOLD, 13));
