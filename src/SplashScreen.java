@@ -6,9 +6,11 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+
 import javax.swing.JToolBar;
 import javax.swing.UIManager;
 
@@ -17,10 +19,7 @@ public class SplashScreen {
 
 	private JFrame frame;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
+	public static void openWindow() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -32,6 +31,7 @@ public class SplashScreen {
 			}
 		});
 	}
+
 
 	/**
 	 * Create the application.
