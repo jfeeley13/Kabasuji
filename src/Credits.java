@@ -3,9 +3,14 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.JLabel;
+
 import java.awt.BorderLayout;
+
 import javax.swing.SwingConstants;
+
 import java.awt.Font;
+import java.util.concurrent.TimeUnit;
+
 import javax.swing.JTextPane;
 
 
@@ -22,6 +27,13 @@ public class Credits {
 				try {
 					Credits window = new Credits();
 					window.frame.setVisible(true);
+					long timer = System.currentTimeMillis()/1000;
+					while((System.currentTimeMillis()/1000) - timer < 7){
+						
+					}
+					SplashScreen mainMenu = new SplashScreen();
+					window.frame.dispose();
+					mainMenu.openWindow();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -51,7 +63,7 @@ public class Credits {
 		JTextPane txtpnAthenaProjectCs = new JTextPane();
 		txtpnAthenaProjectCs.setBackground(UIManager.getColor("Desktop.background"));
 		txtpnAthenaProjectCs.setEditable(false);
-		txtpnAthenaProjectCs.setText("\t\t\t\t\t\t\t\tAthena Project CS3733 \n\t\t\t\t\t\t\t\t       Tyler Chaulk\n\t\t\t\t\t\t\t                          Juan Chaves\n\t\t\t\t\t\t\t\t        Jordan Feeley\n\t\t\t\t\t\t\t\t       Alex Perucic ");
+		txtpnAthenaProjectCs.setText("\t\t\t\t\t\t\t\tAthena Project CS3733 \n\t\t\t\t\t\t\t\t       Tyler Chaulk\n\t\t\t\t\t\t\t                          Juan Chavez Guerrero\n\t\t\t\t\t\t\t\t        Jordan Feeley\n\t\t\t\t\t\t\t\t       Alex Perucic ");
 		frame.getContentPane().add(txtpnAthenaProjectCs, BorderLayout.CENTER);
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
