@@ -20,7 +20,7 @@ public class LevelSelection {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void openWindow() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -69,6 +69,13 @@ public class LevelSelection {
 		label_4.setFont(new Font("Meiryo", Font.BOLD, 13));
 		
 		JButton btnExit = new JButton("Exit");
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SplashScreen nw = new SplashScreen();
+				frame.dispose();
+				//nw.main();
+			}
+		});
 		
 		
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
@@ -112,6 +119,13 @@ public class LevelSelection {
 		);
 		
 		JButton button_9 = new JButton("1");
+		button_9.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Level nw = new Level();
+				frame.dispose();
+				nw.openLevel("Release Level", 1);
+			}
+		});
 		panel_1.add(button_9);
 		
 		JLabel label_10 = new JLabel("\u2605\u2605\u2605");
@@ -177,6 +191,9 @@ public class LevelSelection {
 		JButton btnNewButton = new JButton("1");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Level nw = new Level();
+				frame.dispose();
+				nw.openLevel("Puzzle Level", 1);
 			}
 		});
 		panel_2.add(btnNewButton);
@@ -214,5 +231,10 @@ public class LevelSelection {
 		lblNoStars.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
 		panel_2.add(lblNoStars);
 		frame.getContentPane().setLayout(groupLayout);
+	}
+
+	public void setVisible(boolean b) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -199,6 +199,7 @@ public class Builder {
 								.addGroup(groupLayout.createSequentialGroup()
 									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 										.addGroup(groupLayout.createSequentialGroup()
+											.addPreferredGap(ComponentPlacement.RELATED)
 											.addComponent(lblBoardSize)
 											.addPreferredGap(ComponentPlacement.RELATED)
 											.addComponent(spinner, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
@@ -221,8 +222,8 @@ public class Builder {
 										.addComponent(btnChangeLevel, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
 										.addComponent(btnGenerate, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE))
 									.addGap(77))
-								.addComponent(board, GroupLayout.PREFERRED_SIZE, 520, GroupLayout.PREFERRED_SIZE)
-								.addComponent(inventory, GroupLayout.PREFERRED_SIZE, 575, GroupLayout.PREFERRED_SIZE))
+								.addComponent(inventory, GroupLayout.PREFERRED_SIZE, 575, GroupLayout.PREFERRED_SIZE)
+								.addComponent(board, GroupLayout.PREFERRED_SIZE, 520, GroupLayout.PREFERRED_SIZE))
 							.addPreferredGap(ComponentPlacement.RELATED)))
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
@@ -254,37 +255,38 @@ public class Builder {
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(toolBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(btnUndo)
-								.addComponent(btnTest)
-								.addComponent(btnCreate)
-								.addComponent(levelComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnChangeLevel))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblBullPin)
-								.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-									.addComponent(setComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-									.addGroup(groupLayout.createSequentialGroup()
-										.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-											.addComponent(btnGenerate)
-											.addComponent(spinner_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-										.addPreferredGap(ComponentPlacement.RELATED)))))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-									.addComponent(lblX)
-									.addGap(24))
-								.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-									.addComponent(spinner_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-									.addGap(12))
-								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-									.addComponent(lblBoardSize)
-									.addComponent(spinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(spinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addGap(5))
+								.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+									.addComponent(btnUndo)
+									.addComponent(btnTest)
+									.addComponent(btnCreate)
+									.addComponent(levelComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addComponent(btnChangeLevel))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(lblX)
+									.addGap(12))))
+						.addComponent(spinner_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(lblBoardSize)))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(Alignment.TRAILING, groupLayout.createParallelGroup(Alignment.LEADING)
+							.addComponent(lblBullPin)
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addComponent(setComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+										.addComponent(btnGenerate)
+										.addComponent(spinner_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+									.addPreferredGap(ComponentPlacement.RELATED))))
+						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
 							.addComponent(lblRightClickTo)
 							.addGap(12)))
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
@@ -311,6 +313,21 @@ public class Builder {
 		
 		JPanel panel = new JPanel();
 		inventory.setViewportView(panel);
+		
+		JSplitPane splitPane_2 = new JSplitPane();
+		splitPane_2.setOrientation(JSplitPane.VERTICAL_SPLIT);
+		inventory.setRowHeaderView(splitPane_2);
+		
+		JButton button_1 = new JButton("\u21BB");
+		splitPane_2.setLeftComponent(button_1);
+		button_1.setPreferredSize(new Dimension(27, 38));	
+
+		
+		JButton button_2 = new JButton("\u21C4");
+		splitPane_2.setRightComponent(button_2);
+		button_2.setPreferredSize(new Dimension(27, 10));	
+
+
 		
 		JSplitPane splitPane = new JSplitPane();
 		splitPane.setPreferredSize(new Dimension(100, 20));	
@@ -374,23 +391,4 @@ public class Builder {
 		groupLayout.setAutoCreateContainerGaps(true);
 		frame.getContentPane().setLayout(groupLayout);
 	}
-	
-	/* public static boolean isCellVisible(JTable table, int rowIndex, int vColIndex) {
-		    if (!(table.getParent() instanceof JViewport)) {
-		      return false;
-		    }
-		    Point pt = viewport.getViewPosition();
-		    rect.setLocation(rect.x - pt.x, rect.y - pt.y);
-		    return new Rectangle(viewport.getExtentSize()).contains(rect);
-		  }
-	 
-	 public static void scrollToVisible(JTable table, int rowIndex, int vColIndex) {
-		    if (!(table.getParent() instanceof JViewport)) {
-		      return;
-		    }
-		    Point pt = viewport.getViewPosition();
-		    rect.setLocation(rect.x - pt.x, rect.y - pt.y);
-		    viewport.scrollRectToVisible(rect);
-		  }
-		  */
 }
