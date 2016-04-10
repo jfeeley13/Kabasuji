@@ -7,6 +7,10 @@ import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JTextPane;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Rectangle;
 
 
 public class HelpScreen {
@@ -16,7 +20,7 @@ public class HelpScreen {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void newwindow() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {

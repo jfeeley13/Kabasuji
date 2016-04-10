@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -6,9 +7,11 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+
 import javax.swing.JToolBar;
 import javax.swing.UIManager;
 
@@ -45,7 +48,9 @@ public class SplashScreen {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.getContentPane().setBackground(UIManager.getColor("Desktop.background"));
+		Color myColor = Color.decode("#4169aa");
+		frame.getContentPane().setBackground(myColor);
+		//frame.getContentPane().setBackground(UIManager.getColor("Desktop.background")); //#4169aa
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -56,7 +61,7 @@ public class SplashScreen {
 		btnPlay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				 LevelSelection newLevelSelectionWindow = new LevelSelection();
-				 frame.dispose();													//closes current window
+				// frame.dispose();													//closes current window
 				 newLevelSelectionWindow.openWindow();
 			}
 		});
@@ -64,6 +69,13 @@ public class SplashScreen {
 		JButton btnCustomLevels = new JButton("Custom Levels");
 		
 		JButton btnLevelBuilder = new JButton("Help");
+		btnLevelBuilder.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				HelpScreen nw = new HelpScreen();
+				
+				nw.newwindow();
+			}
+		});
 		
 		JButton button = new JButton("Credits");
 		button.addActionListener(new ActionListener() {
