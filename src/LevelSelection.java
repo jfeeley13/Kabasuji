@@ -1,20 +1,15 @@
 import java.awt.Color;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JPanel;
 import javax.swing.JButton;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
-
 import java.awt.Font;
-
 import javax.swing.UIManager;
 
 
@@ -78,9 +73,8 @@ public class LevelSelection {
 		JButton btnExit = new JButton("Exit");
 		btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				SplashScreen nw = new SplashScreen();
+				Menu nw = new Menu();
 				frame.dispose();
-				//nw.main();
 			}
 		});
 		

@@ -1,19 +1,16 @@
 import java.awt.Color;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
+import javax.swing.UIManager;
+import javax.swing.JLabel;
+import java.awt.BorderLayout;
+import javax.swing.SwingConstants;
+import java.awt.Font;
+import java.util.concurrent.TimeUnit;
+import javax.swing.JTextPane;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.JLabel;
-import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.Font;
-
-import javax.swing.JToolBar;
-import javax.swing.UIManager;
 
 
 public class SplashScreen {
@@ -29,12 +26,20 @@ public class SplashScreen {
 				try {
 					SplashScreen window = new SplashScreen();
 					window.frame.setVisible(true);
+					long timer = System.currentTimeMillis()/1000;
+					while((System.currentTimeMillis()/1000) - timer < 2){
+						
+					}
+					Menu mainMenu = new Menu();
+					window.frame.dispose();
+					mainMenu.openWindow();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
 	}
+
 
 	/**
 	 * Create the application.
@@ -49,78 +54,46 @@ public class SplashScreen {
 	private void initialize() {
 		frame = new JFrame();
 		Color myColor = Color.decode("#4169aa");
-		frame.getContentPane().setBackground(myColor); //frame.getContentPane().setBackground(UIManager.getColor("Desktop.background")); //#4169aa
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setBackground(myColor);
 		
-		JLabel lblKabasuji = new JLabel("KABASUJI");
-		lblKabasuji.setFont(new Font("Lucida Grande", Font.BOLD, 36));
+		JLabel lblCredits = new JLabel("KABASUJI");
+		lblCredits.setFont(new Font("Lucida Grande", Font.BOLD, 34));
+		lblCredits.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		JButton btnPlay = new JButton("PLAY");
-		btnPlay.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				 LevelSelection newLevelSelectionWindow = new LevelSelection();
-				// frame.dispose();													//closes current window
-				 newLevelSelectionWindow.openWindow();
-			}
-		});
+		JTextPane txtpnAthenaProjectCs = new JTextPane();
+		txtpnAthenaProjectCs.setFont(new Font("Lucida Grande", Font.PLAIN, 13));
+		txtpnAthenaProjectCs.setBackground(myColor);
+		txtpnAthenaProjectCs.setEditable(false);
+		txtpnAthenaProjectCs.setText("\n    Tyler Chaulk, Juan Chavez Guerrero, Jordan Feeley, Alex Perucic ");
 		
-		JButton btnCustomLevels = new JButton("Custom Levels");
-		
-		JButton btnLevelBuilder = new JButton("Help");
-		btnLevelBuilder.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				HelpScreen nw = new HelpScreen();
-				
-				nw.newwindow();
-			}
-		});
-		
-		JButton button = new JButton("Credits");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		
-		JToolBar toolBar = new JToolBar();
-		Color myToolbarColor = Color.decode("#4b89d0");
-		toolBar.setBackground(myToolbarColor);		//toolBar.setBackground(UIManager.getColor("MenuBar.selectionBackground"));
+		JLabel lblAthenaProjectGroup = new JLabel("Athena Project Group CS 3733");
+		lblAthenaProjectGroup.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(144)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnLevelBuilder, GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
-						.addComponent(btnCustomLevels, GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
-						.addComponent(button, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE))
-					.addGap(170))
+					.addComponent(lblCredits, GroupLayout.PREFERRED_SIZE, 450, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+					.addContainerGap(131, Short.MAX_VALUE)
+					.addComponent(lblAthenaProjectGroup)
+					.addGap(106))
 				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(124, Short.MAX_VALUE)
-					.addComponent(lblKabasuji, GroupLayout.PREFERRED_SIZE, 187, GroupLayout.PREFERRED_SIZE)
-					.addGap(139))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(166)
-					.addComponent(btnPlay, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(189, Short.MAX_VALUE))
-				.addComponent(toolBar, GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+					.addComponent(txtpnAthenaProjectCs, GroupLayout.PREFERRED_SIZE, 450, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addComponent(toolBar, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(lblKabasuji, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(btnPlay, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(btnCustomLevels)
+					.addComponent(lblCredits, GroupLayout.PREFERRED_SIZE, 76, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(lblAthenaProjectGroup)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnLevelBuilder)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(button)
-					.addContainerGap(9, Short.MAX_VALUE))
+					.addComponent(txtpnAthenaProjectCs, GroupLayout.PREFERRED_SIZE, 168, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
 		);
 		frame.getContentPane().setLayout(groupLayout);
+		frame.setBounds(100, 100, 450, 300);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 }

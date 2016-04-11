@@ -76,13 +76,17 @@ public class Level {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.getContentPane().setBackground(UIManager.getColor("Desktop.background"));
+		Color myColor = Color.decode("#4169aa");
+		frame.getContentPane().setBackground(myColor);
 		frame.setBounds(100, 100, 760, 550);
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JToolBar toolBar = new JToolBar();
-		toolBar.setBackground(UIManager.getColor("MenuBar.selectionBackground"));
+		toolBar.setEnabled(false);
+		toolBar.setFloatable(false);
+		Color myToolbarColor = Color.decode("#4b89d0");
+		toolBar.setBackground(myToolbarColor);	
 		
 		JButton btnExit = new JButton("EXIT");
 		btnExit.addActionListener(new ActionListener() {
@@ -123,9 +127,9 @@ public class Level {
 		table_c.setRowSelectionAllowed(false);
 		table_c.setBackground(UIManager.getColor("List.dropLineColor"));
 		
-		JLabel lblPressFFor = new JLabel("Press F1 for Help");
-		lblPressFFor.setHorizontalAlignment(SwingConstants.LEFT);
-		lblPressFFor.setFont(new Font("Lucida Grande", Font.ITALIC, 13));
+		JLabel lblF1 = new JLabel("Press F1 for Help");
+		lblF1.setHorizontalAlignment(SwingConstants.LEFT);
+		lblF1.setFont(new Font("Lucida Grande", Font.ITALIC, 13));
 		
 		JPanel panel = new JPanel();
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
@@ -143,7 +147,7 @@ public class Level {
 									.addGap(227))))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(30)
-							.addComponent(lblPressFFor)))
+							.addComponent(lblF1)))
 					.addPreferredGap(ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addComponent(btnExit)
@@ -167,11 +171,12 @@ public class Level {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnExit)
-						.addComponent(lblPressFFor))
+						.addComponent(lblF1))
 					.addGap(34))
 		);
 		
 		JSplitPane splitPane = new JSplitPane();
+		splitPane.setEnabled(false);
 		splitPane.setPreferredSize(new Dimension(100, 20));	
 		scrollPane.setColumnHeaderView(splitPane);
 		
@@ -194,22 +199,28 @@ public class Level {
 		
 
 		
-		JLabel lblNewLabel = new JLabel("Level:");
+		JLabel lblNewLabel = new JLabel("Level:   ");
 		toolBar.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("     ");
-		lblNewLabel_1.setText(String.valueOf(level));
-		toolBar.add(lblNewLabel_1);
+		JLabel lblLvlNum = new JLabel("     ");
+		lblLvlNum.setText(String.valueOf(level));
+		toolBar.add(lblLvlNum);
 		
-		JLabel stars = new JLabel("\u2605\u2605\u2605");
+		JLabel stars = new JLabel("    \u2605\u2605\u2605");
 		toolBar.add(stars);
 		
-		JLabel lblNewLabel_3 = new JLabel("                     ");
+		JLabel lblNewLabel_3 = new JLabel("                            ");
 		toolBar.add(lblNewLabel_3);
 		
-		JLabel lblNewLabel_2 = new JLabel("\"Timer/Moves\":");
-		lblNewLabel_2.setFont(new Font("Lucida Grande", Font.ITALIC, 13));
-		toolBar.add(lblNewLabel_2);
+		JLabel movesLbl = new JLabel();
+		movesLbl.setFont(new Font("Lucida Grande", Font.ITALIC, 13));
+		if (gameType == "Puzzle Level"){
+			movesLbl.setText("Moves:");
+		}
+		else{
+			movesLbl.setText("Timer: ");
+		}
+		toolBar.add(movesLbl);
 		
 		JLabel label = new JLabel("  00:00");
 		toolBar.add(label);

@@ -81,9 +81,6 @@ public class Builder {
 		frame.setBounds(100, 100, 760, 550);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-	
-		
-		
 		
 		JToolBar toolBar = new JToolBar();
 		Color myToolbarColor = Color.decode("#4b89d0");
@@ -95,7 +92,6 @@ public class Builder {
 		
 		final JSpinner spinner = new JSpinner();	//row spinner
 		spinner.setModel(new SpinnerNumberModel(6, 1, 12, 1));
-		//spinner.se
 		spinner.setValue(6);
 		
 		JLabel lblX = new JLabel("x");
@@ -313,9 +309,6 @@ public class Builder {
 					.addContainerGap())
 		);
 		
-		JPanel panel = new JPanel();
-		inventory.setViewportView(panel);
-		
 		JSplitPane splitPane_2 = new JSplitPane();
 		splitPane_2.setOrientation(JSplitPane.VERTICAL_SPLIT);
 		inventory.setRowHeaderView(splitPane_2);
@@ -328,6 +321,19 @@ public class Builder {
 		JButton button_2 = new JButton("\u21C4");
 		splitPane_2.setRightComponent(button_2);
 		button_2.setPreferredSize(new Dimension(27, 10));	
+		
+		JPanel panel = new JPanel();
+		inventory.setViewportView(panel);
+		GroupLayout gl_panel = new GroupLayout(panel);
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 540, Short.MAX_VALUE)
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 90, Short.MAX_VALUE)
+		);
+		panel.setLayout(gl_panel);
 
 
 		
