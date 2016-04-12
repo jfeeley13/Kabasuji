@@ -90,13 +90,13 @@ public class HelpScreen {
 					.addGap(10)
 					.addComponent(lblHelp)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(txtpnKabasujiTylerChaulk, GroupLayout.PREFERRED_SIZE, 303, GroupLayout.PREFERRED_SIZE)
+					.addComponent(txtpnKabasujiTylerChaulk, GroupLayout.PREFERRED_SIZE, 333, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addComponent(btnExit)
 					.addContainerGap())
 		);
 		frame.getContentPane().setLayout(groupLayout);
-		frame.setBounds(100, 100, 550, 410);
+		frame.setBounds(100, 100, 600, 460);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 }

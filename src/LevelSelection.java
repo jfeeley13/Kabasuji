@@ -48,7 +48,7 @@ public class LevelSelection {
 		frame = new JFrame();
 		Color myColor = Color.decode("#4b89d0");
 		frame.getContentPane().setBackground(myColor); //frame.getContentPane().setBackground(UIManager.getColor("ComboBox.selectionBackground"));
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 500, 350);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel panel_2 = new JPanel();
