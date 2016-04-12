@@ -11,8 +11,14 @@ import javax.swing.JTextPane;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.Timer;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.Timer;
 public class SplashScreen {
 
 	private JFrame frame;
@@ -24,15 +30,23 @@ public class SplashScreen {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SplashScreen window = new SplashScreen();
+					final SplashScreen window = new SplashScreen();
+					
+					
 					window.frame.setVisible(true);
-					long timer = System.currentTimeMillis()/1000;
-					while((System.currentTimeMillis()/1000) - timer < 2){
-						
-					}
-					Menu mainMenu = new Menu();
-					window.frame.dispose();
-					mainMenu.openWindow();
+					Timer timer = new Timer(5000, new ActionListener() {
+
+			            @Override
+			            public void actionPerformed(ActionEvent e) {
+
+			            	Menu mainMenu = new Menu();
+			            	mainMenu.openWindow();
+							window.frame.dispose();
+			            }
+			        });
+
+			        timer.start();
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -46,12 +60,15 @@ public class SplashScreen {
 	 */
 	public SplashScreen() {
 		initialize();
+		
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+
+		
 		frame = new JFrame();
 		Color myColor = Color.decode("#4169aa");
 		frame.getContentPane().setBackground(myColor);
@@ -95,5 +112,6 @@ public class SplashScreen {
 		frame.getContentPane().setLayout(groupLayout);
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 	}
 }
