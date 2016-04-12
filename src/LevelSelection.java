@@ -25,6 +25,7 @@ public class LevelSelection {
 			public void run() {
 				try {
 					LevelSelection window = new LevelSelection();
+					window.frame.setLocationRelativeTo(null);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -75,6 +76,7 @@ public class LevelSelection {
 			public void actionPerformed(ActionEvent e) {
 				Menu nw = new Menu();
 				frame.dispose();
+				nw.openWindow();
 			}
 		});
 		

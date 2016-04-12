@@ -1,5 +1,6 @@
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.GroupLayout;
@@ -33,11 +34,11 @@ import javax.swing.JToggleButton;
 import javax.swing.JSplitPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-
-
+import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;
 public class Level {
 
-	private JFrame frame;
+	private static JFrame frame;
 	private JTable table_c;
 	private JTable table;
 	static String gameType;
@@ -52,11 +53,27 @@ public class Level {
 		gameType = type;
 		level = levelnum;
 		
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					Level window = new Level();
+					window.frame.setLocationRelativeTo(null);
 					window.frame.setVisible(true);
+					frame.addKeyListener(new KeyListener() {
+					    public void keyPressed(KeyEvent e) { 
+					    	int key = e.getKeyCode();
+					    	if(key == KeyEvent.VK_F1) {
+					    		HelpScreen nw = new HelpScreen(); 
+						    	nw.newwindow(); 
+					    		}
+					    	}
+
+					    public void keyReleased(KeyEvent e) { System.out.println("whatever"); }
+
+					    public void keyTyped(KeyEvent e) { System.out.println("lol"); }
+					});
+					frame.requestFocus();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

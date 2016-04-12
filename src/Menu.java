@@ -22,6 +22,7 @@ public class Menu {
 			public void run() {
 				try {
 					Menu window = new Menu();
+					window.frame.setLocationRelativeTo(null);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

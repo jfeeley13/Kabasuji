@@ -28,6 +28,7 @@ public class HelpScreen {
 			public void run() {
 				try {
 					HelpScreen window = new HelpScreen();
+					window.frame.setLocationRelativeTo(null);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

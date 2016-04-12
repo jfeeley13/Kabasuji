@@ -33,7 +33,7 @@ public class SplashScreen {
 				try {
 					final SplashScreen window = new SplashScreen();
 					
-					
+					window.frame.setLocationRelativeTo(null);
 					window.frame.setVisible(true);
 					Timer timer = new Timer(5000, new ActionListener() {
 						
