@@ -62,6 +62,7 @@ public class Level {
 					Level window = new Level();
 					window.frame.setLocationRelativeTo(null);
 					window.frame.setVisible(true);
+					window.frame.setResizable(false);
 					frame.addKeyListener(new KeyListener() {
 					    public void keyPressed(KeyEvent e) { 
 					    	int key = e.getKeyCode();

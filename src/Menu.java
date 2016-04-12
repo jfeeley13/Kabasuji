@@ -24,6 +24,7 @@ public class Menu {
 					Menu window = new Menu();
 					window.frame.setLocationRelativeTo(null);
 					window.frame.setVisible(true);
+					window.frame.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

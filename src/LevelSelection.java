@@ -26,7 +26,9 @@ public class LevelSelection {
 				try {
 					LevelSelection window = new LevelSelection();
 					window.frame.setLocationRelativeTo(null);
+					
 					window.frame.setVisible(true);
+					window.frame.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

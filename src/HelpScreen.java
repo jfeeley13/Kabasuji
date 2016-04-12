@@ -29,7 +29,9 @@ public class HelpScreen {
 				try {
 					HelpScreen window = new HelpScreen();
 					window.frame.setLocationRelativeTo(null);
+					window.frame.setUndecorated(true);
 					window.frame.setVisible(true);
+					window.frame.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
