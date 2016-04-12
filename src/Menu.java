@@ -55,7 +55,8 @@ public class Menu {
 		btnPlay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				 LevelSelection newLevelSelectionWindow = new LevelSelection();
-				// frame.dispose();													//closes current window
+				 
+				 frame.dispose();													//closes current window
 				 newLevelSelectionWindow.openWindow();
 			}
 		});

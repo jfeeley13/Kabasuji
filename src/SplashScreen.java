@@ -27,6 +27,7 @@ public class SplashScreen {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		Timer timer;
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -35,23 +36,27 @@ public class SplashScreen {
 					
 					window.frame.setVisible(true);
 					Timer timer = new Timer(5000, new ActionListener() {
-
+						
 			            @Override
 			            public void actionPerformed(ActionEvent e) {
 
 			            	Menu mainMenu = new Menu();
 			            	mainMenu.openWindow();
 							window.frame.dispose();
+							((Timer)e.getSource()).stop();
+							
 			            }
 			        });
+					
 
 			        timer.start();
-					
+			        
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
+		
 	}
 
 
