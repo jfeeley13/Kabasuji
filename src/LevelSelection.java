@@ -50,15 +50,12 @@ public class LevelSelection {
 		frame = new JFrame();
 		Color myColor = Color.decode("#4b89d0");
 		frame.getContentPane().setBackground(myColor); //frame.getContentPane().setBackground(UIManager.getColor("ComboBox.selectionBackground"));
-		frame.setBounds(100, 100, 500, 350);
+		frame.setBounds(100, 100, 500, 320);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel panel_2 = new JPanel();
 		Color myColor2 = Color.decode("#4169aa");
 		panel_2.setBackground(myColor2);
-		
-		JPanel panel = new JPanel();
-		panel.setBackground(myColor2);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(myColor2);
@@ -82,47 +79,6 @@ public class LevelSelection {
 			}
 		});
 		
-		
-		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(14)
-					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 126, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 126, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 126, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(22, Short.MAX_VALUE))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(37)
-					.addComponent(lblPuzzleLevel)
-					.addPreferredGap(ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
-					.addComponent(label_2)
-					.addGap(43)
-					.addComponent(label_4, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
-					.addGap(37))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(333, Short.MAX_VALUE)
-					.addComponent(btnExit))
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(17, Short.MAX_VALUE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(label_4)
-						.addComponent(lblPuzzleLevel)
-						.addComponent(label_2))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-						.addComponent(panel, GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-						.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-					.addGap(8)
-					.addComponent(btnExit))
-		);
-		
 		JButton button_9 = new JButton("1");
 		button_9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -133,19 +89,21 @@ public class LevelSelection {
 		});
 		panel_1.add(button_9);
 		
-		JLabel label_10 = new JLabel("\u2605\u2605\u2605");
+		JLabel label_10 = new JLabel("         ");
 		panel_1.add(label_10);
 		
 		JButton button_10 = new JButton("2");
 		panel_1.add(button_10);
 		
-		JLabel label_11 = new JLabel("\u2605\u2605  ");
+		JLabel label_11 = new JLabel("locked    ");
+		label_11.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
 		panel_1.add(label_11);
 		
 		JButton button_11 = new JButton("3");
 		panel_1.add(button_11);
 		
-		JLabel label_12 = new JLabel("         ");
+		JLabel label_12 = new JLabel("locked    ");
+		label_12.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
 		panel_1.add(label_12);
 		
 		JButton button_12 = new JButton("4");
@@ -161,37 +119,6 @@ public class LevelSelection {
 		JLabel lblLocked_2 = new JLabel("locked   ");
 		lblLocked_2.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
 		panel_1.add(lblLocked_2);
-		
-		JButton button_4 = new JButton("1");
-		panel.add(button_4);
-		
-		JLabel label_5 = new JLabel("\u2605\u2605\u2605");
-		panel.add(label_5);
-		
-		JButton button_5 = new JButton("2");
-		panel.add(button_5);
-		
-		JLabel label_6 = new JLabel("\u2605\u2605   ");
-		panel.add(label_6);
-		
-		JButton button_6 = new JButton("3");
-		panel.add(button_6);
-		
-		JLabel label_7 = new JLabel("\u2605      ");
-		panel.add(label_7);
-		
-		JButton button_7 = new JButton("4");
-		panel.add(button_7);
-		
-		JLabel label_8 = new JLabel("          ");
-		panel.add(label_8);
-		
-		JButton button_8 = new JButton("5");
-		panel.add(button_8);
-		
-		JLabel lblLocked_1 = new JLabel("locked    ");
-		lblLocked_1.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
-		panel.add(lblLocked_1);
 		
 		JButton btnNewButton = new JButton("1");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -209,25 +136,27 @@ public class LevelSelection {
 			}
 		});
 		
-		JLabel lblNewLabel = new JLabel("\u2605\u2605\u2605");
+		JLabel lblNewLabel = new JLabel("         ");
 		panel_2.add(lblNewLabel);
 		panel_2.add(button);
 		
-		JLabel label = new JLabel("\u2605\u2605\u2605");
+		JLabel label = new JLabel("locked    ");
+		label.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
 		panel_2.add(label);
 		
 		JButton button_1 = new JButton("3");
 		panel_2.add(button_1);
 		
-		JLabel label_3 = new JLabel("\u2605      ");
+		JLabel label_3 = new JLabel("locked    ");
+		label_3.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
 		panel_2.add(label_3);
 		
 		JButton button_2 = new JButton("4");
 		panel_2.add(button_2);
 		
-		JLabel lblLocked = new JLabel("            ");
-		lblLocked.setFont(new Font("Lucida Grande", Font.PLAIN, 8));
-		panel_2.add(lblLocked);
+		JLabel label_1 = new JLabel("locked    ");
+		label_1.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
+		panel_2.add(label_1);
 		
 		JButton button_3 = new JButton("5");
 		panel_2.add(button_3);
@@ -235,6 +164,91 @@ public class LevelSelection {
 		JLabel lblNoStars = new JLabel("locked    ");
 		lblNoStars.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
 		panel_2.add(lblNoStars);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(UIManager.getColor("Desktop.background"));
+		
+		JButton button_4 = new JButton("1");
+		button_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					Level nw = new Level();
+					frame.dispose();
+					nw.openLevel("Lightning Level", 1);
+			}
+		});
+		panel.add(button_4);
+		
+		JLabel label_5 = new JLabel("         ");
+		panel.add(label_5);
+		
+		JButton button_5 = new JButton("2");
+		panel.add(button_5);
+		
+		JLabel label_6 = new JLabel("locked    ");
+		label_6.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
+		panel.add(label_6);
+		
+		JButton button_6 = new JButton("3");
+		panel.add(button_6);
+		
+		JLabel label_7 = new JLabel("locked    ");
+		label_7.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
+		panel.add(label_7);
+		
+		JButton button_7 = new JButton("4");
+		panel.add(button_7);
+		
+		JLabel label_8 = new JLabel("locked    ");
+		label_8.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
+		panel.add(label_8);
+		
+		JButton button_8 = new JButton("5");
+		panel.add(button_8);
+		
+		JLabel label_9 = new JLabel("locked    ");
+		label_9.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
+		panel.add(label_9);
+		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(31)
+					.addComponent(lblPuzzleLevel)
+					.addGap(71)
+					.addComponent(label_2)
+					.addPreferredGap(ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+					.addComponent(label_4, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
+					.addGap(51))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(14)
+					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 126, GroupLayout.PREFERRED_SIZE)
+					.addGap(37)
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 126, GroupLayout.PREFERRED_SIZE)
+					.addGap(36)
+					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 126, GroupLayout.PREFERRED_SIZE)
+					.addGap(35))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap(419, Short.MAX_VALUE)
+					.addComponent(btnExit)
+					.addContainerGap())
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(23)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblPuzzleLevel)
+						.addComponent(label_2)
+						.addComponent(label_4))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 198, GroupLayout.PREFERRED_SIZE)
+						.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 198, GroupLayout.PREFERRED_SIZE)
+						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 198, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(btnExit)
+					.addGap(20))
+		);
 		frame.getContentPane().setLayout(groupLayout);
 	}
 

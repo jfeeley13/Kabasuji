@@ -45,18 +45,23 @@ public class Builder {
 	private JTextField txtGame;
 	private JTextField textField;
 	private JTextField textField_1;
+	static String gameType;
 	int row;
 	int col;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void openBuildWindow(String type) {
+		gameType= type;
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					Builder window = new Builder();
+					window.frame.setLocationRelativeTo(null);
 					window.frame.setVisible(true);
+					window.frame.setResizable(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -101,26 +106,41 @@ public class Builder {
 		spinner_1.setModel(new SpinnerNumberModel(6, 1, 12, 1));
 		spinner_1.setValue(6);
 		
-		JComboBox levelComboBox = new JComboBox();	//select which level to create
-		levelComboBox.addItem("Release Level");
-		levelComboBox.addItem("Lighning Level");
+		final JComboBox levelComboBox = new JComboBox();	//select which level to create
 		levelComboBox.addItem("Puzzle Level");
-		
-		
+		levelComboBox.addItem("Lightning Level");
+		levelComboBox.addItem("Release Level");
+
+		levelComboBox.setSelectedItem(gameType);
+
 		
 		JComboBox setComboBox = new JComboBox();	//select create a set
 		setComboBox.addItem("Red");
 		setComboBox.addItem("Yellow");
 		setComboBox.addItem("Green");
 		setComboBox.addItem("Delete");
+		if (gameType == "Release Level"){
+			setComboBox.setVisible(true);
+		}
+		else{
+			setComboBox.setVisible(false);
+		}
+		
 		
 		JButton btnGenerate = new JButton("Generate Set");	//generate a random set
 		btnGenerate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
+		if (gameType == "Release Level"){
+			btnGenerate.setVisible(true);
+		}
+		else{
+			btnGenerate.setVisible(false);
+		}
 		row = 6;
 		col = 6;
+		
 		
 		JButton btnUndo = new JButton("Undo");
 		btnUndo.addActionListener(new ActionListener() {
@@ -142,12 +162,26 @@ public class Builder {
 		
 		JScrollPane inventory = new JScrollPane();
 	    inventory.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		if (gameType == "Lightning Level"){
+			inventory.setVisible(false);
+		}
+		else{
+			inventory.setVisible(true);
+		}
 
 		
 		
 		JButton btnSave = new JButton("Save");
 		
 		JButton btnExit = new JButton("Exit");
+		btnExit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				BuildStart nw = new BuildStart();
+				frame.dispose();
+				nw.openWindow();
+				
+			}
+		});
 		
 		JButton btnCreate = new JButton("Create");
 		btnCreate.addActionListener(new ActionListener() {
@@ -158,26 +192,44 @@ public class Builder {
 			}
 		});
 		
-		
-		
 		JLabel lblInventory = new JLabel("Inventory:");
+		if (gameType == "Lightning Level"){
+			lblInventory.setVisible(false);
+		}
+		else{
+			lblInventory.setVisible(true);
+		}
 		
-		JLabel lblBullPin = new JLabel("Bull Pin:");
+		JLabel lblBullPin = new JLabel("Bull Pen:");
 		
 		JPanel board = new JPanel();
 		
 		JSpinner spinner_2 = new JSpinner();
 		spinner_2.setModel(new SpinnerNumberModel(1, 1, 6, 1));
-		
-		JButton btnQuit = new JButton("Quit");
+		if (gameType == "Release Level"){
+			spinner_2.setVisible(true);
+		}
+		else{
+			spinner_2.setVisible(false);
+		}
 		
 		JLabel lblPressFFor = new JLabel("Press F1 for Help");
 		lblPressFFor.setFont(new Font("Lucida Grande", Font.ITALIC, 13));
 		
 		JButton btnChangeLevel = new JButton("New Level");
+		btnChangeLevel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Builder nw = new Builder();
+				frame.dispose();
+				String newType = levelComboBox.getItemAt(0).toString();
+				nw.openBuildWindow(levelComboBox.getSelectedItem().toString());
+			}
+		});
 		
 		JLabel lblRightClickTo = new JLabel("Right click to add/delete tile");
 		lblRightClickTo.setFont(new Font("Lucida Grande", Font.ITALIC, 13));
+		
+		JLabel label_3 = new JLabel("<--Board");
 		
 		
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
@@ -185,11 +237,6 @@ public class Builder {
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(btnQuit)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblPressFFor))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(12)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
@@ -211,7 +258,7 @@ public class Builder {
 									.addGap(6)
 									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 										.addGroup(groupLayout.createSequentialGroup()
-											.addComponent(setComboBox, 0, 86, Short.MAX_VALUE)
+											.addComponent(setComboBox, 0, 91, Short.MAX_VALUE)
 											.addPreferredGap(ComponentPlacement.RELATED)
 											.addComponent(spinner_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 										.addComponent(levelComboBox, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE))
@@ -221,31 +268,31 @@ public class Builder {
 										.addComponent(btnGenerate, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE))
 									.addGap(77))
 								.addComponent(inventory, GroupLayout.PREFERRED_SIZE, 575, GroupLayout.PREFERRED_SIZE)
-								.addComponent(board, GroupLayout.PREFERRED_SIZE, 520, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.RELATED)))
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(board, GroupLayout.PREFERRED_SIZE, 520, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+									.addComponent(label_3))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(6)
+									.addComponent(lblPressFFor)))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addGroup(groupLayout.createSequentialGroup()
 									.addComponent(btnUndo, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(btnTest, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+									.addComponent(btnTest, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE))
+								.addComponent(lblBullPin)
 								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(lblBullPin)
-									.addGap(87)))
-							.addGroup(groupLayout.createSequentialGroup()
-								.addGap(6)
-								.addComponent(btnSave, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(btnExit, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
-								.addContainerGap()))
+									.addGap(6)
+									.addComponent(btnSave, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnExit, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(9)
+									.addComponent(bullPin, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE))))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(9)
-							.addComponent(bullPin, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE)
-							.addGap(6))))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(toolBar, GroupLayout.DEFAULT_SIZE, 743, Short.MAX_VALUE)
+							.addContainerGap()
+							.addComponent(toolBar, GroupLayout.DEFAULT_SIZE, 748, Short.MAX_VALUE)))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -274,8 +321,8 @@ public class Builder {
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(lblBoardSize)))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(Alignment.TRAILING, groupLayout.createParallelGroup(Alignment.LEADING)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 							.addComponent(lblBullPin)
 							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 								.addComponent(setComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -284,7 +331,7 @@ public class Builder {
 										.addComponent(btnGenerate)
 										.addComponent(spinner_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 									.addPreferredGap(ComponentPlacement.RELATED))))
-						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(lblRightClickTo)
 							.addGap(12)))
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
@@ -296,16 +343,19 @@ public class Builder {
 								.addComponent(btnSave)
 								.addComponent(btnExit)))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(11)
-							.addComponent(board, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblInventory)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(11)
+									.addComponent(board, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(lblInventory))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(95)
+									.addComponent(label_3)))
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(inventory, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(btnQuit)
-								.addComponent(lblPressFFor))))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(lblPressFFor)))
 					.addContainerGap())
 		);
 		
@@ -370,11 +420,18 @@ public class Builder {
 		toolBar.add(txtGame);
 		txtGame.setColumns(10);
 		
-		JLabel label_1 = new JLabel("           ");
+		JLabel label_1 = new JLabel("                ");
 		toolBar.add(label_1);
 		
-		JLabel lblTimer = new JLabel("  Timer:");
+		JLabel lblTimer = new JLabel(" ");
 		toolBar.add(lblTimer);
+		if (gameType == "Lightning Level"){
+			lblTimer.setText("  Timer:");
+		}
+		else{
+			lblTimer.setText("  Moves:");
+		}
+		
 		
 		textField = new JTextField();
 		textField.setText("00");
@@ -383,16 +440,32 @@ public class Builder {
 		
 		JLabel label = new JLabel(":");
 		toolBar.add(label);
+		if (gameType == "Lightning Level"){
+			label.setVisible(true);
+		}
+		else{
+			label.setVisible(false);
+		}
 		
 		textField_1 = new JTextField();
 		textField_1.setText("00");
 		toolBar.add(textField_1);
 		textField_1.setColumns(10);
+		if (gameType == "Lightning Level"){
+			textField_1.setVisible(true);
+		}
+		else{
+			textField_1.setVisible(false);
+		}
 		
-		JLabel label_2 = new JLabel("                                                 ");
+		JLabel label_2 = new JLabel("                                      ");
 		toolBar.add(label_2);
 		
-		JLabel lblLevelBuilder = new JLabel("Level Builder    ");
+		JLabel lblLevelBuilder = new JLabel("     ");
+		String title = gameType + (" Builder");
+		
+		lblLevelBuilder.setText(title);
+		
 		lblLevelBuilder.setFont(new Font("Lucida Grande", Font.BOLD, 18));
 		toolBar.add(lblLevelBuilder);
 		groupLayout.setAutoCreateGaps(true);

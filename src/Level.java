@@ -152,6 +152,8 @@ public class Level {
 		lblF1.setFont(new Font("Lucida Grande", Font.ITALIC, 13));
 		
 		JPanel panel = new JPanel();
+		
+		JLabel lblBoard = new JLabel("Board");
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
@@ -161,10 +163,12 @@ public class Level {
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(17)
 							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-								.addComponent(panel, GroupLayout.PREFERRED_SIZE, 546, GroupLayout.PREFERRED_SIZE)
 								.addGroup(groupLayout.createSequentialGroup()
 									.addComponent(table_c, GroupLayout.PREFERRED_SIZE, 315, GroupLayout.PREFERRED_SIZE)
-									.addGap(227))))
+									.addGap(227))
+								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+									.addComponent(lblBoard)
+									.addComponent(panel, GroupLayout.PREFERRED_SIZE, 546, GroupLayout.PREFERRED_SIZE))))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(30)
 							.addComponent(lblF1)))
@@ -184,7 +188,9 @@ public class Level {
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 410, GroupLayout.PREFERRED_SIZE))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(36)
+							.addGap(14)
+							.addComponent(lblBoard)
+							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(panel, GroupLayout.PREFERRED_SIZE, 268, GroupLayout.PREFERRED_SIZE)
 							.addGap(31)
 							.addComponent(table_c, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
@@ -227,23 +233,31 @@ public class Level {
 		toolBar.add(lblLvlNum);
 		
 		JLabel stars = new JLabel("    \u2605\u2605\u2605");
+		stars.setForeground(Color.LIGHT_GRAY);
 		toolBar.add(stars);
 		
-		JLabel lblNewLabel_3 = new JLabel("                            ");
+		JLabel lblNewLabel_3 = new JLabel("                                   ");
 		toolBar.add(lblNewLabel_3);
 		
-		JLabel movesLbl = new JLabel();
+		JLabel movesLbl = new JLabel(" ");
 		movesLbl.setFont(new Font("Lucida Grande", Font.ITALIC, 13));
-		if (gameType == "Puzzle Level"){
-			movesLbl.setText("Moves:");
+		toolBar.add(movesLbl);
+
+		if (gameType == "Lightning Level"){
+			movesLbl.setText("Timer:");
 		}
 		else{
-			movesLbl.setText("Timer: ");
+			movesLbl.setText("Moves: ");
 		}
-		toolBar.add(movesLbl);
 		
-		JLabel label = new JLabel("  00:00");
+		JLabel label = new JLabel(" ");
 		toolBar.add(label);
+		if (gameType == "Lightning Level"){
+			label.setText("  10:00");
+		}
+		else{
+			label.setText("  40");
+		}
 		
 		JLabel label_1 = new JLabel("                                                                       ");
 		toolBar.add(label_1);
