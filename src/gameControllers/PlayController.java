@@ -1,16 +1,18 @@
 package gameControllers;
+import entity.Kabasuji;
 import views.SplashScreen;
 public class PlayController {
-	//Kabasuji game;
+	Kabasuji model;
 	SplashScreen parentView;
-	//MainMenuView parentView
 	
 	/**
 	 * PlayController constructor
+	 * @param model Entity model.
 	 * @param parentView view that the user is currently in.
 	 */
-	public PlayController(SplashScreen parentView){
+	public PlayController(SplashScreen parentView, Kabasuji model){
 		this.parentView = parentView;
+		this.model = model;
 		entry();
 	}
 	/**

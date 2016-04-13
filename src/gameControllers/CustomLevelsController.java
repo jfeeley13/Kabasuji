@@ -1,17 +1,19 @@
 package gameControllers;
 
+import entity.GameMode;
 import views.SplashScreen;
 
 public class CustomLevelsController {
-	//GameMode customLevels
+	GameMode customLevels;
 	SplashScreen parentView;
 	
 	/**
-	 * 
+	 * @param customLevels List of custom levels
 	 * @param parentView view that the user is currently in.
 	 */
-	public CustomLevelsController(SplashScreen parentView){
+	public CustomLevelsController(SplashScreen parentView,GameMode customLevels){
 		this.parentView = parentView;
+		this.customLevels = customLevels;
 		
 	}
 	
