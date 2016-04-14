@@ -3,9 +3,9 @@ package entity;
 public class Hexomino {
 	
 	protected int pID;
-	protected Point neighbors[] = new Point[5];
+	protected Point neighbors[] = new Point[5]; //TODO: Look at G analysis feedback
 	protected Point origin; //Remove?
-	protected boolean isSel;
+	protected boolean isSel;//TODO: Look at G analysis feedback
 	
 	boolean CWRotate;
 	boolean hFlip;

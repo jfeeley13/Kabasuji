@@ -22,7 +22,7 @@ public class BullPen {
 		return this.HexList[x];
 	}
 	
-	public void addPiece(){
+	public void addPiece(){ //TODO: Look at G analysis feedback
 		
 	}
 	
