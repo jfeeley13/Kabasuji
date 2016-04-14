@@ -1,3 +1,4 @@
+
 import java.awt.Color;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
@@ -141,7 +142,7 @@ public class LevelSelection {
 		lblNoStars.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(UIManager.getColor("Desktop.background"));
+		panel.setBackground(myColor2);
 		
 		JButton button_4 = new JButton("1");
 		button_4.addActionListener(new ActionListener() {
