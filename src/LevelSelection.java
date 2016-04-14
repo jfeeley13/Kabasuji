@@ -87,38 +87,28 @@ public class LevelSelection {
 				nw.openLevel("Release Level", 1);
 			}
 		});
-		panel_1.add(button_9);
 		
 		JLabel label_10 = new JLabel("         ");
-		panel_1.add(label_10);
 		
 		JButton button_10 = new JButton("2");
-		panel_1.add(button_10);
 		
 		JLabel label_11 = new JLabel("locked    ");
 		label_11.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
-		panel_1.add(label_11);
 		
 		JButton button_11 = new JButton("3");
-		panel_1.add(button_11);
 		
 		JLabel label_12 = new JLabel("locked    ");
 		label_12.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
-		panel_1.add(label_12);
 		
 		JButton button_12 = new JButton("4");
-		panel_1.add(button_12);
 		
 		JLabel lblnoStars = new JLabel("locked    ");
 		lblnoStars.setFont(new Font("Lucida Grande", Font.PLAIN, 8));
-		panel_1.add(lblnoStars);
 		
 		JButton button_13 = new JButton("5");
-		panel_1.add(button_13);
 		
 		JLabel lblLocked_2 = new JLabel("locked   ");
 		lblLocked_2.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
-		panel_1.add(lblLocked_2);
 		
 		JButton btnNewButton = new JButton("1");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -128,7 +118,6 @@ public class LevelSelection {
 				nw.openLevel("Puzzle Level", 1);
 			}
 		});
-		panel_2.add(btnNewButton);
 		
 		JButton button = new JButton("2");
 		button.addActionListener(new ActionListener() {
@@ -136,34 +125,20 @@ public class LevelSelection {
 			}
 		});
 		
-		JLabel lblNewLabel = new JLabel("         ");
-		panel_2.add(lblNewLabel);
-		panel_2.add(button);
-		
-		JLabel label = new JLabel("locked    ");
-		label.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
-		panel_2.add(label);
-		
 		JButton button_1 = new JButton("3");
-		panel_2.add(button_1);
 		
 		JLabel label_3 = new JLabel("locked    ");
 		label_3.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
-		panel_2.add(label_3);
 		
 		JButton button_2 = new JButton("4");
-		panel_2.add(button_2);
 		
 		JLabel label_1 = new JLabel("locked    ");
 		label_1.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
-		panel_2.add(label_1);
 		
 		JButton button_3 = new JButton("5");
-		panel_2.add(button_3);
 		
 		JLabel lblNoStars = new JLabel("locked    ");
 		lblNoStars.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
-		panel_2.add(lblNoStars);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(UIManager.getColor("Desktop.background"));
@@ -176,38 +151,28 @@ public class LevelSelection {
 					nw.openLevel("Lightning Level", 1);
 			}
 		});
-		panel.add(button_4);
 		
 		JLabel label_5 = new JLabel("         ");
-		panel.add(label_5);
 		
 		JButton button_5 = new JButton("2");
-		panel.add(button_5);
 		
 		JLabel label_6 = new JLabel("locked    ");
 		label_6.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
-		panel.add(label_6);
 		
 		JButton button_6 = new JButton("3");
-		panel.add(button_6);
 		
 		JLabel label_7 = new JLabel("locked    ");
 		label_7.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
-		panel.add(label_7);
 		
 		JButton button_7 = new JButton("4");
-		panel.add(button_7);
 		
 		JLabel label_8 = new JLabel("locked    ");
 		label_8.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
-		panel.add(label_8);
 		
 		JButton button_8 = new JButton("5");
-		panel.add(button_8);
 		
 		JLabel label_9 = new JLabel("locked    ");
 		label_9.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
-		panel.add(label_9);
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
@@ -249,6 +214,197 @@ public class LevelSelection {
 					.addComponent(btnExit)
 					.addGap(20))
 		);
+		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
+		gl_panel_1.setHorizontalGroup(
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addGap(5)
+					.addComponent(button_9)
+					.addGap(5)
+					.addComponent(label_10))
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addGap(5)
+					.addComponent(button_10)
+					.addGap(5)
+					.addComponent(label_11))
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addGap(5)
+					.addComponent(button_11)
+					.addGap(5)
+					.addComponent(label_12))
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addGap(5)
+					.addComponent(button_12)
+					.addGap(5)
+					.addComponent(lblnoStars))
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addGap(6)
+					.addComponent(button_13)
+					.addGap(5)
+					.addComponent(lblLocked_2))
+		);
+		gl_panel_1.setVerticalGroup(
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addGap(5)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addComponent(button_9)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(6)
+							.addComponent(label_10)))
+					.addGap(5)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addComponent(button_10)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(9)
+							.addComponent(label_11)))
+					.addGap(5)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addComponent(button_11)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(9)
+							.addComponent(label_12)))
+					.addGap(5)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addComponent(button_12)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(9)
+							.addComponent(lblnoStars)))
+					.addGap(5)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addComponent(button_13)
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(9)
+							.addComponent(lblLocked_2))))
+		);
+		panel_1.setLayout(gl_panel_1);
+		GroupLayout gl_panel = new GroupLayout(panel);
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGap(5)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(button_4)
+							.addGap(5)
+							.addComponent(label_5))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(button_5)
+							.addGap(5)
+							.addComponent(label_6))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(button_6)
+							.addGap(5)
+							.addComponent(label_7))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(button_7)
+							.addGap(5)
+							.addComponent(label_8))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(button_8)
+							.addGap(5)
+							.addComponent(label_9))))
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGap(5)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addComponent(button_4)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(6)
+							.addComponent(label_5)))
+					.addGap(5)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addComponent(button_5)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(9)
+							.addComponent(label_6)))
+					.addGap(5)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addComponent(button_6)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(9)
+							.addComponent(label_7)))
+					.addGap(5)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addComponent(button_7)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(9)
+							.addComponent(label_8)))
+					.addGap(5)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addComponent(button_8)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(9)
+							.addComponent(label_9))))
+		);
+		panel.setLayout(gl_panel);
+		
+		JLabel label = new JLabel("locked    ");
+		label.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
+		
+		JLabel label_13 = new JLabel("              ");
+		label_13.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
+		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
+		gl_panel_2.setHorizontalGroup(
+			gl_panel_2.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_2.createSequentialGroup()
+					.addGap(5)
+					.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addComponent(btnNewButton)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(label_13, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addComponent(button)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(label, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addComponent(button_1)
+							.addGap(5)
+							.addComponent(label_3))
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addComponent(button_2)
+							.addGap(5)
+							.addComponent(label_1))
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addComponent(button_3)
+							.addGap(5)
+							.addComponent(lblNoStars)))
+					.addContainerGap())
+		);
+		gl_panel_2.setVerticalGroup(
+			gl_panel_2.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_2.createSequentialGroup()
+					.addGap(5)
+					.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnNewButton)
+						.addComponent(label_13, GroupLayout.PREFERRED_SIZE, 10, GroupLayout.PREFERRED_SIZE))
+					.addGap(5)
+					.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+						.addComponent(button)
+						.addComponent(label, GroupLayout.PREFERRED_SIZE, 10, GroupLayout.PREFERRED_SIZE))
+					.addGap(5)
+					.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+						.addComponent(button_1)
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addGap(9)
+							.addComponent(label_3)))
+					.addGap(5)
+					.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+						.addComponent(button_2)
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addGap(9)
+							.addComponent(label_1)))
+					.addGap(5)
+					.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+						.addComponent(button_3)
+						.addGroup(gl_panel_2.createSequentialGroup()
+							.addGap(9)
+							.addComponent(lblNoStars))))
+		);
+		panel_2.setLayout(gl_panel_2);
 		frame.getContentPane().setLayout(groupLayout);
 	}
 
