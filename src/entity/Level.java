@@ -12,7 +12,7 @@ public class Level {
 	public Level(int lvlID, BullPen pen, Board board){
 		this.lvlID = lvlID;
 		this.pen = pen;
-		this.board =board;
+		this.board = board;
 	}
 	
 	public void initializeLevel(){

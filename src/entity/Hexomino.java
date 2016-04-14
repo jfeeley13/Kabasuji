@@ -3,7 +3,7 @@ package entity;
 public class Hexomino {
 	
 	protected int pID;
-	protected Point neighbors[] = new Point[5];
+	protected Point shape[] = new Point[5];
 	protected Point origin; //Remove?
 	protected boolean isSel;
 	

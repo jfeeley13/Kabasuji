@@ -6,11 +6,9 @@ public class Board {
 	
 	protected Tile tileBoard[];
 	protected Hexomino hexPlaced[];
-	protected Point tileList[];
 	
-	public Board(Tile tileBoard[], Point tileList[]){
+	public Board(Tile tileBoard[]){
 		this.tileBoard = tileBoard;
-		this.tileList = tileList;
 	}
 	
 
