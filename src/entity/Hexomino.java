@@ -8,7 +8,7 @@ public class Hexomino {
 	protected boolean isSel;//TODO: Look at G analysis feedback
 	
 	boolean CWRotate;
-	boolean hFlip;
+	boolean hFlipa;
 
 	public Hexomino(int pID, Point origin, Point neighbors[]){
 		this.pID = pID;
