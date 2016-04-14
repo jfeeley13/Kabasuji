@@ -2,7 +2,7 @@ package entity;
 
 public class Board {
 	
-//	TODO Change point to another class
+//	TODO Change point to another class Hello world
 	
 	protected Tile tileBoard[];
 	protected Hexomino hexPlaced[];
