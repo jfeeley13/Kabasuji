@@ -1,7 +1,7 @@
 package gameControllers;
 
-import entity.GameMode;
 import views.SplashScreen;
+import entity.GameMode;
 
 public class CustomLevelsController {
 	GameMode customLevels;
