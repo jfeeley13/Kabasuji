@@ -2,6 +2,7 @@ package entity;
 
 import java.util.Iterator;
 
+
 public class Hexomino {
 	
 	protected int pID;
@@ -25,12 +26,13 @@ public class Hexomino {
 	}
 	
 	public int[] getShape(){
-		Iterator<Integer> coords;
-		coords.
+		
+		int coords[][];
 		//for loop iterates and grabs each HexTiles coordinates
-//		for(int tileNum = 0; tileNum >= 5; tileNum++){
-			coords.add(this.HexTile[x].getLocation())
-//		}
+		for(int tileNum = 0; tileNum >= 5; tileNum++){
+			coords.
+			.add(this.shape[tileNum].getLocation())
+		}
 		return coords;
 	}
 	
