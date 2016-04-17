@@ -12,4 +12,6 @@ public class LightningTile extends Tile{
 		
 	}
 
+	
+	
 }

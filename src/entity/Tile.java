@@ -35,6 +35,10 @@ public abstract class Tile {
 		return height;
 	}
 	
+	public int[] getLocation(){
+		int coords[] = {row , column};
+		return coords;
+	}
 }
 
 
