@@ -7,7 +7,6 @@ public class Level {
 	protected int starsAcheived;
 	protected Board board;
 	protected BullPen pen;
-	protected UserMove userMoves[];
 	
 	public Level(int lvlID, BullPen pen, Board board){
 		this.lvlID = lvlID;

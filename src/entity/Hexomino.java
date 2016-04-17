@@ -3,17 +3,15 @@ package entity;
 public class Hexomino {
 	
 	protected int pID;
-	protected Point shape[] = new Point[5];
-	protected Point origin; //Remove?
+	protected int shape[][] = new int [5][2];
 	protected boolean isSel;
 	
 	boolean CWRotate;
 	boolean hFlip;
 
-	public Hexomino(int pID, Point origin, Point neighbors[]){
+	public Hexomino(int pID, int shape[][]){
 		this.pID = pID;
-		this.origin = origin;
-		this.neighbors = neighbors;	
+		this.shape = shape;	
 	}
 	
 	public void rotate(boolean direction){

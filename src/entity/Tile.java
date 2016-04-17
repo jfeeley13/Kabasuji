@@ -1,22 +1,38 @@
 package entity;
 
-public class Tile {
+public abstract class Tile {
 	
+	protected int row;
+	protected int column;
 	protected boolean isCovered;
-	protected String setColor;
-	protected int setNum;
+	protected int width;
+	protected int height;
 	
-	public Tile (String setColor, int setNum){
-		this.setColor = setColor; 
-		this.setNum = setNum;
+	
+	public Tile (int row, int column){
+		this.row = row;
+		this.column = column;
 	}
 	
 	public boolean isCovered(){
 		return false;
 	}
-
+	
+	//Toggles from null to non-null
+	public void toggleTile(){
+		
+	}
+	
 	public boolean isNull(){
 		return true;
+	}
+	
+	public int getTileWidth(){
+		return width;
+	}
+	
+	public int getTileHeight(){
+		return height;
 	}
 	
 }

@@ -9,11 +9,11 @@ public class BullPen {
 		this.HexList = HexList;
 	}
 	
-	public void rotatePiece(){
+	public void rotateHex(int direction){
 		
 	}
 	
-	public void putBack(){
+	public void flipHex(int direction){
 		
 	}
 	
@@ -22,7 +22,11 @@ public class BullPen {
 		return this.HexList[x];
 	}
 	
-	public void addPiece(){
+	public void addHex(Hexomino piece){
+		
+	}
+	
+	public void removeHex(Hexomino piece){
 		
 	}
 	
