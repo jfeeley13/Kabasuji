@@ -61,7 +61,7 @@ public class BuildStart {
 				 Builder newBuilderWindow = new Builder();
 				 
 				 frame.dispose();													//closes current window
-				 newBuilderWindow.openBuildWindow("Puzzle Level");
+				 newBuilderWindow.openBuildWindow("Puzzle Level", 6, 6);			//default puzzle with 6x6 board
 			}
 		});
 		

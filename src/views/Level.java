@@ -47,8 +47,9 @@ public class Level {
 	private JTable table;
 	static String gameType;
 	static int level;
-
 	
+	PieceView piecesView;
+	BoardView boardView;
 
 	/**
 	 * Launch the application.
@@ -153,7 +154,9 @@ public class Level {
 		lblF1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblF1.setFont(new Font("Lucida Grande", Font.ITALIC, 13));
 		
-		JPanel panel = new JPanel();
+		//board replaces the panel
+		//JPanel panel = new JPanel();
+		boardView = new BoardView(6,6);
 		
 		JLabel lblBoard = new JLabel("Board");
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
@@ -170,7 +173,7 @@ public class Level {
 									.addGap(227))
 								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 									.addComponent(lblBoard)
-									.addComponent(panel, GroupLayout.PREFERRED_SIZE, 546, GroupLayout.PREFERRED_SIZE))))
+									.addComponent(boardView, GroupLayout.PREFERRED_SIZE, 546, GroupLayout.PREFERRED_SIZE))))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(30)
 							.addComponent(lblF1)))
@@ -193,7 +196,7 @@ public class Level {
 							.addGap(14)
 							.addComponent(lblBoard)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(panel, GroupLayout.PREFERRED_SIZE, 268, GroupLayout.PREFERRED_SIZE)
+							.addComponent(boardView, GroupLayout.PREFERRED_SIZE, 268, GroupLayout.PREFERRED_SIZE)
 							.addGap(31)
 							.addComponent(table_c, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 					.addPreferredGap(ComponentPlacement.RELATED)
@@ -222,11 +225,11 @@ public class Level {
 		});
 		splitPane.setRightComponent(flipButton);
 		
-		JPanel panel_1 = new JPanel();
-		scrollPane.setViewportView(panel_1);
-		
+		//JPanel panel_1 = new JPanel();
+		piecesView = new PieceView(1);
+		//scrollPane.setViewportView(panel_1);
+		scrollPane.setViewportView(piecesView);
 
-		
 		JLabel lblNewLabel = new JLabel("Level:   ");
 		toolBar.add(lblNewLabel);
 		

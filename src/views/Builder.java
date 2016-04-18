@@ -48,14 +48,18 @@ public class Builder {
 	private JTextField textField;
 	private JTextField textField_1;
 	static String gameType;
-	int row;
-	int col;
+	PieceView piecesView;
+	BoardView boardView;
+	static int row;
+	static int col;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void openBuildWindow(String type) {
+	public static void openBuildWindow(String type, int rows, int cols) {
 		gameType= type;
+		row = rows;
+		col = cols;
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -97,16 +101,19 @@ public class Builder {
 		JLabel lblBoardSize = new JLabel("Board Size:");	
 		lblBoardSize.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		final JSpinner spinner = new JSpinner();	//row spinner
+		final JSpinner spinner = new JSpinner();	//col spinner
 		spinner.setModel(new SpinnerNumberModel(6, 1, 12, 1));
-		spinner.setValue(6);
-		
+		spinner.setValue(col);
+		 col = (Integer) spinner.getValue();
+		 
 		JLabel lblX = new JLabel("x");
 		lblX.setHorizontalAlignment(SwingConstants.LEFT);
 		
-		final JSpinner spinner_1 = new JSpinner();	//column spinner
+		final JSpinner spinner_1 = new JSpinner();	//row spinner
 		spinner_1.setModel(new SpinnerNumberModel(6, 1, 12, 1));
-		spinner_1.setValue(6);
+		spinner_1.setValue(row);
+		row = (Integer) spinner_1.getValue();
+
 		
 		final JComboBox levelComboBox = new JComboBox();	//select which level to create
 		levelComboBox.addItem("Puzzle Level");
@@ -139,10 +146,7 @@ public class Builder {
 		}
 		else{
 			btnGenerate.setVisible(false);
-		}
-		row = 6;
-		col = 6;
-		
+		}	
 		
 		JButton btnUndo = new JButton("Undo");
 		btnUndo.addActionListener(new ActionListener() {
@@ -155,8 +159,6 @@ public class Builder {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		
-		
 		
 		JScrollPane bullPin = new JScrollPane();
 		bullPin.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -187,10 +189,13 @@ public class Builder {
 		
 		JButton btnCreate = new JButton("Create");
 		btnCreate.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				 col = (Integer) spinner.getValue();
-				 row = (Integer) spinner_1.getValue();
-				
+			public void actionPerformed(ActionEvent e) {
+				Builder nw = new Builder();
+				row = (Integer) spinner_1.getValue();
+				col = (Integer) spinner.getValue();
+
+				frame.dispose();
+				nw.openBuildWindow(levelComboBox.getSelectedItem().toString(), row, col);
 			}
 		});
 		
@@ -204,7 +209,8 @@ public class Builder {
 		
 		JLabel lblBullPin = new JLabel("Bull Pen:");
 		
-		JPanel board = new JPanel();
+		//JPanel board = new JPanel();
+		boardView = new BoardView(row-1,col-1);
 		
 		JSpinner spinner_2 = new JSpinner();
 		spinner_2.setModel(new SpinnerNumberModel(1, 1, 6, 1));
@@ -224,14 +230,12 @@ public class Builder {
 				Builder nw = new Builder();
 				frame.dispose();
 				String newType = levelComboBox.getItemAt(0).toString();
-				nw.openBuildWindow(levelComboBox.getSelectedItem().toString());
+				nw.openBuildWindow(levelComboBox.getSelectedItem().toString(), row, col);
 			}
 		});
 		
 		JLabel lblRightClickTo = new JLabel("Right click to add/delete tile");
 		lblRightClickTo.setFont(new Font("Lucida Grande", Font.ITALIC, 13));
-		
-		JLabel label_3 = new JLabel("<--Board");
 		
 		
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
@@ -271,9 +275,8 @@ public class Builder {
 									.addGap(77))
 								.addComponent(inventory, GroupLayout.PREFERRED_SIZE, 575, GroupLayout.PREFERRED_SIZE)
 								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(board, GroupLayout.PREFERRED_SIZE, 520, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-									.addComponent(label_3))
+									.addComponent(boardView, GroupLayout.PREFERRED_SIZE, 520, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED, 12, Short.MAX_VALUE))
 								.addGroup(groupLayout.createSequentialGroup()
 									.addGap(6)
 									.addComponent(lblPressFFor)))
@@ -348,12 +351,9 @@ public class Builder {
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addGroup(groupLayout.createSequentialGroup()
 									.addGap(11)
-									.addComponent(board, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)
+									.addComponent(boardView, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(lblInventory))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGap(95)
-									.addComponent(label_3)))
+									.addComponent(lblInventory)))
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(inventory, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
@@ -374,9 +374,10 @@ public class Builder {
 		splitPane_2.setRightComponent(button_2);
 		button_2.setPreferredSize(new Dimension(27, 10));	
 		
-		JPanel panel = new JPanel();
-		inventory.setViewportView(panel);
-		GroupLayout gl_panel = new GroupLayout(panel);
+		//JPanel panel = new JPanel();
+		piecesView = new PieceView(1);
+		inventory.setViewportView(piecesView);
+		GroupLayout gl_panel = new GroupLayout(piecesView);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGap(0, 540, Short.MAX_VALUE)
@@ -385,7 +386,7 @@ public class Builder {
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGap(0, 90, Short.MAX_VALUE)
 		);
-		panel.setLayout(gl_panel);
+		piecesView.setLayout(gl_panel);
 
 
 		
@@ -410,8 +411,9 @@ public class Builder {
 		splitPane.setRightComponent(flipButton);
 		flipButton.setPreferredSize(new Dimension(40, 20));	
 		
-		JPanel panel_1 = new JPanel();
-		bullPin.setViewportView(panel_1);
+		//JPanel panel_1 = new JPanel();
+		piecesView = new PieceView(1);
+		bullPin.setViewportView(piecesView);
 
 		
 		JLabel lblLevelName = new JLabel("Level Name:");
