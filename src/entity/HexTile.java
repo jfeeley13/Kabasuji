@@ -6,6 +6,9 @@ public class HexTile extends Tile{
 		super(row, column);
 	}
 	
-	
+	public void changeLocation(int newRow, int newCol){
+		row = newRow;
+		column = newCol;
+	}
 	
 }

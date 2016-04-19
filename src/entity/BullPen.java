@@ -9,21 +9,20 @@ public class BullPen {
 		this.HexList = HexList;
 	}
 	
-	public void rotateHex(int direction){
+	public void rotateHex(boolean direction){
 		
 	}
 	
-	public void flipHex(int direction){
+	public void flipHex(boolean direction){
 		
 	}
 	
-	public Hexomino getPiece(){
-		int x = 0;
+	public Hexomino getPiece(int x){
 		return this.HexList[x];
 	}
 	
 	public void addHex(Hexomino piece){
-		
+		HexList[HexList.length] = piece;
 	}
 	
 	public void removeHex(Hexomino piece){

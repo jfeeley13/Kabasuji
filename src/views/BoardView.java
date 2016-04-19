@@ -141,7 +141,7 @@ public class BoardView extends JPanel {
 	}
 	*/
 
-	/** Helper method to return polygon for tangram piece anchored at (x,y). 
+	/** Helper method to return polygon for piece anchored at (x,y). 
 	public Polygon computePolygon(int x, int y, Puzzle p) {
 		int[] xpoints = new int[p.size()];
 		int[] ypoints = new int[p.size()];
