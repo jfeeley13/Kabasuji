@@ -6,11 +6,18 @@ public class Board {
 	
 	protected Tile tileBoard[];
 	protected Hexomino hexPlaced[];
+	protected int XOrigin;
+	protected int YOrigin;
 	
 	public Board(Tile tileBoard[]){
 		this.tileBoard = tileBoard;
 	}
 	
+
+	public int[] getTopLeft(){
+		int[] origin = {XOrigin, YOrigin};
+		return origin;
+	}
 	
 	public boolean checkCollision(Hexomino reqHex){
 		return false;
@@ -20,18 +27,40 @@ public class Board {
 		return hexPlaced.length;
 	}
 	
+	/**
+	 * Adds hexomino to board from BullPen (possibly give XY coordinates of piece as well)
+	 * 
+	 * @param Requested hexomino to be added
+	 * @return True if heomino was added, false if hexomino doesn't exist
+	 */
+	
 	public boolean addHex(Hexomino hex){
 		boolean isValid = true;
 		return isValid;
 	}
-	
+	/**
+	 * 
+	 * Removes selected hexomino from board
+	 * 
+	 * @param Requested hexomino to be removed 
+	 * @return true if hexomino was removed, false if hexomino doesn't exist
+	 */
 	public boolean removeHex(Hexomino hex){
 		boolean isValid = true;
 		return isValid;
 	}
-	//Can throw NullTileException
+	/**
+	 * 
+	 * @param x location of click in pixels
+	 * @param y location of click in pixels
+	 * @return Tile that is being selected
+	 * Throws exception if tile does not exist at selected location
+	 * 
+	 */
 	public Tile getTile(int x, int y){
-		int tile = 0;
+		int tRow = (y-YOrigin)/tileBoard[0].getTileWidth();
+		int tCol = (x-XOrigin)/tileBoard[0].getTileHeight();
+		int tile = 0; //Placeholder value
 		return tileBoard[tile];
 	}
 	//Can throw NullTileException
