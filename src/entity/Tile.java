@@ -1,18 +1,15 @@
 package entity;
 
 public abstract class Tile {
-	
-	protected int row;
-	protected int column;
+	protected RowColumn rowCol;
 	protected boolean isCovered;
 	protected int width = 32;
 	protected int height = 32;
 	protected boolean isNull = false;
 	
 	
-	public Tile (int row, int column){
-		this.row = row;
-		this.column = column;
+	public Tile (RowColumn rowCol){
+		this.rowCol = rowCol;
 	}
 
 	/**
@@ -71,9 +68,8 @@ public abstract class Tile {
 	 * 
 	 * @return (Row, Column) Coordinates of Selected Tile
 	 */
-	public int[] getLocation(){
-		int coords[] = {row , column};
-		return coords;
+	public RowColumn getLocation(){
+		return rowCol;
 	}
 }
 

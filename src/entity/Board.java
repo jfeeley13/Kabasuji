@@ -54,7 +54,7 @@ public class Board {
 	 * @param x location of click in pixels
 	 * @param y location of click in pixels
 	 * @return Tile that is being selected
-	 * Throws exception if tile does not exist at selected location
+	 * @exception NullTileException if tile does not exist at selected location
 	 * 
 	 */
 	public Tile getTile(int x, int y){
