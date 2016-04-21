@@ -8,7 +8,12 @@ public class HexTile extends Tile{
 	
 	public void changeLocation(int newRow, int newCol){
 		RowColumn newRowCol = new RowColumn(newRow, newCol);
-		this.rowCol = newRowCol; 
+		this.setRowCol(newRowCol); 
+	}
+
+	@Override
+	public boolean isCovered() {
+		return false;
 	}
 	
 }

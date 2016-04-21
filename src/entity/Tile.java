@@ -1,28 +1,17 @@
 package entity;
 
 public abstract class Tile {
-	protected RowColumn rowCol;
-	protected boolean isCovered;
-	protected int width = 32;
-	protected int height = 32;
-	protected boolean isNull = false;
+	private RowColumn rowCol;
+	private boolean isCovered;
+	private int width = 32;
+	private int height = 32;
+	private boolean isNull = false;
 	
 	
 	public Tile (RowColumn rowCol){
 		this.rowCol = rowCol;
 	}
 
-	/**
-	 * 
-	 * Determines if tile is covered or not
-	 * 
-	 * @return True = Covered --- False = Not Covered
-	 */
-	public boolean isCovered(){
-		return isCovered;
-	}
-	
-	
 	/**
 	 * Toggles tile from null to not null
 	 * Used in level editor only
@@ -31,46 +20,48 @@ public abstract class Tile {
 	public void toggleTile(){
 		this.isNull = !this.isNull;
 	}
-	
-	
-	/**
-	 * 
-	 * Determines if tile is null or not
-	 * 
-	 * @return True = Null --- False = Not Null
-	 */
-	
-	public boolean isNull(){
-		return isNull;
+
+	public RowColumn getRowCol() {
+		return rowCol;
 	}
-	
-	/**
-	 * 
-	 * @return Width of tile in Pixels
-	 * 
-	 */
-	public int getTileWidth(){
+
+	public void setRowCol(RowColumn rowCol) {
+		this.rowCol = rowCol;
+	}
+
+	public boolean isCovered() {
+		return isCovered;
+	}
+
+	public int getWidth() {
 		return width;
 	}
 
-	/**
-	 * 
-	 * @return Height of tile in Pixels
-	 * 
-	 */
-	public int getTileHeight(){
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public int getHeight() {
 		return height;
 	}
-	
-	/**
-	 * 
-	 * Determines the location of the tile in a board or piece
-	 * 
-	 * @return (Row, Column) Coordinates of Selected Tile
-	 */
-	public RowColumn getLocation(){
-		return rowCol;
+
+	public void setHeight(int height) {
+		this.height = height;
 	}
+
+	public boolean isNull() {
+		return isNull;
+	}
+
+	public void setNull(boolean isNull) {
+		this.isNull = isNull;
+	}
+
+	public void setCovered(boolean isCovered) {
+		this.isCovered = isCovered;
+	}
+	
+
 }
 
 

@@ -58,8 +58,8 @@ public class Board {
 	 * 
 	 */
 	public Tile getTile(int x, int y){
-		int tRow = (y-YOrigin)/tileBoard[0].getTileWidth();
-		int tCol = (x-XOrigin)/tileBoard[0].getTileHeight();
+		int tRow = (y-YOrigin)/tileBoard[0].getWidth();
+		int tCol = (x-XOrigin)/tileBoard[0].getHeight();
 		int tile = 0; //Placeholder value
 		return tileBoard[tile];
 	}

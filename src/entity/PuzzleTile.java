@@ -9,5 +9,4 @@ public class PuzzleTile extends Tile{
 		super(rowCol);
 	}
 	
-	
 }

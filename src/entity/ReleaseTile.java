@@ -11,4 +11,13 @@ public class ReleaseTile extends Tile{
 		this.setNum = setNum;
 	}
 
+	@Override
+	public boolean isCovered() {
+		if(setColor == null) //if the tile has no set, it does not matter if this tile is covered or not, so return true
+			return true;
+		return this.isCovered();
+	}
+	
+	
+
 }
