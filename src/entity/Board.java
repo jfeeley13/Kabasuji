@@ -1,10 +1,11 @@
 package entity;
 
 import java.awt.Point;
+import java.util.HashMap;
 
 public class Board {
 	
-	protected Tile tileBoard[];
+	protected HashMap<RowColumn, Tile> tileBoard;
 	protected Hexomino hexPlaced[];
 	protected int XOrigin;
 	protected int YOrigin;
