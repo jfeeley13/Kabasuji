@@ -12,5 +12,10 @@ public class LightningTile extends Tile{
 	public void markTile(){
 		marked = true;
 	}
+
+	@Override
+	public boolean hasWon() {
+		return marked;
+	}
 	
 }

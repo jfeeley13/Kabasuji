@@ -7,18 +7,16 @@ public class Board {
 	
 	protected HashMap<RowColumn, Tile> tileBoard;
 	protected Hexomino hexPlaced[];
-	protected int XOrigin;
-	protected int YOrigin;
+	RowColumn origin;
+	int maxRow, maxCol;
 	
-	public Board(HashMap<RowColumn, Tile>  tileBoard){
+	public Board(HashMap<RowColumn, Tile>  tileBoard, int maxRow, int maxCol){
 		this.tileBoard = tileBoard;
+		this.maxCol = maxCol;
+		this.maxRow = maxRow;
+		origin = new RowColumn(0, 0);
 	}
 	
-
-	public int[] getTopLeft(){
-		int[] origin = {XOrigin, YOrigin};
-		return origin;
-	}
 	
 	public boolean checkCollision(Hexomino reqHex){
 		return false;
@@ -50,24 +48,27 @@ public class Board {
 		boolean isValid = true;
 		return isValid;
 	}
-	/**
-	 * 
-	 * @param x location of click in pixels
-	 * @param y location of click in pixels
-	 * @return Tile that is being selected
-	 * @exception NullTileException if tile does not exist at selected location
-	 * 
-	 */
-/**	public Tile getTile(int x, int y){
-		int tRow = (y-YOrigin)/tileBoard[0].getWidth();
-		int tCol = (x-XOrigin)/tileBoard[0].getHeight();
-		int tile = 0; //Placeholder value
-		return tileBoard[tile];
+	public Tile getTile(RowColumn key){
+		return tileBoard.get(key);
 	}
-	//Can throw NullTileException
-	public Point getTopLeftOfTile(Tile tile){
-		Point coords = new Point(0, 0);
-		return coords; 
-	}**/
+	public void editTile(RowColumn key,Tile newTile){
+		tileBoard.put(key, newTile);
+	}
+	public void removeTile(RowColumn key){
+		tileBoard.remove(key);
+	}
+	
+	public boolean hasWon(){
+		TileIterator boardIterator = new TileIterator(tileBoard, maxRow, maxCol);
+		while(boardIterator.hasNext()){
+			Tile t = boardIterator.next();
+			if(t.hasWon() || t.isCovered())
+				return false;
+		}
+		return true;
+	}
+	
+	
+
 	
 }

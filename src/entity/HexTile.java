@@ -15,5 +15,10 @@ public class HexTile extends Tile{
 	public boolean isCovered() {
 		return false;
 	}
+
+	@Override
+	public boolean hasWon() {
+		return false;
+	}
 	
 }

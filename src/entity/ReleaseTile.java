@@ -11,6 +11,11 @@ public class ReleaseTile extends Tile{
 		this.setNum = setNum;
 	}
 
+	@Override
+	public boolean hasWon() {
+		return isCovered() && (setColor != null);
+	}
+
 	
 
 }

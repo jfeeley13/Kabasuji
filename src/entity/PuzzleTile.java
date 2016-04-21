@@ -8,5 +8,10 @@ public class PuzzleTile extends Tile{
 	public PuzzleTile(RowColumn rowCol) {
 		super(rowCol);
 	}
+
+	@Override
+	public boolean hasWon() {
+		return this.isCovered();
+	}
 	
 }

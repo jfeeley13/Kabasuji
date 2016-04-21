@@ -20,11 +20,12 @@ public class TileIterator implements java.util.Iterator<Tile>{
 
 	@Override
 	public Tile next() {
+		Tile item = tileBoard.get(currentTile);
 		if(currentTile.getRow() <= maxRow)
-			currentTile.setRow(currentTile.getRow() + 1 );
+			currentTile.setRow(currentTile.getRow() + 1);
 		else
-			currentTile.setColumn(currentTile.getColumn() + 1);
-		return tileBoard.get(currentTile);
+			currentTile.setColumn(currentTile.getColumn()+ 1);
+		return item;
 	}
 
 }

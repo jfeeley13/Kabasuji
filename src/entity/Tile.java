@@ -15,7 +15,10 @@ public abstract class Tile {
 	/**
 	 * Toggles tile from null to not null
 	 * Used in level editor only
+	 * @return 
 	 */
+	
+	public abstract boolean hasWon();
 	
 	public void toggleTile(){
 		this.isNull = !this.isNull;
