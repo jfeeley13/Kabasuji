@@ -6,6 +6,8 @@ import java.util.*;
 import javax.swing.JPanel;
 
 import entity.AllHex;
+import entity.HexTile;
+import entity.RowColumn;
 import entity.Tile;
 
 /**
@@ -20,15 +22,14 @@ public class PieceView extends JPanel {
 	Image offScreenImage = null;
 	Graphics offScreenGraphics = null;
 	int[] pieces = new int[35];
-
+	int row=0, col=0;
 	
 	Hashtable<AllHex,Color> colorMapping = new Hashtable<AllHex,Color>();
+    public ArrayList<RectangleShape> shapeList = new ArrayList<RectangleShape>();
 
 	// Given a set of pieces, draw them in this panel. 
 		public PieceView(int num) {
-			
-			
-			
+
 			/* initially allocate random color with each piece
 			Random rand = new Random();
 			for (AllHex p : model.getPieces()) {
@@ -36,13 +37,14 @@ public class PieceView extends JPanel {
 				colorMapping.put(p, randomColor);
 			}
 			*/
+			initComponents();
 		}
 		
 	//  Square Tile 1:1, 32x32 pixels. 
 		@Override
 		public Dimension size() {
-			int width = 32;
-			int height = 32;
+			int width = 33;
+			int height = 33;
 
 			return new Dimension (width, height);
 		}
@@ -54,6 +56,28 @@ public class PieceView extends JPanel {
 		model = new Model();
 	}
 	*/
+		
+		private void initComponents() {		
+			RowColumn coords[] = new RowColumn[6];
+			int row=0,col=0;
+
+			coords = AllHex.h1.getCoordShape();
+	
+			for (int i=0; i<coords.length;i++){
+				row = coords[i].getRow();
+				col = coords[i].getColumn()*-1;
+				shapeList.add(new RectangleShape((33*row),(col*33),33,33,false));	
+			}
+			
+			coords = AllHex.h2.getCoordShape();
+			
+			for (int i=0; i<coords.length;i++){
+				row = coords[i].getRow();
+				col = coords[i].getColumn()*-1;
+				shapeList.add(new RectangleShape((33*row),(col*33),33,33, false));			
+			}
+
+	    }
 
 	// Draw background puzzle and all active pieces.
 	public void paintComponent(Graphics g) {
@@ -75,13 +99,9 @@ public class PieceView extends JPanel {
 		}
 
 		// copy image into place.
-		//g.drawImage(offScreenImage, 0, 0, this);
-		g.drawRect(30,30,33,33); 
-        g.setColor(Color.BLACK);  
-        g.fillRect(30,30,33,33);
-        g.drawRect(32,32,30,30); 
-        g.setColor(Color.RED);  
-        g.fillRect(32,32,30,30);
+		for (RectangleShape s : shapeList) {
+            s.draw(g);
+        }
 		
 		/* double check if no model (for WindowBuilder)
 		if (model == null) { return; }

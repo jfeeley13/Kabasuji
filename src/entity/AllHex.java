@@ -20,13 +20,12 @@ public class AllHex {
 //	protected Hexomino h4 = new Hexomino(1, hp4);		
 //	protected Hexomino h5 = new Hexomino(1, hp5);
 //	protected Hexomino h12 = new Hexomino(1, hp12);
-
-	HexTile[] shape1 = {new HexTile(new RowColumn(0,0)),new HexTile(new RowColumn(0,-1)),new HexTile(new RowColumn(0,-2)),new HexTile(new RowColumn(0,-3)),new HexTile(new RowColumn(0,-4)),new HexTile(new RowColumn(0,-5))};
-	HexTile[] shape2 = {new HexTile(new RowColumn(0,0)),new HexTile(new RowColumn(0,-1)),new HexTile(new RowColumn(0,-2)),new HexTile(new RowColumn(0,-3)),new HexTile(new RowColumn(0,-4)),new HexTile(new RowColumn(1,0))};
-
-	protected Hexomino h1 = new Hexomino(1, shape1);		
-	protected Hexomino h2 = new Hexomino(2, shape2);
-
-
+	
+	public static HexTile[] shape1 = {new HexTile(new RowColumn(0,0)),new HexTile(new RowColumn(0,-1)),new HexTile(new RowColumn(0,-2)),new HexTile(new RowColumn(0,-3)),new HexTile(new RowColumn(0,-4)),new HexTile(new RowColumn(0,-5))};
+	public static HexTile[] shape2 = {new HexTile(new RowColumn(0,0)),new HexTile(new RowColumn(0,-1)),new HexTile(new RowColumn(0,-2)),new HexTile(new RowColumn(0,-3)),new HexTile(new RowColumn(0,-4)),new HexTile(new RowColumn(1,0))};	
+	
+	//TEMPORARY public static to display piece drawn
+	public static Hexomino h1 = new Hexomino(1, shape1);		
+	public static Hexomino h2 = new Hexomino(2, shape2);
 
 }
