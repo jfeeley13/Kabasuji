@@ -10,7 +10,7 @@ public class Board {
 	protected int XOrigin;
 	protected int YOrigin;
 	
-	public Board(Tile tileBoard[]){
+	public Board(HashMap<RowColumn, Tile>  tileBoard){
 		this.tileBoard = tileBoard;
 	}
 	
@@ -58,7 +58,7 @@ public class Board {
 	 * @exception NullTileException if tile does not exist at selected location
 	 * 
 	 */
-	public Tile getTile(int x, int y){
+/**	public Tile getTile(int x, int y){
 		int tRow = (y-YOrigin)/tileBoard[0].getWidth();
 		int tCol = (x-XOrigin)/tileBoard[0].getHeight();
 		int tile = 0; //Placeholder value
@@ -68,6 +68,6 @@ public class Board {
 	public Point getTopLeftOfTile(Tile tile){
 		Point coords = new Point(0, 0);
 		return coords; 
-	}
+	}**/
 	
 }

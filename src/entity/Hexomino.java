@@ -29,7 +29,7 @@ public class Hexomino {
 		if(direction)//If CW Rotation
 			dir = -1;
 		for(HexTile tile : shape){
-			tile.changeLocation(dir*(-1)*tile.rowCol.getColumn(), dir*tile.rowCol.getRow());
+			tile.changeLocation(dir*(-1)*tile.getRowCol().getColumn(), dir*tile.getRowCol().getRow());
 			// tile.rowCol.getColumn is the current column in which the tile is located
 			//and tile.rowCol.getRow() is the current row in which the tile is located
 		}
@@ -48,7 +48,7 @@ public class Hexomino {
 		if(direction)//If VFlip
 			dir = -1;
 		for(HexTile tile : shape){
-			tile.changeLocation(dir*(-1)*tile.rowCol.getRow(), dir*tile.rowCol.getColumn());
+			tile.changeLocation(dir*(-1)*tile.getRowCol().getRow(), dir*tile.getRowCol().getColumn());
 			// tile.rowCol.getColumn is the current column in which the tile is located
 			//and tile.rowCol.getRow() is the current row in which the tile is located
 		}
@@ -63,7 +63,7 @@ public class Hexomino {
 		RowColumn coords[] = new RowColumn[6];
 		int idx = 0;
 		for(HexTile tile : shape){
-			coords[idx] = tile.rowCol;
+			coords[idx] = tile.getRowCol();
 			idx++;
 		}
 		return coords;
