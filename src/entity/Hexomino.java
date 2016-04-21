@@ -67,7 +67,17 @@ public class Hexomino {
 			idx++;
 		}
 		return coords;
-		
 	}
+		/*
+	public int[][] getCoordShape(){
+		int coords[][] = new int[5][2];
+		//for loop iterates and grabs each HexTiles coordinates
+		for(int tileNum = 0; tileNum >= 5; tileNum++){
+			coords[tileNum][0] = this.shape[tileNum].getLocation()[0];
+			coords[tileNum][1] = this.shape[tileNum].getLocation()[1];		
+			}
+		return coords;
+		
+	}*/
 	
 }

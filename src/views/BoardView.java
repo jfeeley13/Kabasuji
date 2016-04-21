@@ -46,7 +46,7 @@ public class BoardView extends JPanel {
 		//create a arraylist of row/col squares
 		for (int i=0; i<=row;i++){
 			for (int j=0; j<=col;j++){
-				shapeList.add(new RectangleShape((33*i),(j*33),33,33));
+				shapeList.add(new RectangleShape((33*i),(j*33),33,33,true));
 			}
 		}
     }
