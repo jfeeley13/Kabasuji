@@ -2,8 +2,9 @@ package entity;
 
 public class HexTile extends Tile{
 
-	public HexTile(int row, int column) {
-		super(row, column);
+
+	public HexTile(Board board, int row, int column) {
+		super(board, row, column);
 	}
 	
 	public void changeLocation(int newRow, int newCol){

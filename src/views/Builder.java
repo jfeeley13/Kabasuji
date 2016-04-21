@@ -22,6 +22,8 @@ import javax.swing.JToggleButton;
 import javax.swing.JTable;
 
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JScrollPane;
@@ -41,7 +43,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.SpinnerNumberModel;
 
 
-public class Builder {
+public class Builder implements MouseListener{
 
 	private JFrame frame;
 	private JTextField txtGame;
@@ -232,7 +234,6 @@ public class Builder {
 		lblRightClickTo.setFont(new Font("Lucida Grande", Font.ITALIC, 13));
 		
 		JLabel label_3 = new JLabel("<--Board");
-		
 		
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
@@ -473,5 +474,47 @@ public class Builder {
 		groupLayout.setAutoCreateGaps(true);
 		groupLayout.setAutoCreateContainerGaps(true);
 		frame.getContentPane().setLayout(groupLayout);
+
+		
+		/**Mouse Listener*/
+		
+		board.addMouseListener(this);
+	
+	}
+
+	
+
+	@Override
+	public void mouseClicked(MouseEvent me) {
+		int pixRow = me.getY();
+		int pixCol = me.getX();
+
+		System.out.println(pixRow);
+		System.out.println(pixCol);
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

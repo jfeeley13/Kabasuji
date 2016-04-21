@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTable;
@@ -14,6 +15,12 @@ import javax.swing.border.LineBorder;
 import java.awt.Color;
 
 import javax.swing.table.DefaultTableModel;
+
+import entity.Board;
+import entity.PuzzleTile;
+import entity.Tile;
+import gameControllers.MListener;
+
 import javax.swing.JToolBar;
 import javax.swing.JLabel;
 import javax.swing.JTextPane;
@@ -22,6 +29,7 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JButton;
 
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -31,16 +39,19 @@ import javax.swing.JScrollPane;
 import javax.swing.JProgressBar;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JToggleButton;
 import javax.swing.JSplitPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.KeyEvent;
 
 
-public class Level {
+public class Level{
 
 	private static JFrame frame;
 	private JTable table_c;
@@ -153,7 +164,7 @@ public class Level {
 		lblF1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblF1.setFont(new Font("Lucida Grande", Font.ITALIC, 13));
 		
-		JPanel panel = new JPanel();
+		Board board = new Board();
 		
 		JLabel lblBoard = new JLabel("Board");
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
@@ -170,7 +181,7 @@ public class Level {
 									.addGap(227))
 								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 									.addComponent(lblBoard)
-									.addComponent(panel, GroupLayout.PREFERRED_SIZE, 546, GroupLayout.PREFERRED_SIZE))))
+									.addComponent(board, GroupLayout.PREFERRED_SIZE, 348, GroupLayout.PREFERRED_SIZE))))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(30)
 							.addComponent(lblF1)))
@@ -193,7 +204,7 @@ public class Level {
 							.addGap(14)
 							.addComponent(lblBoard)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(panel, GroupLayout.PREFERRED_SIZE, 268, GroupLayout.PREFERRED_SIZE)
+							.addComponent(board, GroupLayout.PREFERRED_SIZE, 348, GroupLayout.PREFERRED_SIZE)
 							.addGap(31)
 							.addComponent(table_c, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 					.addPreferredGap(ComponentPlacement.RELATED)
@@ -202,6 +213,7 @@ public class Level {
 						.addComponent(lblF1))
 					.addGap(34))
 		);
+		
 		
 		JSplitPane splitPane = new JSplitPane();
 		splitPane.setEnabled(false);
@@ -270,5 +282,33 @@ public class Level {
 		lblLevel.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		toolBar.add(lblLevel);
 		frame.getContentPane().setLayout(groupLayout);
+
+		board.setLayout(new GridLayout(12,12));
+		board.setPreferredSize(new Dimension(384,384));
+		board.setMinimumSize(new Dimension(384,384));
+		board.setMaximumSize(new Dimension(384,384));
+		
+		Tile boardArray[][] = new Tile[12][12];
+		
+		Border BoardTileBorder = BorderFactory.createLineBorder(Color.BLACK, 2, true);
+		
+		int TileRow = 0;
+		int TileCol = 0;
+		
+//		for(int TileRow = 0; TileRow <=11;TileRow++){
+//			for(int TileCol = 0; TileCol <=11;TileCol++){
+				System.out.println("On Row " + TileRow + " -- Col " + TileCol);
+//				PuzzleTile AddedTile = new PuzzleTile(board, TileRow,TileCol);
+				System.out.println("1");
+//				AddedTile.setBackground(Color.WHITE);
+				System.out.println("2");
+//				AddedTile.setBorder(BoardTileBorder);
+				System.out.println("3");
+//				boardArray[TileRow][TileCol] = AddedTile;
+//			}
+//		}
+		board.makeBoard(boardArray);
+
 	}
+
 }

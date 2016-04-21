@@ -1,18 +1,29 @@
 package entity;
 
-import java.awt.Point;
+import java.util.List;
 
-public class Board {
+import javax.swing.JPanel;
+
+import java.awt.Color;
+import java.awt.Point;
+import java.util.ArrayList;
+
+public class Board extends JPanel{
 	
-	protected Tile tileBoard[];
-	protected Hexomino hexPlaced[];
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	protected Tile boardArray[][];
+//	protected Hexomino hexPlaced[] = new Hexomino[];
+	List<Hexomino> hexPlaced = new ArrayList<Hexomino>();
 	protected int XOrigin;
 	protected int YOrigin;
 	
-	public Board(Tile tileBoard[]){
-		this.tileBoard = tileBoard;
-	}
 	
+	public void makeBoard(Tile[][] boardArray){
+		this.boardArray = boardArray;
+	}
 
 	public int[] getTopLeft(){
 		int[] origin = {XOrigin, YOrigin};
@@ -24,7 +35,7 @@ public class Board {
 	}
 	
 	public int checkNumOfHex(){		
-		return hexPlaced.length;
+		return hexPlaced.size();
 	}
 	
 	/**
@@ -34,9 +45,25 @@ public class Board {
 	 * @return True if heomino was added, false if hexomino doesn't exist
 	 */
 	
-	public boolean addHex(Hexomino hex){
-		boolean isValid = true;
-		return isValid;
+	public boolean addHex(Hexomino hex, Tile tile){
+		hexPlaced.add(hex);
+		int tileX = tile.getCoords()[0];
+		int tileY = tile.getCoords()[1];
+		int coordList[][] = hex.getCoordShape();
+		
+		for(int hexTileNum = 0; hexTileNum <= coordList.length; hexTileNum++){
+			coordList[hexTileNum][0] = coordList[hexTileNum][0]+tileX;
+			coordList[hexTileNum][1] = coordList[hexTileNum][1]+tileY;
+		}
+		
+		for(int hexTileNum = 0; hexTileNum <= coordList.length; hexTileNum++){
+			boardArray[coordList[hexTileNum][0]][coordList[hexTileNum][0]].coverTile();
+			boardArray[coordList[hexTileNum][0]][coordList[hexTileNum][0]].setBackground(Color.BLUE);
+		}
+		
+		
+		
+		return true;
 	}
 	/**
 	 * 
@@ -57,7 +84,7 @@ public class Board {
 	 * Throws exception if tile does not exist at selected location
 	 * 
 	 */
-	public Tile getTile(int x, int y){
+/*	public Tile getTile(int x, int y){
 		int tRow = (y-YOrigin)/tileBoard[0].getTileWidth();
 		int tCol = (x-XOrigin)/tileBoard[0].getTileHeight();
 		int tile = 0; //Placeholder value
@@ -68,5 +95,5 @@ public class Board {
 		Point coords = new Point(0, 0);
 		return coords; 
 	}
-	
+	*/
 }

@@ -1,18 +1,27 @@
 package entity;
 
-public abstract class Tile {
+import javax.swing.JPanel;
+
+import gameControllers.MListener;
+
+public abstract class Tile extends JPanel{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected int row;
 	protected int column;
-	protected boolean isCovered;
+	protected boolean isCovered = false;
 	protected int width = 32;
 	protected int height = 32;
 	protected boolean isNull = false;
 	
 	
-	public Tile (int row, int column){
+	public Tile (Board board, int row, int column){
 		this.row = row;
 		this.column = column;
+		this.addMouseListener(new MListener(board, this));
 	}
 
 	/**
@@ -25,6 +34,9 @@ public abstract class Tile {
 		return isCovered;
 	}
 	
+	public void coverTile(){
+		this.isCovered = true;
+	}
 	
 	/**
 	 * Toggles tile from null to not null
@@ -71,7 +83,7 @@ public abstract class Tile {
 	 * 
 	 * @return (Row, Column) Coordinates of Selected Tile
 	 */
-	public int[] getLocation(){
+	public int[] getCoords(){
 		int coords[] = {row , column};
 		return coords;
 	}
