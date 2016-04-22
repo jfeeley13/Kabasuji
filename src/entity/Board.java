@@ -45,25 +45,35 @@ public class Board extends JPanel{
 	 * @return True if heomino was added, false if hexomino doesn't exist
 	 */
 	
-	public boolean addHex(Hexomino hex, Tile tile){
-		hexPlaced.add(hex);
-		int tileX = tile.getCoords()[0];
-		int tileY = tile.getCoords()[1];
-		int coordList[][] = hex.getCoordShape();
-		
-		for(int hexTileNum = 0; hexTileNum <= coordList.length; hexTileNum++){
-			coordList[hexTileNum][0] = coordList[hexTileNum][0]+tileX;
-			coordList[hexTileNum][1] = coordList[hexTileNum][1]+tileY;
+	public boolean addHex(Tile tile){
+		HexTile[] shape = {new HexTile(this,0,0),new HexTile(this,0,1),new HexTile(this,0,-2),new HexTile(this,0,-3),new HexTile(this,0,-4),new HexTile(this,1,0)};
+		HexTile[] shape2 = {new HexTile(this,0,0),new HexTile(this,0,1),new HexTile(this,0,2),new HexTile(this,0,3),new HexTile(this,0,4),new HexTile(this,0,5)};
+		Hexomino hex = new Hexomino(1, shape2);	
+	
+		boolean allTilesEmpty=CheckTiles(tile, shape2);
+		if(allTilesEmpty){
+			for(int i=0; i<6;i++){
+				int x=hex.shape[i].row+tile.getCoords()[0];
+				int y=hex.shape[i].column+tile.getCoords()[1];
+				boardArray[x][y].coverTile();
+				boardArray[x][y].setBackground(Color.BLUE);
+				hexPlaced.add(hex);
+			}
 		}
-		
-		for(int hexTileNum = 0; hexTileNum <= coordList.length; hexTileNum++){
-			boardArray[coordList[hexTileNum][0]][coordList[hexTileNum][0]].coverTile();
-			boardArray[coordList[hexTileNum][0]][coordList[hexTileNum][0]].setBackground(Color.BLUE);
-		}
-		
-		
-		
 		return true;
+	}
+	public boolean CheckTiles(Tile tile,HexTile[] shape){
+		Hexomino hex = new Hexomino(1, shape);
+		for(int i=0; i<6;i++){
+			int x=hex.shape[i].row+tile.getCoords()[0];
+			int y=hex.shape[i].column+tile.getCoords()[1];
+			if(boardArray[x][y].isCovered()==true){
+				System.out.println("can't place piece here");
+				return false;
+			}	
+		}
+		return true;
+
 	}
 	/**
 	 * 

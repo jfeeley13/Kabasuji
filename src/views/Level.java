@@ -292,21 +292,20 @@ public class Level{
 		
 		Border BoardTileBorder = BorderFactory.createLineBorder(Color.BLACK, 2, true);
 		
-		int TileRow = 0;
-		int TileCol = 0;
 		
-//		for(int TileRow = 0; TileRow <=11;TileRow++){
-//			for(int TileCol = 0; TileCol <=11;TileCol++){
-				System.out.println("On Row " + TileRow + " -- Col " + TileCol);
-//				PuzzleTile AddedTile = new PuzzleTile(board, TileRow,TileCol);
-				System.out.println("1");
-//				AddedTile.setBackground(Color.WHITE);
-				System.out.println("2");
-//				AddedTile.setBorder(BoardTileBorder);
-				System.out.println("3");
-//				boardArray[TileRow][TileCol] = AddedTile;
-//			}
-//		}
+		for(int TileCol = 0; TileCol <=11;TileCol++){
+			for(int TileRow = 0; TileRow <=11;TileRow++){
+				//System.out.println("On Row " + TileRow + " -- Col " + TileCol);
+				PuzzleTile AddedTile = new PuzzleTile(board, TileRow,TileCol);
+				//System.out.println("1");
+				AddedTile.setBackground(Color.WHITE);
+				//System.out.println("2");
+				AddedTile.setBorder(BoardTileBorder);
+				//System.out.println("3");
+				boardArray[TileRow][TileCol] = AddedTile;
+				board.add(AddedTile);
+			}
+		}
 		board.makeBoard(boardArray);
 
 	}
