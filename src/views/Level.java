@@ -234,9 +234,9 @@ public class Level{
 		});
 		splitPane.setRightComponent(flipButton);
 		
-		JPanel panel_1 = new JPanel();
-		scrollPane.setViewportView(panel_1);
-		
+		SpecialDrawing BullPen_Panel = new SpecialDrawing();
+		scrollPane.setViewportView(BullPen_Panel);
+		BullPen_Panel.setPreferredSize(new Dimension(100, 1000));
 
 		
 		JLabel lblNewLabel = new JLabel("Level:   ");
