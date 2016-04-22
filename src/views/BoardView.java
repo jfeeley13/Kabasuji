@@ -39,14 +39,13 @@ public class BoardView extends JPanel {
 		col = cols;
 		
         this.initComponents();
-
 	}
 	
 	private void initComponents() {
 		//create a arraylist of row/col squares
-		for (int i=0; i<=row;i++){
-			for (int j=0; j<=col;j++){
-				shapeList.add(new RectangleShape((33*i),(j*33),33,33,true));
+		for (int i=0; i<=col;i++){
+			for (int j=0; j<=row;j++){
+				shapeList.add(new RectangleShape((tileSize*i),(j*tileSize),tileSize,tileSize,true));
 			}
 		}
     }

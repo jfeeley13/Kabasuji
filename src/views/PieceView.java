@@ -23,6 +23,7 @@ public class PieceView extends JPanel {
 	Graphics offScreenGraphics = null;
 	int[] pieces = new int[35];
 	int row=0, col=0;
+	int tileSize=32;
 	
 	Hashtable<AllHex,Color> colorMapping = new Hashtable<AllHex,Color>();
     public ArrayList<RectangleShape> shapeList = new ArrayList<RectangleShape>();
@@ -43,8 +44,8 @@ public class PieceView extends JPanel {
 	//  Square Tile 1:1, 32x32 pixels. 
 		@Override
 		public Dimension size() {
-			int width = 33;
-			int height = 33;
+			int width = 32;
+			int height = 32;
 
 			return new Dimension (width, height);
 		}
@@ -66,16 +67,17 @@ public class PieceView extends JPanel {
 			for (int i=0; i<coords.length;i++){
 				row = coords[i].getRow();
 				col = coords[i].getColumn()*-1;
-				shapeList.add(new RectangleShape((33*row),(col*33),33,33,false));	
+				shapeList.add(new RectangleShape((tileSize*row)+10,(col*tileSize)+10,tileSize,tileSize,false));	
 			}
 			
-			coords = AllHex.h2.getCoordShape();
+			/*coords = AllHex.h2.getCoordShape();
 			
 			for (int i=0; i<coords.length;i++){
 				row = coords[i].getRow();
 				col = coords[i].getColumn()*-1;
-				shapeList.add(new RectangleShape((33*row),(col*33),33,33, false));			
+				shapeList.add(new RectangleShape((tileSize*row)+10,(col*tileSize)+10,tileSize,tileSize,false));	
 			}
+			*/
 
 	    }
 

@@ -13,6 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Font;
 import javax.swing.UIManager;
+import java.awt.GridLayout;
+import javax.swing.SwingConstants;
 
 
 public class LevelSelection {
@@ -89,6 +91,7 @@ public class LevelSelection {
 				nw.openLevel("Release Level", 1);
 			}
 		});
+		panel_1.setLayout(new GridLayout(0, 2, 0, 0));
 		panel_1.add(button_9);
 		
 		JLabel label_10 = new JLabel("         ");
@@ -98,6 +101,7 @@ public class LevelSelection {
 		panel_1.add(button_10);
 		
 		JLabel label_11 = new JLabel("locked    ");
+		label_11.setHorizontalAlignment(SwingConstants.CENTER);
 		label_11.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
 		panel_1.add(label_11);
 		
@@ -105,6 +109,7 @@ public class LevelSelection {
 		panel_1.add(button_11);
 		
 		JLabel label_12 = new JLabel("locked    ");
+		label_12.setHorizontalAlignment(SwingConstants.CENTER);
 		label_12.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
 		panel_1.add(label_12);
 		
@@ -112,6 +117,7 @@ public class LevelSelection {
 		panel_1.add(button_12);
 		
 		JLabel lblnoStars = new JLabel("locked    ");
+		lblnoStars.setHorizontalAlignment(SwingConstants.CENTER);
 		lblnoStars.setFont(new Font("Lucida Grande", Font.PLAIN, 8));
 		panel_1.add(lblnoStars);
 		
@@ -119,6 +125,7 @@ public class LevelSelection {
 		panel_1.add(button_13);
 		
 		JLabel lblLocked_2 = new JLabel("locked   ");
+		lblLocked_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLocked_2.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
 		panel_1.add(lblLocked_2);
 		
@@ -130,6 +137,7 @@ public class LevelSelection {
 				nw.openLevel("Puzzle Level", 1);
 			}
 		});
+		panel_2.setLayout(new GridLayout(0, 2, 0, 0));
 		panel_2.add(btnNewButton);
 		
 		JButton button = new JButton("2");
@@ -139,10 +147,12 @@ public class LevelSelection {
 		});
 		
 		JLabel lblNewLabel = new JLabel("         ");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_2.add(lblNewLabel);
 		panel_2.add(button);
 		
 		JLabel label = new JLabel("locked    ");
+		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
 		panel_2.add(label);
 		
@@ -150,6 +160,7 @@ public class LevelSelection {
 		panel_2.add(button_1);
 		
 		JLabel label_3 = new JLabel("locked    ");
+		label_3.setHorizontalAlignment(SwingConstants.CENTER);
 		label_3.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
 		panel_2.add(label_3);
 		
@@ -157,6 +168,7 @@ public class LevelSelection {
 		panel_2.add(button_2);
 		
 		JLabel label_1 = new JLabel("locked    ");
+		label_1.setHorizontalAlignment(SwingConstants.CENTER);
 		label_1.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
 		panel_2.add(label_1);
 		
@@ -164,6 +176,7 @@ public class LevelSelection {
 		panel_2.add(button_3);
 		
 		JLabel lblNoStars = new JLabel("locked    ");
+		lblNoStars.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNoStars.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
 		panel_2.add(lblNoStars);
 		
@@ -178,6 +191,7 @@ public class LevelSelection {
 					nw.openLevel("Lightning Level", 1);
 			}
 		});
+		panel.setLayout(new GridLayout(0, 2, 0, 0));
 		panel.add(button_4);
 		
 		JLabel label_5 = new JLabel("         ");
@@ -187,6 +201,7 @@ public class LevelSelection {
 		panel.add(button_5);
 		
 		JLabel label_6 = new JLabel("locked    ");
+		label_6.setHorizontalAlignment(SwingConstants.CENTER);
 		label_6.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
 		panel.add(label_6);
 		
@@ -194,6 +209,7 @@ public class LevelSelection {
 		panel.add(button_6);
 		
 		JLabel label_7 = new JLabel("locked    ");
+		label_7.setHorizontalAlignment(SwingConstants.CENTER);
 		label_7.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
 		panel.add(label_7);
 		
@@ -201,6 +217,7 @@ public class LevelSelection {
 		panel.add(button_7);
 		
 		JLabel label_8 = new JLabel("locked    ");
+		label_8.setHorizontalAlignment(SwingConstants.CENTER);
 		label_8.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
 		panel.add(label_8);
 		
@@ -208,6 +225,7 @@ public class LevelSelection {
 		panel.add(button_8);
 		
 		JLabel label_9 = new JLabel("locked    ");
+		label_9.setHorizontalAlignment(SwingConstants.CENTER);
 		label_9.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
 		panel.add(label_9);
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());

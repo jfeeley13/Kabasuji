@@ -3,6 +3,7 @@ package views;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.EventQueue;
+import java.awt.GridLayout;
 
 import javax.swing.JFrame;
 import javax.swing.GroupLayout;
@@ -36,6 +37,7 @@ import javax.swing.JToggleButton;
 import javax.swing.JSplitPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 
@@ -121,6 +123,7 @@ public class Level {
 		});
 
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setMaximumSize(new Dimension(2000, 2000));
 		//scrollPane.setPreferredSize(new Dimension(99, 400));	
 
 	    scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -156,7 +159,7 @@ public class Level {
 		
 		//board replaces the panel
 		//JPanel panel = new JPanel();
-		boardView = new BoardView(6,6);
+		boardView = new BoardView(6,12);
 		
 		JLabel lblBoard = new JLabel("Board");
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
@@ -177,8 +180,8 @@ public class Level {
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(30)
 							.addComponent(lblF1)))
-					.addPreferredGap(ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+					.addGap(51)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
 						.addComponent(btnExit)
 						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
@@ -206,27 +209,35 @@ public class Level {
 					.addGap(34))
 		);
 		
-		JSplitPane splitPane = new JSplitPane();
-		splitPane.setEnabled(false);
-		splitPane.setPreferredSize(new Dimension(100, 20));	
-		scrollPane.setColumnHeaderView(splitPane);
+		JPanel jPane = new JPanel();
+		jPane.setMaximumSize(new Dimension(100, 40));
+		jPane.setMinimumSize(new Dimension(100, 40));
+		jPane.setPreferredSize(new Dimension(100, 40));
+		scrollPane.setColumnHeaderView(jPane);
+		jPane.setLayout(new GridLayout(2, 2));
 		
-		JButton rotateButton = new JButton("\u21BB");
-		rotateButton.setPreferredSize(new Dimension(50, 20));	
-
-		splitPane.setLeftComponent(rotateButton);
+		JButton btnA = new JButton("\u21BA");
+		btnA.setPreferredSize(new Dimension(50, 20));
+		btnA.setMinimumSize(new Dimension(50, 20));
+		btnA.setMaximumSize(new Dimension(50, 20));
+		jPane.add(btnA);
 		
-		JButton flipButton = new JButton("\u21C4");
-		flipButton.setPreferredSize(new Dimension(50, 20));	
-
-		flipButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		splitPane.setRightComponent(flipButton);
+		JButton btnB = new JButton("\u21BB");
+		btnB.setPreferredSize(new Dimension(50, 20));
+		btnB.setMinimumSize(new Dimension(50, 20));
+		btnB.setMaximumSize(new Dimension(50, 20));
+		jPane.add(btnB);
+		
+		JButton btnJ = new JButton(" \u21C4");
+		jPane.add(btnJ);
+		
+		JButton btnNewButton = new JButton("\u21C5");
+		jPane.add(btnNewButton);
+		
 		
 		//JPanel panel_1 = new JPanel();
 		piecesView = new PieceView(1);
+		piecesView.setAutoscrolls(true);
 		//scrollPane.setViewportView(panel_1);
 		scrollPane.setViewportView(piecesView);
 

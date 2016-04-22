@@ -27,5 +27,10 @@ public class TileIterator implements java.util.Iterator<Tile>{
 			currentTile.setColumn(currentTile.getColumn()+ 1);
 		return item;
 	}
+	@Override
+	public void remove() {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
