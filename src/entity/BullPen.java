@@ -51,7 +51,8 @@ public class BullPen extends BoardBoss{
 		Hexomino hex = new Hexomino(1, shape2);	
 	
 		boolean allTilesEmpty=CheckTiles(tile, shape2);
-		if(allTilesEmpty){
+
+		if(init){
 			for(int i=0; i<6;i++){
 				int x=hex.shape[i].row+tile.getCoords()[0];
 				int y=hex.shape[i].column+tile.getCoords()[1];
@@ -61,6 +62,7 @@ public class BullPen extends BoardBoss{
 				hexPlaced.add(hex);
 			}
 		}
+
 		return true;
 	}
 	public boolean CheckTiles(Tile tile,HexTile[] shape){

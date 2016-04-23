@@ -334,9 +334,9 @@ public class Level{
 		
 		for(int TileRow = 0; TileRow <y;TileRow++){
 			for(int TileCol = 0; TileCol <x;TileCol++){
-				System.out.println(TileRow);
-				System.out.println(TileCol);
-				System.out.println("On Row " + TileRow + " -- Col " + TileCol);
+				//System.out.println(TileRow);
+				//System.out.println(TileCol);
+				//System.out.println("On Row " + TileRow + " -- Col " + TileCol);
 				PuzzleTile AddedTile = new PuzzleTile(pen, TileCol,TileRow, x, y);
 				//System.out.println("1");
 				AddedTile.setBackground(Color.WHITE);
@@ -348,8 +348,9 @@ public class Level{
 			}
 		}
 		pen.makeBoard(penArray, x, y);
-		
+		pen.init=true;
 		pen.addHex(penArray[2][2]);
+		pen.init=false;
 		pen.selectedPiece = null;
 
 		

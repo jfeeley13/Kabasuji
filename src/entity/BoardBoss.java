@@ -23,6 +23,7 @@ public abstract class BoardBoss extends JPanel{
 	int width = 12;
 	int height = 12;
 	public static Hexomino selectedPiece;
+	public static boolean init = false;
 	
 	public void makeBoard(Tile[][] boardArray, int width, int height){
 		this.boardArray = boardArray;
