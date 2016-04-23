@@ -1,5 +1,7 @@
 package views;
 
+import gameControllers.SaveController;
+
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Point;
@@ -176,16 +178,21 @@ public class Builder {
 		
 		
 		JButton btnSave = new JButton("Save");
-		
+
 		JButton btnExit = new JButton("Exit");
-		btnExit.addActionListener(new ActionListener() {
+		btnExit.addActionListener(new SaveController(this));
+
+		/*btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				BuildStart nw = new BuildStart();
-				frame.dispose();
-				nw.openWindow();
+				SaveMenu nw = new SaveMenu();
+				//frame.dispose();
+				nw.setVisible(true);
+				
+				SaveController sc = new SaveController(this);
 				
 			}
 		});
+		*/
 		
 		JButton btnCreate = new JButton("Create");
 		btnCreate.addActionListener(new ActionListener() {
@@ -475,5 +482,10 @@ public class Builder {
 		groupLayout.setAutoCreateGaps(true);
 		groupLayout.setAutoCreateContainerGaps(true);
 		frame.getContentPane().setLayout(groupLayout);
+	}
+
+	public void quit(Builder parentView) {
+		parentView.frame.setVisible(false);
+		
 	}
 }

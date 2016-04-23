@@ -23,7 +23,7 @@ public class PieceView extends JPanel {
 	Graphics offScreenGraphics = null;
 	int[] pieces = new int[35];
 	int row=0, col=0;
-	int tileSize=32;
+	int tileSize=20;
 	
 	Hashtable<AllHex,Color> colorMapping = new Hashtable<AllHex,Color>();
     public ArrayList<RectangleShape> shapeList = new ArrayList<RectangleShape>();

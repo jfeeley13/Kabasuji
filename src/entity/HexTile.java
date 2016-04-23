@@ -2,6 +2,8 @@ package entity;
 
 public class HexTile extends Tile{
 
+
+
 	public HexTile(RowColumn rowCol) {
 		super(rowCol);
 	}

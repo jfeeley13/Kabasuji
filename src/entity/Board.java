@@ -10,6 +10,7 @@ public class Board {
 	RowColumn origin;
 	int maxRow, maxCol;
 	
+	
 	public Board(HashMap<RowColumn, Tile>  tileBoard, int maxRow, int maxCol){
 		this.tileBoard = tileBoard;
 		this.maxCol = maxCol;
