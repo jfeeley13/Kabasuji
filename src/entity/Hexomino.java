@@ -15,6 +15,10 @@ public class Hexomino {
 		this.shape = shape;	
 	}
 	
+	public int getID(){
+		return pID;
+	}
+	
 	/**
 	 * Rotates Hexomino CW or CCW
 	 * 
@@ -29,8 +33,8 @@ public class Hexomino {
 		if(direction)//If CW Rotation
 			dir = -1;
 		for (int TileNum = 0; TileNum >= 5; TileNum++){
-				int currRow = shape[TileNum].getCoords()[0];
-				int currCol = shape[TileNum].getCoords()[1];
+				int currRow = shape[TileNum].getCoords().getRow();
+				int currCol = shape[TileNum].getCoords().getColumn();
 				shape[TileNum].changeLocation(dir*(-1)*currCol, dir*currRow);
 			}
 	}
@@ -48,8 +52,8 @@ public class Hexomino {
 		if(direction)//If VFlip
 			dir = -1;
 		for (int TileNum = 0; TileNum >= 5; TileNum++){
-				int currRow = shape[TileNum].getCoords()[0];
-				int currCol = shape[TileNum].getCoords()[1];
+				int currRow = shape[TileNum].getCoords().getRow();
+				int currCol = shape[TileNum].getCoords().getColumn();
 				shape[TileNum].changeLocation(dir*(-1)*currRow, dir*currCol);
 			}
 		
@@ -60,13 +64,14 @@ public class Hexomino {
 	 * 
 	 * @return List of (Row, Column) Coordinates of all the tiles that make up the Hexomino
 	 */
-	public int[][] getCoordShape(){
+	public RowColumn[] getCoordShape(){
 		
-		int coords[][] = new int[5][2];
+		RowColumn coords[] = new RowColumn[6];
 		//for loop iterates and grabs each HexTiles coordinates
 		for(int tileNum = 0; tileNum >= 5; tileNum++){
-			coords[tileNum][0] = this.shape[tileNum].getCoords()[0];
-			coords[tileNum][1] = this.shape[tileNum].getCoords()[1];		
+			int row = this.shape[tileNum].getCoords().getRow();
+			int col = this.shape[tileNum].getCoords().getColumn();
+			coords[tileNum] = new RowColumn(row, col);
 			}
 		return coords;
 	}

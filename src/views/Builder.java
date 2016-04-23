@@ -43,9 +43,9 @@ import javax.swing.border.LineBorder;
 import javax.swing.SpinnerNumberModel;
 
 
-public class Builder implements MouseListener{
-
-	private JFrame frame;
+public class Builder extends JFrame implements MouseListener{
+//
+//	private JFrame frame;
 	private JTextField txtGame;
 	private JTextField textField;
 	private JTextField textField_1;
@@ -53,30 +53,31 @@ public class Builder implements MouseListener{
 	int row;
 	int col;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void openBuildWindow(String type) {
-		gameType= type;
-		
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Builder window = new Builder();
-					window.frame.setLocationRelativeTo(null);
-					window.frame.setVisible(true);
-					window.frame.setResizable(false);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	/**
+//	 * Launch the application.
+//	 */
+//	public static void openBuildWindow(String type) {
+//		gameType= type;
+//		
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					Builder window = new Builder();
+//					window.frame.setLocationRelativeTo(null);
+//					window.frame.setVisible(true);
+//					window.frame.setResizable(false);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the application.
 	 */
-	public Builder() {
+	public Builder(String type) {
+		gameType = type;
 		initialize();
 	}
 
@@ -84,12 +85,11 @@ public class Builder implements MouseListener{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
+		//frame = new JFrame();
 		Color myColor = Color.decode("#4169aa");
-		frame.getContentPane().setBackground(myColor);
-		frame.setBounds(100, 100, 760, 550);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+		getContentPane().setBackground(myColor);
+		setBounds(100, 100, 760, 550);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JToolBar toolBar = new JToolBar();
 		Color myToolbarColor = Color.decode("#4b89d0");
@@ -181,8 +181,8 @@ public class Builder implements MouseListener{
 		btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				BuildStart nw = new BuildStart();
-				frame.dispose();
-				nw.openWindow();
+				setVisible(false);
+				//nw.openWindow();
 				
 			}
 		});
@@ -223,10 +223,11 @@ public class Builder implements MouseListener{
 		JButton btnChangeLevel = new JButton("New Level");
 		btnChangeLevel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Builder nw = new Builder();
-				frame.dispose();
+				//frame.dispose();
 				String newType = levelComboBox.getItemAt(0).toString();
-				nw.openBuildWindow(levelComboBox.getSelectedItem().toString());
+				Builder nw = new Builder(levelComboBox.getSelectedItem().toString());
+				nw.setVisible(true);
+				//nw.openBuildWindow(levelComboBox.getSelectedItem().toString());
 			}
 		});
 		
@@ -235,7 +236,10 @@ public class Builder implements MouseListener{
 		
 		JLabel label_3 = new JLabel("<--Board");
 		
-		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
+		GroupLayout groupLayout = new GroupLayout(getContentPane());
+		groupLayout.setAutoCreateGaps(false);
+		groupLayout.setAutoCreateContainerGaps(false); // Problem code
+
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
@@ -471,9 +475,9 @@ public class Builder implements MouseListener{
 		
 		lblLevelBuilder.setFont(new Font("Lucida Grande", Font.BOLD, 18));
 		toolBar.add(lblLevelBuilder);
-		groupLayout.setAutoCreateGaps(true);
-		groupLayout.setAutoCreateContainerGaps(true);
-		frame.getContentPane().setLayout(groupLayout);
+//		groupLayout.setAutoCreateGaps(true);
+//		groupLayout.setAutoCreateContainerGaps(true);
+		getContentPane().setLayout(groupLayout);
 
 		
 		/**Mouse Listener*/

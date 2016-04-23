@@ -6,9 +6,7 @@ import java.util.*;
 import javax.swing.JPanel;
 
 import entity.AllHex;
-import entity.HexTile;
 import entity.RowColumn;
-import entity.Tile;
 
 /**
  * Here is where the pieces are to be played (in 512x512 size). 
@@ -23,6 +21,7 @@ public class PieceView extends JPanel {
 	Graphics offScreenGraphics = null;
 	int[] pieces = new int[35];
 	int row=0, col=0;
+	AllHex hexList; 
 	
 	Hashtable<AllHex,Color> colorMapping = new Hashtable<AllHex,Color>();
     public ArrayList<RectangleShape> shapeList = new ArrayList<RectangleShape>();
@@ -60,8 +59,8 @@ public class PieceView extends JPanel {
 		private void initComponents() {		
 			RowColumn coords[] = new RowColumn[6];
 			int row=0,col=0;
-
-			coords = AllHex.h1.getCoordShape();
+			
+			coords = hexList.getHex(1).getCoordShape();
 	
 			for (int i=0; i<coords.length;i++){
 				row = coords[i].getRow();
@@ -69,7 +68,7 @@ public class PieceView extends JPanel {
 				shapeList.add(new RectangleShape((33*row),(col*33),33,33,false));	
 			}
 			
-			coords = AllHex.h2.getCoordShape();
+			coords = hexList.getHex(2).getCoordShape();
 			
 			for (int i=0; i<coords.length;i++){
 				row = coords[i].getRow();

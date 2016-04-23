@@ -12,4 +12,5 @@ public class HexTile extends Tile{
 		column = newCol;
 	}
 	
+	
 }

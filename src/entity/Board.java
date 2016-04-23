@@ -10,16 +10,26 @@ import java.util.ArrayList;
 
 public class Board extends JPanel{
 	
-	/**
-	 * 
-	 */
+	/** List of Hexominos*/
+	
+	HexTile[] shape1 = {new HexTile(this, 0,0),new HexTile(this,0,-1),new HexTile(this,0,-2),new HexTile(this,0,-3),new HexTile(this,0,-4),new HexTile(this,0,-5)};
+	HexTile[] shape2 = {new HexTile(this,0,0),new HexTile(this,0,-1),new HexTile(this,0,-2),new HexTile(this,0,-3),new HexTile(this,0,-4),new HexTile(this,1,0)};
+
+	AllHex hexList = new AllHex();
+	
+	
+	public Board(){
+		hexList.makeHex((Integer) 1,shape1);
+		hexList.makeHex((Integer)2,shape2);
+	}
+	
 	private static final long serialVersionUID = 1L;
 	protected Tile boardArray[][];
 //	protected Hexomino hexPlaced[] = new Hexomino[];
 	List<Hexomino> hexPlaced = new ArrayList<Hexomino>();
 	protected int XOrigin;
 	protected int YOrigin;
-	
+	AllHex HexList;
 	
 	public void makeBoard(Tile[][] boardArray){
 		this.boardArray = boardArray;
@@ -47,21 +57,24 @@ public class Board extends JPanel{
 	
 	public boolean addHex(Hexomino hex, Tile tile){
 		hexPlaced.add(hex);
-		int tileX = tile.getCoords()[0];
-		int tileY = tile.getCoords()[1];
-		int coordList[][] = hex.getCoordShape();
+		int tileX = tile.getCoords().getColumn();
+		int tileY = tile.getCoords().getRow();
+		RowColumn coordList[] = hex.getCoordShape();
 		
 		for(int hexTileNum = 0; hexTileNum <= coordList.length; hexTileNum++){
-			coordList[hexTileNum][0] = coordList[hexTileNum][0]+tileX;
-			coordList[hexTileNum][1] = coordList[hexTileNum][1]+tileY;
+			int row = coordList[hexTileNum].getRow();
+			int col = coordList[hexTileNum].getColumn();
+			
+			coordList[hexTileNum] = new RowColumn(row+tileX, col+tileY);
 		}
 		
 		for(int hexTileNum = 0; hexTileNum <= coordList.length; hexTileNum++){
-			boardArray[coordList[hexTileNum][0]][coordList[hexTileNum][0]].coverTile();
-			boardArray[coordList[hexTileNum][0]][coordList[hexTileNum][0]].setBackground(Color.BLUE);
+			int row = coordList[hexTileNum].getRow();
+			int col = coordList[hexTileNum].getColumn();
+
+			boardArray[row][col].coverTile();
+			boardArray[row][col].setBackground(Color.BLUE);
 		}
-		
-		
 		
 		return true;
 	}

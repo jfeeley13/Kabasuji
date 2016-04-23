@@ -16,12 +16,14 @@ public abstract class Tile extends JPanel{
 	protected int width = 32;
 	protected int height = 32;
 	protected boolean isNull = false;
+	Board board;
 	
 	
 	public Tile (Board board, int row, int column){
 		this.row = row;
 		this.column = column;
-		this.addMouseListener(new MListener(board, this));
+		this.board = board; 
+		this.addMouseListener(new MListener(this));
 	}
 
 	/**
@@ -30,6 +32,10 @@ public abstract class Tile extends JPanel{
 	 * 
 	 * @return True = Covered --- False = Not Covered
 	 */
+	public Board getBoard(){
+		return this.board;
+	}
+	
 	public boolean isCovered(){
 		return isCovered;
 	}
@@ -83,8 +89,8 @@ public abstract class Tile extends JPanel{
 	 * 
 	 * @return (Row, Column) Coordinates of Selected Tile
 	 */
-	public int[] getCoords(){
-		int coords[] = {row , column};
+	public RowColumn getCoords(){
+		RowColumn coords = new RowColumn(row , column);
 		return coords;
 	}
 }
