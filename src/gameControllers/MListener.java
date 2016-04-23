@@ -21,8 +21,8 @@ public class MListener extends MouseInputAdapter implements MouseListener{
 		int x = this.tile.getCoords()[0];
 		int y = this.tile.getCoords()[1];
 
-		System.out.println("Row = " + x);
-		System.out.println("Col = " + y);
+		System.out.println("Row = " + y);
+		System.out.println("Col = " + x);
 
 		this.tile.getBoard().addHex(this.tile);
 

@@ -17,6 +17,10 @@ import java.awt.Color;
 import javax.swing.table.DefaultTableModel;
 
 import entity.Board;
+import entity.BoardBoss;
+import entity.BullPen;
+import entity.HexTile;
+import entity.Hexomino;
 import entity.PuzzleTile;
 import entity.Tile;
 import gameControllers.MListener;
@@ -93,6 +97,7 @@ public class Level{
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+			
 			}
 		});
 	}
@@ -164,7 +169,8 @@ public class Level{
 		lblF1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblF1.setFont(new Font("Lucida Grande", Font.ITALIC, 13));
 		
-		Board board = new Board();
+		BoardBoss board = new Board();
+		BoardBoss pen = new BullPen();
 		
 		JLabel lblBoard = new JLabel("Board");
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
@@ -188,7 +194,7 @@ public class Level{
 					.addPreferredGap(ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addComponent(btnExit)
-						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE))
+						.addComponent(pen, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -199,7 +205,7 @@ public class Level{
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 410, GroupLayout.PREFERRED_SIZE))
+							.addComponent(pen, GroupLayout.PREFERRED_SIZE, 410, GroupLayout.PREFERRED_SIZE))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(14)
 							.addComponent(lblBoard)
@@ -215,6 +221,9 @@ public class Level{
 		);
 		
 		
+
+		
+		/**
 		JSplitPane splitPane = new JSplitPane();
 		splitPane.setEnabled(false);
 		splitPane.setPreferredSize(new Dimension(100, 20));	
@@ -233,10 +242,10 @@ public class Level{
 			}
 		});
 		splitPane.setRightComponent(flipButton);
-		
-		SpecialDrawing BullPen_Panel = new SpecialDrawing();
-		scrollPane.setViewportView(BullPen_Panel);
-		BullPen_Panel.setPreferredSize(new Dimension(100, 1000));
+		**/
+		//SpecialDrawing BullPen_Panel = new SpecialDrawing();
+		//scrollPane.setViewportView(BullPen_Panel);
+		//BullPen_Panel.setPreferredSize(new Dimension(100, 1000));
 
 		
 		JLabel lblNewLabel = new JLabel("Level:   ");
@@ -282,6 +291,7 @@ public class Level{
 		lblLevel.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		toolBar.add(lblLevel);
 		frame.getContentPane().setLayout(groupLayout);
+		
 
 		board.setLayout(new GridLayout(12,12));
 		board.setPreferredSize(new Dimension(384,384));
@@ -296,7 +306,7 @@ public class Level{
 		for(int TileCol = 0; TileCol <=11;TileCol++){
 			for(int TileRow = 0; TileRow <=11;TileRow++){
 				//System.out.println("On Row " + TileRow + " -- Col " + TileCol);
-				PuzzleTile AddedTile = new PuzzleTile(board, TileRow,TileCol);
+				PuzzleTile AddedTile = new PuzzleTile(board, TileRow,TileCol, 12, 12);
 				//System.out.println("1");
 				AddedTile.setBackground(Color.WHITE);
 				//System.out.println("2");
@@ -306,8 +316,43 @@ public class Level{
 				board.add(AddedTile);
 			}
 		}
-		board.makeBoard(boardArray);
+		board.makeBoard(boardArray, 12, 12);
 
+		
+		
+		int x = 10;
+		int y = 18;
+		
+		pen.setLayout(new GridLayout(y,x));
+		pen.setPreferredSize(new Dimension(140,410));
+		pen.setMinimumSize(new Dimension(140,410));
+		pen.setMaximumSize(new Dimension(140,410));
+		
+		Tile penArray[][] = new Tile[x+6][y+6];
+		
+		Border penTileBorder = BorderFactory.createLineBorder(Color.WHITE, 2, true);
+		
+		for(int TileRow = 0; TileRow <y;TileRow++){
+			for(int TileCol = 0; TileCol <x;TileCol++){
+				System.out.println(TileRow);
+				System.out.println(TileCol);
+				System.out.println("On Row " + TileRow + " -- Col " + TileCol);
+				PuzzleTile AddedTile = new PuzzleTile(pen, TileCol,TileRow, x, y);
+				//System.out.println("1");
+				AddedTile.setBackground(Color.WHITE);
+				//System.out.println("2");
+				AddedTile.setBorder(penTileBorder);
+				//System.out.println("3");
+				penArray[TileCol][TileRow] = AddedTile;
+				pen.add(AddedTile);
+			}
+		}
+		pen.makeBoard(penArray, x, y);
+		
+		pen.addHex(penArray[2][2]);
+		pen.selectedPiece = null;
+
+		
 	}
 
 }

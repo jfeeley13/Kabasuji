@@ -8,7 +8,7 @@ import java.awt.Color;
 import java.awt.Point;
 import java.util.ArrayList;
 
-public class Board extends BoardBoss{
+public abstract class BoardBoss extends JPanel{
 	
 	/**
 	 * 
@@ -19,15 +19,13 @@ public class Board extends BoardBoss{
 	List<Hexomino> hexPlaced = new ArrayList<Hexomino>();
 	protected int XOrigin;
 	protected int YOrigin;
-	protected int width = 12;
-	protected int height = 12;
-	
-	
+	Board board;
+	int width = 12;
+	int height = 12;
+	public static Hexomino selectedPiece;
 	
 	public void makeBoard(Tile[][] boardArray, int width, int height){
 		this.boardArray = boardArray;
-		this.width = width;
-		this.height = height;
 	}
 
 	public int[] getTopLeft(){
@@ -56,14 +54,13 @@ public class Board extends BoardBoss{
 		Hexomino hex = new Hexomino(1, shape2);	
 	
 		boolean allTilesEmpty=CheckTiles(tile, shape2);
-		if(allTilesEmpty && selectedPiece!=null){
+		if(allTilesEmpty){
 			for(int i=0; i<6;i++){
 				int x=hex.shape[i].row+tile.getCoords()[0];
 				int y=hex.shape[i].column+tile.getCoords()[1];
 				boardArray[x][y].coverTile();
 				boardArray[x][y].setBackground(Color.BLUE);
-				hexPlaced.add(selectedPiece);
-				selectedPiece=null;
+				hexPlaced.add(hex);
 			}
 		}
 		return true;

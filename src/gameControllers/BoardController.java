@@ -1,6 +1,6 @@
 package gameControllers;
 
-import entity.Board;
+import entity.BoardBoss;
 import entity.Kabasuji;
 import java.awt.event.MouseEvent;
 
@@ -10,9 +10,9 @@ public class BoardController {
 //	private Kabasuji theGame;
 	
 	/** The board being used */
-	private Board board;
+	private BoardBoss board;
 	
-	public BoardController(/**Kabasuji theGame,*/ Board board){
+	public BoardController(/**Kabasuji theGame,*/ BoardBoss board){
 //		this.theGame = theGame;
 		this.board = board;
 	}

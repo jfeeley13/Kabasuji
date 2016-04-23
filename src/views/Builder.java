@@ -471,7 +471,7 @@ public class Builder implements MouseListener{
 		
 		lblLevelBuilder.setFont(new Font("Lucida Grande", Font.BOLD, 18));
 		toolBar.add(lblLevelBuilder);
-		groupLayout.setAutoCreateGaps(true);
+		//groupLayout.setAutoCreateGaps(true);
 		groupLayout.setAutoCreateContainerGaps(true);
 		frame.getContentPane().setLayout(groupLayout);
 
