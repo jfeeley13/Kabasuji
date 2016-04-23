@@ -290,7 +290,7 @@ public class Level{
 		
 		Tile boardArray[][] = new Tile[12][12];
 		
-		Border BoardTileBorder = BorderFactory.createLineBorder(Color.BLACK, 2, true);
+		Border BoardTileBorder = BorderFactory.createLineBorder(Color.BLACK, 2);
 		
 		for(int TileCol = 0; TileCol <=11;TileCol++){
 			for(int TileRow = 0; TileRow <=11;TileRow++){
