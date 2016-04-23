@@ -1,19 +1,18 @@
 package entity;
 
 import java.util.List;
-
 import javax.swing.JPanel;
-
 import java.awt.Color;
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Board extends JPanel{
 	
 	/** List of Hexominos*/
 	
-	HexTile[] shape1 = {new HexTile(this, 0,0),new HexTile(this,0,-1),new HexTile(this,0,-2),new HexTile(this,0,-3),new HexTile(this,0,-4),new HexTile(this,0,-5)};
-	HexTile[] shape2 = {new HexTile(this,0,0),new HexTile(this,0,-1),new HexTile(this,0,-2),new HexTile(this,0,-3),new HexTile(this,0,-4),new HexTile(this,1,0)};
+	HexTile[] shape1 = {new HexTile(this, new RowColumn(0,0)),new HexTile(this, new RowColumn(0,-1)),new HexTile(this,new RowColumn(0,-2)),new HexTile(this,new RowColumn(0,-3)),new HexTile(this,new RowColumn(0,-4)),new HexTile(this,new RowColumn(0,-5))};
+	HexTile[] shape2 = {new HexTile(this, new RowColumn(0,0)),new HexTile(this, new RowColumn(0,-1)),new HexTile(this,new RowColumn(0,-2)),new HexTile(this,new RowColumn(0,-3)),new HexTile(this,new RowColumn(0,-4)),new HexTile(this,new RowColumn(1,0))};
 
 	AllHex hexList = new AllHex();
 	
@@ -39,6 +38,20 @@ public class Board extends JPanel{
 		int[] origin = {XOrigin, YOrigin};
 		return origin;
 	}
+
+	protected HashMap<RowColumn, Tile> tileBoard;
+	//protected Hexomino hexPlaced[];
+	RowColumn origin;
+	int maxRow, maxCol;
+	
+	
+	public Board(HashMap<RowColumn, Tile>  tileBoard, int maxRow, int maxCol){
+		this.tileBoard = tileBoard;
+		this.maxCol = maxCol;
+		this.maxRow = maxRow;
+		origin = new RowColumn(0, 0);
+	}
+
 	
 	public boolean checkCollision(Hexomino reqHex){
 		return false;
@@ -89,6 +102,7 @@ public class Board extends JPanel{
 		boolean isValid = true;
 		return isValid;
 	}
+
 	/**
 	 * 
 	 * @param x location of click in pixels
@@ -102,11 +116,26 @@ public class Board extends JPanel{
 		int tCol = (x-XOrigin)/tileBoard[0].getTileHeight();
 		int tile = 0; //Placeholder value
 		return tileBoard[tile];
+	public Tile getTile(RowColumn key){
+		return tileBoard.get(key);
 	}
-	//Can throw NullTileException
-	public Point getTopLeftOfTile(Tile tile){
-		Point coords = new Point(0, 0);
-		return coords; 
+	public void editTile(RowColumn key,Tile newTile){
+		tileBoard.put(key, newTile);
 	}
 	*/
+
+	public void removeTile(RowColumn key){
+		tileBoard.remove(key);
+	}
+	
+	public boolean hasWon(){
+		TileIterator boardIterator = new TileIterator(tileBoard, maxRow, maxCol);
+		while(boardIterator.hasNext()){
+			Tile t = boardIterator.next();
+			if(t.hasWon() || t.isCovered())
+				return false;
+		}
+		return true;
+	}
+	
 }

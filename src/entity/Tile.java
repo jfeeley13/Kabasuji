@@ -17,11 +17,11 @@ public abstract class Tile extends JPanel{
 	protected int height = 32;
 	protected boolean isNull = false;
 	Board board;
+	private RowColumn rowCol;
 	
 	
-	public Tile (Board board, int row, int column){
-		this.row = row;
-		this.column = column;
+	public Tile (Board board, RowColumn rowcol){
+		this.rowCol = rowCol;
 		this.board = board; 
 		this.addMouseListener(new MListener(this));
 	}
@@ -36,50 +36,58 @@ public abstract class Tile extends JPanel{
 		return this.board;
 	}
 	
-	public boolean isCovered(){
-		return isCovered;
-	}
 	
 	public void coverTile(){
 		this.isCovered = true;
 	}
 	
 	/**
+=======
+public abstract class Tile {
+	private RowColumn rowCol;
+	private boolean isCovered;
+	private int width = 32;
+	private int height = 32;
+	private boolean isNull = false;
+	
+	
+	public Tile (RowColumn rowCol){
+		this.rowCol = rowCol;
+	}
+
+	/**
 	 * Toggles tile from null to not null
 	 * Used in level editor only
+	 * @return 
 	 */
+	
+	public abstract boolean hasWon();
 	
 	public void toggleTile(){
 		this.isNull = !this.isNull;
 	}
-	
-	
-	/**
-	 * 
-	 * Determines if tile is null or not
-	 * 
-	 * @return True = Null --- False = Not Null
-	 */
-	
-	public boolean isNull(){
-		return isNull;
+
+	public RowColumn getRowCol() {
+		return rowCol;
 	}
-	
-	/**
-	 * 
-	 * @return Width of tile in Pixels
-	 * 
-	 */
-	public int getTileWidth(){
+
+	public void setRowCol(RowColumn rowCol) {
+		this.rowCol = rowCol;
+	}
+
+	public boolean isCovered() {
+		return isCovered;
+	}
+
+	public int getWidth() {
 		return width;
 	}
 
-	/**
-	 * 
-	 * @return Height of tile in Pixels
-	 * 
-	 */
-	public int getTileHeight(){
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public int getHeight() {
 		return height;
 	}
 	
@@ -93,6 +101,24 @@ public abstract class Tile extends JPanel{
 		RowColumn coords = new RowColumn(row , column);
 		return coords;
 	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+	public boolean isNull() {
+		return isNull;
+	}
+
+	public void setNull(boolean isNull) {
+		this.isNull = isNull;
+	}
+
+	public void setCovered(boolean isCovered) {
+		this.isCovered = isCovered;
+	}
+	
+
 }
 
 

@@ -3,6 +3,7 @@ package views;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.EventQueue;
+import java.awt.GridLayout;
 
 import javax.swing.JFrame;
 import javax.swing.BorderFactory;
@@ -18,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
 
 import entity.Board;
 import entity.PuzzleTile;
+import entity.RowColumn;
 import entity.Tile;
 import gameControllers.MListener;
 
@@ -45,6 +47,7 @@ import javax.swing.JToggleButton;
 import javax.swing.JSplitPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -59,7 +62,7 @@ public class Level{
 	static String gameType;
 	static int level;
 
-	
+	PieceView piecesView;
 
 	/**
 	 * Launch the application.
@@ -131,6 +134,7 @@ public class Level{
 		});
 
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setMaximumSize(new Dimension(2000, 2000));
 		//scrollPane.setPreferredSize(new Dimension(99, 400));	
 
 	    scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -163,33 +167,29 @@ public class Level{
 		JLabel lblF1 = new JLabel("Press F1 for Help");
 		lblF1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblF1.setFont(new Font("Lucida Grande", Font.ITALIC, 13));
-		
 		Board board = new Board();
-		
+
 		JLabel lblBoard = new JLabel("Board");
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addComponent(toolBar, GroupLayout.DEFAULT_SIZE, 760, Short.MAX_VALUE)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(17)
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(table_c, GroupLayout.PREFERRED_SIZE, 315, GroupLayout.PREFERRED_SIZE)
-									.addGap(227))
-								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-									.addComponent(lblBoard)
-									.addComponent(board, GroupLayout.PREFERRED_SIZE, 348, GroupLayout.PREFERRED_SIZE))))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(30)
-							.addComponent(lblF1)))
-					.addPreferredGap(ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+					.addContainerGap(46, Short.MAX_VALUE)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(btnExit)
-						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap())
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(table_c, GroupLayout.PREFERRED_SIZE, 315, GroupLayout.PREFERRED_SIZE)
+							.addGap(227))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(board, GroupLayout.PREFERRED_SIZE, 348, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblBoard))
+							.addGap(226)
+							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE))))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(30)
+					.addComponent(lblF1))
+				.addComponent(btnExit)
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
@@ -202,43 +202,62 @@ public class Level{
 							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 410, GroupLayout.PREFERRED_SIZE))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(14)
-							.addComponent(lblBoard)
-							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(board, GroupLayout.PREFERRED_SIZE, 348, GroupLayout.PREFERRED_SIZE)
-							.addGap(31)
+							.addGap(321)
 							.addComponent(table_c, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnExit)
 						.addComponent(lblF1))
 					.addGap(34))
+				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+					.addGap(59)
+					.addComponent(lblBoard)
+					.addContainerGap(794, Short.MAX_VALUE))
 		);
-		
-		
+
 		JSplitPane splitPane = new JSplitPane();
 		splitPane.setEnabled(false);
 		splitPane.setPreferredSize(new Dimension(100, 20));	
 		scrollPane.setColumnHeaderView(splitPane);
-		
-		JButton rotateButton = new JButton("\u21BB");
-		rotateButton.setPreferredSize(new Dimension(50, 20));	
 
-		splitPane.setLeftComponent(rotateButton);
+		JPanel jPane = new JPanel();
+		jPane.setMaximumSize(new Dimension(100, 40));
+		jPane.setMinimumSize(new Dimension(100, 40));
+		jPane.setPreferredSize(new Dimension(100, 40));
+		scrollPane.setColumnHeaderView(jPane);
+		jPane.setLayout(new GridLayout(2, 2));
 		
-		JButton flipButton = new JButton("\u21C4");
-		flipButton.setPreferredSize(new Dimension(50, 20));	
+		JButton btnA = new JButton("\u21BA");
+		btnA.setPreferredSize(new Dimension(50, 20));
+		btnA.setMinimumSize(new Dimension(50, 20));
+		btnA.setMaximumSize(new Dimension(50, 20));
+		jPane.add(btnA);
+		
+		JButton btnB = new JButton("\u21BB");
+		btnB.setPreferredSize(new Dimension(50, 20));
+		btnB.setMinimumSize(new Dimension(50, 20));
+		btnB.setMaximumSize(new Dimension(50, 20));
+		jPane.add(btnB);
+		
+	//	SpecialDrawing BullPen_Panel = new SpecialDrawing();
+	//	scrollPane.setViewportView(BullPen_Panel);
+	//	BullPen_Panel.setPreferredSize(new Dimension(100, 1000));
 
-		flipButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		splitPane.setRightComponent(flipButton);
+		JButton btnJ = new JButton(" \u21C4");
+		jPane.add(btnJ);
 		
-		JPanel panel_1 = new JPanel();
-		scrollPane.setViewportView(panel_1);
+		JButton btnNewButton = new JButton("\u21C5");
+		jPane.add(btnNewButton);
 		
+		
+		//TODO:PIECE VIEW FIX
+		//JPanel panel_1 = new JPanel();
+		//piecesView = new PieceView(1);
+		//piecesView.setAutoscrolls(true);
+		//scrollPane.setViewportView(panel_1);
+		//scrollPane.setViewportView(piecesView);
 
-		
 		JLabel lblNewLabel = new JLabel("Level:   ");
 		toolBar.add(lblNewLabel);
 		
@@ -283,6 +302,8 @@ public class Level{
 		toolBar.add(lblLevel);
 		frame.getContentPane().setLayout(groupLayout);
 
+		//board.setLayout(new GridLayout(12,12));
+		
 		board.setLayout(new GridLayout(12,12));
 		board.setPreferredSize(new Dimension(384,384));
 		board.setMinimumSize(new Dimension(384,384));
@@ -291,11 +312,13 @@ public class Level{
 		Tile boardArray[][] = new Tile[12][12];
 		
 		Border BoardTileBorder = BorderFactory.createLineBorder(Color.BLACK, 2);
+		//Border BoardTileBorder = BorderFactory.createLineBorder(Color.BLACK, 2, true);
+		
 		
 		for(int TileCol = 0; TileCol <=11;TileCol++){
 			for(int TileRow = 0; TileRow <=11;TileRow++){
 				//System.out.println("On Row " + TileRow + " -- Col " + TileCol);
-				PuzzleTile AddedTile = new PuzzleTile(board, TileRow,TileCol);
+				PuzzleTile AddedTile = new PuzzleTile(board, new RowColumn(TileRow,TileCol));
 				//System.out.println("1");
 				AddedTile.setBackground(Color.WHITE);
 				//System.out.println("2");
@@ -306,6 +329,7 @@ public class Level{
 			}
 		}
 		board.makeBoard(boardArray);
+		
 
 	}
 

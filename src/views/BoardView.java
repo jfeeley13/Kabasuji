@@ -1,90 +1,102 @@
 package views;
 
-import java.awt.*;
-import java.util.*;
-
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Polygon;
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Random;
 import javax.swing.JPanel;
-
-import entity.AllHex;
-import entity.RowColumn;
-import entity.HexTile;
-import entity.RowColumn;
+import views.RectangleShape;
 import entity.Tile;
 
-/**
- * Here is where the pieces are to be played (in 512x512 size). 
- */
-public class PieceView extends JPanel {
+public class BoardView extends JPanel {
+    public ArrayList<RectangleShape> shapeList = new ArrayList<RectangleShape>();
 
-	/** Core model. */
-	//Model model;
-	
+	/** Core model. 
+	Model model;*/
+
+	int tileSize = 32;
+	int row, col;
+
 	/** Off-screen image for drawing (and Graphics object). */
 	Image offScreenImage = null;
 	Graphics offScreenGraphics = null;
-	int[] pieces = new int[35];
-	int row=0, col=0;
-	AllHex hexList; 
-	int tileSize=20;
-	
-	Hashtable<AllHex,Color> colorMapping = new Hashtable<AllHex,Color>();
-    public ArrayList<RectangleShape> shapeList = new ArrayList<RectangleShape>();
 
-	// Given a set of pieces, draw them in this panel. 
-		public PieceView(int num) {
+	/** Color mapping. Could also be used within TangramPiecesView but for now keep here. */
+	Hashtable<Tile,Color> colorMapping = new Hashtable<Tile,Color>();
 
-			/* initially allocate random color with each piece
-			Random rand = new Random();
-			for (AllHex p : model.getPieces()) {
-				Color randomColor = new Color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255));
-				colorMapping.put(p, randomColor);
-			}
-			*/
-			initComponents();
-		}
-		
-	//  Square Tile 1:1, 32x32 pixels. 
-		@Override
-		public Dimension size() {
-			int width = 32;
-			int height = 32;
-
-			return new Dimension (width, height);
-		}
-	
-
-		/*
-	// Only here so we can safely open within WindowBuilder. 
-	PieceView() {
+	/** Only here so we can safely open within WindowBuilder. 
+	PuzzleView() {
 		model = new Model();
-	}
-	*/
+	}*/
+
+	/** Draw the board them in this panel. */
+	public BoardView(int rows, int cols) {
+		row = rows;
+		col = cols;
 		
-		private void initComponents() {		
-			RowColumn coords[] = new RowColumn[6];
-			int row=0,col=0;
-			coords = hexList.getHex(1).getCoordShape();
+        this.initComponents();
+	}
 	
-			for (int i=0; i<coords.length;i++){
-				row = coords[i].getRow();
-				col = coords[i].getColumn()*-1;
-				shapeList.add(new RectangleShape((tileSize*row)+10,(col*tileSize)+10,tileSize,tileSize,false));	
+	private void initComponents() {
+		//create a arraylist of row/col squares
+		for (int i=0; i<=col;i++){
+			for (int j=0; j<=row;j++){
+				shapeList.add(new RectangleShape((tileSize*i),(j*tileSize),tileSize,tileSize,true));
 			}
-			
-			coords = hexList.getHex(2).getCoordShape();
-			
-			for (int i=0; i<coords.length;i++){
-				row = coords[i].getRow();
-				col = coords[i].getColumn()*-1;
+		}
+    }
+	
 
-				shapeList.add(new RectangleShape((tileSize*row)+10,(col*tileSize)+10,tileSize,tileSize,false));	
-			}
-			
-
+	 @Override
+	    public void paint(Graphics g) {
+	        for (RectangleShape s : shapeList) {
+	            s.draw(g);
+	        }
 	    }
 
-	// Draw background puzzle and all active pieces.
+
+	/** 
+	 * Swing thing. We must be large enough to draw all tangram pieces. 
+	 */
+	@Override
+	public Dimension getMinimumSize() { //6x6 board
+		int width = 192;
+		int height = 192;
+
+		return new Dimension (width, height);
+	}
+	
+	@Override
+	public Dimension getMaximumSize() {	//12x12 board
+		int width = 384;
+		int height = 384;
+
+		return new Dimension (width, height);
+	}
+
+
+	/** 
+	 * Swing thing. We must be large enough to draw all Tangram pieces. 
+	 */
+	@Override
+	public Dimension getPreferredSize() {
+		int width = row*tileSize;
+		int height = col*tileSize;
+
+		return new Dimension (width, height);
+	}
+
+
+	/**
+	 * Draw background puzzle and all active pieces.
+	
 	public void paintComponent(Graphics g) {
+		
+
 		super.paintComponent(g);
 
 		if (offScreenImage == null) {
@@ -103,23 +115,32 @@ public class PieceView extends JPanel {
 		}
 
 		// copy image into place.
-		for (RectangleShape s : shapeList) {
-            s.draw(g);
-        }
+		//g.drawImage(offScreenImage, 0, 0, this);
+			//DRAWS A BOX
+			g.drawRect(30,30,33,33); 
+	        g.setColor(Color.BLACK);  
+	        g.fillRect(30,30,33,33);
+	        g.drawRect(32,32,30,30); 
+	        g.setColor(Color.RED);  
+	        g.fillRect(32,32,30,30);
+	        
 		
-		/* double check if no model (for WindowBuilder)
-		if (model == null) { return; }
-		
-		// draw active polygon.
+		}
+
+		// double check if no model (for WindowBuilder)
+		//if (model == null) { return; }
+
+		/ draw active polygon.
 		PlacedPiece active = model.getActive();
 		if (active != null) {
 			g.setColor(colorMapping.get(active.getPiece()));
 			g.fillPolygon(active.getPolygon());
 		}
-		*/
+		
 	}
-	
-	/*Helper method to return polygon for tangram piece anchored at (x,y). 
+	*/
+
+	/** Helper method to return polygon for piece anchored at (x,y). 
 	public Polygon computePolygon(int x, int y, Puzzle p) {
 		int[] xpoints = new int[p.size()];
 		int[] ypoints = new int[p.size()];
@@ -134,14 +155,15 @@ public class PieceView extends JPanel {
 
 		return new Polygon(xpoints, ypoints, p.size());
 	}
-	
+	*/
+
 	/** 
 	 * Helper method to return polygon for tangram piece anchored at (x,y). 
 	 *
 	 * Appropriate that this method be in View since it is responsible for
 	 * mapping abstract pieces into pixel locations.
 	 
-	public Polygon computePolygon(int x, int y, Tile tp) {
+	public Polygon computePolygon(int x, int y, TangramPiece tp) {
 		int[] xpoints = new int[tp.size()];
 		int[] ypoints = new int[tp.size()];
 
@@ -155,21 +177,22 @@ public class PieceView extends JPanel {
 
 		return new Polygon(xpoints, ypoints, tp.size());
 	}
+	*/
 
-	// Draw background and then all pieces on top of it. 
+	/** Draw background and then all pieces on top of it. 
 	public void redraw() {
 		// Once created, draw each, with buffer.
 		int x = offset;
 		int y = offset;
-		
+
 		Dimension dim = getPreferredSize();
 		offScreenGraphics.clearRect(0, 0, dim.width, dim.height);
-		
+
 		Puzzle p = model.getPuzzle();
 		Polygon polyshape = computePolygon (x, y, p);
 		offScreenGraphics.setColor(Color.black);
 		offScreenGraphics.fillPolygon(polyshape);
-		
+
 		// placed pieces.
 		if (model.getPlacedPieces() != null) {
 			for (PlacedPiece pp : model.getPlacedPieces()) {
@@ -180,5 +203,7 @@ public class PieceView extends JPanel {
 			}
 		}		
 	}
-*/
+	*/
+
 }
+

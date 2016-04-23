@@ -71,6 +71,10 @@ public class BuildStart extends JFrame {
 //				 frame.dispose();													//closes current window
 //				 newBuilderWindow.openBuildWindow("Puzzle Level");
 				new CreateNewLevelController(BuildStart.this).process();
+				 Builder newBuilderWindow = new Builder("Puzzle Level", 6, 6);
+				 
+				 //frame.dispose();													//closes current window
+				 //newBuilderWindow.openBuildWindow("Puzzle Level", 6, 6);			//default puzzle with 6x6 board
 			}
 		});
 		
