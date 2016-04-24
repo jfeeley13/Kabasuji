@@ -281,10 +281,7 @@ public class Level{
 		splitPane.setEnabled(true);
 		**/
 		
-		//SpecialDrawing BullPen_Panel = new SpecialDrawing();
-		//scrollPane.setViewportView(BullPen_Panel);
-		//BullPen_Panel.setPreferredSize(new Dimension(100, 1000));
-
+	
 		
 		JLabel lblNewLabel = new JLabel("Level:   ");
 		toolBar.add(lblNewLabel);
@@ -346,13 +343,13 @@ public class Level{
 		
 		for(int TileCol = 0; TileCol <=11;TileCol++){
 			for(int TileRow = 0; TileRow <=11;TileRow++){
-				//System.out.println("On Row " + TileRow + " -- Col " + TileCol);
+
 				PuzzleTile AddedTile = new PuzzleTile(board, TileRow,TileCol, 12, 12, 999);
-				//System.out.println("1");
+
 				AddedTile.setBackground(Color.WHITE);
-				//System.out.println("2");
+
 				AddedTile.setBorder(BoardTileBorder);
-				//System.out.println("3");
+
 				boardArray[TileRow][TileCol] = AddedTile;
 				board.add(AddedTile);
 			}
@@ -378,15 +375,13 @@ public class Level{
 		
 		for(int TileRow = 0; TileRow <y;TileRow++){
 			for(int TileCol = 0; TileCol <x;TileCol++){
-				//System.out.println(TileRow);
-				//System.out.println(TileCol);
-				//System.out.println("On Row " + TileRow + " -- Col " + TileCol);
+
 				PuzzleTile AddedTile = new PuzzleTile(pen, TileCol,TileRow, x, y, 999);
-				//System.out.println("1");
+
 				AddedTile.setBackground(Color.WHITE);
-				//System.out.println("2");
+
 				AddedTile.setBorder(penTileBorder);
-				//System.out.println("3");
+
 				penArray[TileCol][TileRow] = AddedTile;
 				pen.add(AddedTile);
 			}
@@ -412,15 +407,13 @@ public class Level{
 		
 		for(int TileRow = 0; TileRow <y;TileRow++){
 			for(int TileCol = 0; TileCol <x;TileCol++){
-				//System.out.println(TileRow);
-				//System.out.println(TileCol);
-				//System.out.println("On Row " + TileRow + " -- Col " + TileCol);
+
 				PuzzleTile AddedTile = new PuzzleTile(boardPen, TileCol,TileRow, x, y, 999);
-				//System.out.println("1");
+
 				AddedTile.setBackground(Color.decode("#4169aa"));
-				//System.out.println("2");
+
 				AddedTile.setBorder(boardPenTileBorder);
-				//System.out.println("3");
+
 				boardPenArray[TileCol][TileRow] = AddedTile;
 				boardPen.add(AddedTile);
 			}
@@ -466,5 +459,9 @@ public class Level{
 	public void setLabel() {
 		if (gameType == "Lightning Level")
 			label.setText(levelTime/2+"");
+		if(levelTime==0) {
+			GameOver hs = new GameOver();
+			hs.newwindow();
+		}
 	}
 }
