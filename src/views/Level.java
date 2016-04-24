@@ -66,6 +66,8 @@ public class Level{
 	private JTable table;
 	static String gameType;
 	static int level;
+	public static int levelTime=60;
+	static JLabel label;
 
 	
 
@@ -111,6 +113,11 @@ public class Level{
 	 */
 	public Level() {
 		initialize();
+		try {
+			gameControllers.LevelTimer.main(this);
+		} catch (Exception e) {
+			
+		}
 	}
 
 	/**
@@ -336,10 +343,10 @@ public class Level{
 			movesLbl.setText("Moves: ");
 		}
 		
-		JLabel label = new JLabel(" ");
+		label = new JLabel(" ");
 		toolBar.add(label);
 		if (gameType == "Lightning Level"){
-			label.setText("  10:00");
+			label.setText(levelTime/2+"");
 		}
 		else{
 			label.setText("  40");
@@ -480,9 +487,17 @@ public class Level{
 				boardPen2.add(AddedTile);
 			}
 		}
+		
+		
 
 		boardPen2.makeBoard(boardPen2Array, x, y, 4);
-
+	
 
 	}
+	
+	public void setLabel() {
+		if (gameType == "Lightning Level")
+			label.setText(levelTime/2+"");
+	}
+	
 }
