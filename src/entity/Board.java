@@ -1,5 +1,6 @@
 package entity;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.JPanel;
@@ -19,6 +20,8 @@ public class Board extends BoardBoss{
 	protected Tile boardArray[][];
 //	protected Hexomino hexPlaced[] = new Hexomino[];
 	List<Hexomino> hexPlaced = new ArrayList<Hexomino>();
+	//protected HashMap<RowColumn, Tile> tileBoard;
+
 	protected int XOrigin;
 	protected int YOrigin;
 	protected int width = 12;
@@ -26,8 +29,6 @@ public class Board extends BoardBoss{
 	protected int tileID;
 	protected int boardID = 1;
 
-	
-	
 	
 	public void makeBoard(Tile[][] boardArray, int width, int height, int id){
 		this.boardArray = boardArray;

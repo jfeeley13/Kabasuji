@@ -3,7 +3,6 @@ package views;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
@@ -11,12 +10,9 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.LineBorder;
-
 import java.awt.Color;
 import java.awt.Container;
-
 import javax.swing.table.DefaultTableModel;
-
 import entity.Board;
 import entity.BoardBoss;
 import entity.BoardPen;
@@ -26,7 +22,6 @@ import entity.Hexomino;
 import entity.PuzzleTile;
 import entity.Tile;
 import gameControllers.MListener;
-
 import javax.swing.JToolBar;
 import javax.swing.JLabel;
 import javax.swing.JTextPane;
@@ -57,6 +52,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.KeyEvent;
 import java.awt.Panel;
+import javax.swing.JScrollBar;
 
 
 public class Level{
@@ -128,7 +124,7 @@ public class Level{
 		frame = new JFrame();
 		Color myColor = Color.decode("#4169aa");
 		frame.getContentPane().setBackground(myColor);
-		frame.setBounds(100, 100, 760, 550);
+		frame.setBounds(100, 100, 760, 600);
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
@@ -205,84 +201,56 @@ public class Level{
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addComponent(toolBar, GroupLayout.DEFAULT_SIZE, 760, Short.MAX_VALUE)
+				.addComponent(toolBar, GroupLayout.DEFAULT_SIZE, 1056, Short.MAX_VALUE)
 				.addGroup(groupLayout.createSequentialGroup()
-					
+					.addGap(26)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-							
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(17)
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-								
-								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(table_c, GroupLayout.PREFERRED_SIZE, 315, GroupLayout.PREFERRED_SIZE)
-									.addGap(227))
-									
-								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-									.addComponent(lblBoard)
-									
-									.addComponent(board, GroupLayout.PREFERRED_SIZE, 348, GroupLayout.PREFERRED_SIZE)
-									)))
+							.addComponent(table_c, GroupLayout.PREFERRED_SIZE, 315, GroupLayout.PREFERRED_SIZE))
 						.addGroup(groupLayout.createSequentialGroup()
-							
 							.addGap(30)
-							
-							.addComponent(lblF1)))
-					//.addPreferredGap(ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
-					//.addPreferredGap(ComponentPlacement.RELATED, 51, 51)
-
-					
-					.addComponent(boardPen, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
-					.addComponent(boardPen2, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+							.addComponent(lblF1))
+						.addComponent(board, GroupLayout.PREFERRED_SIZE, 348, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblBoard))
+					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						
-						.addComponent(btnExit)
-
-						.addComponent(pen, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap())
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(boardPen, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(boardPen2, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(pen, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE))
+						.addComponent(btnExit))
+					.addGap(360))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
-					
 					.addComponent(toolBar, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
-					.addGap(22)
-
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-							
-							
-							
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+							.addGap(22)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(boardPen2, GroupLayout.PREFERRED_SIZE, 410, GroupLayout.PREFERRED_SIZE)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(lblBoard)
+									.addGap(18)
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+										.addComponent(boardPen, GroupLayout.PREFERRED_SIZE, 348, GroupLayout.PREFERRED_SIZE)
+										.addGroup(groupLayout.createSequentialGroup()
+											.addComponent(board, GroupLayout.PREFERRED_SIZE, 348, GroupLayout.PREFERRED_SIZE)
+											.addGap(33)
+											.addComponent(table_c, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+											.addPreferredGap(ComponentPlacement.RELATED)
+											.addComponent(lblF1)))))
+							.addGap(34))
 						.addGroup(groupLayout.createSequentialGroup()
-							
-							.addPreferredGap(ComponentPlacement.RELATED)
-
-							.addComponent(pen, GroupLayout.PREFERRED_SIZE, 410, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createSequentialGroup()
-								.addGap(36)
-								.addComponent(boardPen, GroupLayout.PREFERRED_SIZE, 348, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createSequentialGroup()
-								
-								.addComponent(boardPen2, GroupLayout.PREFERRED_SIZE, 410, GroupLayout.PREFERRED_SIZE))
-								
-						.addGroup(groupLayout.createSequentialGroup()
-							
-							.addGap(14)
-							
-							.addComponent(lblBoard)
-							
-							.addPreferredGap(ComponentPlacement.RELATED)
-							
-							.addComponent(board, GroupLayout.PREFERRED_SIZE, 348, GroupLayout.PREFERRED_SIZE)
-							
-							.addGap(31)
-							
-							.addComponent(table_c, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnExit)
-
-						.addComponent(lblF1))
-					.addGap(34))
+							.addGap(48)
+							.addComponent(pen, GroupLayout.PREFERRED_SIZE, 410, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(btnExit)
+							.addGap(21))))
 		);
 		
 		boardPen.setBackground(Color.decode("#4169aa"));
@@ -373,7 +341,7 @@ public class Level{
 		
 		Tile boardArray[][] = new Tile[12][12];
 		
-		Border BoardTileBorder = BorderFactory.createLineBorder(Color.BLACK, 1, true);
+		Border BoardTileBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
 		
 		
 		for(int TileCol = 0; TileCol <=11;TileCol++){
@@ -406,7 +374,7 @@ public class Level{
 
 
 		
-		Border penTileBorder = BorderFactory.createLineBorder(Color.WHITE, 1, true);
+		Border penTileBorder = BorderFactory.createLineBorder(Color.WHITE, 1);
 		
 		for(int TileRow = 0; TileRow <y;TileRow++){
 			for(int TileCol = 0; TileCol <x;TileCol++){
@@ -440,7 +408,7 @@ public class Level{
 		
 		Tile boardPenArray[][] = new Tile[x+6][y+6];
 		
-		Border boardPenTileBorder = BorderFactory.createLineBorder(Color.decode("#4169aa"), 1, true);
+		Border boardPenTileBorder = BorderFactory.createLineBorder(Color.decode("#4169aa"), 1);
 		
 		for(int TileRow = 0; TileRow <y;TileRow++){
 			for(int TileCol = 0; TileCol <x;TileCol++){
@@ -470,7 +438,7 @@ public class Level{
 		
 		Tile boardPen2Array[][] = new Tile[x+6][y+6];
 		
-		Border boardPen2TileBorder = BorderFactory.createLineBorder(Color.decode("#4169aa"), 1, true);
+		Border boardPen2TileBorder = BorderFactory.createLineBorder(Color.decode("#4169aa"), 1);
 		
 		for(int TileRow = 0; TileRow <y;TileRow++){
 			for(int TileCol = 0; TileCol <x;TileCol++){
@@ -499,5 +467,4 @@ public class Level{
 		if (gameType == "Lightning Level")
 			label.setText(levelTime/2+"");
 	}
-	
 }

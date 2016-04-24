@@ -42,8 +42,10 @@ import java.awt.Color;
 import javax.swing.border.LineBorder;
 import javax.swing.SpinnerNumberModel;
 
+import gameControllers.SaveController;
 
-public class Builder implements MouseListener{
+
+public class Builder extends JFrame implements MouseListener{
 
 	private JFrame frame;
 	private JTextField txtGame;
@@ -53,11 +55,31 @@ public class Builder implements MouseListener{
 	int row;
 	int col;
 
+//	/**
+//	 * Launch the application.
+//	 */
+//	public static void openBuildWindow(String type) {
+//		gameType= type;
+//		
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					Builder window = new Builder();
+//					window.frame.setLocationRelativeTo(null);
+//					window.frame.setVisible(true);
+//					window.frame.setResizable(false);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 	/**
 	 * Launch the application.
-	 */
-	public static void openBuildWindow(String type) {
+	public static void openBuildWindow(String type, int rows, int cols) {
 		gameType= type;
+		row = rows;
+		col = cols;
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -72,23 +94,28 @@ public class Builder implements MouseListener{
 			}
 		});
 	}
+*/
 
 	/**
 	 * Create the application.
 	 */
-	public Builder() {
+	public Builder(String type, int rows, int cols) {
+		gameType = type;
+		row = rows;
+		col = cols;
 		initialize();
 	}
+
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
+		//frame = new JFrame();
 		Color myColor = Color.decode("#4169aa");
-		frame.getContentPane().setBackground(myColor);
-		frame.setBounds(100, 100, 760, 550);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getContentPane().setBackground(myColor);
+		setBounds(100, 100, 760, 550);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		
 		JToolBar toolBar = new JToolBar();
@@ -117,7 +144,6 @@ public class Builder implements MouseListener{
 
 		levelComboBox.setSelectedItem(gameType);
 
-		
 		JComboBox setComboBox = new JComboBox();	//select create a set
 		setComboBox.addItem("Red");
 		setComboBox.addItem("Yellow");
@@ -178,20 +204,35 @@ public class Builder implements MouseListener{
 		JButton btnSave = new JButton("Save");
 		
 		JButton btnExit = new JButton("Exit");
-		btnExit.addActionListener(new ActionListener() {
+		btnExit.addActionListener(new SaveController(this));
+
+		/*btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				BuildStart nw = new BuildStart();
-				frame.dispose();
-				nw.openWindow();
+				SaveMenu nw = new SaveMenu();
+				//frame.dispose();
+				nw.setVisible(true);
 				
+				SaveController sc = new SaveController(this);
+				
+				BuildStart nw = new BuildStart();
+				setVisible(false);
+				//nw.openWindow();
+				SaveMenu nw = new SaveMenu();
+				//frame.dispose();
+				nw.setVisible(true);
+							
 			}
 		});
+		*/
 		
 		JButton btnCreate = new JButton("Create");
+		//TODO: this needs a controller
 		btnCreate.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				 col = (Integer) spinner.getValue();
-				 row = (Integer) spinner_1.getValue();
+			public void actionPerformed(ActionEvent e) {
+				row = (Integer) spinner_1.getValue();
+				col = (Integer) spinner.getValue();
+				Builder nw = new Builder(levelComboBox.getSelectedItem().toString(), row, col);
+				nw.setVisible(false);
 				
 			}
 		});
@@ -223,19 +264,17 @@ public class Builder implements MouseListener{
 		JButton btnChangeLevel = new JButton("New Level");
 		btnChangeLevel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Builder nw = new Builder();
-				frame.dispose();
 				String newType = levelComboBox.getItemAt(0).toString();
-				nw.openBuildWindow(levelComboBox.getSelectedItem().toString());
+				Builder nw = new Builder(levelComboBox.getSelectedItem().toString(), row, col);
+				nw.setVisible(true);
+				//nw.openBuildWindow(levelComboBox.getSelectedItem().toString(), row, col);
 			}
 		});
 		
 		JLabel lblRightClickTo = new JLabel("Right click to add/delete tile");
 		lblRightClickTo.setFont(new Font("Lucida Grande", Font.ITALIC, 13));
 		
-		JLabel label_3 = new JLabel("<--Board");
-		
-		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
+		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
@@ -261,7 +300,7 @@ public class Builder implements MouseListener{
 									.addGap(6)
 									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 										.addGroup(groupLayout.createSequentialGroup()
-											.addComponent(setComboBox, 0, 91, Short.MAX_VALUE)
+											.addComponent(setComboBox, 0, 86, Short.MAX_VALUE)
 											.addPreferredGap(ComponentPlacement.RELATED)
 											.addComponent(spinner_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 										.addComponent(levelComboBox, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE))
@@ -271,10 +310,7 @@ public class Builder implements MouseListener{
 										.addComponent(btnGenerate, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE))
 									.addGap(77))
 								.addComponent(inventory, GroupLayout.PREFERRED_SIZE, 575, GroupLayout.PREFERRED_SIZE)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(board, GroupLayout.PREFERRED_SIZE, 520, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-									.addComponent(label_3))
+								.addComponent(board, GroupLayout.PREFERRED_SIZE, 520, GroupLayout.PREFERRED_SIZE)
 								.addGroup(groupLayout.createSequentialGroup()
 									.addGap(6)
 									.addComponent(lblPressFFor)))
@@ -295,7 +331,7 @@ public class Builder implements MouseListener{
 									.addComponent(bullPin, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE))))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(toolBar, GroupLayout.DEFAULT_SIZE, 748, Short.MAX_VALUE)))
+							.addComponent(toolBar, GroupLayout.DEFAULT_SIZE, 749, Short.MAX_VALUE)))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -307,9 +343,6 @@ public class Builder implements MouseListener{
 						.addGroup(groupLayout.createSequentialGroup()
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(spinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-									.addGap(5))
 								.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 									.addComponent(btnUndo)
 									.addComponent(btnTest)
@@ -318,8 +351,12 @@ public class Builder implements MouseListener{
 									.addComponent(btnChangeLevel))
 								.addGroup(groupLayout.createSequentialGroup()
 									.addComponent(lblX)
-									.addGap(12))))
-						.addComponent(spinner_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addGap(12))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+										.addComponent(spinner_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(spinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+									.addGap(5))))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(lblBoardSize)))
@@ -346,15 +383,10 @@ public class Builder implements MouseListener{
 								.addComponent(btnSave)
 								.addComponent(btnExit)))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGap(11)
-									.addComponent(board, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(lblInventory))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGap(95)
-									.addComponent(label_3)))
+							.addGap(11)
+							.addComponent(board, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblInventory)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(inventory, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
@@ -473,7 +505,7 @@ public class Builder implements MouseListener{
 		toolBar.add(lblLevelBuilder);
 		//groupLayout.setAutoCreateGaps(true);
 		groupLayout.setAutoCreateContainerGaps(true);
-		frame.getContentPane().setLayout(groupLayout);
+		getContentPane().setLayout(groupLayout);
 
 		
 		/**Mouse Listener*/
@@ -516,5 +548,9 @@ public class Builder implements MouseListener{
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public void quit(Builder parentView) {
+		parentView.setVisible(false);	
 	}
 }
