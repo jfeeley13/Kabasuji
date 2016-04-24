@@ -7,6 +7,7 @@ public class Level {
 	protected int starsAcheived;
 	protected Board board;
 	protected BullPen pen;
+	//TODO: instead of level taking these parameters why not just have it take a string to identify type of level and initialize everything according to this variable.
 	
 	public Level(int lvlID, BullPen pen, Board board){
 		this.lvlID = lvlID;
@@ -15,7 +16,7 @@ public class Level {
 	}
 	
 	public void initializeLevel(){
-	
+		
 	}
 	
 	public boolean levelComplete(){

@@ -22,4 +22,8 @@ public class RowColumn {
 	public int getColumn(){
 		return this.column;
 	}
+	
+	public String toString(){
+		return "("+ row + "," + column + ")";
+	}
 }

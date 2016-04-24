@@ -6,7 +6,7 @@ import java.util.HashMap;
 public class Board {
 	
 	protected HashMap<RowColumn, Tile> tileBoard;
-	protected Hexomino hexPlaced[];
+	protected Hexomino hexPlaced[]; //TODO: why array? we need to dinamically resize this as it is impossible to know max number of pieces in the game as all levels vary on this
 	RowColumn origin;
 	int maxRow, maxCol;
 	
@@ -20,6 +20,7 @@ public class Board {
 	
 	
 	public boolean checkCollision(Hexomino reqHex){
+		//TODO: is the hexTiles location where the piece is in the board or is it for specifying shape?
 		return false;
 	}
 	
@@ -35,8 +36,11 @@ public class Board {
 	 */
 	
 	public boolean addHex(Hexomino hex){
-		boolean isValid = true;
-		return isValid;
+		if(checkCollision(hex)){
+			//hexPlaces should not be an array in my opinion, maybe a list
+			return true;
+		}
+		return false;
 	}
 	/**
 	 * 
@@ -68,8 +72,19 @@ public class Board {
 		}
 		return true;
 	}
-	
-	
+	/**
+	 * @return 
+	 * 
+	 */
+	public String toString(){
+		TileIterator boardIterator = new TileIterator(tileBoard, maxRow, maxCol);
+		String returnString = new String();
+		while(boardIterator.hasNext()){
+			Tile t = boardIterator.next();
+			returnString = t.toString() + "/n" ;
+		}
+		return returnString;
+	}
 
 	
 }

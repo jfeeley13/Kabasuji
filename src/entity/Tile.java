@@ -64,6 +64,9 @@ public abstract class Tile {
 		this.isCovered = isCovered;
 	}
 	
+	public String toString(){
+		return "Tile : Position " + rowCol.toString() + "isCovered: " + isCovered + " isNull = " + isNull;
+	}
 
 }
 
