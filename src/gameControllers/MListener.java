@@ -1,5 +1,6 @@
 package gameControllers;
 
+import java.awt.Color;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.PointerInfo;
@@ -8,6 +9,10 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.swing.event.MouseInputAdapter;
 
@@ -21,13 +26,20 @@ import entity.Tile;
 public class MListener extends MouseInputAdapter implements MouseListener, MouseMotionListener, MouseWheelListener{
 	Tile tile;
 	static int lastID;
+	static int lastTileID;
 	BoardBoss board;
 	static BoardBoss lastBoard;
+	Random r = new Random();
+	static ArrayList<Integer> ids = new ArrayList<Integer>();
+	int randint;
 
+	
 	
 	public MListener(Tile tile, BoardBoss board){
 		this.tile=tile;
 		this.board = board;
+		this.lastTileID = tile.getTileID();
+
 	}
 	
 	@Override
@@ -44,8 +56,17 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 		//System.out.println("Row = " + y);
 		//System.out.println("Col = " + x);
 		System.out.println("Clicked!");
-
-		this.tile.getBoard().addHex(this.tile);
+		randint = r.nextInt(100);
+		if(!ids.contains(randint)) ids.add(randint);
+		else {
+			while(ids.contains(randint)) {
+				randint = r.nextInt(100);
+			}
+			ids.add(randint);
+		}
+		this.tile.getBoard().addHex(this.tile, ids.get(ids.size()-1));
+		
+		
 
 	}
 
@@ -75,61 +96,68 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 	public void mouseWheelMoved(MouseWheelEvent e) {
 	       String message;
 	       int notches = e.getWheelRotation();
-	       
-	       if (notches < 0) {
-	    	   this.tile.getBoard().rotated = (this.tile.getBoard().rotated % 4) + 1;
-	    	   if(this.tile.getBoard().rotateCheck(this.tile)) {
-	    		   System.out.println(this.tile.getBoard().rotated);
-		           this.tile.getBoard().refresh();
-		           this.tile.getBoard().drawHex(this.tile, 1, 1);
-	    	   }
-	    	   else {
+	       if(this.tile.getBoard().getID()==2){
+	    	   if (notches < 0) {
+	    		   this.tile.getBoard().rotated = (this.tile.getBoard().rotated % 4) + 1;
+	    		   if(this.tile.getBoard().rotateCheck(this.tile)) {
+	    			   System.out.println(this.tile.getBoard().rotated);
+	    			   this.tile.getBoard().refresh();
+	    			   this.tile.getBoard().drawHex(this.tile, 1, 1, Color.GREEN);
+	    		   }
+	    		   else {
+	    			   this.tile.getBoard().rotated = (this.tile.getBoard().rotated % 4) - 1;
+	    		   }
+	           
+	           
+	    	   } else {
 	    		   this.tile.getBoard().rotated = (this.tile.getBoard().rotated % 4) - 1;
-	    	   }
-	           
-	           
-	       } else {
-	    	   this.tile.getBoard().rotated = (this.tile.getBoard().rotated % 4) - 1;
-	    	   if(this.tile.getBoard().rotated<=0) this.tile.getBoard().rotated+=4;
-	    	   if(this.tile.getBoard().rotateCheck(this.tile)) {
+	    		   if(this.tile.getBoard().rotated<=0) this.tile.getBoard().rotated+=4;
+	    		   if(this.tile.getBoard().rotateCheck(this.tile)) {
 	    		   
-	    		   System.out.println(this.tile.getBoard().rotated);
-		           this.tile.getBoard().refresh();
-		           this.tile.getBoard().drawHex(this.tile, 1, 1);
+	    			   System.out.println(this.tile.getBoard().rotated);
+	    			   this.tile.getBoard().refresh();
+	    			   this.tile.getBoard().drawHex(this.tile, 1, 1, Color.GREEN);
 
-	    	   }
-	    	   else {
-	    		   if(this.tile.getBoard().rotated==4) this.tile.getBoard().rotated-=3;
-	    		   else
-	    			   this.tile.getBoard().rotated = (this.tile.getBoard().rotated % 4) + 1;
-	    	   }
+	    		   }
+	    		   else {
+	    			   if(this.tile.getBoard().rotated==4) 
+	    				   this.tile.getBoard().rotated-=3;
+	    			   else
+	    				   this.tile.getBoard().rotated = (this.tile.getBoard().rotated % 4) + 1;
+	    		   }
 	    	   
 	           
-	           
+	    	   }
 	       }
 	}
 	
     public void mouseMoved(MouseEvent e) {
     	if(tile.getBoard().selectedPiece!=null && tile.getBoard().lifted && !tile.getBoard().penPiece) {
     		
+    		
 
     		Point b = e.getLocationOnScreen();
     		int x = (int) b.getX();
     		int y = (int) b.getY();
     		
-    		
-
+    		int tileID= this.tile.getTileID();
     		
     		this.tile.getBoard().refresh();
 
-    		this.tile.getBoard().drawHex(this.tile, x, y);
+    		this.tile.getBoard().drawHex(this.tile, x, y, Color.GREEN);
    
     		int id = tile.getBoard().getID();
     		if(id!=lastID) {
-  
     			lastBoard.refresh();
-
     		}
+    		if(tileID!=lastTileID && id==lastID) {
+    			this.tile.getBoard().redraw();
+    		}
+    		
+    		//if(this.tile.getTileID()<100) {
+    		//	//this.tile.getBoard().redraw();
+    		//}
+    
     		lastID = id;
     		lastBoard = board;
 

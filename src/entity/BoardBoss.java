@@ -57,7 +57,7 @@ public abstract class BoardBoss extends JPanel{
 	 * @return True if heomino was added, false if hexomino doesn't exist
 	 */
 	
-	public boolean addHex(Tile tile){
+	public boolean addHex(Tile tile, int tileID){
 		//HexTile[] shape = {new HexTile(this,0,0, width, height),new HexTile(this,0,1, width, height),new HexTile(this,0,-2, width, height),new HexTile(this,0,-3, width, height),new HexTile(this,0,-4, width, height),new HexTile(this,1,0, width, height)};
 		//HexTile[] shape2 = {new HexTile(this,0,0, width, height),new HexTile(this,0,1, width, height),new HexTile(this,0,2, width, height),new HexTile(this,0,3, width, height),new HexTile(this,0,4, width, height),new HexTile(this,0,5, width, height)};
 		//Hexomino hex = new Hexomino(1, shape2);	
@@ -90,7 +90,7 @@ public abstract class BoardBoss extends JPanel{
 	}
 	
 	
-	public void drawHex(Tile tile, int posx, int posy) {
+	public void drawHex(Tile tile, int posx, int posy, Color c) {
 
 		for(int i=0; i<6;i++){
 			int x=selectedPiece.shape[i].row+tile.getCoords()[0];
@@ -151,6 +151,18 @@ public abstract class BoardBoss extends JPanel{
 	}
 	*/
 
+	public void redraw() {
+		for(int j=0; j<width; j++) 
+			for(int k=0; k<height; k++) 
+				if(boardArray[j][k].tileID<100) {
+					
+					//x=hex.shape[j].row+tile.getCoords()[0];
+					//y=hex.shape[j].column+tile.getCoords()[1];
+					//boardArray[j][k].isCovered = false;
+					boardArray[j][k].setBackground(Color.BLUE);
+				}
+	}
+	
 	public boolean rotateCheck(Tile tile) {
 		return true;
 		

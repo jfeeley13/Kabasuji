@@ -18,6 +18,7 @@ public abstract class Tile extends JPanel{
 	protected boolean isNull = false;
 	protected int tileID;
 	BoardBoss board=new Board();
+	protected boolean isHighlight = false;
 	
 	
 	public Tile (BoardBoss board, int row, int column, int w,int h, int tileID){
@@ -77,6 +78,14 @@ public abstract class Tile extends JPanel{
 	 */
 	public int getTileWidth(){
 		return width;
+	}
+	
+	public boolean isHighlight() {
+		return isHighlight;
+	}
+	
+	public void setHighlight(boolean b) {
+		isHighlight = b;
 	}
 
 	/**

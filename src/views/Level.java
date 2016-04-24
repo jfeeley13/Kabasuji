@@ -386,8 +386,8 @@ public class Level{
 
 
 
-		int x = 10;
-		int y = 18;
+		int x = 14;
+		int y = 35;
 		
 		pen.setPreferredSize(new Dimension(140, 410));
 		pen.setMinimumSize(new Dimension(140, 410));
@@ -419,7 +419,8 @@ public class Level{
 		pen.selectedPiece = null;
 		pen.makeBoard(penArray, x, y, 2);
 		pen.init = true;
-		pen.addHex(penArray[2][2]);
+		pen.addHex(penArray[2][2], 1);
+		pen.addHex(penArray[4][4], 2);
 		pen.init=false;
 		
 		x=3;
