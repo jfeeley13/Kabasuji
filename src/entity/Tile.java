@@ -1,9 +1,11 @@
 package entity;
 
 import gameControllers.MListener;
+import javax.swing.JPanel;
+import gameControllers.MListener;
 
 
-public abstract class Tile {
+public abstract class Tile extends JPanel{
 	private static final long serialVersionUID = 1L;
 	protected int row;
 	protected int column;
@@ -13,24 +15,13 @@ public abstract class Tile {
 	protected boolean isNull = false;
 	Board board;
 	private RowColumn rowCol;
-	
-	/**
-=======
-import javax.swing.JPanel;
 
-import gameControllers.MListener;
 
-public abstract class Tile extends JPanel{
-	
-	/**
-	 * 
-	 */
-	public Tile (Board board, RowColumn rowCol){
+	public Tile(Board board, RowColumn rowCol) {
 		this.rowCol = rowCol;
-		this.board = board; 
-	//	this.addMouseListener(new MListener(this));
+		this.board = board;
+		//	this.addMouseListener(new MListener(this));
 	}
-
 
 	/**
 	 * 
@@ -48,26 +39,11 @@ public abstract class Tile extends JPanel{
 	}
 	
 	/**
-=======
-public abstract class Tile {
-	private RowColumn rowCol;
-	private boolean isCovered;
-	private int width = 32;
-	private int height = 32;
-	private boolean isNull = false;
-	
-	
-	public Tile (RowColumn rowCol){
-		this.rowCol = rowCol;
-	}
-
-	/**
->>>>>>> tyler_merger
 	 * Toggles tile from null to not null
 	 * Used in level editor only
 	 * @return 
 	 */
-	
+
 	public abstract boolean hasWon();
 	
 	public void toggleTile(){

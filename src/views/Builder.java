@@ -53,7 +53,6 @@ public class Builder extends JFrame implements MouseListener{
 	private JTextField textField_1;
 	static String gameType;
 	PieceView piecesView;
-	BoardView boardView;
 	static int row;
 	static int col;
 
@@ -247,7 +246,6 @@ public class Builder extends JFrame implements MouseListener{
 		
 		JLabel lblBullPin = new JLabel("Bull Pen:");
 		JPanel board = new JPanel();
-		boardView = new BoardView(row-1,col-1);
 		
 		JSpinner spinner_2 = new JSpinner();
 		spinner_2.setModel(new SpinnerNumberModel(1, 1, 6, 1));
@@ -320,7 +318,7 @@ public class Builder extends JFrame implements MouseListener{
 									.addGap(77))
 								.addComponent(inventory, GroupLayout.PREFERRED_SIZE, 575, GroupLayout.PREFERRED_SIZE)
 								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(boardView, GroupLayout.PREFERRED_SIZE, 520, GroupLayout.PREFERRED_SIZE)
+									.addComponent(board, GroupLayout.PREFERRED_SIZE, 520, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.RELATED, 12, Short.MAX_VALUE))
 								.addGroup(groupLayout.createSequentialGroup()
 									.addGap(6)
@@ -396,7 +394,7 @@ public class Builder extends JFrame implements MouseListener{
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addGroup(groupLayout.createSequentialGroup()
 									.addGap(11)
-									.addComponent(boardView, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)
+									.addComponent(board, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addComponent(lblInventory)))
 							.addPreferredGap(ComponentPlacement.RELATED)
