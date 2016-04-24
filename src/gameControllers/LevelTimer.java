@@ -50,8 +50,10 @@ public class LevelTimer{
 	public static void main(final Level level) throws Exception{
         ActionListener taskPerformer = new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                level.levelTime-=1;
-                level.setLabel();
+            	if(level.levelTime>=0) {
+            		level.levelTime-=1;
+            		level.setLabel();
+            	}
             }
         };
         Timer timer = new Timer(1000 ,taskPerformer);
