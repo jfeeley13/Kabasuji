@@ -214,7 +214,6 @@ public class Builder extends JFrame implements MouseListener{
 				
 				SaveController sc = new SaveController(this);
 				
-=======
 				BuildStart nw = new BuildStart();
 				setVisible(false);
 				//nw.openWindow();
@@ -458,8 +457,8 @@ public class Builder extends JFrame implements MouseListener{
 		flipButton.setPreferredSize(new Dimension(40, 20));	
 		
 		//JPanel panel_1 = new JPanel();
-		piecesView = new PieceView(1);
-		bullPin.setViewportView(piecesView);
+		//piecesView = new PieceView(1);
+		//bullPin.setViewportView(piecesView);
 
 		
 		JLabel lblLevelName = new JLabel("Level Name:");

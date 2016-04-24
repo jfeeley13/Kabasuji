@@ -229,9 +229,7 @@ public class Level{
 							.addGap(14)
 							.addComponent(lblBoard)
 							.addPreferredGap(ComponentPlacement.RELATED)
-//<<<<<<< HEAD
 							.addComponent(board, GroupLayout.PREFERRED_SIZE, 348, GroupLayout.PREFERRED_SIZE)
-//=======
 							//.addComponent(boardView, GroupLayout.PREFERRED_SIZE, 268, GroupLayout.PREFERRED_SIZE)
 							.addGap(31)
 							.addComponent(board, GroupLayout.PREFERRED_SIZE, 348, GroupLayout.PREFERRED_SIZE)

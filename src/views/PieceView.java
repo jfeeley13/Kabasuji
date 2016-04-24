@@ -40,7 +40,7 @@ public class PieceView extends JPanel {
 				colorMapping.put(p, randomColor);
 			}
 			*/
-			initComponents();
+		//	initComponents();
 		}
 		
 	//  Square Tile 1:1, 32x32 pixels. 
