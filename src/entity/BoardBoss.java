@@ -23,10 +23,18 @@ public abstract class BoardBoss extends JPanel{
 	int width = 12;
 	int height = 12;
 	public static Hexomino selectedPiece;
-	public static boolean init = false;
+	public static boolean init = true;
+	public static boolean lifted = false;
+	public static boolean penPiece = false;
+	public static int id = 1;
+	protected int tileID;
+	protected int boardID;
+	public static int rotated = 1;
+
 	
-	public void makeBoard(Tile[][] boardArray, int width, int height){
+	public void makeBoard(Tile[][] boardArray, int width, int height, int id){
 		this.boardArray = boardArray;
+		this.boardID = id;
 	}
 
 	public int[] getTopLeft(){
@@ -50,10 +58,10 @@ public abstract class BoardBoss extends JPanel{
 	 */
 	
 	public boolean addHex(Tile tile){
-		HexTile[] shape = {new HexTile(this,0,0, width, height),new HexTile(this,0,1, width, height),new HexTile(this,0,-2, width, height),new HexTile(this,0,-3, width, height),new HexTile(this,0,-4, width, height),new HexTile(this,1,0, width, height)};
-		HexTile[] shape2 = {new HexTile(this,0,0, width, height),new HexTile(this,0,1, width, height),new HexTile(this,0,2, width, height),new HexTile(this,0,3, width, height),new HexTile(this,0,4, width, height),new HexTile(this,0,5, width, height)};
-		Hexomino hex = new Hexomino(1, shape2);	
-	
+		//HexTile[] shape = {new HexTile(this,0,0, width, height),new HexTile(this,0,1, width, height),new HexTile(this,0,-2, width, height),new HexTile(this,0,-3, width, height),new HexTile(this,0,-4, width, height),new HexTile(this,1,0, width, height)};
+		//HexTile[] shape2 = {new HexTile(this,0,0, width, height),new HexTile(this,0,1, width, height),new HexTile(this,0,2, width, height),new HexTile(this,0,3, width, height),new HexTile(this,0,4, width, height),new HexTile(this,0,5, width, height)};
+		//Hexomino hex = new Hexomino(1, shape2);	
+		/**
 		boolean allTilesEmpty=CheckTiles(tile, shape2);
 		if(allTilesEmpty){
 			for(int i=0; i<6;i++){
@@ -64,6 +72,7 @@ public abstract class BoardBoss extends JPanel{
 				hexPlaced.add(hex);
 			}
 		}
+		**/
 		return true;
 	}
 	public boolean CheckTiles(Tile tile,HexTile[] shape){
@@ -72,12 +81,43 @@ public abstract class BoardBoss extends JPanel{
 			int x=hex.shape[i].row+tile.getCoords()[0];
 			int y=hex.shape[i].column+tile.getCoords()[1];
 			if(boardArray[x][y].isCovered()==true){
-				System.out.println("can't place piece here");
+				//System.out.println("can't place piece here");
 				return false;
 			}	
 		}
 		return true;
 
+	}
+	
+	
+	public void drawHex(Tile tile, int posx, int posy) {
+
+		for(int i=0; i<6;i++){
+			int x=selectedPiece.shape[i].row+tile.getCoords()[0];
+			int y=selectedPiece.shape[i].column+tile.getCoords()[1];
+			//System.out.println("The x and y are:" + x + y);
+			//boardArray[x][y].coverTile();
+			boardArray[x][y].setBackground(Color.BLUE);
+			//hexPlaced.add(selectedPiece);
+			//penPiece = true;
+			//boardArray[x][y].setTileID(board.id);
+		}	
+	}
+	
+	public void refresh() {
+		for(int j=0; j<width; j++) 
+			for(int k=0; k<height; k++) 
+				if(boardArray[j][k].tileID==tileID) {
+					
+					//x=hex.shape[j].row+tile.getCoords()[0];
+					//y=hex.shape[j].column+tile.getCoords()[1];
+					boardArray[j][k].isCovered = false;
+					boardArray[j][k].setBackground(Color.WHITE);
+				}
+	}
+	
+	public int getID() {
+		return boardID;
 	}
 	/**
 	 * 
@@ -110,4 +150,9 @@ public abstract class BoardBoss extends JPanel{
 		return coords; 
 	}
 	*/
+
+	public boolean rotateCheck(Tile tile) {
+		return true;
+		
+	}
 }

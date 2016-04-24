@@ -19,10 +19,18 @@ public class BullPen extends BoardBoss{
 	List<Hexomino> hexPlaced = new ArrayList<Hexomino>();
 	protected int XOrigin;
 	protected int YOrigin;
+	protected int width = 10;
+	protected int height = 18;
+	protected int tileID;
+	protected int boardID = 2;
+
 	
 	
-	public void makeBoard(Tile[][] boardArray, int width, int height){
+	public void makeBoard(Tile[][] boardArray, int width, int height, int id){
 		this.boardArray = boardArray;
+		this.width = width;
+		this.height = height;
+		this.boardID = id;
 	}
 
 	public int[] getTopLeft(){
@@ -47,22 +55,29 @@ public class BullPen extends BoardBoss{
 	
 	public boolean addHex(Tile tile){
 		//HexTile[] shape = {new HexTile(this,0,0),new HexTile(this,0,1),new HexTile(this,0,-2),new HexTile(this,0,-3),new HexTile(this,0,-4),new HexTile(this,1,0)};
-		HexTile[] shape2 = {new HexTile(this,0,0, width, height),new HexTile(this,0,1, width, height),new HexTile(this,0,2, width, height),new HexTile(this,0,3, width, height),new HexTile(this,0,4, width, height),new HexTile(this,0,5, width, height)};
+		HexTile[] shape2 = {new HexTile(this,0,0, width, height,1),new HexTile(this,0,1, width, height,1),new HexTile(this,0,2, width, height,1),new HexTile(this,0,3, width, height,1),new HexTile(this,0,4, width, height,1),new HexTile(this,0,5, width, height,1)};
 		Hexomino hex = new Hexomino(1, shape2);	
 	
 		boolean allTilesEmpty=CheckTiles(tile, shape2);
-
-		if(init){
+		
+		if((selectedPiece!=null && lifted && !penPiece) || init){
 			for(int i=0; i<6;i++){
 				int x=hex.shape[i].row+tile.getCoords()[0];
 				int y=hex.shape[i].column+tile.getCoords()[1];
-				System.out.println("The x and y are:" + x + y);
+				//System.out.println("The x and y are:" + x + y);
 				boardArray[x][y].coverTile();
 				boardArray[x][y].setBackground(Color.BLUE);
 				hexPlaced.add(hex);
+				penPiece = true;
+				boardArray[x][y].setTileID(board.id);
 			}
+			
+
+			System.out.println("Piece Placed!");
+
 		}
 
+		lifted = true;
 		return true;
 	}
 	public boolean CheckTiles(Tile tile,HexTile[] shape){
@@ -70,20 +85,114 @@ public class BullPen extends BoardBoss{
 		for(int i=0; i<6;i++){
 			int x=hex.shape[i].row+tile.getCoords()[0];
 			int y=hex.shape[i].column+tile.getCoords()[1];
+			
 			if(boardArray[x][y].isCovered()==true){
-				for(int j=0; j<6; j++) {
-					x=hex.shape[j].row+tile.getCoords()[0];
-					y=hex.shape[j].column+tile.getCoords()[1];
-					boardArray[x][y].coverTile();
-					boardArray[x][y].setBackground(Color.WHITE);
-				}
+				tileID = boardArray[x][y].getTileID();
+				System.out.println(tileID);
+				System.out.println("Selected Piece!");
+				for(int j=0; j<width; j++) 
+					for(int k=0; k<height; k++) 
+						if(boardArray[j][k].tileID==tileID) {
+							
+							//x=hex.shape[j].row+tile.getCoords()[0];
+							//y=hex.shape[j].column+tile.getCoords()[1];
+							boardArray[j][k].isCovered = false;
+							boardArray[j][k].setBackground(Color.WHITE);
+						}
 				selectedPiece = hex;
+				lifted = false;
+				penPiece = false;
+				drawHex(tile,1,1);
 				return false;
-			}	
+			}
+
 			
 		}
 		return true;
 
+	}
+	
+	public void drawHex(Tile tile, int posx, int posy) {
+
+		for(int i=0; i<6;i++){
+			int x = 0;
+			int y = 0;
+			switch(rotated) {
+			case 1:	x=selectedPiece.shape[i].row+tile.getCoords()[0];
+					y=selectedPiece.shape[i].column+tile.getCoords()[1];
+					break;
+			case 2:	x=selectedPiece.shape[i].column+tile.getCoords()[0];
+					y=selectedPiece.shape[i].row+tile.getCoords()[1];
+					break;
+			case 3:	x=selectedPiece.shape[i].row+tile.getCoords()[0];
+					y=tile.getCoords()[1]-selectedPiece.shape[5-i].column;
+					break;
+			case 4:	x=tile.getCoords()[0]-selectedPiece.shape[i].column;
+					y=selectedPiece.shape[i].row+tile.getCoords()[1];
+					break;
+			}
+
+				
+
+			
+			//System.out.println("The x and y are:" + x + y);
+			//boardArray[x][y].coverTile();
+			try {
+				boardArray[x][y].setTileID(tileID+100);
+				boardArray[x][y].setBackground(Color.GREEN);
+
+
+				
+			} catch(Exception e) {
+
+
+			}
+			
+			//hexPlaced.add(selectedPiece);
+			//penPiece = true;
+			//boardArray[x][y].setTileID(board.id);
+		}	
+	}
+	
+	public void refresh() {
+		for(int j=0; j<width; j++) 
+			for(int k=0; k<height; k++) 
+				if(boardArray[j][k].tileID==tileID+100) {
+					
+					//x=hex.shape[j].row+tile.getCoords()[0];
+					//y=hex.shape[j].column+tile.getCoords()[1];
+					//boardArray[j][k].isCovered = false;
+					boardArray[j][k].setBackground(Color.WHITE);
+				}
+	}
+	
+	public int getID() {
+		return boardID;
+	}
+	
+	public boolean rotateCheck(Tile tile) {
+		int x=0;
+		int y=0;
+
+		//System.out.println(selectedPiece.shape[5].column);
+		switch(rotated) {
+		case 1:	x=selectedPiece.shape[5].row+tile.getCoords()[0];
+				y=selectedPiece.shape[5].column+tile.getCoords()[1];
+				break;
+		case 2:	x=selectedPiece.shape[5].column+tile.getCoords()[0];
+				y=selectedPiece.shape[5].row+tile.getCoords()[1];
+				break;
+		case 3:	x=selectedPiece.shape[5].row+tile.getCoords()[0];
+				y=tile.getCoords()[1]-selectedPiece.shape[5-5].column;
+				break;
+		case 4:	x=tile.getCoords()[0]-selectedPiece.shape[5].column;
+				y=selectedPiece.shape[5].row+tile.getCoords()[1];
+				break;
+		}
+		//System.out.println("x: " + x);
+		//System.out.println("y: " + y);
+		if(x>width-2 || y>height-2 || x<0 || y<0) return false;
+		return true;
 	}
 	/**
 	 * 

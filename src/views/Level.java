@@ -13,11 +13,13 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.LineBorder;
 
 import java.awt.Color;
+import java.awt.Container;
 
 import javax.swing.table.DefaultTableModel;
 
 import entity.Board;
 import entity.BoardBoss;
+import entity.BoardPen;
 import entity.BullPen;
 import entity.HexTile;
 import entity.Hexomino;
@@ -52,7 +54,9 @@ import javax.swing.SwingConstants;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.awt.event.KeyEvent;
+import java.awt.Panel;
 
 
 public class Level{
@@ -113,6 +117,7 @@ public class Level{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
 		frame = new JFrame();
 		Color myColor = Color.decode("#4169aa");
 		frame.getContentPane().setBackground(myColor);
@@ -169,8 +174,25 @@ public class Level{
 		lblF1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblF1.setFont(new Font("Lucida Grande", Font.ITALIC, 13));
 		
+		
+		BoardBoss boardPen = new BoardPen();
+		BoardBoss boardPen2 = new BoardPen();
+		
+
 		BoardBoss board = new Board();
 		BoardBoss pen = new BullPen();
+		
+		JButton rotateButton = new JButton("\u21BB");
+		rotateButton.setPreferredSize(new Dimension(50, 20));	
+
+
+		
+		JButton flipButton = new JButton("\u21C4");
+		flipButton.setPreferredSize(new Dimension(50, 20));	
+		
+		
+		
+		
 		
 		JLabel lblBoard = new JLabel("Board");
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
@@ -178,51 +200,90 @@ public class Level{
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addComponent(toolBar, GroupLayout.DEFAULT_SIZE, 760, Short.MAX_VALUE)
 				.addGroup(groupLayout.createSequentialGroup()
+					
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+							
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(17)
 							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								
 								.addGroup(groupLayout.createSequentialGroup()
 									.addComponent(table_c, GroupLayout.PREFERRED_SIZE, 315, GroupLayout.PREFERRED_SIZE)
 									.addGap(227))
+									
 								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 									.addComponent(lblBoard)
-									.addComponent(board, GroupLayout.PREFERRED_SIZE, 348, GroupLayout.PREFERRED_SIZE))))
+									
+									.addComponent(board, GroupLayout.PREFERRED_SIZE, 348, GroupLayout.PREFERRED_SIZE)
+									)))
 						.addGroup(groupLayout.createSequentialGroup()
+							
 							.addGap(30)
+							
 							.addComponent(lblF1)))
-					.addPreferredGap(ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+					//.addPreferredGap(ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+					//.addPreferredGap(ComponentPlacement.RELATED, 51, 51)
+
+					
+					.addComponent(boardPen, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+					.addComponent(boardPen2, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						
 						.addComponent(btnExit)
+
 						.addComponent(pen, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
+					
 					.addComponent(toolBar, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
 					.addGap(22)
+
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+							
+							
+							
 						.addGroup(groupLayout.createSequentialGroup()
+							
 							.addPreferredGap(ComponentPlacement.RELATED)
+
 							.addComponent(pen, GroupLayout.PREFERRED_SIZE, 410, GroupLayout.PREFERRED_SIZE))
 						.addGroup(groupLayout.createSequentialGroup()
+								.addGap(36)
+								.addComponent(boardPen, GroupLayout.PREFERRED_SIZE, 348, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+								
+								.addComponent(boardPen2, GroupLayout.PREFERRED_SIZE, 410, GroupLayout.PREFERRED_SIZE))
+								
+						.addGroup(groupLayout.createSequentialGroup()
+							
 							.addGap(14)
+							
 							.addComponent(lblBoard)
+							
 							.addPreferredGap(ComponentPlacement.RELATED)
+							
 							.addComponent(board, GroupLayout.PREFERRED_SIZE, 348, GroupLayout.PREFERRED_SIZE)
+							
 							.addGap(31)
+							
 							.addComponent(table_c, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnExit)
+
 						.addComponent(lblF1))
 					.addGap(34))
 		);
 		
+		boardPen.setBackground(Color.decode("#4169aa"));
+		boardPen2.setBackground(Color.decode("#4169aa"));
+		pen.setBackground(Color.decode("#4169aa"));
+		//boardPen.setBackground(Color.WHITE);
 		
 
-		
 		/**
 		JSplitPane splitPane = new JSplitPane();
 		splitPane.setEnabled(false);
@@ -242,7 +303,9 @@ public class Level{
 			}
 		});
 		splitPane.setRightComponent(flipButton);
+		splitPane.setEnabled(true);
 		**/
+		
 		//SpecialDrawing BullPen_Panel = new SpecialDrawing();
 		//scrollPane.setViewportView(BullPen_Panel);
 		//BullPen_Panel.setPreferredSize(new Dimension(100, 1000));
@@ -290,8 +353,11 @@ public class Level{
 		
 		lblLevel.setFont(new Font("Lucida Grande", Font.BOLD, 16));
 		toolBar.add(lblLevel);
-		frame.getContentPane().setLayout(groupLayout);
 		
+		
+		
+		frame.getContentPane().setLayout(groupLayout);
+
 
 		board.setLayout(new GridLayout(12,12));
 		board.setPreferredSize(new Dimension(384,384));
@@ -300,13 +366,13 @@ public class Level{
 		
 		Tile boardArray[][] = new Tile[12][12];
 		
-		Border BoardTileBorder = BorderFactory.createLineBorder(Color.BLACK, 2, true);
+		Border BoardTileBorder = BorderFactory.createLineBorder(Color.BLACK, 1, true);
 		
 		
 		for(int TileCol = 0; TileCol <=11;TileCol++){
 			for(int TileRow = 0; TileRow <=11;TileRow++){
 				//System.out.println("On Row " + TileRow + " -- Col " + TileCol);
-				PuzzleTile AddedTile = new PuzzleTile(board, TileRow,TileCol, 12, 12);
+				PuzzleTile AddedTile = new PuzzleTile(board, TileRow,TileCol, 12, 12, 999);
 				//System.out.println("1");
 				AddedTile.setBackground(Color.WHITE);
 				//System.out.println("2");
@@ -316,28 +382,31 @@ public class Level{
 				board.add(AddedTile);
 			}
 		}
-		board.makeBoard(boardArray, 12, 12);
+		board.makeBoard(boardArray, 12, 12, 1);
 
-		
-		
+
+
 		int x = 10;
 		int y = 18;
 		
-		pen.setLayout(new GridLayout(y,x));
-		pen.setPreferredSize(new Dimension(140,410));
-		pen.setMinimumSize(new Dimension(140,410));
-		pen.setMaximumSize(new Dimension(140,410));
+		pen.setPreferredSize(new Dimension(140, 410));
+		pen.setMinimumSize(new Dimension(140, 410));
+		pen.setMaximumSize(new Dimension(140, 410));
+		
+		pen.setLayout(new GridLayout(y, x));
 		
 		Tile penArray[][] = new Tile[x+6][y+6];
+
+
 		
-		Border penTileBorder = BorderFactory.createLineBorder(Color.WHITE, 2, true);
+		Border penTileBorder = BorderFactory.createLineBorder(Color.WHITE, 1, true);
 		
 		for(int TileRow = 0; TileRow <y;TileRow++){
 			for(int TileCol = 0; TileCol <x;TileCol++){
 				//System.out.println(TileRow);
 				//System.out.println(TileCol);
 				//System.out.println("On Row " + TileRow + " -- Col " + TileCol);
-				PuzzleTile AddedTile = new PuzzleTile(pen, TileCol,TileRow, x, y);
+				PuzzleTile AddedTile = new PuzzleTile(pen, TileCol,TileRow, x, y, 999);
 				//System.out.println("1");
 				AddedTile.setBackground(Color.WHITE);
 				//System.out.println("2");
@@ -347,13 +416,72 @@ public class Level{
 				pen.add(AddedTile);
 			}
 		}
-		pen.makeBoard(penArray, x, y);
-		pen.init=true;
+		pen.selectedPiece = null;
+		pen.makeBoard(penArray, x, y, 2);
+		pen.init = true;
 		pen.addHex(penArray[2][2]);
 		pen.init=false;
-		pen.selectedPiece = null;
-
 		
-	}
+		x=3;
+		y=12;
+		
+		boardPen.setPreferredSize(new Dimension(26, 410));
+		boardPen.setMinimumSize(new Dimension(26, 410));
+		boardPen.setMaximumSize(new Dimension(26, 410));
+		boardPen.setLayout(new GridLayout(y, x));
+		
+		Tile boardPenArray[][] = new Tile[x+6][y+6];
+		
+		Border boardPenTileBorder = BorderFactory.createLineBorder(Color.decode("#4169aa"), 1, true);
+		
+		for(int TileRow = 0; TileRow <y;TileRow++){
+			for(int TileCol = 0; TileCol <x;TileCol++){
+				//System.out.println(TileRow);
+				//System.out.println(TileCol);
+				//System.out.println("On Row " + TileRow + " -- Col " + TileCol);
+				PuzzleTile AddedTile = new PuzzleTile(boardPen, TileCol,TileRow, x, y, 999);
+				//System.out.println("1");
+				AddedTile.setBackground(Color.decode("#4169aa"));
+				//System.out.println("2");
+				AddedTile.setBorder(boardPenTileBorder);
+				//System.out.println("3");
+				boardPenArray[TileCol][TileRow] = AddedTile;
+				boardPen.add(AddedTile);
+			}
+		}
 
+		boardPen.makeBoard(boardPenArray, x, y,3);
+		
+		
+		x=4;
+		y=18;
+		boardPen2.setPreferredSize(new Dimension(26, 410));
+		boardPen2.setMinimumSize(new Dimension(26, 410));
+		boardPen2.setMaximumSize(new Dimension(26, 410));
+		boardPen2.setLayout(new GridLayout(y, x));
+		
+		Tile boardPen2Array[][] = new Tile[x+6][y+6];
+		
+		Border boardPen2TileBorder = BorderFactory.createLineBorder(Color.decode("#4169aa"), 1, true);
+		
+		for(int TileRow = 0; TileRow <y;TileRow++){
+			for(int TileCol = 0; TileCol <x;TileCol++){
+				//System.out.println(TileRow);
+				//System.out.println(TileCol);
+				//System.out.println("On Row " + TileRow + " -- Col " + TileCol);
+				PuzzleTile AddedTile = new PuzzleTile(boardPen2, TileCol,TileRow, x, y, 999);
+				//System.out.println("1");
+				AddedTile.setBackground(Color.decode("#4169aa"));
+				//System.out.println("2");
+				AddedTile.setBorder(boardPen2TileBorder);
+				//System.out.println("3");
+				boardPen2Array[TileCol][TileRow] = AddedTile;
+				boardPen2.add(AddedTile);
+			}
+		}
+
+		boardPen2.makeBoard(boardPen2Array, x, y, 4);
+
+
+	}
 }
