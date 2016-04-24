@@ -24,6 +24,8 @@ import javax.swing.JToggleButton;
 import javax.swing.JTable;
 
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JScrollPane;
@@ -43,9 +45,9 @@ import javax.swing.border.LineBorder;
 import javax.swing.SpinnerNumberModel;
 
 
-public class Builder {
-
-	private JFrame frame;
+public class Builder extends JFrame implements MouseListener{
+//
+//	private JFrame frame;
 	private JTextField txtGame;
 	private JTextField textField;
 	private JTextField textField_1;
@@ -55,9 +57,28 @@ public class Builder {
 	static int row;
 	static int col;
 
+//	/**
+//	 * Launch the application.
+//	 */
+//	public static void openBuildWindow(String type) {
+//		gameType= type;
+//		
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					Builder window = new Builder();
+//					window.frame.setLocationRelativeTo(null);
+//					window.frame.setVisible(true);
+//					window.frame.setResizable(false);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 	/**
 	 * Launch the application.
-	 */
+
 	public static void openBuildWindow(String type, int rows, int cols) {
 		gameType= type;
 		row = rows;
@@ -76,11 +97,15 @@ public class Builder {
 			}
 		});
 	}
+ */
 
 	/**
 	 * Create the application.
 	 */
-	public Builder() {
+	public Builder(String type, int rows, int cols) {
+		gameType = type;
+		row = rows;
+		col = cols;
 		initialize();
 	}
 
@@ -88,12 +113,11 @@ public class Builder {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
+		//frame = new JFrame();
 		Color myColor = Color.decode("#4169aa");
-		frame.getContentPane().setBackground(myColor);
-		frame.setBounds(100, 100, 760, 550);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+		getContentPane().setBackground(myColor);
+		setBounds(100, 100, 760, 550);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JToolBar toolBar = new JToolBar();
 		Color myToolbarColor = Color.decode("#4b89d0");
@@ -190,19 +214,27 @@ public class Builder {
 				
 				SaveController sc = new SaveController(this);
 				
+=======
+				BuildStart nw = new BuildStart();
+				setVisible(false);
+				//nw.openWindow();
+				SaveMenu nw = new SaveMenu();
+				//frame.dispose();
+				nw.setVisible(true);
+							
 			}
 		});
 		*/
 		
 		JButton btnCreate = new JButton("Create");
+		//TODO: this needs a controller
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Builder nw = new Builder();
+				Builder nw = new Builder(levelComboBox.getSelectedItem().toString(), row, col);
 				row = (Integer) spinner_1.getValue();
 				col = (Integer) spinner.getValue();
-
-				frame.dispose();
-				nw.openBuildWindow(levelComboBox.getSelectedItem().toString(), row, col);
+				nw.setVisible(false);
+				
 			}
 		});
 		
@@ -215,8 +247,7 @@ public class Builder {
 		}
 		
 		JLabel lblBullPin = new JLabel("Bull Pen:");
-		
-		//JPanel board = new JPanel();
+		JPanel board = new JPanel();
 		boardView = new BoardView(row-1,col-1);
 		
 		JSpinner spinner_2 = new JSpinner();
@@ -234,10 +265,14 @@ public class Builder {
 		JButton btnChangeLevel = new JButton("New Level");
 		btnChangeLevel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Builder nw = new Builder();
-				frame.dispose();
+				//frame.dispose();
 				String newType = levelComboBox.getItemAt(0).toString();
-				nw.openBuildWindow(levelComboBox.getSelectedItem().toString(), row, col);
+
+				Builder nw = new Builder(levelComboBox.getSelectedItem().toString(), row, col);
+				nw.setVisible(true);
+
+				//nw.openBuildWindow(levelComboBox.getSelectedItem().toString(), row, col);
+
 			}
 		});
 		
@@ -245,7 +280,11 @@ public class Builder {
 		lblRightClickTo.setFont(new Font("Lucida Grande", Font.ITALIC, 13));
 		
 		
-		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
+		GroupLayout groupLayout = new GroupLayout(getContentPane());
+		groupLayout.setAutoCreateGaps(false);
+		groupLayout.setAutoCreateContainerGaps(false); // Problem code
+		
+		//GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
@@ -479,13 +518,56 @@ public class Builder {
 		
 		lblLevelBuilder.setFont(new Font("Lucida Grande", Font.BOLD, 18));
 		toolBar.add(lblLevelBuilder);
-		groupLayout.setAutoCreateGaps(true);
-		groupLayout.setAutoCreateContainerGaps(true);
-		frame.getContentPane().setLayout(groupLayout);
+//		groupLayout.setAutoCreateGaps(true);
+//		groupLayout.setAutoCreateContainerGaps(true);
+		getContentPane().setLayout(groupLayout);
+
+		
+		/**Mouse Listener*/
+		
+		board.addMouseListener(this);
+	
+	}
+
+	
+
+	@Override
+	public void mouseClicked(MouseEvent me) {
+		int pixRow = me.getY();
+		int pixCol = me.getX();
+
+		System.out.println(pixRow);
+		System.out.println(pixCol);
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	public void quit(Builder parentView) {
-		parentView.frame.setVisible(false);
+		parentView.setVisible(false);
 		
 	}
+
 }

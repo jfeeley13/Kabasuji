@@ -1,5 +1,54 @@
 package entity;
 
+import gameControllers.MListener;
+
+
+public abstract class Tile {
+	private static final long serialVersionUID = 1L;
+	protected int row;
+	protected int column;
+	protected boolean isCovered = false;
+	protected int width = 32;
+	protected int height = 32;
+	protected boolean isNull = false;
+	Board board;
+	private RowColumn rowCol;
+	
+	/**
+=======
+import javax.swing.JPanel;
+
+import gameControllers.MListener;
+
+public abstract class Tile extends JPanel{
+	
+	/**
+	 * 
+	 */
+	public Tile (Board board, RowColumn rowCol){
+		this.rowCol = rowCol;
+		this.board = board; 
+	//	this.addMouseListener(new MListener(this));
+	}
+
+
+	/**
+	 * 
+	 * Determines if tile is covered or not
+	 * 
+	 * @return True = Covered --- False = Not Covered
+	 */
+	public Board getBoard(){
+		return this.board;
+	}
+	
+	
+	public void coverTile(){
+		this.isCovered = true;
+	}
+	
+	/**
+=======
 public abstract class Tile {
 	private RowColumn rowCol;
 	private boolean isCovered;
@@ -13,6 +62,7 @@ public abstract class Tile {
 	}
 
 	/**
+>>>>>>> tyler_merger
 	 * Toggles tile from null to not null
 	 * Used in level editor only
 	 * @return 
@@ -46,6 +96,17 @@ public abstract class Tile {
 
 	public int getHeight() {
 		return height;
+	}
+	
+	/**
+	 * 
+	 * Determines the location of the tile in a board or piece
+	 * 
+	 * @return (Row, Column) Coordinates of Selected Tile
+	 */
+	public RowColumn getCoords(){
+		RowColumn coords = new RowColumn(row , column);
+		return coords;
 	}
 
 	public void setHeight(int height) {

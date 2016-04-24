@@ -79,7 +79,7 @@ public class LevelSelection {
 			public void actionPerformed(ActionEvent e) {
 				Menu nw = new Menu();
 				frame.dispose();
-				nw.openWindow();
+				Menu.openWindow();
 			}
 		});
 		
@@ -88,7 +88,7 @@ public class LevelSelection {
 			public void actionPerformed(ActionEvent e) {
 				Level nw = new Level();
 				frame.dispose();
-				nw.openLevel("Release Level", 1);
+				Level.openLevel("Release Level", 1);
 			}
 		});
 		panel_1.setLayout(new GridLayout(0, 2, 0, 0));
@@ -134,7 +134,7 @@ public class LevelSelection {
 			public void actionPerformed(ActionEvent e) {
 				Level nw = new Level();
 				frame.dispose();
-				nw.openLevel("Puzzle Level", 1);
+				Level.openLevel("Puzzle Level", 1);
 			}
 		});
 		panel_2.setLayout(new GridLayout(0, 2, 0, 0));
@@ -186,9 +186,9 @@ public class LevelSelection {
 		JButton button_4 = new JButton("1");
 		button_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-					Level nw = new Level();
-					frame.dispose();
-					nw.openLevel("Lightning Level", 1);
+				Level nw = new Level();
+				frame.dispose();
+				Level.openLevel("Lightning Level", 1);
 			}
 		});
 		panel.setLayout(new GridLayout(0, 2, 0, 0));

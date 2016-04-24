@@ -3,9 +3,9 @@ package entity;
 public class HexTile extends Tile{
 
 
+	public HexTile(Board board, RowColumn rowCol) {
+		super(board, rowCol);
 
-	public HexTile(RowColumn rowCol) {
-		super(rowCol);
 	}
 	
 	public void changeLocation(int newRow, int newCol){
@@ -16,11 +16,13 @@ public class HexTile extends Tile{
 	@Override
 	public boolean isCovered() {
 		return false;
+	
 	}
 
 	@Override
 	public boolean hasWon() {
 		return false;
 	}
+	
 	
 }

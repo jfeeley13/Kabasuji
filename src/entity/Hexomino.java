@@ -15,6 +15,10 @@ public class Hexomino {
 		this.shape = shape;	
 	}
 	
+	public int getID(){
+		return pID;
+	}
+	
 	/**
 	 * Rotates Hexomino CW or CCW
 	 * 
@@ -28,11 +32,25 @@ public class Hexomino {
 		int dir = 1;
 		if(direction)//If CW Rotation
 			dir = -1;
-		for(HexTile tile : shape){
+
+		//for(HexTile tile : shape){
+
+		
+		/*TYLER
+		for (int TileNum = 0; TileNum >= 5; TileNum++){
+				int currRow = shape[TileNum].getCoords().getRow();
+				int currCol = shape[TileNum].getCoords().getColumn();
+				shape[TileNum].changeLocation(dir*(-1)*currCol, dir*currRow);
+			}
+			*/
+
+		//MASTERS
+	for(HexTile tile : shape){
 			tile.changeLocation(dir*(-1)*tile.getRowCol().getColumn(), dir*tile.getRowCol().getRow());
 			// tile.rowCol.getColumn is the current column in which the tile is located
 			//and tile.rowCol.getRow() is the current row in which the tile is located
 		}
+
 	}
 	/**
 	 * 
@@ -47,11 +65,21 @@ public class Hexomino {
 		int dir = 1;
 		if(direction)//If VFlip
 			dir = -1;
+		/*tyler
+		for (int TileNum = 0; TileNum >= 5; TileNum++){
+				int currRow = shape[TileNum].getCoords().getRow();
+				int currCol = shape[TileNum].getCoords().getColumn();
+				shape[TileNum].changeLocation(dir*(-1)*currRow, dir*currCol);
+			}
+			*/
+		
+		//MASTER
 		for(HexTile tile : shape){
 			tile.changeLocation(dir*(-1)*tile.getRowCol().getRow(), dir*tile.getRowCol().getColumn());
 			// tile.rowCol.getColumn is the current column in which the tile is located
 			//and tile.rowCol.getRow() is the current row in which the tile is located
 		}
+
 	}
 	
 	/**
@@ -73,8 +101,9 @@ public class Hexomino {
 		int coords[][] = new int[5][2];
 		//for loop iterates and grabs each HexTiles coordinates
 		for(int tileNum = 0; tileNum >= 5; tileNum++){
-			coords[tileNum][0] = this.shape[tileNum].getLocation()[0];
-			coords[tileNum][1] = this.shape[tileNum].getLocation()[1];		
+			int row = this.shape[tileNum].getCoords().getRow();
+			int col = this.shape[tileNum].getCoords().getColumn();
+			coords[tileNum] = new RowColumn(row, col);
 			}
 		return coords;
 		

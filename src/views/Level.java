@@ -21,7 +21,9 @@ import entity.Board;
 import entity.PuzzleTile;
 import entity.Tile;
 //import gameControllers.MListener;
-
+import entity.RowColumn;
+import entity.Tile;
+import gameControllers.MListener;
 import javax.swing.JToolBar;
 import javax.swing.JLabel;
 import javax.swing.JTextPane;
@@ -60,9 +62,8 @@ public class Level{
 	private JTable table;
 	static String gameType;
 	static int level;
-	
-	PieceView piecesView;
 	BoardView boardView;
+	PieceView piecesView;
 
 	/**
 	 * Launch the application.
@@ -168,19 +169,20 @@ public class Level{
 		lblF1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblF1.setFont(new Font("Lucida Grande", Font.ITALIC, 13));
 		
-	//	Board board = new Board();
-
 		//board replaces the panel
 		//JPanel panel = new JPanel();
 		boardView = new BoardView(6,12);
 		
+		Board board = new Board();
+
 		JLabel lblBoard = new JLabel("Board");
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addComponent(toolBar, GroupLayout.DEFAULT_SIZE, 760, Short.MAX_VALUE)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+					.addContainerGap(46, Short.MAX_VALUE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(17)
 							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
@@ -189,9 +191,9 @@ public class Level{
 									.addGap(227))
 								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 									.addComponent(lblBoard)
-	//								.addComponent(board, GroupLayout.PREFERRED_SIZE, 348, GroupLayout.PREFERRED_SIZE))))
+									.addComponent(board, GroupLayout.PREFERRED_SIZE, 348, GroupLayout.PREFERRED_SIZE))))
 //=======
-									.addComponent(boardView, GroupLayout.PREFERRED_SIZE, 546, GroupLayout.PREFERRED_SIZE))))
+									//.addComponent(boardView, GroupLayout.PREFERRED_SIZE, 546, GroupLayout.PREFERRED_SIZE))))
 //>>>>>>> master
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(30)
@@ -200,7 +202,19 @@ public class Level{
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
 						.addComponent(btnExit)
 						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap())
+					.addContainerGap()//)
+							.addComponent(table_c, GroupLayout.PREFERRED_SIZE, 315, GroupLayout.PREFERRED_SIZE)
+							.addGap(227)//)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(board, GroupLayout.PREFERRED_SIZE, 348, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblBoard))
+							.addGap(226)
+							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(30)
+					.addComponent(lblF1))
+				.addComponent(btnExit)
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
@@ -216,18 +230,24 @@ public class Level{
 							.addComponent(lblBoard)
 							.addPreferredGap(ComponentPlacement.RELATED)
 //<<<<<<< HEAD
-//							.addComponent(board, GroupLayout.PREFERRED_SIZE, 348, GroupLayout.PREFERRED_SIZE)
+							.addComponent(board, GroupLayout.PREFERRED_SIZE, 348, GroupLayout.PREFERRED_SIZE)
 //=======
-							.addComponent(boardView, GroupLayout.PREFERRED_SIZE, 268, GroupLayout.PREFERRED_SIZE)
+							//.addComponent(boardView, GroupLayout.PREFERRED_SIZE, 268, GroupLayout.PREFERRED_SIZE)
 							.addGap(31)
+							.addComponent(board, GroupLayout.PREFERRED_SIZE, 348, GroupLayout.PREFERRED_SIZE)
+							.addGap(321)
 							.addComponent(table_c, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnExit)
 						.addComponent(lblF1))
 					.addGap(34))
+				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+					.addGap(59)
+					.addComponent(lblBoard)
+					.addContainerGap(794, Short.MAX_VALUE))
 		);
-				
+
 		JSplitPane splitPane = new JSplitPane();
 		splitPane.setEnabled(false);
 		splitPane.setPreferredSize(new Dimension(100, 20));	
@@ -260,14 +280,15 @@ public class Level{
 		jPane.add(btnJ);
 		
 		JButton btnNewButton = new JButton("\u21C5");
-		jPane.add(btnNewButton);
+		jPane.add(btnNewButton);		
 		
 		
+		//TODO:PIECE VIEW FIX
 		//JPanel panel_1 = new JPanel();
-		piecesView = new PieceView(1);
-		piecesView.setAutoscrolls(true);
+		//piecesView = new PieceView(1);
+		//piecesView.setAutoscrolls(true);
 		//scrollPane.setViewportView(panel_1);
-		scrollPane.setViewportView(piecesView);
+		//scrollPane.setViewportView(piecesView);
 
 		JLabel lblNewLabel = new JLabel("Level:   ");
 		toolBar.add(lblNewLabel);
@@ -313,31 +334,36 @@ public class Level{
 		toolBar.add(lblLevel);
 		frame.getContentPane().setLayout(groupLayout);
 
-	/*	board.setLayout(new GridLayout(12,12));
+		board.setLayout(new GridLayout(12,12));
+		
+		board.setLayout(new GridLayout(12,12));
 		board.setPreferredSize(new Dimension(384,384));
 		board.setMinimumSize(new Dimension(384,384));
 		board.setMaximumSize(new Dimension(384,384));
 		
 		Tile boardArray[][] = new Tile[12][12];
 		
-		Border BoardTileBorder = BorderFactory.createLineBorder(Color.BLACK, 2, true);
-		
-		
+		//Border BoardTileBorder = BorderFactory.createLineBorder(Color.BLACK, 2, true);
+		Border BoardTileBorder = BorderFactory.createLineBorder(Color.BLACK, 2);
+		/*
 		for(int TileCol = 0; TileCol <=11;TileCol++){
 			for(int TileRow = 0; TileRow <=11;TileRow++){
 				//System.out.println("On Row " + TileRow + " -- Col " + TileCol);
-				PuzzleTile AddedTile = new PuzzleTile(board, TileRow,TileCol);
+				//PuzzleTile AddedTile = new PuzzleTile(board, TileRow,TileCol);
+				PuzzleTile AddedTile = new PuzzleTile(board, new RowColumn(TileRow,TileCol));
+
 				//System.out.println("1");
-				AddedTile.setBackground(Color.WHITE);
+				//AddedTile.setBackground(Color.WHITE);
 				//System.out.println("2");
-				AddedTile.setBorder(BoardTileBorder);
+				//AddedTile.setBorder(BoardTileBorder);
 				//System.out.println("3");
 				boardArray[TileRow][TileCol] = AddedTile;
-				board.add(AddedTile);
+		//		board.add(AddedTile);
 			}
 		}
 		board.makeBoard(boardArray);
-		*/
+		
+*/
 
 	}
 

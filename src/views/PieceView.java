@@ -6,6 +6,7 @@ import java.util.*;
 import javax.swing.JPanel;
 
 import entity.AllHex;
+import entity.RowColumn;
 import entity.HexTile;
 import entity.RowColumn;
 import entity.Tile;
@@ -23,6 +24,7 @@ public class PieceView extends JPanel {
 	Graphics offScreenGraphics = null;
 	int[] pieces = new int[35];
 	int row=0, col=0;
+	AllHex hexList; 
 	int tileSize=20;
 	
 	Hashtable<AllHex,Color> colorMapping = new Hashtable<AllHex,Color>();
@@ -61,9 +63,8 @@ public class PieceView extends JPanel {
 		private void initComponents() {		
 			RowColumn coords[] = new RowColumn[6];
 			int row=0,col=0;
-
-			coords = AllHex.h1.getCoordShape();
-	
+			//coords = AllHex.h1.getCoordShape();
+			coords = hexList.getHex(1).getCoordShape();	
 			for (int i=0; i<coords.length;i++){
 				row = coords[i].getRow();
 				col = coords[i].getColumn()*-1;
@@ -71,7 +72,7 @@ public class PieceView extends JPanel {
 			}
 			
 			/*coords = AllHex.h2.getCoordShape();
-			
+			coords = hexList.getHex(2).getCoordShape();			
 			for (int i=0; i<coords.length;i++){
 				row = coords[i].getRow();
 				col = coords[i].getColumn()*-1;
@@ -79,6 +80,9 @@ public class PieceView extends JPanel {
 			}
 			*/
 
+				shapeList.add(new RectangleShape((tileSize*row)+10,(col*tileSize)+10,tileSize,tileSize,false));	
+			
+			
 	    }
 
 	// Draw background puzzle and all active pieces.

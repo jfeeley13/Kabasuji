@@ -5,8 +5,9 @@ public class PuzzleTile extends Tile{
 	protected int row;
 	protected int column;
 	
-	public PuzzleTile(RowColumn rowCol) {
-		super(rowCol);
+
+	public PuzzleTile(Board board, RowColumn rowCol) {
+		super(board, rowCol);
 	}
 
 	@Override
