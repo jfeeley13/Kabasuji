@@ -3,6 +3,7 @@ package entity;
 /**
  * 
  * Entity class representing a move in the level builder.
+ * a
  *
  */
 public class LevelBuilderMove implements IMove{
