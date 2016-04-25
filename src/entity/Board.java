@@ -86,15 +86,18 @@ public class Board extends BoardBoss{
 		}
 		if(isOverPiece) return false;
 		if(selectedPiece!=null & lifted) {
+			for(int k=0; k<6;k++){
+				int x=hex.shape[k].row+tile.getCoords()[0];
+				int y=hex.shape[k].column+tile.getCoords()[1];
+				try {
+					if(boardArray[x][y].isCovered()) {
+						System.out.println("4");
+						return false;
+					}
+				} catch (NullPointerException e) {}
+			}
 			for(int i=0; i<width; i++) 
 				for(int j=0; j<height; j++) {
-					for(int k=0; k<6;k++){
-						int x=hex.shape[k].row+tile.getCoords()[0];
-						int y=hex.shape[k].column+tile.getCoords()[1];
-						if(boardArray[x][y].isCovered()) {
-							break;
-						}
-					}
 					if(boardArray[i][j].getBackground()==Color.GREEN) {
 						boardArray[i][j].coverTile();
 						boardArray[i][j].setBackground(Color.BLUE);
