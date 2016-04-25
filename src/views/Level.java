@@ -437,39 +437,6 @@ public class Level{
 
 		boardPen.makeBoard(boardPenArray, x, y,3);
 		
-		/**
-		x=4;
-		y=18;
-		boardPen2.setPreferredSize(new Dimension(26, crossHeight));
-		boardPen2.setMinimumSize(new Dimension(26, crossHeight));
-		boardPen2.setMaximumSize(new Dimension(26, crossHeight));
-		boardPen2.setLayout(new GridLayout(y, x));
-		
-		Tile boardPen2Array[][] = new Tile[x+6][y+6];
-		
-		Border boardPen2TileBorder = BorderFactory.createLineBorder(Color.decode("#4169aa"), 1);
-		boardPen2TileBorder = BorderFactory.createLineBorder(Color.WHITE, 1);
-		
-		for(int TileRow = 0; TileRow <y;TileRow++){
-			for(int TileCol = 0; TileCol <x;TileCol++){
-				//System.out.println(TileRow);
-				//System.out.println(TileCol);
-				//System.out.println("On Row " + TileRow + " -- Col " + TileCol);
-				PuzzleTile AddedTile = new PuzzleTile(boardPen2, TileCol,TileRow, x, y, 999);
-				//System.out.println("1");
-				AddedTile.setBackground(Color.decode("#4169aa"));
-				//System.out.println("2");
-				AddedTile.setBorder(boardPen2TileBorder);
-				//System.out.println("3");
-				boardPen2Array[TileCol][TileRow] = AddedTile;
-				boardPen2.add(AddedTile);
-			}
-		}
-		
-		
-
-		boardPen2.makeBoard(boardPen2Array, x, y, 4);
-		**/
 
 	}
 	
