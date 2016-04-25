@@ -2,5 +2,6 @@ package entity;
 
 public interface IMove{
 	
-	public boolean doMove();
+	public boolean doMove(Level previousState);
+	public Level revertMove();
 }
