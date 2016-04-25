@@ -15,23 +15,17 @@ import views.Level;
 
 public class BullPen extends JPanel{
 
-	protected List<Hexomino> HexsInPen = new ArrayList<Hexomino>();
+	protected List<Hexomino> HexsInPen;
 	protected Hexomino selectedHex;
 	public Level level;
 	
 	public BullPen(Level level,List<Hexomino> HexsInPen){
 		this.level=level;
 		this.HexsInPen = HexsInPen;
-		HexTile[] shape1 = {new HexTile(1,this, 0,0),new HexTile(1,this,0,1),new HexTile(1,this,0,2),new HexTile(1,this,0,3),new HexTile(1,this,0,4),new HexTile(1,this,0,5)};
-		HexTile[] shape2 = {new HexTile(2,this, 0,0),new HexTile(2,this,1,1),new HexTile(2,this,0,2),new HexTile(2,this,0,3),new HexTile(2,this,0,4),new HexTile(2,this,0,1)};
-
-		Hexomino h1 = new Hexomino(1, shape1);		
-		Hexomino h2 = new Hexomino(2, shape2);
-		HexsInPen.add(h1);
-		HexsInPen.add(h2);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		Border border = BorderFactory.createLineBorder(Color.BLACK, 1, true);
 		for(int h=0; h<HexsInPen.size();h++){
+			System.out.println(h);
 			HexTile tileList[][]=new HexTile[6][6];
 			JPanel panel=new JPanel(new GridLayout(6,6));
 			panel.setPreferredSize(new Dimension(99,99));
@@ -39,7 +33,7 @@ public class BullPen extends JPanel{
 			panel.setMinimumSize(new Dimension(99,99));
 			for(int i=0; i<6;i++){
 				for(int j=0; j<6;j++){
-					HexTile tile=new HexTile(h,this,i,j);
+					HexTile tile=new HexTile(h+1,this,i,j);
 					tile.valid=0;
 					
 					//tile.setBorder(border);
@@ -83,7 +77,12 @@ public class BullPen extends JPanel{
 	}
 	
 	public void removeHex(Hexomino piece){
-		
+		for(int i = 0; i < this.HexsInPen.size(); i++){
+			if(HexsInPen.get(i).getID() == piece.getID()){
+				HexsInPen.remove(i);
+				break;
+			}
+		}
 	}
 	
 }

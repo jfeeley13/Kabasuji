@@ -55,6 +55,7 @@ public class Board extends JPanel{
 	//replace tile with the hexomino being placed. Use this.tile.getBoard.level.getPieceFromID(ID) in mListener
 	public boolean addHex(int ID, Tile tile){
 
+		System.out.println("Got here");
 		Hexomino hex = level.getHexPieceFromID(ID);
 		
 		boolean allTilesEmpty=CheckTiles(tile, hex.getShape());
@@ -113,4 +114,8 @@ public class Board extends JPanel{
 		return coords; 
 	}
 	*/
+	public Tile[][] getBoardArray() {
+		return boardArray;
+		
+	}
 }

@@ -1,5 +1,6 @@
 package gameControllers;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
@@ -17,7 +18,13 @@ import views.Level;
 
 public class MListener extends MouseInputAdapter implements MouseListener{
 	Tile tile;
-	boolean pieceSelected=false;
+	boolean pieceSelected = false;
+	Hexomino selectedHex;
+	Color c = Color.blue;
+	Color oldColor[][] = new Color[12][12];
+	int ID = 1;
+	BullPen bp;
+	
 	public MListener(Tile tile){
 		this.tile=tile;
 	}
@@ -25,45 +32,84 @@ public class MListener extends MouseInputAdapter implements MouseListener{
 	public void mouseClicked(MouseEvent e) {
 		
 		//Code to show which tile is clicked on
-		if((tile.valid==1) && (this.tile.getBoard() instanceof Board)){
+		if((tile.valid==1) && (this.tile.getPanel() instanceof Board)){
+			pieceSelected = ((Board) this.tile.getPanel()).getLevel().isHexSel();
 			placePiece();
 		}
-		else if(tile.valid==1){
-			System.out.println("got here");
-			pieceSelected=true;	
+		else if(tile.valid==1 && tile instanceof HexTile){
+
+			((BullPen) this.tile.getPanel()).getLevel().setIfPieceSel(true);
+			pieceSelected = ((BullPen) this.tile.getPanel()).getLevel().isHexSel();
+			System.out.println(pieceSelected);
 			pickFromPen();
+			
 		}
 	}
 	public void placePiece(){
 		int x = this.tile.getCoords()[0];
 		int y = this.tile.getCoords()[1];
 
-		System.out.println("Row = " + x);
-		System.out.println("Col = " + y);
-		int ID = ((HexTile) this.tile).getAssocHexID();
-		((Board) this.tile.getBoard()).addHex(ID,this.tile);
-		pieceSelected=false;
-		((Board) this.tile.getBoard()).getLevel().setIfPieceSel(false);
+//		System.out.println("Row = " + x);
+//		System.out.println("Col = " + y);
+//		System.out.println(pieceSelected);
+		if(pieceSelected){
+			int test = ((Board) this.tile.getPanel()).getLevel().giveSelHex().getID();
+			ID = ((Board) this.tile.getPanel()).getLevel().giveSelHex().getID();
+			((Board) this.tile.getPanel()).addHex(ID,this.tile);
+			//Removes Hexomino
+			((Board) this.tile.getPanel()).getLevel().getBP().removeHex(selectedHex);
+			((Board) this.tile.getPanel()).getLevel().getBP().getPiece(0).setEnabled(false);
+			((Board) this.tile.getPanel()).getLevel().setIfPieceSel(false);
+			((Board) this.tile.getPanel()).getLevel().selectHexomino(null);
+			c = Color.blue;
+		}
 	}
 	
 	public void pickFromPen(){
-
-		int ID = ((HexTile) this.tile).getAssocHexID();
-		Hexomino selHex =((BullPen) this.tile.getBoard()).getLevel().getHexPieceFromID(ID);
-		((BullPen) this.tile.getBoard()).getLevel().selectHexomino(selHex);
-
-		((BullPen) this.tile.getBoard()).getLevel().setIfPieceSel(true);
-		
+		ID = ((HexTile) this.tile).getAssocHexID();
+		selectedHex =((BullPen) this.tile.getPanel()).getLevel().getHexPieceFromID(ID);
+//		System.out.print(ID);
+		bp = ((BullPen)this.tile.getPanel()).getLevel().getBP();
+//		((BullPen) this.tile.getPanel()).getLevel().selectHexomino(selectedHex);
 		
 	}
 	
+	
 	@Override
 	public void mouseEntered(MouseEvent e) {
+		c = this.tile.getBackground();
+		if (this.tile.getPanel() instanceof Board){
+			selectedHex = ((Board)this.tile.getPanel()).getLevel().giveSelHex();
+//			System.out.println(selectedHex.getID());
+			if(((Board)this.tile.getPanel()).getLevel().giveSelHex() != null){
+				Tile boardArray[][] = ((Board) this.tile.getPanel()).getBoardArray();
+				for (int i = 0; i < selectedHex.getCoordShape().length; i++){
+					int x=selectedHex.getShape()[i].getCoords()[0]+this.tile.getCoords()[0];
+					int y=selectedHex.getShape()[i].getCoords()[1]+this.tile.getCoords()[1];
+					System.out.println("x,y = " + x + " " + y);
+					oldColor[x][y] = boardArray[x][y].getBackground();
+					boardArray[x][y].setBackground(Color.GREEN);
+					//					this.tile.setBackground(Color.green);
+				}
+			}
+		}
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		
+		if (this.tile.getPanel() instanceof Board){
+			if(((Board)this.tile.getPanel()).getLevel().giveSelHex() != null){
+
+				Tile boardArray[][] = ((Board) this.tile.getPanel()).getBoardArray();
+				for (int i = 0; i < selectedHex.getCoordShape().length; i++){
+					int x=selectedHex.getShape()[i].getCoords()[0]+this.tile.getCoords()[0];
+					int y=selectedHex.getShape()[i].getCoords()[1]+this.tile.getCoords()[1];
+					System.out.println("x,y = " + x + " " + y);
+					boardArray[x][y].setBackground(oldColor[x][y]);				
+					this.tile.setBackground(c);
+				}
+			}
+		}
 	}
 
 	@Override

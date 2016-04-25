@@ -43,6 +43,7 @@ import javax.swing.Timer;
 
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.KeyEvent;
 
 
@@ -59,6 +60,7 @@ public class Level extends JPanel implements ActionListener{
 	boolean drawPiece=false;
 	ArrayList <Hexomino> HexList;
 	private  Hexomino selectedHex;
+	private BullPen bullPen;
 
 	/**
 	 * Launch the application.
@@ -111,6 +113,7 @@ public class Level extends JPanel implements ActionListener{
 			  int width = 27;
 			  int height = 27;
 			  Hexomino hex = selectedHex;
+//			  System.out.println(hex.getID());
 		  if(drawPiece){
 			  for (int i = 0; i < 6; i++){
 				 int wConst = hex.getCoordShape()[i][0];
@@ -259,10 +262,10 @@ public class Level extends JPanel implements ActionListener{
 			}
 		});
 		splitPane.setRightComponent(flipButton);
-		//bull pen initilize code goes in here
-		BullPen pen= new BullPen(this,new ArrayList<Hexomino>());
-		scrollPane.setViewportView(pen);
 		
+		//bull pen initilize code goes in here
+		bullPen= new BullPen(this,HexList);
+		scrollPane.setViewportView(bullPen);
 		//end of  bullpen initilize code
 		
 		JLabel lblNewLabel = new JLabel("Level:   ");
@@ -348,6 +351,7 @@ public class Level extends JPanel implements ActionListener{
 		hexList.add(h1);
 		hexList.add(h2);
 
+		selectedHex = h2;
 		return hexList;
 	}
 
@@ -367,10 +371,18 @@ public class Level extends JPanel implements ActionListener{
 		pieceSelected = isSel;
 	}
 	
+	public Hexomino giveSelHex(){
+		return selectedHex;
+	}
+	
+	public boolean isHexSel(){
+		return pieceSelected;
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		System.out.println("x: "+this.mouseX);
-		System.out.println("y: "+this.mouseY);
+//		System.out.println("x: "+this.mouseX);
+//		System.out.println("y: "+this.mouseY);
 		int x=this.mouseX;
 		int y=this.mouseY;
 			if(x>375 && pieceSelected==true){
@@ -381,7 +393,14 @@ public class Level extends JPanel implements ActionListener{
 			}
 		repaint();
 	}
+
+	public List<Hexomino> getHexList() {
+		return HexList;
+	}
 	
+	public BullPen getBP(){
+		return bullPen;
+	}
 
 
 }

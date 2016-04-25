@@ -34,7 +34,7 @@ public abstract class Tile extends JPanel{
 	 * 
 	 * @return True = Covered --- False = Not Covered
 	 */
-	public JPanel getBoard(){
+	public JPanel getPanel(){
 		return this.panel;
 	}
 	public boolean isCovered(){
