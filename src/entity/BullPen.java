@@ -66,11 +66,17 @@ public class BullPen extends BoardBoss{
 			for(int i=0; i<6;i++){
 				int x=hex.shape[i].row+tile.getCoords()[0];
 				int y=hex.shape[i].column+tile.getCoords()[1];
-				//System.out.println("The x and y are:" + x + y);
+				if(boardArray[x][y].getTileID()<100) return false;
+			}
+			
+			for(int i=0; i<6;i++){
+				int x=hex.shape[i].row+tile.getCoords()[0];
+				int y=hex.shape[i].column+tile.getCoords()[1];
 				boardArray[x][y].coverTile();
 				boardArray[x][y].setBackground(Color.BLUE);
-				hexPlaced.add(hex);
-				penPiece = true;
+				boardArray[x][y].isHighlight=false;
+				hexPlaced.add(selectedPiece);
+				selectedPiece=null;
 				boardArray[x][y].setTileID(tileID);
 			}
 
@@ -89,7 +95,7 @@ public class BullPen extends BoardBoss{
 			int x=hex.shape[i].row+tile.getCoords()[0];
 			int y=hex.shape[i].column+tile.getCoords()[1];
 			
-			if(boardArray[x][y].isCovered()==true){
+			if(boardArray[x][y].isCovered()==true && selectedPiece==null){
 				tileID = boardArray[x][y].getTileID();
 				System.out.println(tileID);
 				System.out.println("Selected Piece!");
@@ -100,7 +106,7 @@ public class BullPen extends BoardBoss{
 							//x=hex.shape[j].row+tile.getCoords()[0];
 							//y=hex.shape[j].column+tile.getCoords()[1];
 							boardArray[j][k].isCovered = false;
-							boardArray[j][k].isHighlight = false;
+
 							boardArray[j][k].setTileID(tileID+100);
 							boardArray[j][k].setBackground(Color.WHITE);
 						}
@@ -108,7 +114,7 @@ public class BullPen extends BoardBoss{
 				lifted = false;
 				penPiece = false;
 				
-				drawHex(tile,tile.getCoords()[0],tile.getCoords()[1], Color.GREEN);
+				drawHex(tile,x,y, Color.GREEN);
 				return false;
 			}
 
