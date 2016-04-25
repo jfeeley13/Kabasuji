@@ -24,8 +24,8 @@ public class Board extends BoardBoss{
 
 	protected int XOrigin;
 	protected int YOrigin;
-	protected int width = 12;
-	protected int height = 12;
+	int width;
+	int height;
 	protected int tileID;
 	protected int boardID = 1;
 
@@ -53,10 +53,14 @@ public class Board extends BoardBoss{
 	public boolean hasWon(){
 		for(int i = 0; i < width; i++){
 			for(Tile t : boardArray[i]){
-				if(!t.hasWon())
+				if(!t.hasWon()) {
+					
 					return true;
+				}
 			}
 		}
+		System.out.println("You win!");
+		winAnimation();
 		return false;
 	}
 	
@@ -73,6 +77,22 @@ public class Board extends BoardBoss{
 		Hexomino hex = new Hexomino(1, shape2);	
 	
 		boolean allTilesEmpty=CheckTiles(tile, shape2);
+		if(selectedPiece!=null & lifted) {
+			for(int i=0; i<width; i++) 
+				for(int j=0; j<height; j++) {
+					if(boardArray[i][j].isCovered) break;
+					if(boardArray[i][j].getBackground()==Color.GREEN) {
+						boardArray[i][j].coverTile();
+						boardArray[i][j].setBackground(Color.BLUE);
+						boardArray[i][j].isHighlight=false;
+						hexPlaced.add(selectedPiece);
+						selectedPiece=null;
+						boardArray[i][j].setTileID(tileID);
+					
+					}
+				}
+			}
+		/**
 		if(selectedPiece!=null && lifted ){
 			for(int i=0; i<6;i++){
 				int x=hex.shape[i].row+tile.getCoords()[0];
@@ -94,15 +114,19 @@ public class Board extends BoardBoss{
 			System.out.println("Piece Placed!");
 
 		}
+		**/
 		lifted = true;
+		hasWon();
 		return true;
 	}
 	public boolean CheckTiles(Tile tile,HexTile[] shape){
 		Hexomino hex = new Hexomino(1, shape);
 		for(int i=0; i<6;i++){
-			int x=hex.shape[i].row+tile.getCoords()[0];
-			int y=hex.shape[i].column+tile.getCoords()[1];
-		
+			//int x=hex.shape[i].row+tile.getCoords()[0];
+			//int y=hex.shape[i].column+tile.getCoords()[1];
+			int x=tile.getCoords()[0];
+			int y=tile.getCoords()[1];
+			
 			if(boardArray[x][y].isCovered()==true && selectedPiece==null){
 				tileID = boardArray[x][y].getTileID();
 				System.out.println(tileID);
@@ -115,7 +139,7 @@ public class Board extends BoardBoss{
 							boardArray[j][k].isCovered = false;
 
 							boardArray[j][k].setTileID(tileID+100);
-							boardArray[j][k].setBackground(Color.WHITE);
+							//boardArray[j][k].setBackground(Color.WHITE);
 						}
 				selectedPiece = hex;
 				lifted = false;
@@ -129,8 +153,9 @@ public class Board extends BoardBoss{
 	}
 	
 	public void drawHex(Tile tile, int posx, int posy, Color c) {
-
+		
 		for(int i=0; i<6;i++){
+			if(!borderCheck(tile)) posy=height-6;
 			int x = 0;
 			int y = 0;
 			switch(rotated) {
@@ -225,12 +250,33 @@ public class Board extends BoardBoss{
 
 		x=selectedPiece.shape[5].row+tile.getCoords()[0];
 		y=selectedPiece.shape[5].column+tile.getCoords()[1];
-		
+			
 		if(x<width && y<height) {
 			return true;
 		}
 		else
 			return false;
+	}
+	
+	public int returnHeight() {
+		return this.height;
+	}
+	
+	public Tile[][] returnBoard() {
+		return boardArray;
+	}
+	
+	public void winAnimation() {
+		int k=0;
+		Color[] colorList = new Color[3];
+		colorList[0] = Color.GREEN;
+		colorList[1] = Color.RED;
+		colorList[2] = Color.BLUE;
+		for(int i=0; i<width; i++) 
+			for(int j=0; j<height; j++) {
+				boardArray[i][j].setBackground(colorList[1]);
+				k=(k+1)%2;
+			}
 	}
 	/**
 	 * 

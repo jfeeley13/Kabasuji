@@ -332,8 +332,8 @@ public class Level{
 		
 		frame.getContentPane().setLayout(groupLayout);
 
-		int x = 12;
-		int y = 12;
+		int x = 6;
+		int y = 6;
 
 		board.setLayout(new GridLayout(y,x));
 		board.setPreferredSize(new Dimension(384,384));
@@ -348,7 +348,7 @@ public class Level{
 		for(int TileCol = 0; TileCol <y;TileCol++){
 			for(int TileRow = 0; TileRow <x;TileRow++){
 
-				PuzzleTile AddedTile = new PuzzleTile(board, TileRow,TileCol, 12, 12, 999);
+				PuzzleTile AddedTile = new PuzzleTile(board, TileRow,TileCol, x, y, 999);
 
 				AddedTile.setBackground(Color.WHITE);
 
@@ -375,7 +375,7 @@ public class Level{
 
 
 		
-		Border penTileBorder = BorderFactory.createLineBorder(Color.WHITE, 1);
+		Border penTileBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
 		
 		for(int TileRow = 0; TileRow <y;TileRow++){
 			for(int TileCol = 0; TileCol <x;TileCol++){
@@ -394,7 +394,11 @@ public class Level{
 		pen.makeBoard(penArray, x, y, 2);
 		pen.init = true;
 		pen.addHex(penArray[2][2], 1);
-		pen.addHex(penArray[4][4], 2);
+		pen.addHex(penArray[3][2], 2);
+		pen.addHex(penArray[4][2], 3);
+		pen.addHex(penArray[5][2], 4);
+		pen.addHex(penArray[6][2], 5);
+		pen.addHex(penArray[7][2], 6);
 		pen.init=false;
 		
 		

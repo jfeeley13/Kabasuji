@@ -172,6 +172,10 @@ public abstract class BoardBoss extends JPanel{
 		return this.height;
 	}
 	
+	public Tile[][] returnBoard() {
+		return boardArray;
+	}
+	
 	public boolean borderCheck(Tile tile) {
 		int x=0;
 		int y=0;

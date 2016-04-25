@@ -62,7 +62,7 @@ public class BullPen extends BoardBoss{
 	
 		boolean allTilesEmpty=CheckTiles(tile, shape2);
 		
-		if((selectedPiece!=null && lifted && !penPiece) || init){
+		if(init){
 			for(int i=0; i<6;i++){
 				int x=hex.shape[i].row+tile.getCoords()[0];
 				int y=hex.shape[i].column+tile.getCoords()[1];
@@ -83,7 +83,23 @@ public class BullPen extends BoardBoss{
 			System.out.println("Piece Placed!");
 
 		}
-		
+		else {
+			if((selectedPiece!=null && lifted && !penPiece)) {
+				for(int i=0; i<width; i++) 
+					for(int j=0; j<height; j++) {
+						if(boardArray[i][j].isCovered) break;
+						if(boardArray[i][j].getBackground()==Color.GREEN) {
+							boardArray[i][j].coverTile();
+							boardArray[i][j].setBackground(Color.BLUE);
+							boardArray[i][j].isHighlight=false;
+							hexPlaced.add(selectedPiece);
+							selectedPiece=null;
+							boardArray[i][j].setTileID(tileID);
+						
+						}
+					}
+				}
+		}
 
 		lifted = true;
 		return true;
@@ -92,8 +108,10 @@ public class BullPen extends BoardBoss{
 		Hexomino hex = new Hexomino(1, shape);
 		System.out.println("CHECKING");
 		for(int i=0; i<6;i++){
-			int x=hex.shape[i].row+tile.getCoords()[0];
-			int y=hex.shape[i].column+tile.getCoords()[1];
+			//int x=hex.shape[i].row+tile.getCoords()[0];
+			//int y=hex.shape[i].column+tile.getCoords()[1];
+			int x=tile.getCoords()[0];
+			int y=tile.getCoords()[1];
 			
 			if(boardArray[x][y].isCovered()==true && selectedPiece==null){
 				tileID = boardArray[x][y].getTileID();
@@ -126,7 +144,7 @@ public class BullPen extends BoardBoss{
 	}
 	
 	public void drawHex(Tile tile, int posx, int posy, Color c) {
-
+		if(!borderCheck(tile)) posy=height-6;
 		for(int i=0; i<6;i++){
 			int x = 0;
 			int y = 0;
@@ -231,8 +249,7 @@ public class BullPen extends BoardBoss{
 				y=selectedPiece.shape[5].row+tile.getCoords()[1];
 				break;
 		}
-		//System.out.println("x: " + x);
-		//System.out.println("y: " + y);
+
 		if(x>width-2 || y>height-2 || x<0 || y<0) return false;
 		return true;
 	}
@@ -240,8 +257,6 @@ public class BullPen extends BoardBoss{
 	public boolean borderCheck(Tile tile) {
 		int x=0;
 		int y=0;
-
-		//System.out.println(selectedPiece.shape[5].column);
 
 		x=selectedPiece.shape[5].row+tile.getCoords()[0];
 		y=selectedPiece.shape[5].column+tile.getCoords()[1];
@@ -266,6 +281,10 @@ public class BullPen extends BoardBoss{
 	
 	public int returnHeight() {
 		return this.height;
+	}
+	
+	public Tile[][] returnBoard() {
+		return boardArray;
 	}
 	/**
 	 * 

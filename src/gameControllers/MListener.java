@@ -65,6 +65,7 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 			}
 			ids.add(randint);
 		}
+		
 		this.tile.getBoard().addHex(this.tile, ids.get(ids.size()-1));
 		
 		
@@ -151,6 +152,7 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
     			lastGoodTile=this.tile;
     		}
     		else {
+    			
     			this.tile.getBoard().drawHex(this.tile, x, this.tile.getBoard().returnHeight()-6, Color.GREEN);
     			//lastGoodTile.getBoard().drawHex(lastGoodTile, x, y, Color.GREEN);
     		}

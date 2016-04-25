@@ -167,6 +167,10 @@ public class BoardPen extends BoardBoss{
 	public int returnHeight() {
 		return this.height;
 	}
+	
+	public Tile[][] returnBoard() {
+		return boardArray;
+	}
 	/**
 	 * 
 	 * @param x location of click in pixels

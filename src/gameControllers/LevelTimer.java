@@ -42,8 +42,6 @@ public class LevelTimer{
 	public LevelTimer(Tile tile, BoardBoss board){
 		this.tile=tile;
 		this.board = board;
-
-
 	}
 	
 	
