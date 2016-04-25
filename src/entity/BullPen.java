@@ -54,6 +54,7 @@ public class BullPen extends BoardBoss{
 	
 		boolean isOverPiece = false;
 		boolean allTilesEmpty=CheckTiles(tile, shape2);
+
 		if(init) {
 			for(int i=0; i<6;i++){
 				int x=hex.shape[i].row+tile.getCoords()[0];
@@ -78,15 +79,16 @@ public class BullPen extends BoardBoss{
 		
 		if(isOverPiece) return false;
 		if(init){
-			for(int i=0; i<6;i++){
-				int x=hex.shape[i].row+tile.getCoords()[0];
-				int y=hex.shape[i].column+tile.getCoords()[1];
-				if(boardArray[x][y].getTileID()<100) return false;
-			}
+			//for(int i=0; i<6;i++){
+			//	int x=hex.shape[i].row+tile.getCoords()[0];
+			//	int y=hex.shape[i].column+tile.getCoords()[1];
+			//	if(boardArray[x][y].getTileID()<100) return false;
+			//}
 			
 			for(int i=0; i<6;i++){
 				int x=hex.shape[i].row+tile.getCoords()[0];
 				int y=hex.shape[i].column+tile.getCoords()[1];
+				System.out.println("x: " + x + ", " + "y: " + y);
 				boardArray[x][y].coverTile();
 				boardArray[x][y].setBackground(Color.BLUE);
 				boardArray[x][y].isHighlight=false;
@@ -273,9 +275,10 @@ public class BullPen extends BoardBoss{
 		int x=0;
 		int y=0;
 
+		try {
 		x=selectedPiece.shape[5].row+tile.getCoords()[0];
 		y=selectedPiece.shape[5].column+tile.getCoords()[1];
-		
+		} catch (Exception e) {}
 		if(x<width && y<height) {
 			return true;
 		}
