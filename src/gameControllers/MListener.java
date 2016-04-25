@@ -97,6 +97,7 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 	public void mouseWheelMoved(MouseWheelEvent e) {
 	       String message;
 	       int notches = e.getWheelRotation();
+	       /**
 	       if(this.tile.getBoard().getID()==2){
 	    	   if (notches < 0) {
 	    		   this.tile.getBoard().rotated = (this.tile.getBoard().rotated % 4) + 1;
@@ -130,6 +131,7 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 	           
 	    	   }
 	       }
+	       **/
 	}
 	
     public void mouseMoved(MouseEvent e) {
