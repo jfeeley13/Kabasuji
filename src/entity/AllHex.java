@@ -29,7 +29,7 @@ public class AllHex {
 //	protected Hexomino h1 = new Hexomino(1, shape1);		
 //	protected Hexomino h2 = new Hexomino(2, shape2);
 
-	private HashMap<Integer, Hexomino> hexList = new HashMap<Integer, Hexomino>();
+/*	private HashMap<Integer, Hexomino> hexList = new HashMap<Integer, Hexomino>();
 	
 	public Hexomino getHex(int ID) {
 		Hexomino hex = null;
@@ -51,5 +51,5 @@ public class AllHex {
 	public static Hexomino h1 = new Hexomino(1, shape1);		
 	public static Hexomino h2 = new Hexomino(2, shape2);
 	
-
-}*/
+*/
+}

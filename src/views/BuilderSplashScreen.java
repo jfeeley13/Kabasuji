@@ -46,7 +46,8 @@ public class BuilderSplashScreen {
 			            public void actionPerformed(ActionEvent e) {
 
 			            	BuildStart build = new BuildStart();
-			            	window.frame.dispose();
+			            	build.openWindow();
+							window.frame.dispose();
 							((Timer)e.getSource()).stop();
 							
 			            }

@@ -1,5 +1,7 @@
 package entity;
 
+import views.Level;
+
 public class LevelBuilder implements IMove{
 
 	protected Level level;

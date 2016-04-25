@@ -15,15 +15,17 @@ public abstract class Tile extends JPanel{
 	protected boolean isCovered = false;
 	protected int width = 32;
 	protected int height = 32;
+	public int valid=1;
 	protected boolean isNull = false;
-	Board board;
-	private RowColumn rowCol;
+	JPanel panel;//the panel that the tile is on. Eitherboard or bullpen
 	
 	
-	public Tile (Board board, RowColumn rowcol){
-		this.rowCol = rowCol;
-		this.board = board; 
+	public Tile (JPanel panel, int row, int column){
+		this.row = row;
+		this.column = column;
+		this.panel=panel;
 		this.addMouseListener(new MListener(this));
+		
 	}
 
 	/**
@@ -32,62 +34,53 @@ public abstract class Tile extends JPanel{
 	 * 
 	 * @return True = Covered --- False = Not Covered
 	 */
-	public Board getBoard(){
-		return this.board;
+	public JPanel getBoard(){
+		return this.panel;
 	}
-	
+	public boolean isCovered(){
+		return isCovered;
+	}
 	
 	public void coverTile(){
 		this.isCovered = true;
 	}
 	
 	/**
-=======
-public abstract class Tile {
-	private RowColumn rowCol;
-	private boolean isCovered;
-	private int width = 32;
-	private int height = 32;
-	private boolean isNull = false;
-	
-	
-	public Tile (RowColumn rowCol){
-		this.rowCol = rowCol;
-	}
-
-	/**
 	 * Toggles tile from null to not null
 	 * Used in level editor only
-	 * @return 
 	 */
-	
-	public abstract boolean hasWon();
 	
 	public void toggleTile(){
 		this.isNull = !this.isNull;
 	}
-
-	public RowColumn getRowCol() {
-		return rowCol;
+	
+	
+	/**
+	 * 
+	 * Determines if tile is null or not
+	 * 
+	 * @return True = Null --- False = Not Null
+	 */
+	
+	public boolean isNull(){
+		return isNull;
 	}
-
-	public void setRowCol(RowColumn rowCol) {
-		this.rowCol = rowCol;
-	}
-
-	public boolean isCovered() {
-		return isCovered;
-	}
-
-	public int getWidth() {
+	
+	/**
+	 * 
+	 * @return Width of tile in Pixels
+	 * 
+	 */
+	public int getTileWidth(){
 		return width;
 	}
 
-	public void setWidth(int width) {
-		this.width = width;
-	}
-
-	public int getHeight() {
+	/**
+	 * 
+	 * @return Height of tile in Pixels
+	 * 
+	 */
+	public int getTileHeight(){
 		return height;
 	}
 	
@@ -97,28 +90,10 @@ public abstract class Tile {
 	 * 
 	 * @return (Row, Column) Coordinates of Selected Tile
 	 */
-	public RowColumn getCoords(){
-		RowColumn coords = new RowColumn(row , column);
+	public int[] getCoords(){
+		int coords[] = {row , column};
 		return coords;
 	}
-
-	public void setHeight(int height) {
-		this.height = height;
-	}
-
-	public boolean isNull() {
-		return isNull;
-	}
-
-	public void setNull(boolean isNull) {
-		this.isNull = isNull;
-	}
-
-	public void setCovered(boolean isCovered) {
-		this.isCovered = isCovered;
-	}
-	
-
 }
 
 

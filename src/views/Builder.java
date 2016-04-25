@@ -1,28 +1,17 @@
 package views;
 
-import gameControllers.SaveController;
-
 import java.awt.Dimension;
 import java.awt.EventQueue;
-import java.awt.Point;
-import java.awt.Rectangle;
-
 import javax.swing.JFrame;
 import javax.swing.JToolBar;
-
-import java.awt.BorderLayout;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
-import javax.swing.JViewport;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JSpinner;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
-import javax.swing.JToggleButton;
-import javax.swing.JTable;
-
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -33,56 +22,29 @@ import javax.swing.JTextField;
 
 import java.awt.Font;
 
-import javax.swing.UIManager;
 import javax.swing.SwingConstants;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
-import javax.swing.table.DefaultTableModel;
-
 import java.awt.Color;
 
-import javax.swing.border.LineBorder;
 import javax.swing.SpinnerNumberModel;
 
 
-public class Builder extends JFrame implements MouseListener{
-//
-//	private JFrame frame;
+public class Builder implements MouseListener{
+
+	private JFrame frame;
 	private JTextField txtGame;
 	private JTextField textField;
 	private JTextField textField_1;
 	static String gameType;
-	PieceView piecesView;
-	BoardView boardView;
-	static int row;
-	static int col;
+	int row;
+	int col;
 
-//	/**
-//	 * Launch the application.
-//	 */
-//	public static void openBuildWindow(String type) {
-//		gameType= type;
-//		
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					Builder window = new Builder();
-//					window.frame.setLocationRelativeTo(null);
-//					window.frame.setVisible(true);
-//					window.frame.setResizable(false);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
 	/**
 	 * Launch the application.
-	
-	public static void openBuildWindow(String type, int rows, int cols) {
+	 */
+	public static void openBuildWindow(String type) {
 		gameType= type;
-		row = rows;
-		col = cols;
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -97,15 +59,11 @@ public class Builder extends JFrame implements MouseListener{
 			}
 		});
 	}
- */
 
 	/**
 	 * Create the application.
 	 */
-	public Builder(String type, int rows, int cols) {
-		gameType = type;
-		row = rows;
-		col = cols;
+	public Builder() {
 		initialize();
 	}
 
@@ -113,11 +71,12 @@ public class Builder extends JFrame implements MouseListener{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		//frame = new JFrame();
+		frame = new JFrame();
 		Color myColor = Color.decode("#4169aa");
-		getContentPane().setBackground(myColor);
-		setBounds(100, 100, 760, 550);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setBackground(myColor);
+		frame.setBounds(100, 100, 760, 550);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		
 		JToolBar toolBar = new JToolBar();
 		Color myToolbarColor = Color.decode("#4b89d0");
@@ -127,19 +86,16 @@ public class Builder extends JFrame implements MouseListener{
 		JLabel lblBoardSize = new JLabel("Board Size:");	
 		lblBoardSize.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		final JSpinner spinner = new JSpinner();	//col spinner
+		final JSpinner spinner = new JSpinner();	//row spinner
 		spinner.setModel(new SpinnerNumberModel(6, 1, 12, 1));
-		spinner.setValue(col);
-		 col = (Integer) spinner.getValue();
-		 
+		spinner.setValue(6);
+		
 		JLabel lblX = new JLabel("x");
 		lblX.setHorizontalAlignment(SwingConstants.LEFT);
 		
-		final JSpinner spinner_1 = new JSpinner();	//row spinner
+		final JSpinner spinner_1 = new JSpinner();	//column spinner
 		spinner_1.setModel(new SpinnerNumberModel(6, 1, 12, 1));
-		spinner_1.setValue(row);
-		row = (Integer) spinner_1.getValue();
-
+		spinner_1.setValue(6);
 		
 		final JComboBox levelComboBox = new JComboBox();	//select which level to create
 		levelComboBox.addItem("Puzzle Level");
@@ -172,7 +128,10 @@ public class Builder extends JFrame implements MouseListener{
 		}
 		else{
 			btnGenerate.setVisible(false);
-		}	
+		}
+		row = 6;
+		col = 6;
+		
 		
 		JButton btnUndo = new JButton("Undo");
 		btnUndo.addActionListener(new ActionListener() {
@@ -185,6 +144,8 @@ public class Builder extends JFrame implements MouseListener{
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
+		
+		
 		
 		JScrollPane bullPin = new JScrollPane();
 		bullPin.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -202,32 +163,23 @@ public class Builder extends JFrame implements MouseListener{
 		
 		
 		JButton btnSave = new JButton("Save");
-
+		
 		JButton btnExit = new JButton("Exit");
-		btnExit.addActionListener(new SaveController(this));
-
-		/*btnExit.addActionListener(new ActionListener() {
+		btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				BuildStart nw = new BuildStart();
-				setVisible(false);
-				//nw.openWindow();
-				SaveMenu nw = new SaveMenu();
-				//frame.dispose();
-				nw.setVisible(true);
-							
+				frame.dispose();
+				nw.openWindow();
+				
 			}
 		});
-		*/
 		
 		JButton btnCreate = new JButton("Create");
-		//TODO: this needs a controller
 		btnCreate.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				row = (Integer) spinner_1.getValue();
-				col = (Integer) spinner.getValue();
-				Builder nw = new Builder(levelComboBox.getSelectedItem().toString(), row, col);
-				nw.setVisible(false);
-				//nw.openBuildWindow(levelComboBox.getSelectedItem().toString(), row, col);
+			public void actionPerformed(ActionEvent arg0) {
+				 col = (Integer) spinner.getValue();
+				 row = (Integer) spinner_1.getValue();
+				
 			}
 		});
 		
@@ -242,7 +194,6 @@ public class Builder extends JFrame implements MouseListener{
 		JLabel lblBullPin = new JLabel("Bull Pen:");
 		
 		JPanel board = new JPanel();
-		boardView = new BoardView(row-1,col-1);
 		
 		JSpinner spinner_2 = new JSpinner();
 		spinner_2.setModel(new SpinnerNumberModel(1, 1, 6, 1));
@@ -259,26 +210,19 @@ public class Builder extends JFrame implements MouseListener{
 		JButton btnChangeLevel = new JButton("New Level");
 		btnChangeLevel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//frame.dispose();
+				Builder nw = new Builder();
+				frame.dispose();
 				String newType = levelComboBox.getItemAt(0).toString();
-
-				Builder nw = new Builder(levelComboBox.getSelectedItem().toString(), row, col);
-				nw.setVisible(true);
-
-				//nw.openBuildWindow(levelComboBox.getSelectedItem().toString(), row, col);
+				nw.openBuildWindow(levelComboBox.getSelectedItem().toString());
 			}
 		});
 		
 		JLabel lblRightClickTo = new JLabel("Right click to add/delete tile");
 		lblRightClickTo.setFont(new Font("Lucida Grande", Font.ITALIC, 13));
 		
+		JLabel label_3 = new JLabel("<--Board");
 		
-		GroupLayout groupLayout = new GroupLayout(getContentPane());
-		groupLayout.setAutoCreateGaps(false);
-		groupLayout.setAutoCreateContainerGaps(false); // Problem code
-
-		
-		//GroupLayout groupLayout = new GroupLayout(getContentPane());
+		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
@@ -315,8 +259,9 @@ public class Builder extends JFrame implements MouseListener{
 									.addGap(77))
 								.addComponent(inventory, GroupLayout.PREFERRED_SIZE, 575, GroupLayout.PREFERRED_SIZE)
 								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(boardView, GroupLayout.PREFERRED_SIZE, 520, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED, 12, Short.MAX_VALUE))
+									.addComponent(board, GroupLayout.PREFERRED_SIZE, 520, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+									.addComponent(label_3))
 								.addGroup(groupLayout.createSequentialGroup()
 									.addGap(6)
 									.addComponent(lblPressFFor)))
@@ -391,9 +336,12 @@ public class Builder extends JFrame implements MouseListener{
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addGroup(groupLayout.createSequentialGroup()
 									.addGap(11)
-									.addComponent(boardView, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)
+									.addComponent(board, GroupLayout.PREFERRED_SIZE, 225, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(lblInventory)))
+									.addComponent(lblInventory))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(95)
+									.addComponent(label_3)))
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(inventory, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
@@ -414,10 +362,9 @@ public class Builder extends JFrame implements MouseListener{
 		splitPane_2.setRightComponent(button_2);
 		button_2.setPreferredSize(new Dimension(27, 10));	
 		
-		//JPanel panel = new JPanel();
-		piecesView = new PieceView(1);
-		inventory.setViewportView(piecesView);
-		GroupLayout gl_panel = new GroupLayout(piecesView);
+		JPanel panel = new JPanel();
+		inventory.setViewportView(panel);
+		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGap(0, 540, Short.MAX_VALUE)
@@ -426,7 +373,7 @@ public class Builder extends JFrame implements MouseListener{
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGap(0, 90, Short.MAX_VALUE)
 		);
-		piecesView.setLayout(gl_panel);
+		panel.setLayout(gl_panel);
 
 
 		
@@ -451,9 +398,8 @@ public class Builder extends JFrame implements MouseListener{
 		splitPane.setRightComponent(flipButton);
 		flipButton.setPreferredSize(new Dimension(40, 20));	
 		
-		//JPanel panel_1 = new JPanel();
-		piecesView = new PieceView(1);
-		bullPin.setViewportView(piecesView);
+		JPanel panel_1 = new JPanel();
+		bullPin.setViewportView(panel_1);
 
 		
 		JLabel lblLevelName = new JLabel("Level Name:");
@@ -512,9 +458,9 @@ public class Builder extends JFrame implements MouseListener{
 		
 		lblLevelBuilder.setFont(new Font("Lucida Grande", Font.BOLD, 18));
 		toolBar.add(lblLevelBuilder);
-//		groupLayout.setAutoCreateGaps(true);
-//		groupLayout.setAutoCreateContainerGaps(true);
-		getContentPane().setLayout(groupLayout);
+		groupLayout.setAutoCreateGaps(true);
+		groupLayout.setAutoCreateContainerGaps(true);
+		frame.getContentPane().setLayout(groupLayout);
 
 		
 		/**Mouse Listener*/
@@ -559,8 +505,8 @@ public class Builder extends JFrame implements MouseListener{
 		
 	}
 
-	public void quit(Builder parentView) {
-		parentView.setVisible(false);
+	public void setVisible(boolean b) {
+		// TODO Auto-generated method stub
 		
 	}
 }

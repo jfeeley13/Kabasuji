@@ -12,10 +12,10 @@ public class CreateNewLevelController {
 	
 	public void process() {
 		
-		parent.setVisible(false);
-		parent.dispose();
+//		parent.setVisible(false);
+//		parent.dispose();
 		
-		Builder newBuilderWindow = new Builder("Puzzle Level", 6, 6);
+		Builder newBuilderWindow = new Builder();
 		 
 		 //frame.dispose();													//closes current window
 		// newBuilderWindow.openBuildWindow();

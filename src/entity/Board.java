@@ -1,57 +1,42 @@
 package entity;
 
 import java.util.List;
+
 import javax.swing.JPanel;
+
+import views.Level;
+
 import java.awt.Color;
 import java.awt.Point;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Board extends JPanel{
 	
-	/** List of Hexominos*/
-	
-	HexTile[] shape1 = {new HexTile(this, new RowColumn(0,0)),new HexTile(this, new RowColumn(0,-1)),new HexTile(this,new RowColumn(0,-2)),new HexTile(this,new RowColumn(0,-3)),new HexTile(this,new RowColumn(0,-4)),new HexTile(this,new RowColumn(0,-5))};
-	HexTile[] shape2 = {new HexTile(this, new RowColumn(0,0)),new HexTile(this, new RowColumn(0,-1)),new HexTile(this,new RowColumn(0,-2)),new HexTile(this,new RowColumn(0,-3)),new HexTile(this,new RowColumn(0,-4)),new HexTile(this,new RowColumn(1,0))};
-
-	AllHex hexList = new AllHex();
-	
-	
-	public Board(){
-		hexList.makeHex((Integer) 1,shape1);
-		hexList.makeHex((Integer)2,shape2);
-	}
-	
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 	protected Tile boardArray[][];
-//	protected Hexomino hexPlaced[] = new Hexomino[];
 	List<Hexomino> hexPlaced = new ArrayList<Hexomino>();
 	protected int XOrigin;
 	protected int YOrigin;
-	AllHex HexList;
+	public Level level;
 	
-	public void makeBoard(Tile[][] boardArray){
+	public Board(){
+	}
+	public void makeBoard(Level level,Tile[][] boardArray){
+		this.level=level;
 		this.boardArray = boardArray;
 	}
 
+	public Level getLevel(){
+		return level;
+	}
+	
 	public int[] getTopLeft(){
 		int[] origin = {XOrigin, YOrigin};
 		return origin;
 	}
-
-	protected HashMap<RowColumn, Tile> tileBoard;
-	//protected Hexomino hexPlaced[];
-	RowColumn origin;
-	int maxRow, maxCol;
-	
-	
-	public Board(HashMap<RowColumn, Tile>  tileBoard, int maxRow, int maxCol){
-		this.tileBoard = tileBoard;
-		this.maxCol = maxCol;
-		this.maxRow = maxRow;
-		origin = new RowColumn(0, 0);
-	}
-
 	
 	public boolean checkCollision(Hexomino reqHex){
 		return false;
@@ -67,29 +52,35 @@ public class Board extends JPanel{
 	 * @param Requested hexomino to be added
 	 * @return True if heomino was added, false if hexomino doesn't exist
 	 */
-	
-	public boolean addHex(Hexomino hex, Tile tile){
-		hexPlaced.add(hex);
-		int tileX = tile.getCoords().getColumn();
-		int tileY = tile.getCoords().getRow();
-		RowColumn coordList[] = hex.getCoordShape();
-		
-		for(int hexTileNum = 0; hexTileNum <= coordList.length; hexTileNum++){
-			int row = coordList[hexTileNum].getRow();
-			int col = coordList[hexTileNum].getColumn();
-			
-			coordList[hexTileNum] = new RowColumn(row+tileX, col+tileY);
-		}
-		
-		for(int hexTileNum = 0; hexTileNum <= coordList.length; hexTileNum++){
-			int row = coordList[hexTileNum].getRow();
-			int col = coordList[hexTileNum].getColumn();
+	//replace tile with the hexomino being placed. Use this.tile.getBoard.level.getPieceFromID(ID) in mListener
+	public boolean addHex(int ID, Tile tile){
 
-			boardArray[row][col].coverTile();
-			boardArray[row][col].setBackground(Color.BLUE);
-		}
+		Hexomino hex = level.getHexPieceFromID(ID);
 		
+		boolean allTilesEmpty=CheckTiles(tile, hex.getShape());
+		if(allTilesEmpty){
+			for(int i=0; i<6;i++){
+				int x=hex.shape[i].row+tile.getCoords()[0];
+				int y=hex.shape[i].column+tile.getCoords()[1];
+				boardArray[x][y].coverTile();
+				boardArray[x][y].setBackground(Color.BLUE);
+				hexPlaced.add(hex);
+			}
+		}
 		return true;
+	}
+	public boolean CheckTiles(Tile tile,HexTile[] shape){
+		Hexomino hex = new Hexomino(1, shape);
+		for(int i=0; i<6;i++){
+			int x=hex.shape[i].row+tile.getCoords()[0];
+			int y=hex.shape[i].column+tile.getCoords()[1];
+			if(boardArray[x][y].isCovered()==true){
+				System.out.println("can't place piece here");
+				return false;
+			}	
+		}
+		return true;
+
 	}
 	/**
 	 * 
@@ -102,7 +93,6 @@ public class Board extends JPanel{
 		boolean isValid = true;
 		return isValid;
 	}
-
 	/**
 	 * 
 	 * @param x location of click in pixels
@@ -116,26 +106,11 @@ public class Board extends JPanel{
 		int tCol = (x-XOrigin)/tileBoard[0].getTileHeight();
 		int tile = 0; //Placeholder value
 		return tileBoard[tile];
-	public Tile getTile(RowColumn key){
-		return tileBoard.get(key);
 	}
-	public void editTile(RowColumn key,Tile newTile){
-		tileBoard.put(key, newTile);
+	//Can throw NullTileException
+	public Point getTopLeftOfTile(Tile tile){
+		Point coords = new Point(0, 0);
+		return coords; 
 	}
 	*/
-
-	public void removeTile(RowColumn key){
-		tileBoard.remove(key);
-	}
-	
-	public boolean hasWon(){
-		TileIterator boardIterator = new TileIterator(tileBoard, maxRow, maxCol);
-		while(boardIterator.hasNext()){
-			Tile t = boardIterator.next();
-			if(t.hasWon() || t.isCovered())
-				return false;
-		}
-		return true;
-	}
-	
 }

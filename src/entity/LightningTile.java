@@ -2,20 +2,16 @@ package entity;
 
 public class LightningTile extends Tile{
 
-	protected boolean marked; //marked is isCovered in Tile superclass, so this is not needed right?
+	protected boolean marked;
 	
-	public LightningTile(Board board, RowColumn rowCol) {
-		super(board, rowCol);
-		marked = false;
+	public LightningTile(Board board, int row, int column) {
+		super(board, row, column);
 	}
 	
 	public void markTile(){
-		marked = true;
+		
 	}
 
-	@Override
-	public boolean hasWon() {
-		return marked;
-	}
+	
 	
 }

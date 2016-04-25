@@ -15,7 +15,7 @@ public class Level {
 	}
 	
 	public void initializeLevel(){
-	
+		
 	}
 	
 	public boolean levelComplete(){

@@ -5,13 +5,9 @@ public class PuzzleTile extends Tile{
 	protected int row;
 	protected int column;
 	
-	public PuzzleTile(Board board, RowColumn rowCol) {
-		super(board, rowCol);
+	public PuzzleTile(Board board, int row, int column) {
+		super(board, row, column);
 	}
-
-	@Override
-	public boolean hasWon() {
-		return this.isCovered();
-	}
+	
 	
 }

@@ -1,27 +1,21 @@
 package entity;
 
+import javax.swing.JPanel;
+
 public class HexTile extends Tile{
 
-
-	public HexTile(Board board, RowColumn rowCol) {
-		super(board, rowCol);
-
+	public int belongsTo;
+	public HexTile(int belongsTo,JPanel panel, int row, int column) {
+		super(panel, row, column);
+		this.belongsTo=belongsTo;
 	}
 	
 	public void changeLocation(int newRow, int newCol){
-		RowColumn newRowCol = new RowColumn(newRow, newCol);
-		this.setRowCol(newRowCol); 
-	}
-
-	@Override
-	public boolean isCovered() {
-		return false;
-	}
-
-	@Override
-	public boolean hasWon() {
-		return false;
+		row = newRow;
+		column = newCol;
 	}
 	
-	
+	public int getAssocHexID(){
+		return belongsTo;
+	}
 }

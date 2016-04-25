@@ -38,7 +38,7 @@ public class SplashScreen {
 					window.frame.setLocationRelativeTo(null);
 					window.frame.setVisible(true);
 					window.frame.setResizable(false);
-					Timer timer = new Timer(5000, new ActionListener() {
+					Timer timer = new Timer(50, new ActionListener() {//TODO Change back to 5000
 						
 			            @Override
 			            public void actionPerformed(ActionEvent e) {

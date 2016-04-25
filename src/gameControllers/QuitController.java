@@ -19,7 +19,7 @@ public class QuitController implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		sm.setVisible(false);
-		parentView.quit(parentView);
+//		parentView.quit(parentView);
 
 	}
 
