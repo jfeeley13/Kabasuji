@@ -21,6 +21,7 @@ import entity.BoardBoss;
 import entity.BullPen;
 import entity.Hexomino;
 import entity.Tile;
+import views.Level;
 
 
 public class MListener extends MouseInputAdapter implements MouseListener, MouseMotionListener, MouseWheelListener{
@@ -66,6 +67,7 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 			ids.add(randint);
 		}
 		System.out.println("Piece id: " + ids.get(ids.size()-1));
+		
 		
 		this.tile.getBoard().addHex(this.tile, ids.get(ids.size()-1));
 		

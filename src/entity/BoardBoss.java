@@ -27,6 +27,7 @@ public abstract class BoardBoss extends JPanel{
 	protected int tileID;
 	protected int boardID;
 	public static int rotated = 1;
+	public static int moves = 8;
 
 	
 	public void makeBoard(Tile[][] boardArray, int width, int height, int id){

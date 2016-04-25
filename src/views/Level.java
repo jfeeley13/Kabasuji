@@ -476,10 +476,20 @@ public class Level{
 	public void setLabel() {
 		if (gameType == "Lightning Level") {
 			label.setText(levelTime/2+"");
-		if(levelTime==0) {
-			GameOver hs = new GameOver();
-			hs.newwindow();
+			if(levelTime==0) {
+				GameOver hs = new GameOver();
+				hs.newwindow();
+			}
 		}
+		
+		if (gameType == "Puzzle Level") {
+			if(BoardBoss.moves>=0)
+				label.setText(BoardBoss.moves+"");
+			if(BoardBoss.moves==0) {
+				GameOver hs = new GameOver();
+				hs.newwindow();
+				BoardBoss.moves=-1;
+			}
 		}
 	}
 }

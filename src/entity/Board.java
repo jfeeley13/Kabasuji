@@ -106,7 +106,7 @@ public class Board extends BoardBoss{
 					}
 				}
 			}
-
+		BoardBoss.moves-=1;
 		lifted = true;
 		hasWon();
 		return true;
