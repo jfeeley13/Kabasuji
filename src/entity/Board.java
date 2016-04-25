@@ -6,6 +6,8 @@ import java.util.List;
 import javax.swing.JPanel;
 
 import gameControllers.MListener;
+import views.GameOver;
+import views.YouWin;
 
 import java.awt.Color;
 import java.awt.Point;
@@ -51,6 +53,8 @@ public class Board extends BoardBoss{
 			}
 		}
 		System.out.println("You win!");
+		YouWin hs = new YouWin();
+		hs.newwindow();
 		winAnimation();
 		return false;
 	}
