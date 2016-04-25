@@ -47,9 +47,10 @@ public class SaveMenu extends JFrame {
 		lblAreYouSure.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JButton btnSave = new JButton("Save");
+		btnSave.addActionListener(new QuitController(this, parentView, true));
 		
 		JButton btnExit = new JButton("Exit");
-		btnExit.addActionListener(new QuitController(this, parentView));
+		btnExit.addActionListener(new QuitController(this, parentView, false));
 
 		/*btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

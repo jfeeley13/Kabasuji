@@ -551,6 +551,8 @@ public class Builder extends JFrame implements MouseListener{
 	}
 
 	public void quit(Builder parentView) {
-		parentView.setVisible(false);	
+		//parentView.setVisible(false);	
+		BuildStart bs = new BuildStart();
+		bs.setVisible(true);
 	}
 }
