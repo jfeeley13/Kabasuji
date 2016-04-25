@@ -17,7 +17,7 @@ public abstract class Tile extends JPanel{
 	protected int height;
 	protected boolean isNull = false;
 	protected int tileID;
-	BoardBoss board=new Board();
+	BoardBoss board;
 	protected boolean isHighlight = false;
 	
 	

@@ -5,23 +5,20 @@ public class Level {
 	protected int lvlID;
 	protected boolean locked;
 	protected int starsAcheived;
-	protected BoardBoss board;
+	protected Board board;
 	protected BullPen pen;
 	
-	public Level(int lvlID, BullPen pen, BoardBoss board){
+	public Level(int lvlID, BullPen pen){
 		this.lvlID = lvlID;
 		this.pen = pen;
-		this.board = board;
 	}
 	
 	public void initializeLevel(){
-		
+		this.board = new Board();
 	}
 	
 	public boolean levelComplete(){
-//	Can return false for losing and true for winning
-//	Use another method to deal with result of this method?
-		return false;
+		return board.hasWon();
 	}
 	
 	
