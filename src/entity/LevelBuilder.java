@@ -58,7 +58,7 @@ public class LevelBuilder{
 
 	/**
 	 * Changes the number of rows and columns that the board contains.
-	 * @param rows
+	 * @param rows a
 	 * @param columns
 	 */
 	public void setBoardDimensions(int rows, int columns){
