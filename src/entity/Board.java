@@ -106,29 +106,7 @@ public class Board extends BoardBoss{
 					}
 				}
 			}
-		/**
-		if(selectedPiece!=null && lifted ){
-			for(int i=0; i<6;i++){
-				int x=hex.shape[i].row+tile.getCoords()[0];
-				int y=hex.shape[i].column+tile.getCoords()[1];
-				if(boardArray[x][y].getTileID()<100) return false;
-			}
-			
-			for(int i=0; i<6;i++){
-				int x=hex.shape[i].row+tile.getCoords()[0];
-				int y=hex.shape[i].column+tile.getCoords()[1];
-				boardArray[x][y].coverTile();
-				boardArray[x][y].setBackground(Color.BLUE);
-				boardArray[x][y].isHighlight=false;
-				hexPlaced.add(selectedPiece);
-				selectedPiece=null;
-				boardArray[x][y].setTileID(tileID);
-			}
 
-			System.out.println("Piece Placed!");
-
-		}
-		**/
 		lifted = true;
 		hasWon();
 		return true;
