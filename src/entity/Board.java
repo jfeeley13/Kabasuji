@@ -89,9 +89,10 @@ public class Board extends BoardBoss{
 			for(int k=0; k<6;k++){
 				int x=hex.shape[k].row+tile.getCoords()[0];
 				int y=hex.shape[k].column+tile.getCoords()[1];
+				if(!borderCheck(tile)) y=height-6;
 				try {
 					if(boardArray[x][y].isCovered()) {
-						System.out.println("4");
+
 						return false;
 					}
 				} catch (NullPointerException e) {}
