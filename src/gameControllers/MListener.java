@@ -18,7 +18,6 @@ import views.Level;
 
 public class MListener extends MouseInputAdapter implements MouseListener{
 	Tile tile;
-	boolean pieceSelected = false;
 	Hexomino selectedHex;
 	Color c = Color.blue;
 	Color oldColor[][] = new Color[12][12];
@@ -32,15 +31,13 @@ public class MListener extends MouseInputAdapter implements MouseListener{
 	public void mouseClicked(MouseEvent e) {
 		
 		//Code to show which tile is clicked on
-		if((tile.valid==1) && (this.tile.getPanel() instanceof Board)){
-			pieceSelected = ((Board) this.tile.getPanel()).getLevel().isHexSel();
+		if((tile.valid==1) && (this.tile.getPanel() instanceof Board) && ((Board) this.tile.getPanel()).getLevel().isHexSel()==true){
 			placePiece();
 		}
 		else if(tile.valid==1 && tile instanceof HexTile){
 
 			((BullPen) this.tile.getPanel()).getLevel().setIfPieceSel(true);
-			pieceSelected = ((BullPen) this.tile.getPanel()).getLevel().isHexSel();
-			System.out.println(pieceSelected);
+			//((BullPen) this.tile.getPanel()).getLevel().isHexSel();
 			pickFromPen();
 			
 		}
@@ -52,13 +49,13 @@ public class MListener extends MouseInputAdapter implements MouseListener{
 //		System.out.println("Row = " + x);
 //		System.out.println("Col = " + y);
 //		System.out.println(pieceSelected);
-		if(pieceSelected){
+		if(true){
 			int test = ((Board) this.tile.getPanel()).getLevel().giveSelHex().getID();
 			ID = ((Board) this.tile.getPanel()).getLevel().giveSelHex().getID();
 			((Board) this.tile.getPanel()).addHex(ID,this.tile);
 			//Removes Hexomino
 			((Board) this.tile.getPanel()).getLevel().getBP().removeHex(selectedHex);
-			((Board) this.tile.getPanel()).getLevel().getBP().getPiece(0).setEnabled(false);
+			((Board) this.tile.getPanel()).getLevel().getBP().Initialize();
 			((Board) this.tile.getPanel()).getLevel().setIfPieceSel(false);
 			((Board) this.tile.getPanel()).getLevel().selectHexomino(null);
 			c = Color.blue;
@@ -67,7 +64,7 @@ public class MListener extends MouseInputAdapter implements MouseListener{
 	
 	public void pickFromPen(){
 		ID = ((HexTile) this.tile).getAssocHexID();
-		selectedHex =((BullPen) this.tile.getPanel()).getLevel().getHexPieceFromID(ID);
+		((BullPen) this.tile.getPanel()).getLevel().selectHexomino(((BullPen) this.tile.getPanel()).getLevel().getHexPieceFromID(ID));
 //		System.out.print(ID);
 		bp = ((BullPen)this.tile.getPanel()).getLevel().getBP();
 //		((BullPen) this.tile.getPanel()).getLevel().selectHexomino(selectedHex);

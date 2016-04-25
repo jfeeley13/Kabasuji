@@ -18,10 +18,15 @@ public class BullPen extends JPanel{
 	protected List<Hexomino> HexsInPen;
 	protected Hexomino selectedHex;
 	public Level level;
-	
+
 	public BullPen(Level level,List<Hexomino> HexsInPen){
 		this.level=level;
 		this.HexsInPen = HexsInPen;
+		Initialize();
+	}
+
+	public void Initialize(){
+		this.removeAll();
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		Border border = BorderFactory.createLineBorder(Color.BLACK, 1, true);
 		for(int h=0; h<HexsInPen.size();h++){
@@ -35,7 +40,7 @@ public class BullPen extends JPanel{
 				for(int j=0; j<6;j++){
 					HexTile tile=new HexTile(h+1,this,i,j);
 					tile.valid=0;
-					
+
 					//tile.setBorder(border);
 					//tile.setBackground(Color.blue);
 					tileList[i][j]=tile;
@@ -54,28 +59,30 @@ public class BullPen extends JPanel{
 			}
 			this.add(panel);
 		}
+		this.revalidate();
+		this.repaint();
 	}
-	
+
 	public Level getLevel(){
 		return level;
 	}
-	
+
 	public void rotateHex(boolean direction){
-		
+
 	}
-	
+
 	public void flipHex(boolean direction){
-		
+
 	}
-	
+
 	public Hexomino getPiece(int x){
 		return this.HexsInPen.get(x);
 	}
-	
+
 	public void addHex(Hexomino piece){
 		HexsInPen.add(piece);
 	}
-	
+
 	public void removeHex(Hexomino piece){
 		for(int i = 0; i < this.HexsInPen.size(); i++){
 			if(HexsInPen.get(i).getID() == piece.getID()){
@@ -84,5 +91,5 @@ public class BullPen extends JPanel{
 			}
 		}
 	}
-	
+
 }
