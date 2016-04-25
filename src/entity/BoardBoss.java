@@ -167,4 +167,24 @@ public abstract class BoardBoss extends JPanel{
 		return true;
 		
 	}
+	
+	public int returnHeight() {
+		return this.height;
+	}
+	
+	public boolean borderCheck(Tile tile) {
+		int x=0;
+		int y=0;
+
+		//System.out.println(selectedPiece.shape[5].column);
+
+		x=selectedPiece.shape[5].row+tile.getCoords()[0];
+		y=selectedPiece.shape[5].column+tile.getCoords()[1];
+		
+		if(x<=width && y<=height) {
+			return true;
+		}
+		else
+			return false;
+	}
 }

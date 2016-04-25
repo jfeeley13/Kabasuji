@@ -108,7 +108,7 @@ public class BullPen extends BoardBoss{
 				lifted = false;
 				penPiece = false;
 				
-				drawHex(tile,1,1, Color.GREEN);
+				drawHex(tile,tile.getCoords()[0],tile.getCoords()[1], Color.GREEN);
 				return false;
 			}
 
@@ -125,17 +125,17 @@ public class BullPen extends BoardBoss{
 			int x = 0;
 			int y = 0;
 			switch(rotated) {
-			case 1:	x=selectedPiece.shape[i].row+tile.getCoords()[0];
-					y=selectedPiece.shape[i].column+tile.getCoords()[1];
+			case 1:	x=selectedPiece.shape[i].row+posx;
+					y=selectedPiece.shape[i].column+posy;
 					break;
-			case 2:	x=selectedPiece.shape[i].column+tile.getCoords()[0];
-					y=selectedPiece.shape[i].row+tile.getCoords()[1];
+			case 2:	x=selectedPiece.shape[i].column+posx;
+					y=selectedPiece.shape[i].row+posy;
 					break;
-			case 3:	x=selectedPiece.shape[i].row+tile.getCoords()[0];
-					y=tile.getCoords()[1]-selectedPiece.shape[5-i].column;
+			case 3:	x=selectedPiece.shape[i].row+posx;
+					y=posy-selectedPiece.shape[5-i].column;
 					break;
-			case 4:	x=tile.getCoords()[0]-selectedPiece.shape[i].column;
-					y=selectedPiece.shape[i].row+tile.getCoords()[1];
+			case 4:	x=posx-selectedPiece.shape[i].column;
+					y=selectedPiece.shape[i].row+posy;
 					break;
 			}
 
@@ -230,6 +230,22 @@ public class BullPen extends BoardBoss{
 		if(x>width-2 || y>height-2 || x<0 || y<0) return false;
 		return true;
 	}
+	
+	public boolean borderCheck(Tile tile) {
+		int x=0;
+		int y=0;
+
+		//System.out.println(selectedPiece.shape[5].column);
+
+		x=selectedPiece.shape[5].row+tile.getCoords()[0];
+		y=selectedPiece.shape[5].column+tile.getCoords()[1];
+		
+		if(x<width && y<height) {
+			return true;
+		}
+		else
+			return false;
+	}
 	/**
 	 * 
 	 * Removes selected hexomino from board
@@ -240,6 +256,10 @@ public class BullPen extends BoardBoss{
 	public boolean removeHex(Hexomino hex){
 		boolean isValid = true;
 		return isValid;
+	}
+	
+	public int returnHeight() {
+		return this.height;
 	}
 	/**
 	 * 

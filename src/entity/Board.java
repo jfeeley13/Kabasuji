@@ -67,8 +67,15 @@ public class Board extends BoardBoss{
 			for(int i=0; i<6;i++){
 				int x=hex.shape[i].row+tile.getCoords()[0];
 				int y=hex.shape[i].column+tile.getCoords()[1];
+				if(boardArray[x][y].getTileID()<100) return false;
+			}
+			
+			for(int i=0; i<6;i++){
+				int x=hex.shape[i].row+tile.getCoords()[0];
+				int y=hex.shape[i].column+tile.getCoords()[1];
 				boardArray[x][y].coverTile();
 				boardArray[x][y].setBackground(Color.BLUE);
+				boardArray[x][y].isHighlight=false;
 				hexPlaced.add(selectedPiece);
 				selectedPiece=null;
 				boardArray[x][y].setTileID(tileID);
@@ -86,7 +93,7 @@ public class Board extends BoardBoss{
 			int x=hex.shape[i].row+tile.getCoords()[0];
 			int y=hex.shape[i].column+tile.getCoords()[1];
 		
-			if(boardArray[x][y].isCovered()==true){
+			if(boardArray[x][y].isCovered()==true && selectedPiece==null){
 				tileID = boardArray[x][y].getTileID();
 				System.out.println(tileID);
 				System.out.println("Selected Piece!");
@@ -96,13 +103,14 @@ public class Board extends BoardBoss{
 							//x=hex.shape[j].row+tile.getCoords()[0];
 							//y=hex.shape[j].column+tile.getCoords()[1];
 							boardArray[j][k].isCovered = false;
+
 							boardArray[j][k].setTileID(tileID+100);
 							boardArray[j][k].setBackground(Color.WHITE);
 						}
 				selectedPiece = hex;
 				lifted = false;
 				penPiece = false;
-				drawHex(tile,1,1, Color.GREEN);
+				drawHex(tile,x,y, Color.GREEN);
 				return false;
 			}	
 		}
@@ -116,17 +124,17 @@ public class Board extends BoardBoss{
 			int x = 0;
 			int y = 0;
 			switch(rotated) {
-			case 1:	x=selectedPiece.shape[i].row+tile.getCoords()[0];
-					y=selectedPiece.shape[i].column+tile.getCoords()[1];
+			case 1:	x=selectedPiece.shape[i].row+posx;
+					y=selectedPiece.shape[i].column+posy;
 					break;
-			case 2:	x=selectedPiece.shape[i].column+tile.getCoords()[0];
-					y=selectedPiece.shape[i].row+tile.getCoords()[1];
+			case 2:	x=selectedPiece.shape[i].column+posx;
+					y=selectedPiece.shape[i].row+posy;
 					break;
-			case 3:	x=selectedPiece.shape[i].row+tile.getCoords()[0];
-					Math.abs(y=tile.getCoords()[1]-selectedPiece.shape[5-i].column);
+			case 3:	x=selectedPiece.shape[i].row+posx;
+					y=posy-selectedPiece.shape[5-i].column;
 					break;
-			case 4:	x=tile.getCoords()[0]-selectedPiece.shape[i].column;
-					Math.abs(y=selectedPiece.shape[i].row+tile.getCoords()[1]);
+			case 4:	x=posx-selectedPiece.shape[i].column;
+					y=selectedPiece.shape[i].row+posy;
 					break;
 			}
 			
@@ -197,6 +205,22 @@ public class Board extends BoardBoss{
 	public boolean removeHex(Hexomino hex){
 		boolean isValid = true;
 		return isValid;
+	}
+	
+	public boolean borderCheck(Tile tile) {
+		int x=0;
+		int y=0;
+
+		//System.out.println(selectedPiece.shape[5].column);
+
+		x=selectedPiece.shape[5].row+tile.getCoords()[0];
+		y=selectedPiece.shape[5].column+tile.getCoords()[1];
+		
+		if(x<width && y<height) {
+			return true;
+		}
+		else
+			return false;
 	}
 	/**
 	 * 

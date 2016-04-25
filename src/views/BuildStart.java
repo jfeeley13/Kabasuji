@@ -50,6 +50,9 @@ public class BuildStart extends JFrame {
 		//setLocationRelativeTo(null);
 		setVisible(true);
 		setResizable(false);
+		setLocationRelativeTo(null);
+		//window.frame.setVisible(true);
+		//window.frame.setResizable(false);
 	}
 
 	/**

@@ -27,6 +27,7 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 	Tile tile;
 	static int lastID;
 	static int lastTileID;
+	static Tile lastGoodTile;
 	BoardBoss board;
 	static BoardBoss lastBoard;
 	Random r = new Random();
@@ -49,8 +50,8 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 
 
 		Point b = e.getLocationOnScreen();
-		int x = (int) b.getX();
-		int y = (int) b.getY();
+		int x = this.tile.getCoords()[0];
+		int y = this.tile.getCoords()[1];
 		
 		lastID = tile.getBoard().getID();
 		//System.out.println("Row = " + y);
@@ -137,14 +138,21 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
     		
 
     		Point b = e.getLocationOnScreen();
-    		int x = (int) b.getX();
-    		int y = (int) b.getY();
+    		int x = this.tile.getCoords()[0];
+    		int y = this.tile.getCoords()[1];
     		
     		int tileID= this.tile.getTileID();
     		
     		this.tile.getBoard().refresh();
-
-    		this.tile.getBoard().drawHex(this.tile, x, y, Color.GREEN);
+    		if(this.tile.getBoard().borderCheck(this.tile)) {
+    			this.tile.getBoard().drawHex(this.tile, x, y, Color.GREEN);
+    			lastGoodTile=this.tile;
+    		}
+    		else {
+    			this.tile.getBoard().drawHex(this.tile, x, this.tile.getBoard().returnHeight()-6, Color.GREEN);
+    			//lastGoodTile.getBoard().drawHex(lastGoodTile, x, y, Color.GREEN);
+    		}
+    		
    
     		int id = tile.getBoard().getID();
     		if(id!=lastID) {

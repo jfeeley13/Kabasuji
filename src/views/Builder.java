@@ -10,6 +10,7 @@ import javax.swing.JToolBar;
 
 import java.awt.BorderLayout;
 
+import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
@@ -30,6 +31,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import java.awt.Font;
+import java.awt.GridLayout;
 
 import javax.swing.UIManager;
 import javax.swing.SwingConstants;
@@ -37,8 +39,14 @@ import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.table.DefaultTableModel;
 
+import entity.Board;
+import entity.BullPen;
+import entity.PuzzleTile;
+import entity.Tile;
+
 import java.awt.Color;
 
+import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.SpinnerNumberModel;
 
@@ -103,6 +111,7 @@ public class Builder extends JFrame implements MouseListener{
 		gameType = type;
 		row = rows;
 		col = cols;
+		this.setLocationRelativeTo(null);
 		initialize();
 	}
 
@@ -112,9 +121,11 @@ public class Builder extends JFrame implements MouseListener{
 	 */
 	private void initialize() {
 		//frame = new JFrame();
+
 		Color myColor = Color.decode("#4169aa");
 		getContentPane().setBackground(myColor);
-		setBounds(100, 100, 760, 550);
+		
+		setBounds(100, 100, 800, 600);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		
@@ -188,6 +199,8 @@ public class Builder extends JFrame implements MouseListener{
 		
 		JScrollPane bullPin = new JScrollPane();
 		bullPin.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		
+		BullPen pen = new BullPen();
 
 		
 		JScrollPane inventory = new JScrollPane();
@@ -233,6 +246,8 @@ public class Builder extends JFrame implements MouseListener{
 				col = (Integer) spinner.getValue();
 				Builder nw = new Builder(levelComboBox.getSelectedItem().toString(), row, col);
 				nw.setVisible(false);
+				nw.setLocationRelativeTo(null);
+				
 				
 			}
 		});
@@ -247,7 +262,9 @@ public class Builder extends JFrame implements MouseListener{
 		
 		JLabel lblBullPin = new JLabel("Bull Pen:");
 		
-		JPanel board = new JPanel();
+		//JPanel board = new JPanel();
+		Board board = new Board();
+		
 		
 		JSpinner spinner_2 = new JSpinner();
 		spinner_2.setModel(new SpinnerNumberModel(1, 1, 6, 1));
@@ -328,7 +345,7 @@ public class Builder extends JFrame implements MouseListener{
 									.addComponent(btnExit, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE))
 								.addGroup(groupLayout.createSequentialGroup()
 									.addGap(9)
-									.addComponent(bullPin, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE))))
+									.addComponent(pen, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE))))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addContainerGap()
 							.addComponent(toolBar, GroupLayout.DEFAULT_SIZE, 749, Short.MAX_VALUE)))
@@ -377,7 +394,7 @@ public class Builder extends JFrame implements MouseListener{
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(bullPin, GroupLayout.PREFERRED_SIZE, 375, GroupLayout.PREFERRED_SIZE)
+							.addComponent(pen, GroupLayout.PREFERRED_SIZE, 375, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 								.addComponent(btnSave)
@@ -509,8 +526,72 @@ public class Builder extends JFrame implements MouseListener{
 
 		
 		/**Mouse Listener*/
-		
+		this.setLocationRelativeTo(null);
 		board.addMouseListener(this);
+		int x = 20;
+		int y = 16;
+		
+		board.setLayout(new GridLayout(y,x));
+		board.setPreferredSize(new Dimension(384,384));
+		board.setMinimumSize(new Dimension(384,384));
+		board.setMaximumSize(new Dimension(384,384));
+		
+		Tile boardArray[][] = new Tile[x][y];
+		
+		Border BoardTileBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
+		
+		
+		for(int TileRow = 0; TileRow <y;TileRow++){
+			for(int TileCol = 0; TileCol <x;TileCol++){
+				
+				PuzzleTile AddedTile = new PuzzleTile(board, TileCol,TileRow, x, y, 999);
+
+				AddedTile.setBackground(Color.WHITE);
+
+				AddedTile.setBorder(BoardTileBorder);
+
+				boardArray[TileCol][TileRow] = AddedTile;
+				board.add(AddedTile);
+			}
+		}
+		board.makeBoard(boardArray, x, y, 1);
+
+
+
+		x = 14;
+		y = 35;
+		
+		pen.setPreferredSize(new Dimension(140, 410));
+		pen.setMinimumSize(new Dimension(140, 410));
+		pen.setMaximumSize(new Dimension(140, 410));
+		
+		pen.setLayout(new GridLayout(y, x));
+		
+		Tile penArray[][] = new Tile[x+6][y+6];
+
+
+		
+		Border penTileBorder = BorderFactory.createLineBorder(Color.WHITE, 1);
+		
+		for(int TileRow = 0; TileRow <y;TileRow++){
+			for(int TileCol = 0; TileCol <x;TileCol++){
+
+				PuzzleTile AddedTile = new PuzzleTile(pen, TileCol,TileRow, x, y, 999);
+
+				AddedTile.setBackground(Color.WHITE);
+
+				AddedTile.setBorder(penTileBorder);
+
+				penArray[TileCol][TileRow] = AddedTile;
+				pen.add(AddedTile);
+			}
+		}
+		pen.selectedPiece = null;
+		pen.makeBoard(penArray, x, y, 2);
+		pen.init = true;
+		pen.addHex(penArray[2][2], 1);
+		pen.addHex(penArray[4][4], 2);
+		pen.init=false;
 	
 	}
 
