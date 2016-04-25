@@ -64,7 +64,7 @@ public class Level{
 	static int level;
 	public static int levelTime=60;
 	static JLabel label;
-
+	
 	
 
 	/**
@@ -120,7 +120,7 @@ public class Level{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		
+		int crossHeight = 348;
 		frame = new JFrame();
 		Color myColor = Color.decode("#4169aa");
 		frame.getContentPane().setBackground(myColor);
@@ -213,13 +213,13 @@ public class Level{
 							.addComponent(lblF1))
 						.addComponent(board, GroupLayout.PREFERRED_SIZE, 348, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblBoard))
-					.addGap(18)
+					//.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(boardPen, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(boardPen2, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(boardPen, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)
+							//.addPreferredGap(ComponentPlacement.UNRELATED)
+							//.addComponent(boardPen2, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+							//.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(pen, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE))
 						.addComponent(btnExit))
 					.addGap(360))
@@ -232,12 +232,14 @@ public class Level{
 						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
 							.addGap(22)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(boardPen2, GroupLayout.PREFERRED_SIZE, 410, GroupLayout.PREFERRED_SIZE)
+								
 								.addGroup(groupLayout.createSequentialGroup()
 									.addComponent(lblBoard)
 									.addGap(18)
 									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addComponent(boardPen, GroupLayout.PREFERRED_SIZE, 348, GroupLayout.PREFERRED_SIZE)
+										.addComponent(boardPen, GroupLayout.DEFAULT_SIZE, crossHeight, GroupLayout.DEFAULT_SIZE)
+										//.addComponent(boardPen2, GroupLayout.DEFAULT_SIZE, crossHeight, GroupLayout.DEFAULT_SIZE)
+										.addComponent(pen, GroupLayout.DEFAULT_SIZE, 348, GroupLayout.DEFAULT_SIZE)
 										.addGroup(groupLayout.createSequentialGroup()
 											.addComponent(board, GroupLayout.PREFERRED_SIZE, 348, GroupLayout.PREFERRED_SIZE)
 											.addGap(33)
@@ -247,7 +249,7 @@ public class Level{
 							.addGap(34))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(48)
-							.addComponent(pen, GroupLayout.PREFERRED_SIZE, 410, GroupLayout.PREFERRED_SIZE)
+							
 							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 							.addComponent(btnExit)
 							.addGap(21))))
@@ -361,9 +363,9 @@ public class Level{
 		int x = 14;
 		int y = 35;
 		
-		pen.setPreferredSize(new Dimension(140, 410));
-		pen.setMinimumSize(new Dimension(140, 410));
-		pen.setMaximumSize(new Dimension(140, 410));
+		pen.setPreferredSize(new Dimension(140, 348));
+		pen.setMinimumSize(new Dimension(140, 348));
+		pen.setMaximumSize(new Dimension(140, 348));
 		
 		pen.setLayout(new GridLayout(y, x));
 		
@@ -393,17 +395,20 @@ public class Level{
 		pen.addHex(penArray[4][4], 2);
 		pen.init=false;
 		
-		x=3;
+		
+		
+		x=5;
 		y=12;
 		
-		boardPen.setPreferredSize(new Dimension(26, 410));
-		boardPen.setMinimumSize(new Dimension(26, 410));
-		boardPen.setMaximumSize(new Dimension(26, 410));
+		boardPen.setPreferredSize(new Dimension(26, crossHeight));
+		boardPen.setMinimumSize(new Dimension(26, crossHeight));
+		boardPen.setMaximumSize(new Dimension(26, crossHeight));
 		boardPen.setLayout(new GridLayout(y, x));
 		
 		Tile boardPenArray[][] = new Tile[x+6][y+6];
 		
 		Border boardPenTileBorder = BorderFactory.createLineBorder(Color.decode("#4169aa"), 1);
+		//boardPenTileBorder = BorderFactory.createLineBorder(Color.WHITE, 1);
 		
 		for(int TileRow = 0; TileRow <y;TileRow++){
 			for(int TileCol = 0; TileCol <x;TileCol++){
@@ -421,17 +426,18 @@ public class Level{
 
 		boardPen.makeBoard(boardPenArray, x, y,3);
 		
-		
+		/**
 		x=4;
 		y=18;
-		boardPen2.setPreferredSize(new Dimension(26, 410));
-		boardPen2.setMinimumSize(new Dimension(26, 410));
-		boardPen2.setMaximumSize(new Dimension(26, 410));
+		boardPen2.setPreferredSize(new Dimension(26, crossHeight));
+		boardPen2.setMinimumSize(new Dimension(26, crossHeight));
+		boardPen2.setMaximumSize(new Dimension(26, crossHeight));
 		boardPen2.setLayout(new GridLayout(y, x));
 		
 		Tile boardPen2Array[][] = new Tile[x+6][y+6];
 		
 		Border boardPen2TileBorder = BorderFactory.createLineBorder(Color.decode("#4169aa"), 1);
+		boardPen2TileBorder = BorderFactory.createLineBorder(Color.WHITE, 1);
 		
 		for(int TileRow = 0; TileRow <y;TileRow++){
 			for(int TileCol = 0; TileCol <x;TileCol++){
@@ -452,16 +458,17 @@ public class Level{
 		
 
 		boardPen2.makeBoard(boardPen2Array, x, y, 4);
-	
+		**/
 
 	}
 	
 	public void setLabel() {
-		if (gameType == "Lightning Level")
+		if (gameType == "Lightning Level") {
 			label.setText(levelTime/2+"");
 		if(levelTime==0) {
 			GameOver hs = new GameOver();
 			hs.newwindow();
+		}
 		}
 	}
 }
