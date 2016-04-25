@@ -223,14 +223,18 @@ public class BullPen extends BoardBoss{
 	
 	public void refresh() {
 		for(int j=0; j<width; j++) 
-			for(int k=0; k<height; k++) 
+			for(int k=0; k<height; k++) {
 				if(boardArray[j][k].isHighlight) {
-					
-					//x=hex.shape[j].row+tile.getCoords()[0];
-					//y=hex.shape[j].column+tile.getCoords()[1];
-					//boardArray[j][k].isCovered = false;
-					boardArray[j][k].setBackground(Color.WHITE);
-				}
+				
+				//x=hex.shape[j].row+tile.getCoords()[0];
+				//y=hex.shape[j].column+tile.getCoords()[1];
+				//boardArray[j][k].isCovered = false;
+				boardArray[j][k].setBackground(Color.WHITE);
+			}
+			if(boardArray[j][k].isCovered) {
+				boardArray[j][k].setBackground(Color.BLUE);
+			}
+		}
 	}
 	
 	

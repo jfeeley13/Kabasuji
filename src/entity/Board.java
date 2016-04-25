@@ -193,7 +193,7 @@ public class Board extends BoardBoss{
 	
 	public void refresh() {
 		for(int j=0; j<width; j++) 
-			for(int k=0; k<height; k++) 
+			for(int k=0; k<height; k++) {
 				if(boardArray[j][k].isHighlight) {
 					
 					//x=hex.shape[j].row+tile.getCoords()[0];
@@ -201,6 +201,10 @@ public class Board extends BoardBoss{
 					//boardArray[j][k].isCovered = false;
 					boardArray[j][k].setBackground(Color.WHITE);
 				}
+				if(boardArray[j][k].isCovered) {
+					boardArray[j][k].setBackground(Color.BLUE);
+				}
+			}
 	}
 	
 	public int getID() {
