@@ -32,6 +32,10 @@ public abstract class Tile extends JPanel{
 		this.height = h;
 		this.tileID = tileID;
 	}
+	
+	public  boolean hasWon(){
+		return this.isCovered;
+	}
 
 	/**
 	 * 

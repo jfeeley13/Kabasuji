@@ -50,6 +50,16 @@ public class Board extends BoardBoss{
 		return hexPlaced.size();
 	}
 	
+	public boolean hasWon(){
+		for(int i = 0; i < width; i++){
+			for(Tile t : boardArray[i]){
+				if(!t.hasWon())
+					return true;
+			}
+		}
+		return false;
+	}
+	
 	/**
 	 * Adds hexomino to board from BullPen (possibly give XY coordinates of piece as well)
 	 * 
