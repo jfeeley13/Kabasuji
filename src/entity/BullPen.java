@@ -17,10 +17,7 @@ public class BullPen extends BoardBoss{
 	 */
 	private static final long serialVersionUID = 1L;
 	protected Tile boardArray[][];
-//	protected Hexomino hexPlaced[] = new Hexomino[];
 	List<Hexomino> hexPlaced = new ArrayList<Hexomino>();
-	protected int XOrigin;
-	protected int YOrigin;
 	protected int width = 10;
 	protected int height = 18;
 	protected int tileID;
@@ -33,11 +30,6 @@ public class BullPen extends BoardBoss{
 		this.width = width;
 		this.height = height;
 		this.boardID = id;
-	}
-
-	public int[] getTopLeft(){
-		int[] origin = {XOrigin, YOrigin};
-		return origin;
 	}
 	
 	public boolean checkCollision(Hexomino reqHex){
@@ -60,8 +52,31 @@ public class BullPen extends BoardBoss{
 		HexTile[] shape2 = {new HexTile(this,0,0, width, height,1),new HexTile(this,0,1, width, height,1),new HexTile(this,0,2, width, height,1),new HexTile(this,0,3, width, height,1),new HexTile(this,0,4, width, height,1),new HexTile(this,0,5, width, height,1)};
 		Hexomino hex = new Hexomino(1, shape2);	
 	
+		boolean isOverPiece = false;
 		boolean allTilesEmpty=CheckTiles(tile, shape2);
+		if(init) {
+			for(int i=0; i<6;i++){
+				int x=hex.shape[i].row+tile.getCoords()[0];
+				int y=hex.shape[i].column+tile.getCoords()[1];
+				if(boardArray[x][y].getTileID()<100) isOverPiece=true;
+			}
+		}
+		else if(borderCheck(tile)) {
+			for(int i=0; i<6;i++){
+				int x=hex.shape[i].row+tile.getCoords()[0];
+				int y=hex.shape[i].column+tile.getCoords()[1];
+				if(boardArray[x][y].getTileID()<100) isOverPiece=true;
+			}
+		}
+		else {
+			for(int i=0; i<6;i++){
+				int x=hex.shape[i].row+tile.getCoords()[0];
+				int y=hex.shape[i].column+tile.getCoords()[1];
+				if(boardArray[x][height-6].getTileID()<100) isOverPiece=true;
+			}
+		}
 		
+		if(isOverPiece) return false;
 		if(init){
 			for(int i=0; i<6;i++){
 				int x=hex.shape[i].row+tile.getCoords()[0];
@@ -282,6 +297,7 @@ public class BullPen extends BoardBoss{
 	public int returnHeight() {
 		return this.height;
 	}
+
 	
 	public Tile[][] returnBoard() {
 		return boardArray;

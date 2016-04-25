@@ -30,6 +30,8 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JButton;
 
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -64,7 +66,8 @@ public class Level{
 	static int level;
 	public static int levelTime=60;
 	static JLabel label;
-	
+
+
 	
 
 	/**
@@ -119,6 +122,9 @@ public class Level{
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	
+	
+	
 	private void initialize() {
 		int crossHeight = 348;
 		frame = new JFrame();

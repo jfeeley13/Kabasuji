@@ -2,9 +2,13 @@ package entity;
 
 public class GameMode {
 	
-	protected Level Levels[];
+	protected Level levels[];
 	
-	protected GameMode(){
-		
+	public GameMode(int maxLevels){
+		levels = new Level[maxLevels];
+	}
+	
+	public GameMode(Level levels[]){
+		this.levels = levels;
 	}
 }

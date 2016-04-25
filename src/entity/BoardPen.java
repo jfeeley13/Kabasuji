@@ -15,15 +15,11 @@ public class BoardPen extends BoardBoss{
 	 */
 	private static final long serialVersionUID = 1L;
 	protected Tile boardArray[][];
-//	protected Hexomino hexPlaced[] = new Hexomino[];
 	List<Hexomino> hexPlaced = new ArrayList<Hexomino>();
-	protected int XOrigin;
-	protected int YOrigin;
 	int width = 0;
 	int height = 0;
 	protected int tileID;
 	protected int boardID;
-	//boardpen
 
 	
 	
@@ -34,11 +30,6 @@ public class BoardPen extends BoardBoss{
 		this.boardID = id;
 	}
 
-	public int[] getTopLeft(){
-		int[] origin = {XOrigin, YOrigin};
-		return origin;
-	}
-	
 	public boolean checkCollision(Hexomino reqHex){
 		return false;
 	}
@@ -167,6 +158,7 @@ public class BoardPen extends BoardBoss{
 	public int returnHeight() {
 		return this.height;
 	}
+
 	
 	public Tile[][] returnBoard() {
 		return boardArray;
@@ -191,4 +183,5 @@ public class BoardPen extends BoardBoss{
 		return coords; 
 	}
 	*/
+
 }
