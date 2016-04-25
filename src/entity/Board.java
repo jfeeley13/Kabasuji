@@ -18,12 +18,7 @@ public class Board extends BoardBoss{
 	 */
 	private static final long serialVersionUID = 1L;
 	protected Tile boardArray[][];
-//	protected Hexomino hexPlaced[] = new Hexomino[];
 	List<Hexomino> hexPlaced = new ArrayList<Hexomino>();
-	//protected HashMap<RowColumn, Tile> tileBoard;
-
-	protected int XOrigin;
-	protected int YOrigin;
 	protected int width = 12;
 	protected int height = 12;
 	protected int tileID;
@@ -37,11 +32,6 @@ public class Board extends BoardBoss{
 		this.boardID = id;
 	}
 
-	public int[] getTopLeft(){
-		int[] origin = {XOrigin, YOrigin};
-		return origin;
-	}
-	
 	public boolean checkCollision(Hexomino reqHex){
 		return false;
 	}
@@ -232,24 +222,4 @@ public class Board extends BoardBoss{
 		else
 			return false;
 	}
-	/**
-	 * 
-	 * @param x location of click in pixels
-	 * @param y location of click in pixels
-	 * @return Tile that is being selected
-	 * Throws exception if tile does not exist at selected location
-	 * 
-	 */
-/*	public Tile getTile(int x, int y){
-		int tRow = (y-YOrigin)/tileBoard[0].getTileWidth();
-		int tCol = (x-XOrigin)/tileBoard[0].getTileHeight();
-		int tile = 0; //Placeholder value
-		return tileBoard[tile];
-	}
-	//Can throw NullTileException
-	public Point getTopLeftOfTile(Tile tile){
-		Point coords = new Point(0, 0);
-		return coords; 
-	}
-	*/
 }
