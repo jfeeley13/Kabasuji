@@ -332,19 +332,21 @@ public class Level{
 		
 		frame.getContentPane().setLayout(groupLayout);
 
+		int x = 12;
+		int y = 12;
 
-		board.setLayout(new GridLayout(12,12));
+		board.setLayout(new GridLayout(y,x));
 		board.setPreferredSize(new Dimension(384,384));
 		board.setMinimumSize(new Dimension(384,384));
 		board.setMaximumSize(new Dimension(384,384));
 		
-		Tile boardArray[][] = new Tile[12][12];
+		Tile boardArray[][] = new Tile[x][y];
 		
 		Border BoardTileBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
 		
 		
-		for(int TileCol = 0; TileCol <=11;TileCol++){
-			for(int TileRow = 0; TileRow <=11;TileRow++){
+		for(int TileCol = 0; TileCol <y;TileCol++){
+			for(int TileRow = 0; TileRow <x;TileRow++){
 
 				PuzzleTile AddedTile = new PuzzleTile(board, TileRow,TileCol, 12, 12, 999);
 
@@ -356,12 +358,12 @@ public class Level{
 				board.add(AddedTile);
 			}
 		}
-		board.makeBoard(boardArray, 12, 12, 1);
+		board.makeBoard(boardArray, x, y, 1);
 
 
 
-		int x = 14;
-		int y = 35;
+		x = 14;
+		y = 35;
 		
 		pen.setPreferredSize(new Dimension(140, 348));
 		pen.setMinimumSize(new Dimension(140, 348));
