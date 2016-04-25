@@ -387,11 +387,10 @@ public class Level{
 			for(int TileCol = 0; TileCol <x;TileCol++){
 
 				PuzzleTile AddedTile = new PuzzleTile(pen, TileCol,TileRow, x, y, 999);
-
 				AddedTile.setBackground(Color.WHITE);
 
 				AddedTile.setBorder(penTileBorder);
-
+				
 				penArray[TileCol][TileRow] = AddedTile;
 				pen.add(AddedTile);
 			}

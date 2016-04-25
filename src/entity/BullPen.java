@@ -30,6 +30,10 @@ public class BullPen extends BoardBoss{
 		this.width = width;
 		this.height = height;
 		this.boardID = id;
+		
+		for(int i=0;i<width;i++) 
+			for(int j=0; j<height; j++)
+				boardArray[i][j].isCovered=false;
 	}
 	
 	public boolean checkCollision(Hexomino reqHex){
@@ -55,35 +59,31 @@ public class BullPen extends BoardBoss{
 		boolean isOverPiece = false;
 		boolean allTilesEmpty=CheckTiles(tile, shape2);
 
-		if(init) {
-			for(int i=0; i<6;i++){
-				int x=hex.shape[i].row+tile.getCoords()[0];
-				int y=hex.shape[i].column+tile.getCoords()[1];
-				if(boardArray[x][y].getTileID()<100) isOverPiece=true;
+		
+		for(int i=0;i<6;i++) {
+			int x=hex.shape[i].row+tile.getCoords()[0];
+			int y=hex.shape[i].column+tile.getCoords()[1];
+			if(init) {
+				System.out.println("1");
+				if(boardArray[x][y].getTileID()<100) 
+					isOverPiece=true;
 			}
-		}
-		else if(borderCheck(tile)) {
-			for(int i=0; i<6;i++){
-				int x=hex.shape[i].row+tile.getCoords()[0];
-				int y=hex.shape[i].column+tile.getCoords()[1];
-				if(boardArray[x][y].getTileID()<100) isOverPiece=true;
+			else if(borderCheck(tile)) {
+				System.out.println("2");
+				if(boardArray[x][y].getTileID()<100) 
+					isOverPiece=true;
 			}
-		}
-		else {
-			for(int i=0; i<6;i++){
-				int x=hex.shape[i].row+tile.getCoords()[0];
-				int y=hex.shape[i].column+tile.getCoords()[1];
-				if(boardArray[x][height-6].getTileID()<100) isOverPiece=true;
+			else {
+				System.out.println("3");
+				if(boardArray[x][height-6].getTileID()<100) 
+					isOverPiece=true;
 			}
+				
 		}
+
 		
 		if(isOverPiece) return false;
 		if(init){
-			//for(int i=0; i<6;i++){
-			//	int x=hex.shape[i].row+tile.getCoords()[0];
-			//	int y=hex.shape[i].column+tile.getCoords()[1];
-			//	if(boardArray[x][y].getTileID()<100) return false;
-			//}
 			
 			for(int i=0; i<6;i++){
 				int x=hex.shape[i].row+tile.getCoords()[0];
@@ -104,7 +104,15 @@ public class BullPen extends BoardBoss{
 			if((selectedPiece!=null && lifted && !penPiece)) {
 				for(int i=0; i<width; i++) 
 					for(int j=0; j<height; j++) {
-						if(boardArray[i][j].isCovered) break;
+						for(int k=0; k<6;k++){
+							int x=hex.shape[k].row+tile.getCoords()[0];
+							int y=hex.shape[k].column+tile.getCoords()[1];
+							if(boardArray[x][y].isCovered()) {
+								System.out.println("4");
+								break;
+							}
+						}
+						
 						if(boardArray[i][j].getBackground()==Color.GREEN) {
 							boardArray[i][j].coverTile();
 							boardArray[i][j].setBackground(Color.BLUE);

@@ -88,7 +88,13 @@ public class Board extends BoardBoss{
 		if(selectedPiece!=null & lifted) {
 			for(int i=0; i<width; i++) 
 				for(int j=0; j<height; j++) {
-					if(boardArray[i][j].isCovered) break;
+					for(int k=0; k<6;k++){
+						int x=hex.shape[k].row+tile.getCoords()[0];
+						int y=hex.shape[k].column+tile.getCoords()[1];
+						if(boardArray[x][y].isCovered()) {
+							break;
+						}
+					}
 					if(boardArray[i][j].getBackground()==Color.GREEN) {
 						boardArray[i][j].coverTile();
 						boardArray[i][j].setBackground(Color.BLUE);
