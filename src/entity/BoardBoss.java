@@ -110,7 +110,7 @@ public abstract class BoardBoss extends JPanel{
 	public void redraw() {
 		for(int j=0; j<width; j++) 
 			for(int k=0; k<height; k++) 
-				if(boardArray[j][k].tileID<100) {
+				if(boardArray[j][k].tileID<1000) {
 					
 					//x=hex.shape[j].row+tile.getCoords()[0];
 					//y=hex.shape[j].column+tile.getCoords()[1];

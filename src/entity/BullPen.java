@@ -65,17 +65,17 @@ public class BullPen extends BoardBoss{
 			int y=hex.shape[i].column+tile.getCoords()[1];
 			if(init) {
 				//System.out.println("1");
-				if(boardArray[x][y].getTileID()<100) 
+				if(boardArray[x][y].getTileID()<1000) 
 					isOverPiece=true;
 			}
 			else if(borderCheck(tile)) {
 				//System.out.println("2");
-				if(boardArray[x][y].getTileID()<100) 
+				if(boardArray[x][y].getTileID()<1000) 
 					isOverPiece=true;
 			}
 			else {
 				//System.out.println("3");
-				if(boardArray[x][height-6].getTileID()<100) 
+				if(boardArray[x][height-6].getTileID()<1000) 
 					isOverPiece=true;
 			}
 				
@@ -150,7 +150,7 @@ public class BullPen extends BoardBoss{
 							//x=hex.shape[j].row+tile.getCoords()[0];
 							//y=hex.shape[j].column+tile.getCoords()[1];
 							boardArray[j][k].isCovered = false;
-							boardArray[j][k].setTileID(tileID+100);
+							boardArray[j][k].setTileID(tileID+1000);
 							boardArray[j][k].setBackground(Color.WHITE);
 						}
 				selectedPiece = hex;
@@ -197,10 +197,10 @@ public class BullPen extends BoardBoss{
 			try {
 				
 				if(!boardArray[x][y].isCovered) {
-					boardArray[x][y].setTileID(tileID+100);
+					boardArray[x][y].setTileID(tileID+1000);
 					
 				}
-				//System.out.println(tileID+100);
+				//System.out.println(tileID+1000);
 				boardArray[x][y].setBackground(c);
 				
 				//if(boardArray[x][y].isCovered) {
@@ -238,7 +238,7 @@ public class BullPen extends BoardBoss{
 		
 		for(int j=0; j<width; j++) 
 			for(int k=0; k<height; k++) 
-				if(boardArray[j][k].tileID<100) {
+				if(boardArray[j][k].tileID<1000) {
 					
 					if(!boardArray[j][k].isHighlight)
 						boardArray[j][k].setBackground(Color.BLUE);

@@ -73,10 +73,10 @@ public class Board extends BoardBoss{
 			int x=hex.shape[i].row+tile.getCoords()[0];
 			int y=hex.shape[i].column+tile.getCoords()[1];
 			if(borderCheck(tile)) {
-				if(boardArray[x][y].getTileID()<100) isOverPiece=true;
+				if(boardArray[x][y].getTileID()<1000) isOverPiece=true;
 			}
 			else {
-				if(boardArray[x][height-6].getTileID()<100) isOverPiece=true;
+				if(boardArray[x][height-6].getTileID()<1000) isOverPiece=true;
 			}
 		}
 		
@@ -130,7 +130,7 @@ public class Board extends BoardBoss{
 							//y=hex.shape[j].column+tile.getCoords()[1];
 							boardArray[j][k].isCovered = false;
 
-							boardArray[j][k].setTileID(tileID+100);
+							boardArray[j][k].setTileID(tileID+1000);
 							//boardArray[j][k].setBackground(Color.WHITE);
 						}
 				selectedPiece = hex;
@@ -170,7 +170,7 @@ public class Board extends BoardBoss{
 			//boardArray[x][y].coverTile();
 			try {
 				if(!boardArray[x][y].isCovered) {
-					boardArray[x][y].setTileID(tileID+100);
+					boardArray[x][y].setTileID(tileID+1000);
 					
 				}
 				boardArray[x][y].setBackground(c);
@@ -210,7 +210,7 @@ public class Board extends BoardBoss{
 	public void redraw() {
 		for(int j=0; j<width; j++) 
 			for(int k=0; k<height; k++) 
-				if(boardArray[j][k].tileID<100) {
+				if(boardArray[j][k].tileID<1000) {
 					
 					if(!boardArray[j][k].isHighlight)
 						boardArray[j][k].setBackground(Color.BLUE);
@@ -239,6 +239,7 @@ public class Board extends BoardBoss{
 
 		//System.out.println(selectedPiece.shape[5].column);
 
+		try {
 		x=selectedPiece.shape[5].row+tile.getCoords()[0];
 		y=selectedPiece.shape[5].column+tile.getCoords()[1];
 			
@@ -247,6 +248,8 @@ public class Board extends BoardBoss{
 		}
 		else
 			return false;
+		} catch (NullPointerException e) {};
+		return false;
 	}
 	
 	public int returnHeight() {
