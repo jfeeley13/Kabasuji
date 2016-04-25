@@ -483,6 +483,7 @@ public class Level{
 		}
 		
 		if (gameType == "Puzzle Level") {
+			
 			if(BoardBoss.moves>=0)
 				label.setText(BoardBoss.moves+"");
 			if(BoardBoss.moves==0) {
