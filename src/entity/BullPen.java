@@ -2,13 +2,22 @@ package entity;
 
 import java.util.List;
 
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 
 import gameControllers.MListener;
 
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.Point;
 import java.util.ArrayList;
+import views.Level;
+import entity.BoardBoss;
+import entity.HexTile;
+
 
 public class BullPen extends BoardBoss{
 	
@@ -23,13 +32,61 @@ public class BullPen extends BoardBoss{
 	protected int tileID;
 	protected int boardID = 2;
 
+	protected List<Hexomino> HexsInPen;
+	protected Hexomino selectedHex;
+	public Level level;
 	
-	
+	/*
 	public void makeBoard(Tile[][] boardArray, int width, int height, int id){
 		this.boardArray = boardArray;
 		this.width = width;
 		this.height = height;
 		this.boardID = id;
+	}
+	*/
+	
+	public void makeBoard(Level level, List<Hexomino> HexsInPen){
+		this.level=level;
+		this.HexsInPen = HexsInPen;
+		Initialize();
+	}
+	
+	public void Initialize(){
+		this.removeAll();
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		Border border = BorderFactory.createLineBorder(Color.BLACK, 1);
+		for(int h=0; h<HexsInPen.size();h++){
+			System.out.println(h);
+			HexTile tileList[][]=new HexTile[6][6];
+			JPanel panel=new JPanel(new GridLayout(6,6));
+			panel.setPreferredSize(new Dimension(99,99));
+			panel.setMaximumSize(new Dimension(99,99));
+			panel.setMinimumSize(new Dimension(99,99));
+			for(int i=0; i<6;i++){
+				for(int j=0; j<6;j++){
+					HexTile tile=new HexTile( ((BoardBoss) this) ,i,j, h+1);
+					tile.valid=0;
+
+					//tile.setBorder(border);
+					//tile.setBackground(Color.blue);
+					tileList[i][j]=tile;
+					panel.add(tile);
+				}
+			}
+			int coords[][]=this.HexsInPen.get(h).getCoordShape();
+			for(int i=0; i<6;i++){
+				int x=coords[i][1];
+				int y=coords[i][0];
+
+				HexTile tile=tileList[x][y];
+				tile.valid=1;
+				tile.setBackground(Color.blue);
+				tile.setBorder(border);
+			}
+			this.add(panel);
+		}
+		this.revalidate();
+		this.repaint();
 	}
 	
 	public boolean checkCollision(Hexomino reqHex){
@@ -49,10 +106,13 @@ public class BullPen extends BoardBoss{
 	
 	public boolean addHex(Tile tile, int tileID){
 		//HexTile[] shape = {new HexTile(this,0,0),new HexTile(this,0,1),new HexTile(this,0,-2),new HexTile(this,0,-3),new HexTile(this,0,-4),new HexTile(this,1,0)};
-		HexTile[] shape2 = {new HexTile(this,0,0, width, height,1),new HexTile(this,0,1, width, height,1),new HexTile(this,0,2, width, height,1),new HexTile(this,0,3, width, height,1),new HexTile(this,0,4, width, height,1),new HexTile(this,0,5, width, height,1)};
-		Hexomino hex = new Hexomino(1, shape2);	
+		//HexTile[] shape2 = {new HexTile(this,0,0, width, height,1),new HexTile(this,0,1, width, height,1),new HexTile(this,0,2, width, height,1),new HexTile(this,0,3, width, height,1),new HexTile(this,0,4, width, height,1),new HexTile(this,0,5, width, height,1)};
+		//Hexomino hex = new Hexomino(1, shape2);	
+		Hexomino hex = level.getHexPieceFromID(tileID);
+		
+		boolean allTilesEmpty=CheckTiles(tile, hex.getShape());
 	
-		boolean allTilesEmpty=CheckTiles(tile, shape2);
+		//boolean allTilesEmpty=CheckTiles(tile, shape2);
 		
 		if((selectedPiece!=null && lifted && !penPiece) || init){
 			for(int i=0; i<6;i++){

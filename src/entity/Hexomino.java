@@ -1,7 +1,9 @@
 package entity;
 
+import javax.swing.JPanel;
 
-public class Hexomino {
+
+public class Hexomino extends JPanel {
 	
 	protected int pID;
 	protected HexTile[] shape;
@@ -13,6 +15,17 @@ public class Hexomino {
 	public Hexomino(int pID, HexTile[] shape){
 		this.pID = pID;
 		this.shape = shape;	
+	}
+	
+	public int getID(){
+	return this.pID;
+	}
+	public HexTile[] getShape(){
+		return shape;
+	}
+	
+	public boolean isSel(){
+		return isSel;
 	}
 	
 	/**

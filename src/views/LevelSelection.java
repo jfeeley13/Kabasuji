@@ -86,7 +86,7 @@ public class LevelSelection {
 			public void actionPerformed(ActionEvent e) {
 				Level nw = new Level();
 				frame.dispose();
-				Level.openLevel("Release Level", 1);
+				Level.openLevel("Release Level", 1, 8);
 			}
 		});
 		panel_1.add(button_9);
@@ -127,7 +127,7 @@ public class LevelSelection {
 			public void actionPerformed(ActionEvent e) {
 				Level nw = new Level();
 				frame.dispose();
-				Level.openLevel("Puzzle Level", 1);
+				Level.openLevel("Puzzle Level", 1, 8);
 			}
 		});
 		panel_2.add(btnNewButton);
@@ -175,7 +175,7 @@ public class LevelSelection {
 			public void actionPerformed(ActionEvent e) {
 				Level nw = new Level();
 				frame.dispose();
-				Level.openLevel("Lightning Level", 1);
+				Level.openLevel("Lightning Level", 1, 30);
 			}
 		});
 		panel.add(button_4);

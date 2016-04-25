@@ -1,5 +1,7 @@
 package entity;
 
+import java.util.HashMap;
+
 public class AllHex {
 
 
@@ -7,6 +9,8 @@ public class AllHex {
 	int width = board.width;
 	int height = board.height;
 //	HexTile[] shape1 = {new HexTile(0,0),new HexTile(0,-1),new HexTile(0,-2),new HexTile(0,-3),new HexTile(0,-4),new HexTile(0,-5)};
+//	HexTile[] shape1 = {new HexTile(null, 0,0, width, height),new HexTile(null,0,-1, width, height),new HexTile(null,0,-2, width, height),new HexTile(null,0,-3, width, height),new HexTile(null,0,-4, width, height),new HexTile(null,0,-5, width, height)};
+//	HexTile[] shape2 = {new HexTile(null,0,0, width, height),new HexTile(null,0,-1, width, height),new HexTile(null,0,-2, width, height),new HexTile(null,0,-3, width, height),new HexTile(null,0,-4, width, height),new HexTile(null,1,0, width, height)};
 
 	//TestPieces	
 //	int hp1[][] = {{0,0},{0,-1},{0,-2},{0,-3},{0,-4},{0,-5}};
@@ -23,10 +27,19 @@ public class AllHex {
 //	protected Hexomino h5 = new Hexomino(1, hp5);
 //	protected Hexomino h12 = new Hexomino(1, hp12);
 
-	//HexTile[] shape1 = {new HexTile(null, 0,0, width, height),new HexTile(null,0,-1, width, height),new HexTile(null,0,-2, width, height),new HexTile(null,0,-3, width, height),new HexTile(null,0,-4, width, height),new HexTile(null,0,-5, width, height)};
-	//HexTile[] shape2 = {new HexTile(null,0,0, width, height),new HexTile(null,0,-1, width, height),new HexTile(null,0,-2, width, height),new HexTile(null,0,-3, width, height),new HexTile(null,0,-4, width, height),new HexTile(null,1,0, width, height)};
-
 	//protected Hexomino h1 = new Hexomino(1, shape1);		
 	//protected Hexomino h2 = new Hexomino(2, shape2);
 
+	private HashMap<Integer, Hexomino> hexList = new HashMap<Integer, Hexomino>();
+		
+		public Hexomino getHex(int ID) {
+			Hexomino hex = null;
+			hex = hexList.get(ID);
+			
+			return hex;
+		}
+	
+		public void makeHex(int ID, HexTile[] shape) {
+			hexList.put(ID, new Hexomino(ID, shape));
+		}
 }

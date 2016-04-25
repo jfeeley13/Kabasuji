@@ -3,6 +3,7 @@ package views;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.EventQueue;
+
 import javax.swing.JFrame;
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
@@ -10,9 +11,12 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.LineBorder;
+
 import java.awt.Color;
 import java.awt.Container;
+
 import javax.swing.table.DefaultTableModel;
+
 import entity.Board;
 import entity.BoardBoss;
 import entity.BoardPen;
@@ -22,6 +26,7 @@ import entity.Hexomino;
 import entity.PuzzleTile;
 import entity.Tile;
 import gameControllers.MListener;
+
 import javax.swing.JToolBar;
 import javax.swing.JLabel;
 import javax.swing.JTextPane;
@@ -46,16 +51,19 @@ import javax.swing.JToggleButton;
 import javax.swing.JSplitPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.KeyEvent;
 import java.awt.Panel;
+import java.util.ArrayList;
+
 import javax.swing.JScrollBar;
 
 
-public class Level{
+public class Level extends JPanel implements ActionListener{
 
 	private static JFrame frame;
 	private JTable table_c;
@@ -64,15 +72,24 @@ public class Level{
 	static int level;
 	public static int levelTime=60;
 	static JLabel label;
+	static int moves;
+	private BullPen bullPen;
+	boolean drawPiece;
+	ArrayList <Hexomino> HexList;
+
 	
 	
 
 	/**
 	 * Launch the application.
 	 */
-	public static void openLevel(String type, int levelnum) {
+	public static void openLevel(String type, int levelnum, int move) {
 		gameType = type;
 		level = levelnum;
+		if (gameType.equals("Lightning Level")){
+			levelTime= move;
+		}
+		else moves = move;
 		
 		
 		EventQueue.invokeLater(new Runnable() {
@@ -114,6 +131,16 @@ public class Level{
 		} catch (Exception e) {
 			
 		}
+	}
+	
+	public Hexomino getHexPieceFromID(int ID){
+		Hexomino hex = HexList.get(0);
+		for(int i = 1; i < HexList.size(); i++){
+			if (HexList.get(i).getID() == ID){
+				hex = HexList.get(i);
+			}
+		}
+		return hex;
 	}
 
 	/**
@@ -179,11 +206,11 @@ public class Level{
 		
 		
 		BoardBoss boardPen = new BoardPen();
-		BoardBoss boardPen2 = new BoardPen();
+		//BoardBoss boardPen2 = new BoardPen();
 		
 
 		BoardBoss board = new Board();
-		BoardBoss pen = new BullPen();
+		//BoardBoss pen = new BullPen();
 		
 		JButton rotateButton = new JButton("\u21BB");
 		rotateButton.setPreferredSize(new Dimension(50, 20));	
@@ -198,10 +225,18 @@ public class Level{
 		
 		
 		JLabel lblBoard = new JLabel("Board");
+		
+		JScrollPane scrollPane1 = new JScrollPane();
+		//bull pen initilize code goes in here
+		bullPen = new BullPen();
+	//bullPen= BullPen.makeBoard(this, HexList);
+		scrollPane1.setViewportView(bullPen);
+		//end of  bullpen initilize code
+		
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addComponent(toolBar, GroupLayout.DEFAULT_SIZE, 1056, Short.MAX_VALUE)
+				.addComponent(toolBar, GroupLayout.DEFAULT_SIZE, 1014, Short.MAX_VALUE)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(26)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
@@ -213,51 +248,44 @@ public class Level{
 							.addComponent(lblF1))
 						.addComponent(board, GroupLayout.PREFERRED_SIZE, 348, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblBoard))
-					//.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(boardPen, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)
-							//.addPreferredGap(ComponentPlacement.UNRELATED)
-							//.addComponent(boardPen2, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
-							//.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(pen, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE))
-						.addComponent(btnExit))
-					.addGap(360))
+						//	.addComponent(pen, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE))
+						.addComponent(btnExit)))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 115, GroupLayout.PREFERRED_SIZE)
+					.addGap(239))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addComponent(toolBar, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-							.addGap(22)
+					.addGap(22)
+					.addComponent(lblBoard)
+					.addGap(18)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+						.addGroup(groupLayout.createSequentialGroup()
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								
+								.addComponent(boardPen, GroupLayout.DEFAULT_SIZE, 348, GroupLayout.DEFAULT_SIZE)
+							//	.addComponent(pen, GroupLayout.DEFAULT_SIZE, 348, GroupLayout.DEFAULT_SIZE)
 								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(lblBoard)
-									.addGap(18)
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addComponent(boardPen, GroupLayout.DEFAULT_SIZE, crossHeight, GroupLayout.DEFAULT_SIZE)
-										//.addComponent(boardPen2, GroupLayout.DEFAULT_SIZE, crossHeight, GroupLayout.DEFAULT_SIZE)
-										.addComponent(pen, GroupLayout.DEFAULT_SIZE, 348, GroupLayout.DEFAULT_SIZE)
-										.addGroup(groupLayout.createSequentialGroup()
-											.addComponent(board, GroupLayout.PREFERRED_SIZE, 348, GroupLayout.PREFERRED_SIZE)
-											.addGap(33)
-											.addComponent(table_c, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(lblF1)))))
+									.addComponent(board, GroupLayout.PREFERRED_SIZE, 348, GroupLayout.PREFERRED_SIZE)
+									.addGap(33)
+									.addComponent(table_c, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(lblF1)))
 							.addGap(34))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(48)
-							
+							.addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 349, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 							.addComponent(btnExit)
 							.addGap(21))))
 		);
 		
-		boardPen.setBackground(Color.decode("#4169aa"));
-		boardPen2.setBackground(Color.decode("#4169aa"));
-		pen.setBackground(Color.decode("#4169aa"));
+	//	boardPen.setBackground(Color.decode("#4169aa"));
+	//	boardPen2.setBackground(Color.decode("#4169aa"));
+	//	pen.setBackground(Color.decode("#4169aa"));
 		//boardPen.setBackground(Color.WHITE);
 		
 
@@ -316,7 +344,7 @@ public class Level{
 			label.setText(levelTime/2+"");
 		}
 		else{
-			label.setText("  40");
+			label.setText("  "+ moves);
 		}
 		
 		JLabel label_1 = new JLabel("                                                                       ");
@@ -348,7 +376,7 @@ public class Level{
 		for(int TileCol = 0; TileCol <y;TileCol++){
 			for(int TileRow = 0; TileRow <x;TileRow++){
 
-				PuzzleTile AddedTile = new PuzzleTile(board, TileRow,TileCol, 12, 12, 999);
+				PuzzleTile AddedTile = new PuzzleTile(board, TileRow,TileCol, 999);
 
 				AddedTile.setBackground(Color.WHITE);
 
@@ -360,21 +388,19 @@ public class Level{
 		}
 		board.makeBoard(boardArray, x, y, 1);
 
-
-
 		x = 14;
 		y = 35;
 		
-		pen.setPreferredSize(new Dimension(140, 348));
+		/*pen.setPreferredSize(new Dimension(140, 348));
 		pen.setMinimumSize(new Dimension(140, 348));
 		pen.setMaximumSize(new Dimension(140, 348));
 		
 		pen.setLayout(new GridLayout(y, x));
-		
+	*/	
 		Tile penArray[][] = new Tile[x+6][y+6];
 
 
-		
+		/*
 		Border penTileBorder = BorderFactory.createLineBorder(Color.WHITE, 1);
 		
 		for(int TileRow = 0; TileRow <y;TileRow++){
@@ -397,7 +423,7 @@ public class Level{
 		pen.addHex(penArray[4][4], 2);
 		pen.init=false;
 		
-		
+		*/
 		
 		x=5;
 		y=12;
@@ -415,7 +441,7 @@ public class Level{
 		for(int TileRow = 0; TileRow <y;TileRow++){
 			for(int TileCol = 0; TileCol <x;TileCol++){
 
-				PuzzleTile AddedTile = new PuzzleTile(boardPen, TileCol,TileRow, x, y, 999);
+				PuzzleTile AddedTile = new PuzzleTile(boardPen, TileCol,TileRow, 999);
 
 				AddedTile.setBackground(Color.decode("#4169aa"));
 
@@ -464,6 +490,30 @@ public class Level{
 
 	}
 	
+	/** Creates all of the Hexominos*/
+	private ArrayList<Hexomino> makeHexominos() {
+		ArrayList<Hexomino> hexList = new ArrayList<Hexomino>();
+		
+		HexTile[] shape1 = {new HexTile(1,this, 0,0),new HexTile(1,this,0,1),new HexTile(1,this,0,2),new HexTile(1,this,0,3),new HexTile(1,this,0,4),new HexTile(1,this,0,5)};
+		HexTile[] shape2 = {new HexTile(2,this, 0,0),new HexTile(2,this,1,1),new HexTile(2,this,0,2),new HexTile(2,this,0,3),new HexTile(2,this,0,4),new HexTile(2,this,0,1)};
+
+		Hexomino h1 = new Hexomino(1, shape1);		
+		Hexomino h2 = new Hexomino(2, shape2);
+		hexList.add(h1);
+		hexList.add(h2);
+
+		Hexomino selectedHex = h2;
+		return hexList;
+	}
+
+	public void hidePiece(){
+		drawPiece = false;
+	}
+	public void drawPiece(){
+		drawPiece=true;
+	}
+
+
 	public void setLabel() {
 		if (gameType == "Lightning Level") {
 			label.setText(levelTime/2+"");
@@ -472,5 +522,15 @@ public class Level{
 			hs.newwindow();
 		}
 		}
+	}
+	
+	public BullPen getBP(){
+		return bullPen;
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 }

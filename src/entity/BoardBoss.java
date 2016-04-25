@@ -15,7 +15,10 @@ public abstract class BoardBoss extends JPanel{
 	 */
 	private static final long serialVersionUID = 1L;
 	protected Tile boardArray[][];
+//	protected Hexomino hexPlaced[] = new Hexomino[];
 	List<Hexomino> hexPlaced = new ArrayList<Hexomino>();
+	protected int XOrigin;
+	protected int YOrigin;
 	Board board;
 	int width = 12;
 	int height = 12;
@@ -33,6 +36,11 @@ public abstract class BoardBoss extends JPanel{
 		this.boardArray = boardArray;
 		this.boardID = id;
 	}
+
+	public int[] getTopLeft(){
+		int[] origin = {XOrigin, YOrigin};
+		return origin;
+	}
 	
 	public boolean checkCollision(Hexomino reqHex){
 		return false;
@@ -49,8 +57,24 @@ public abstract class BoardBoss extends JPanel{
 	 * @return True if heomino was added, false if hexomino doesn't exist
 	 */
 	
-	public abstract boolean addHex(Tile tile, int tileID);
-
+	public boolean addHex(Tile tile, int tileID){
+		//HexTile[] shape = {new HexTile(this,0,0, width, height),new HexTile(this,0,1, width, height),new HexTile(this,0,-2, width, height),new HexTile(this,0,-3, width, height),new HexTile(this,0,-4, width, height),new HexTile(this,1,0, width, height)};
+		//HexTile[] shape2 = {new HexTile(this,0,0, width, height),new HexTile(this,0,1, width, height),new HexTile(this,0,2, width, height),new HexTile(this,0,3, width, height),new HexTile(this,0,4, width, height),new HexTile(this,0,5, width, height)};
+		//Hexomino hex = new Hexomino(1, shape2);	
+		/**
+		boolean allTilesEmpty=CheckTiles(tile, shape2);
+		if(allTilesEmpty){
+			for(int i=0; i<6;i++){
+				int x=hex.shape[i].row+tile.getCoords()[0];
+				int y=hex.shape[i].column+tile.getCoords()[1];
+				boardArray[x][y].coverTile();
+				boardArray[x][y].setBackground(Color.BLUE);
+				hexPlaced.add(hex);
+			}
+		}
+		**/
+		return true;
+	}
 	public boolean CheckTiles(Tile tile,HexTile[] shape){
 		Hexomino hex = new Hexomino(1, shape);
 		for(int i=0; i<6;i++){
@@ -106,6 +130,26 @@ public abstract class BoardBoss extends JPanel{
 		boolean isValid = true;
 		return isValid;
 	}
+	/**
+	 * 
+	 * @param x location of click in pixels
+	 * @param y location of click in pixels
+	 * @return Tile that is being selected
+	 * Throws exception if tile does not exist at selected location
+	 * 
+	 */
+/*	public Tile getTile(int x, int y){
+		int tRow = (y-YOrigin)/tileBoard[0].getTileWidth();
+		int tCol = (x-XOrigin)/tileBoard[0].getTileHeight();
+		int tile = 0; //Placeholder value
+		return tileBoard[tile];
+	}
+	//Can throw NullTileException
+	public Point getTopLeftOfTile(Tile tile){
+		Point coords = new Point(0, 0);
+		return coords; 
+	}
+	*/
 
 	public void redraw() {
 		for(int j=0; j<width; j++) 
@@ -122,25 +166,5 @@ public abstract class BoardBoss extends JPanel{
 	public boolean rotateCheck(Tile tile) {
 		return true;
 		
-	}
-	
-	public int returnHeight() {
-		return this.height;
-	}
-	
-	public boolean borderCheck(Tile tile) {
-		int x=0;
-		int y=0;
-
-		//System.out.println(selectedPiece.shape[5].column);
-
-		x=selectedPiece.shape[5].row+tile.getCoords()[0];
-		y=selectedPiece.shape[5].column+tile.getCoords()[1];
-		
-		if(x<=width && y<=height) {
-			return true;
-		}
-		else
-			return false;
 	}
 }

@@ -2,7 +2,7 @@ package entity;
 
 import java.util.HashMap;
 import java.util.List;
-
+import views.Level;
 import javax.swing.JPanel;
 
 import gameControllers.MListener;
@@ -23,12 +23,12 @@ public class Board extends BoardBoss{
 	protected int height = 12;
 	protected int tileID;
 	protected int boardID = 1;
+	public Level level;
 
 	
-	public void makeBoard(Tile[][] boardArray, int width, int height, int id){
+	public void makeBoard(Level level, Tile[][] boardArray, int id){
 		this.boardArray = boardArray;
-		this.width = width;
-		this.height = height;
+		this.level=level;
 		this.boardID = id;
 	}
 
@@ -59,10 +59,13 @@ public class Board extends BoardBoss{
 	
 	public boolean addHex(Tile tile, int tileID){
 		//HexTile[] shape = {new HexTile(this,0,0, width, height),new HexTile(this,0,1, width, height),new HexTile(this,0,-2, width, height),new HexTile(this,0,-3, width, height),new HexTile(this,0,-4, width, height),new HexTile(this,1,0, width, height)};
-		HexTile[] shape2 = {new HexTile(this,0,0, width, height,1),new HexTile(this,0,1, width, height,1),new HexTile(this,0,2, width, height,1),new HexTile(this,0,3, width, height,1),new HexTile(this,0,4, width, height,1),new HexTile(this,0,5, width, height,1)};
-		Hexomino hex = new Hexomino(1, shape2);	
+		//HexTile[] shape2 = {new HexTile(this,0,0, width, height,1),new HexTile(this,0,1, width, height,1),new HexTile(this,0,2, width, height,1),new HexTile(this,0,3, width, height,1),new HexTile(this,0,4, width, height,1),new HexTile(this,0,5, width, height,1)};
+		//Hexomino hex = new Hexomino(1, shape2);	
 	
-		boolean allTilesEmpty=CheckTiles(tile, shape2);
+		System.out.println("Got here");
+		Hexomino hex = this.level.getHexPieceFromID(tileID);
+		
+		boolean allTilesEmpty=CheckTiles(tile, hex.getShape());
 		if(selectedPiece!=null && lifted ){
 			for(int i=0; i<6;i++){
 				int x=hex.shape[i].row+tile.getCoords()[0];
