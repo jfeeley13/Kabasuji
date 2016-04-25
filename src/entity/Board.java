@@ -69,21 +69,17 @@ public class Board extends BoardBoss{
 	
 		boolean isOverPiece = false;
 		boolean allTilesEmpty=CheckTiles(tile, shape2);
-
-		if(borderCheck(tile)) {
-			for(int i=0; i<6;i++){
-				int x=hex.shape[i].row+tile.getCoords()[0];
-				int y=hex.shape[i].column+tile.getCoords()[1];
+		for(int i=0; i<6;i++){
+			int x=hex.shape[i].row+tile.getCoords()[0];
+			int y=hex.shape[i].column+tile.getCoords()[1];
+			if(borderCheck(tile)) {
 				if(boardArray[x][y].getTileID()<100) isOverPiece=true;
 			}
-		}
-		else {
-			for(int i=0; i<6;i++){
-				int x=hex.shape[i].row+tile.getCoords()[0];
-				int y=hex.shape[i].column+tile.getCoords()[1];
+			else {
 				if(boardArray[x][height-6].getTileID()<100) isOverPiece=true;
 			}
 		}
+		
 		if(isOverPiece) return false;
 		if(selectedPiece!=null & lifted) {
 			for(int k=0; k<6;k++){
@@ -177,7 +173,6 @@ public class Board extends BoardBoss{
 					boardArray[x][y].setTileID(tileID+100);
 					
 				}
-				//System.out.println(tileID+100);
 				boardArray[x][y].setBackground(c);
 				
 				//if(boardArray[x][y].isCovered) {
