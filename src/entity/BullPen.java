@@ -22,7 +22,7 @@ public class BullPen extends BoardBoss{
 	protected int tileID;
 	protected int boardID = 2;
 	
-
+	
 
 
 	/** Board Creation method 

@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public abstract class BoardBoss extends JPanel{
 	
 	/**
-	 * 
+	 * *
 	 */
 	private static final long serialVersionUID = 1L;
 	protected Tile boardArray[][];

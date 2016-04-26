@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class Board extends BoardBoss{
 	
 	/**
-	 * 
+	 *  
 	 */
 	private static final long serialVersionUID = 1L;
 	protected Tile boardArray[][];
