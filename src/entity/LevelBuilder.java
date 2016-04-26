@@ -107,5 +107,12 @@ public class LevelBuilder{
 
 	}
 	
+	public void addSolutionPiece(Hexomino hex){
+		Level previousState = level;
+		level.solutionPieces.add(hex);
+		Level currentState = level;
+		moveDone(previousState, currentState);
+	}
+	
 	
 }

@@ -283,5 +283,39 @@ public class Board extends BoardBoss{
 				k=(k+1)%3;
 			}
 	}
+	
+	/**
+	 * Resizes the field boardArray in Board class
+	 * @param newRows new number of rows in board
+	 * @param newCols new number of columns in board
+	 */
+	public void resizeBoardArray(int newRows, int newCols){
+		//check if the new dimension are smaller or bigger than previous array
+		Tile[][] newBoard = new Tile[newRows][newCols];
+		if(newCols < height && newRows < width)
+			copyContents(newBoard, newRows, newCols);
+		else if(newCols < height)
+			copyContents(newBoard, width, newCols);
+		else if(newRows < width)
+			copyContents(newBoard, newRows, height);
+		else{
+			copyContents(newBoard, width, height);
+			//since in this case the ew array is bigger, 
+			//we still need to fill the empty entries od the array with the correct type of tiles
+		}
+	}
+	/**
+	 * Copies the contents of boardArray into a newBoard up to a specified row and column limit
+	 * @param newBoard 
+	 * @param row
+	 * @param cols
+	 */
+	public void copyContents(Tile[][] newBoard ,int row, int cols){
+		for(int i= 0; i < row; i++){
+			for(int j = 0; j < cols; j++){
+				newBoard[i][j] = boardArray[i][j]; 
+			}
+		}
+	}
 
 }
