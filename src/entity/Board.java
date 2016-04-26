@@ -90,8 +90,9 @@ public class Board extends BoardBoss{
 					
 					}
 				}
+			System.out.println("Piece Placed!");
+			BoardBoss.moves-=1;
 			}
-		BoardBoss.moves-=1;
 		lifted = true;
 		hasWon();
 		return true;
@@ -109,7 +110,7 @@ public class Board extends BoardBoss{
 			
 			if(boardArray[x][y].isCovered()==true && selectedPiece==null){
 				tileID = boardArray[x][y].getTileID();
-				System.out.println(tileID);
+				//System.out.println(tileID);
 				System.out.println("Selected Piece!");
 				for(int j=0; j<width; j++) 
 					for(int k=0; k<height; k++) 

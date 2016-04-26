@@ -49,7 +49,7 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 		
 		lastID = tile.getBoard().getID();
 
-		System.out.println("Clicked!");
+		//System.out.println("Clicked!");
 		randint = r.nextInt(993)+7;
 		if(!ids.contains(randint)) ids.add(randint);
 		else {
@@ -63,10 +63,11 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 		
 		boolean placed = this.tile.getBoard().addHex(this.tile, ids.get(ids.size()-1));
 		if(!placed) {
-			//System.out.println("Didn't place anything!");
+			System.out.println("Didn't place anything!");
 			ids.remove(ids.size()-1);
 		
 		}
+		
 
 	}
 
@@ -164,5 +165,8 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 
     	}
      }	
+    public void mouseDragged(MouseEvent e) {
+    	mouseMoved(e);
+    }
 
 }
