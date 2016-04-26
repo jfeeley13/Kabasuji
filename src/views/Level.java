@@ -458,6 +458,9 @@ public class Level{
 				hs.newwindow();
 				BoardBoss.moves=-1;
 			}
+			if(BoardBoss.moves==-1) {
+				label.setText(0+"");
+			}
 		}
 	}
 }

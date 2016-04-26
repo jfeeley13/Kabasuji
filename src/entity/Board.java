@@ -53,6 +53,7 @@ public class Board extends BoardBoss{
 			}
 		}
 		System.out.println("You win!");
+		moves=-1;
 		YouWin hs = new YouWin();
 		hs.newwindow();
 		winAnimation();
