@@ -591,8 +591,8 @@ public class Builder extends JFrame implements MouseListener{
 		Bullpen.selectedPiece = null;
 		Bullpen.makeBoard(penArray, x, y, 2);
 		Bullpen.init = true;
-		Bullpen.addHex(penArray[2][2], 1);
-		Bullpen.addHex(penArray[4][4], 2);
+		//Bullpen.addHex(penArray[2][2], 1);
+		//Bullpen.addHex(penArray[4][4], 2);
 		Bullpen.init=false;
 	
 		
@@ -625,8 +625,8 @@ public class Builder extends JFrame implements MouseListener{
 			Inventory.selectedPiece = null;
 			Inventory.makeBoard(penArray, x, y, 2);
 			Inventory.init = true;
-			Inventory.addHex(penArray[2][2], 1);
-			Inventory.addHex(penArray[4][4], 2);
+			//Inventory.addHex(penArray[2][2], 1);
+			//Inventory.addHex(penArray[4][4], 2);
 			Inventory.init=false;
 
 		}

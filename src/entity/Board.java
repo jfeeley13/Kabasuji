@@ -46,24 +46,26 @@ public class Board extends BoardBoss{
 	 * 
 	 */
 	
-	public boolean addHex(Tile tile, int tileID){
-		//HexTile[] shape = {new HexTile(this,0,0, width, height),new HexTile(this,0,1, width, height),new HexTile(this,0,-2, width, height),new HexTile(this,0,-3, width, height),new HexTile(this,0,-4, width, height),new HexTile(this,1,0, width, height)};
-		HexTile[] shape2 = {new HexTile(this,0,0, width, height,1),new HexTile(this,0,1, width, height,1),new HexTile(this,0,2, width, height,1),new HexTile(this,0,3, width, height,1),new HexTile(this,0,4, width, height,1),new HexTile(this,0,5, width, height,1)};
-		Hexomino hex = new Hexomino(1, shape2);	
+	public boolean addHex(Tile tile, int tileID, Hexomino hex){
+
 	
 		boolean isOverPiece = false;
-		boolean allTilesEmpty=liftHex(tile, shape2);
+		boolean allTilesEmpty=liftHex(tile, hex.shape);
+		
+		
 		
 		if(selectedPiece==null && !init) return false;
 		for(int i=0; i<6;i++){
 			int x=hex.shape[i].row+tile.getCoords()[0];
 			int y=hex.shape[i].column+tile.getCoords()[1];
+			try {
 			if(borderCheck(tile)) {
 				if(boardArray[x][y].getTileID()<1000) isOverPiece=true;
 			}
 			else {
 				if(boardArray[x][height-6].getTileID()<1000) isOverPiece=true;
 			}
+			} catch (Exception e) {return false;}
 		}
 		
 		if(isOverPiece) return false;
@@ -90,6 +92,7 @@ public class Board extends BoardBoss{
 					
 					}
 				}
+			pieceList.put(tileID, hex);
 			System.out.println("Piece Placed!");
 			BoardBoss.moves-=1;
 			}
@@ -157,7 +160,9 @@ public class Board extends BoardBoss{
 					break;
 			}
 			
-			boardArray[x][y].setHighlight(true);
+			try{
+				boardArray[x][y].setHighlight(true);
+			
 
 			try {
 				if(!boardArray[x][y].isCovered) {
@@ -168,6 +173,7 @@ public class Board extends BoardBoss{
 			} catch(NullPointerException e) {
 
 			}
+			} catch(Exception e) {};
 			
 
 		}	

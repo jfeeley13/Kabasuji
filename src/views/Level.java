@@ -13,6 +13,8 @@ import javax.swing.border.LineBorder;
 import java.awt.Color;
 import java.awt.Container;
 import javax.swing.table.DefaultTableModel;
+
+import entity.AllHex;
 import entity.Board;
 import entity.BoardBoss;
 import entity.BoardPen;
@@ -66,6 +68,7 @@ public class Level{
 	static int level;
 	public static int levelTime=60;
 	static JLabel label;
+	AllHex allhex = new AllHex();
 
 
 	
@@ -395,12 +398,8 @@ public class Level{
 		pen.selectedPiece = null;
 		pen.makeBoard(penArray, x, y, 2);
 		pen.init = true;
-		pen.addHex(penArray[2][2], 1);
-		pen.addHex(penArray[3][2], 2);
-		pen.addHex(penArray[4][2], 3);
-		pen.addHex(penArray[5][2], 4);
-		pen.addHex(penArray[6][2], 5);
-		pen.addHex(penArray[7][2], 6);
+		pen.addHex(penArray[2][2], 1, allhex.getHexList().get(1));
+		pen.addHex(penArray[4][4], 2, allhex.getHexList().get(2));
 		pen.init=false;
 		
 		

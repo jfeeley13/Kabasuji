@@ -61,7 +61,16 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 		//System.out.println("Piece id: " + ids.get(ids.size()-1));
 		
 		
-		boolean placed = this.tile.getBoard().addHex(this.tile, ids.get(ids.size()-1));
+		
+		Hexomino hex;
+		if(BoardBoss.selectedPiece==null) {
+			hex = (Hexomino) BoardBoss.pieceList.get(tile.getTileID());
+		}
+		else {
+			hex=BoardBoss.selectedPiece;
+		}
+		System.out.println("real shit: " + hex);
+		boolean placed = this.tile.getBoard().addHex(this.tile, ids.get(ids.size()-1), hex);
 		if(!placed) {
 			System.out.println("Didn't place anything!");
 			ids.remove(ids.size()-1);

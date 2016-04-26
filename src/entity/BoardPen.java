@@ -36,7 +36,7 @@ public class BoardPen extends BoardBoss{
 	}
 
 	
-	public boolean addHex(Tile tile, int tileID){
+	public boolean addHex(Tile tile, int tileID, Hexomino hex){
 		
 		return false;
 	}
@@ -71,7 +71,9 @@ public class BoardPen extends BoardBoss{
 					break;
 			}
 			
-			boardArray[x][y].setHighlight(true);
+			try{
+				boardArray[x][y].setHighlight(true);
+			
 
 			try {
 				
@@ -85,6 +87,7 @@ public class BoardPen extends BoardBoss{
 
 
 			}
+			} catch(Exception e) {};
 			
 
 		}	

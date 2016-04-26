@@ -45,13 +45,13 @@ public class BullPen extends BoardBoss{
 	 * 
 	 */
 	
-	public boolean addHex(Tile tile, int tileID){
-		//HexTile[] shape = {new HexTile(this,0,0),new HexTile(this,0,1),new HexTile(this,0,-2),new HexTile(this,0,-3),new HexTile(this,0,-4),new HexTile(this,1,0)};
-		HexTile[] shape2 = {new HexTile(this,0,0, width, height,1),new HexTile(this,0,1, width, height,1),new HexTile(this,0,2, width, height,1),new HexTile(this,0,3, width, height,1),new HexTile(this,0,4, width, height,1),new HexTile(this,0,5, width, height,1)};
-		Hexomino hex = new Hexomino(1, shape2);	
+	public boolean addHex(Tile tile, int tileID, Hexomino hex){
+
 	
 		boolean isOverPiece = false;
-		boolean allTilesEmpty=liftHex(tile, shape2);
+		boolean allTilesEmpty=liftHex(tile, hex);
+		
+		
 
 		if(selectedPiece==null && !init) return false;
 		for(int i=0;i<6;i++) {
@@ -87,7 +87,7 @@ public class BullPen extends BoardBoss{
 				selectedPiece=null;
 				boardArray[x][y].setTileID(tileID);
 			}
-
+			pieceList.put(tileID, hex);
 			System.out.println("Piece Placed!");
 
 		}
@@ -115,6 +115,7 @@ public class BullPen extends BoardBoss{
 						
 						}
 					}
+				pieceList.put(tileID, hex);
 				System.out.println("Piece Placed!");
 				}
 		}
@@ -127,9 +128,8 @@ public class BullPen extends BoardBoss{
 	 *  of shape HexTile[] shape off Tile tile 
 	 * 
 	 */
-	public boolean liftHex(Tile tile,HexTile[] shape){
-		Hexomino hex = new Hexomino(1, shape);
-		//System.out.println("CHECKING");
+	public boolean liftHex(Tile tile, Hexomino hex){
+ 		System.out.println(hex);
 		for(int i=0; i<6;i++){
 			int x=tile.getCoords()[0];
 			int y=tile.getCoords()[1];
@@ -188,7 +188,9 @@ public class BullPen extends BoardBoss{
 			}
 
 
-			boardArray[x][y].setHighlight(true);
+			try {
+				boardArray[x][y].setHighlight(true);
+			
 
 			try {
 				
@@ -204,7 +206,7 @@ public class BullPen extends BoardBoss{
 
 
 			}
-			
+			} catch (Exception e) {};
 
 		}	
 

@@ -9,6 +9,7 @@ import javax.swing.border.Border;
 import java.awt.Color;
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public abstract class BoardBoss extends JPanel{
 	
@@ -31,6 +32,7 @@ public abstract class BoardBoss extends JPanel{
 	protected Border selectBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
 	protected Border whiteBorder = BorderFactory.createLineBorder(Color.WHITE, 1);
 	protected Border boardPenBorder = BorderFactory.createLineBorder(Color.decode("#4169aa"), 1);
+	public static HashMap pieceList = new HashMap();
 
 	
 	/** Board Creation method 
@@ -47,7 +49,7 @@ public abstract class BoardBoss extends JPanel{
 	
 
 
-	public abstract boolean addHex(Tile tile, int tileID);
+	public abstract boolean addHex(Tile tile, int tileID, Hexomino hex);
 
 	public boolean liftHex(Tile tile,HexTile[] shape){
 		return true;
