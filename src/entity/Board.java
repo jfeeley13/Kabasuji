@@ -50,7 +50,7 @@ public class Board extends BoardBoss{
 
 	
 		boolean isOverPiece = false;
-		boolean allTilesEmpty=liftHex(tile, hex.shape);
+		boolean allTilesEmpty=liftHex(tile, hex);
 		
 		
 		
@@ -105,8 +105,7 @@ public class Board extends BoardBoss{
 	 *  of shape HexTile[] shape off Tile tile 
 	 * 
 	 */
-	public boolean liftHex(Tile tile,HexTile[] shape){
-		Hexomino hex = new Hexomino(1, shape);
+	public boolean liftHex(Tile tile,Hexomino hex){
 		for(int i=0; i<6;i++){
 			int x=tile.getCoords()[0];
 			int y=tile.getCoords()[1];
