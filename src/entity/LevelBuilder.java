@@ -9,9 +9,12 @@ public class LevelBuilder{
 	protected BullPen inventory;
 	protected String lvlName;
 	private Stack<IMove> moves = new Stack<IMove>();
+	String type;
+	int newLvlID;
 	
 	public LevelBuilder(){
-		
+		//Alex, how do you add a piece onto a bull pen? i notice the addHex method but i do not know what tileID whould be
+		//Im looking to fill inventory with all hex in here.
 	}
 	
 	/**
@@ -38,7 +41,7 @@ public class LevelBuilder{
 	}
 	
 	public void NewLevel(){
-		//level = new Level(0, type)
+		level = new Level(newLvlID, type);
 	}
 	
 	/**
@@ -71,6 +74,7 @@ public class LevelBuilder{
 	
 	public void setTimer(){
 		Level previousState = level;
+		//Where is the timer attribute
 		//change timer here
 		Level currentState = level;
 		moveDone(previousState, currentState);
@@ -78,7 +82,9 @@ public class LevelBuilder{
 	
 	public void setMoves(){
 		Level previousState = level;
+		//Where is the move attribute
 		//change moves here
+		//I see it in BoardBoss, but shouldnt it be only on board? since only the subclass board uses this atttribute
 		Level currentState = level;
 		moveDone(previousState, currentState);
 	}
@@ -106,7 +112,11 @@ public class LevelBuilder{
 		notSaveMove.revertMove();
 
 	}
-	
+	/**
+	 * Adds a hexomino onto the set of solutionPieces of level.
+	 * This hex should come from the inventory.
+	 * @param hex
+	 */
 	public void addSolutionPiece(Hexomino hex){
 		Level previousState = level;
 		level.solutionPieces.add(hex);

@@ -32,9 +32,13 @@ public class Level {
 		//initialize bullPen
 		//TODO: finish
 	}
-	
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean levelComplete(){
 		return board.hasWon();
+		//TODO: currently this only checks the winning condition of 3start
 	}
 	
 	public void setBoardDimensions(int newRows, int newColumns){
