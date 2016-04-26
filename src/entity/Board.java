@@ -53,6 +53,8 @@ public class Board extends BoardBoss{
 	
 		boolean isOverPiece = false;
 		boolean allTilesEmpty=liftHex(tile, shape2);
+		
+		if(selectedPiece==null && !init) return false;
 		for(int i=0; i<6;i++){
 			int x=hex.shape[i].row+tile.getCoords()[0];
 			int y=hex.shape[i].column+tile.getCoords()[1];

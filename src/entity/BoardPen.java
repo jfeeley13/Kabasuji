@@ -38,7 +38,7 @@ public class BoardPen extends BoardBoss{
 	
 	public boolean addHex(Tile tile, int tileID){
 		
-		return true;
+		return false;
 	}
 	public boolean liftHex(Tile tile,HexTile[] shape){
 		

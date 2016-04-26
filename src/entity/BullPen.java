@@ -53,7 +53,7 @@ public class BullPen extends BoardBoss{
 		boolean isOverPiece = false;
 		boolean allTilesEmpty=liftHex(tile, shape2);
 
-		
+		if(selectedPiece==null && !init) return false;
 		for(int i=0;i<6;i++) {
 			int x=hex.shape[i].row+tile.getCoords()[0];
 			int y=hex.shape[i].column+tile.getCoords()[1];
@@ -115,6 +115,7 @@ public class BullPen extends BoardBoss{
 						
 						}
 					}
+				System.out.println("Piece Placed!");
 				}
 		}
 
@@ -128,7 +129,7 @@ public class BullPen extends BoardBoss{
 	 */
 	public boolean liftHex(Tile tile,HexTile[] shape){
 		Hexomino hex = new Hexomino(1, shape);
-		System.out.println("CHECKING");
+		//System.out.println("CHECKING");
 		for(int i=0; i<6;i++){
 			int x=tile.getCoords()[0];
 			int y=tile.getCoords()[1];
