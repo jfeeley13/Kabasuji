@@ -121,10 +121,7 @@ public class Level{
 
 	/**
 	 * Initialize the contents of the frame.
-	 */
-	
-	
-	
+	 */	
 	private void initialize() {
 		int crossHeight = 348;
 		frame = new JFrame();
