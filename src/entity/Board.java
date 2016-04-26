@@ -300,6 +300,8 @@ public class Board extends BoardBoss{
 	public void resizeBoardArray(int newRows, int newCols){
 		//check if the new dimension are smaller or bigger than previous array
 		Tile[][] newBoard = new Tile[newRows][newCols];
+		if(newRows == this.width && this.height == newCols)
+			return;
 		if(newCols < height && newRows < width)
 			copyContents(newBoard, newRows, newCols);
 		else if(newCols < height)
@@ -308,9 +310,16 @@ public class Board extends BoardBoss{
 			copyContents(newBoard, newRows, height);
 		else{
 			copyContents(newBoard, width, height);
-			//since in this case the ew array is bigger, 
-			//we still need to fill the empty entries od the array with the correct type of tiles
+			for(int i = width - 1; i < newRows; i++){
+				for(int j = height; j < newCols; j++){
+					//just copy the origin tile to the new places to ensure it is the same type of tile.
+					newBoard[i][j] = boardArray[0][0]; 
+				}
+			}
 		}
+		this.width = newRows;
+		this.height = newCols;
+		//not update width and height
 	}
 	/**
 	 * Copies the contents of boardArray into a newBoard up to a specified row and column limit
@@ -322,6 +331,14 @@ public class Board extends BoardBoss{
 		for(int i= 0; i < row; i++){
 			for(int j = 0; j < cols; j++){
 				newBoard[i][j] = boardArray[i][j]; 
+			}
+		}
+	}
+	
+	public void fillArray(Tile typeOfTile){
+		for(int i= 0; i < width; i++){
+			for(int j = 0; j < height; j++){
+				boardArray[i][j] = typeOfTile; 
 			}
 		}
 	}

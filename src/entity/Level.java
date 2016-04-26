@@ -29,6 +29,8 @@ public class Level {
 			board.makeBoard(new LightningTile[rows][columns], rows, columns, 1);
 		else
 			board.makeBoard(new ReleaseTile[rows][columns], rows, columns, 1);
+		
+		//still need to fill array here
 		//initialize bullPen
 		//TODO: finish
 	}
