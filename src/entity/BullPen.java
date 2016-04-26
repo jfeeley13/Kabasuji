@@ -2,7 +2,9 @@ package entity;
 
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 
 import gameControllers.MListener;
 
@@ -19,6 +21,9 @@ public class BullPen extends BoardBoss{
 	int height;
 	protected int tileID;
 	protected int boardID = 2;
+	
+
+
 
 	/** Board Creation method 
 	 *  
@@ -77,6 +82,7 @@ public class BullPen extends BoardBoss{
 				System.out.println("x: " + x + ", " + "y: " + y);
 				boardArray[x][y].coverTile();
 				boardArray[x][y].setBackground(Color.BLUE);
+				boardArray[x][y].setBorder(selectBorder);
 				boardArray[x][y].isHighlight=false;
 				selectedPiece=null;
 				boardArray[x][y].setTileID(tileID);
@@ -101,6 +107,7 @@ public class BullPen extends BoardBoss{
 					for(int j=0; j<height; j++) {
 						if(boardArray[i][j].getBackground()==Color.GREEN) {
 							boardArray[i][j].coverTile();
+							boardArray[i][j].setBorder(selectBorder);
 							boardArray[i][j].setBackground(Color.BLUE);
 							boardArray[i][j].isHighlight=false;
 							selectedPiece=null;
@@ -136,6 +143,7 @@ public class BullPen extends BoardBoss{
 							boardArray[j][k].isCovered = false;
 							boardArray[j][k].setTileID(tileID+1000);
 							boardArray[j][k].setBackground(Color.WHITE);
+							boardArray[j][k].setBorder(whiteBorder);
 						}
 				selectedPiece = hex;
 				lifted = false;
@@ -158,6 +166,7 @@ public class BullPen extends BoardBoss{
 	 * 	over tiles
 	 */
 	public void drawHex(Tile tile, int posx, int posy, Color c) {
+		
 		if(!borderCheck(tile)) posy=height-6;
 		for(int i=0; i<6;i++){
 			int x = 0;
@@ -186,7 +195,7 @@ public class BullPen extends BoardBoss{
 					boardArray[x][y].setTileID(tileID+1000);
 					
 				}
-
+				boardArray[x][y].setBorder(selectBorder);
 				boardArray[x][y].setBackground(c);
 				
 				
@@ -213,8 +222,8 @@ public class BullPen extends BoardBoss{
 		for(int j=0; j<width; j++) 
 			for(int k=0; k<height; k++) {
 				if(boardArray[j][k].isHighlight) {
-			
-				boardArray[j][k].setBackground(Color.WHITE);
+					boardArray[j][k].setBorder(whiteBorder);
+					boardArray[j][k].setBackground(Color.WHITE);
 			}
 			if(boardArray[j][k].isCovered) {
 				boardArray[j][k].setBackground(Color.BLUE);

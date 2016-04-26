@@ -76,6 +76,7 @@ public class BoardPen extends BoardBoss{
 			try {
 				
 				boardArray[x][y].setTileID(tileID+1000);
+				boardArray[x][y].setBorder(selectBorder);
 				boardArray[x][y].setBackground(c);
 
 
@@ -102,7 +103,7 @@ public class BoardPen extends BoardBoss{
 		for(int j=0; j<width; j++) 
 			for(int k=0; k<height; k++) 
 				if(boardArray[j][k].isHighlight) {
-
+					boardArray[j][k].setBorder(boardPenBorder);
 					boardArray[j][k].setBackground(Color.decode("#4169aa"));
 				}
 	}

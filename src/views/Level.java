@@ -381,7 +381,7 @@ public class Level{
 
 
 		
-		Border penTileBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
+		Border penTileBorder = BorderFactory.createLineBorder(Color.WHITE, 1);
 		
 		for(int TileRow = 0; TileRow <y;TileRow++){
 			for(int TileCol = 0; TileCol <x;TileCol++){

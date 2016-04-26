@@ -2,7 +2,9 @@ package entity;
 
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 
 import java.awt.Color;
 import java.awt.Point;
@@ -26,7 +28,11 @@ public abstract class BoardBoss extends JPanel{
 	protected int boardID;											/** id of board */
 	public static int rotated = 1;									/** rotate state */
 	public static int moves = 8;									/** remaining moves */
+	protected Border selectBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
+	protected Border whiteBorder = BorderFactory.createLineBorder(Color.WHITE, 1);
+	protected Border boardPenBorder = BorderFactory.createLineBorder(Color.decode("#4169aa"), 1);
 
+	
 	/** Board Creation method 
 	 *  
 	 *  Creates the board, made up of the boardArray[][], with ROWS height, and COLUMNS width
