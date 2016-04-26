@@ -12,43 +12,32 @@ import java.util.ArrayList;
 
 public class BullPen extends BoardBoss{
 	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	protected Tile boardArray[][];
-	List<Hexomino> hexPlaced = new ArrayList<Hexomino>();
-	protected int width = 10;
-	protected int height = 18;
+	int width;
+	int height;
 	protected int tileID;
 	protected int boardID = 2;
 
-	
+	/** Board Creation method 
+	 *  
+	 *  Creates the bullpen, made up of the boardArray[][], with ROWS height, and COLUMNS width
+	 *  boardID specifies current board
+	 * 
+	 * */
 	
 	public void makeBoard(Tile[][] boardArray, int width, int height, int id){
 		this.boardArray = boardArray;
 		this.width = width;
 		this.height = height;
 		this.boardID = id;
-		
-		for(int i=0;i<width;i++) 
-			for(int j=0; j<height; j++)
-				boardArray[i][j].isCovered=false;
 	}
 	
-	public boolean checkCollision(Hexomino reqHex){
-		return false;
-	}
 	
-	public int checkNumOfHex(){		
-		return hexPlaced.size();
-	}
-	
-	/**
-	 * Adds hexomino to board from BullPen (possibly give XY coordinates of piece as well)
+	/** adds hexomino to Tile tile
+	 *  with specified id tileID
 	 * 
-	 * @param Requested hexomino to be added
-	 * @return True if heomino was added, false if hexomino doesn't exist
 	 */
 	
 	public boolean addHex(Tile tile, int tileID){
@@ -57,27 +46,24 @@ public class BullPen extends BoardBoss{
 		Hexomino hex = new Hexomino(1, shape2);	
 	
 		boolean isOverPiece = false;
-		boolean allTilesEmpty=CheckTiles(tile, shape2);
+		boolean allTilesEmpty=liftHex(tile, shape2);
 
 		
 		for(int i=0;i<6;i++) {
 			int x=hex.shape[i].row+tile.getCoords()[0];
 			int y=hex.shape[i].column+tile.getCoords()[1];
-			if(init) {
-				//System.out.println("1");
+			if(init) 
 				if(boardArray[x][y].getTileID()<1000) 
 					isOverPiece=true;
-			}
-			else if(borderCheck(tile)) {
-				//System.out.println("2");
+			
+			else if(borderCheck(tile)) 
 				if(boardArray[x][y].getTileID()<1000) 
 					isOverPiece=true;
-			}
-			else {
-				//System.out.println("3");
+			
+			else 
 				if(boardArray[x][height-6].getTileID()<1000) 
 					isOverPiece=true;
-			}
+			
 				
 		}
 
@@ -92,7 +78,6 @@ public class BullPen extends BoardBoss{
 				boardArray[x][y].coverTile();
 				boardArray[x][y].setBackground(Color.BLUE);
 				boardArray[x][y].isHighlight=false;
-				hexPlaced.add(selectedPiece);
 				selectedPiece=null;
 				boardArray[x][y].setTileID(tileID);
 			}
@@ -118,7 +103,6 @@ public class BullPen extends BoardBoss{
 							boardArray[i][j].coverTile();
 							boardArray[i][j].setBackground(Color.BLUE);
 							boardArray[i][j].isHighlight=false;
-							hexPlaced.add(selectedPiece);
 							selectedPiece=null;
 							boardArray[i][j].setTileID(tileID);
 						
@@ -130,12 +114,15 @@ public class BullPen extends BoardBoss{
 		lifted = true;
 		return true;
 	}
-	public boolean CheckTiles(Tile tile,HexTile[] shape){
+	
+	/** Attempts to lift hexomino
+	 *  of shape HexTile[] shape off Tile tile 
+	 * 
+	 */
+	public boolean liftHex(Tile tile,HexTile[] shape){
 		Hexomino hex = new Hexomino(1, shape);
 		System.out.println("CHECKING");
 		for(int i=0; i<6;i++){
-			//int x=hex.shape[i].row+tile.getCoords()[0];
-			//int y=hex.shape[i].column+tile.getCoords()[1];
 			int x=tile.getCoords()[0];
 			int y=tile.getCoords()[1];
 			
@@ -146,9 +133,6 @@ public class BullPen extends BoardBoss{
 				for(int j=0; j<width; j++) 
 					for(int k=0; k<height; k++) 
 						if(boardArray[j][k].tileID==tileID) {
-							
-							//x=hex.shape[j].row+tile.getCoords()[0];
-							//y=hex.shape[j].column+tile.getCoords()[1];
 							boardArray[j][k].isCovered = false;
 							boardArray[j][k].setTileID(tileID+1000);
 							boardArray[j][k].setBackground(Color.WHITE);
@@ -168,6 +152,11 @@ public class BullPen extends BoardBoss{
 
 	}
 	
+	
+	/** 
+	 * 	code for drawing lifted piece as green
+	 * 	over tiles
+	 */
 	public void drawHex(Tile tile, int posx, int posy, Color c) {
 		if(!borderCheck(tile)) posy=height-6;
 		for(int i=0; i<6;i++){
@@ -191,44 +180,40 @@ public class BullPen extends BoardBoss{
 
 			boardArray[x][y].setHighlight(true);
 
-
-			//System.out.println("The x and y are:" + x + y);
-			//boardArray[x][y].coverTile();
 			try {
 				
 				if(!boardArray[x][y].isCovered) {
 					boardArray[x][y].setTileID(tileID+1000);
 					
 				}
-				//System.out.println(tileID+1000);
+
 				boardArray[x][y].setBackground(c);
 				
-				//if(boardArray[x][y].isCovered) {
-					
-				//}
-				
-
 				
 			} catch(Exception e) {
 
 
 			}
 			
-			//hexPlaced.add(selectedPiece);
-			//penPiece = true;
-			//boardArray[x][y].setTileID(board.id);
+
 		}	
 
 	}
+	
+	/**
+	 * 	refresh the board
+	 * 	setting pieces to their
+	 * 	appropriate state
+	 * 
+	 * 	(used after moving from bullpen/board to
+	 * 	clear any potential paint artifacts)
+	 */
 	
 	public void refresh() {
 		for(int j=0; j<width; j++) 
 			for(int k=0; k<height; k++) {
 				if(boardArray[j][k].isHighlight) {
-				
-				//x=hex.shape[j].row+tile.getCoords()[0];
-				//y=hex.shape[j].column+tile.getCoords()[1];
-				//boardArray[j][k].isCovered = false;
+			
 				boardArray[j][k].setBackground(Color.WHITE);
 			}
 			if(boardArray[j][k].isCovered) {
@@ -237,7 +222,11 @@ public class BullPen extends BoardBoss{
 		}
 	}
 	
-	
+	/** 
+	 * 	redraw all the current pieces,
+	 * 	both placed and lifted
+	 * 
+	 */
 	public void redraw() {
 		
 		for(int j=0; j<width; j++) 
@@ -247,8 +236,7 @@ public class BullPen extends BoardBoss{
 					if(!boardArray[j][k].isHighlight)
 						boardArray[j][k].setBackground(Color.BLUE);
 					else {
-						//System.out.println("B");
-						//boardArray[j][k].setBackground(Color.GREEN);
+
 						boardArray[j][k].setHighlight(false);
 					}
 				}
@@ -263,7 +251,6 @@ public class BullPen extends BoardBoss{
 		int x=0;
 		int y=0;
 
-		//System.out.println(selectedPiece.shape[5].column);
 		switch(rotated) {
 		case 1:	x=selectedPiece.shape[5].row+tile.getCoords()[0];
 				y=selectedPiece.shape[5].column+tile.getCoords()[1];
@@ -283,6 +270,12 @@ public class BullPen extends BoardBoss{
 		return true;
 	}
 	
+	
+	/**
+	 * 	is piece at Tile tile escaping borders?
+	 * 	this method stops that from happening
+	 */
+	
 	public boolean borderCheck(Tile tile) {
 		int x=0;
 		int y=0;
@@ -297,17 +290,7 @@ public class BullPen extends BoardBoss{
 		else
 			return false;
 	}
-	/**
-	 * 
-	 * Removes selected hexomino from board
-	 * 
-	 * @param Requested hexomino to be removed 
-	 * @return true if hexomino was removed, false if hexomino doesn't exist
-	 */
-	public boolean removeHex(Hexomino hex){
-		boolean isValid = true;
-		return isValid;
-	}
+
 	
 	public int returnHeight() {
 		return this.height;
@@ -317,24 +300,6 @@ public class BullPen extends BoardBoss{
 	public Tile[][] returnBoard() {
 		return boardArray;
 	}
-	/**
-	 * 
-	 * @param x location of click in pixels
-	 * @param y location of click in pixels
-	 * @return Tile that is being selected
-	 * Throws exception if tile does not exist at selected location
-	 * 
-	 */
-/*	public Tile getTile(int x, int y){
-		int tRow = (y-YOrigin)/tileBoard[0].getTileWidth();
-		int tCol = (x-XOrigin)/tileBoard[0].getTileHeight();
-		int tile = 0; //Placeholder value
-		return tileBoard[tile];
-	}
-	//Can throw NullTileException
-	public Point getTopLeftOfTile(Tile tile){
-		Point coords = new Point(0, 0);
-		return coords; 
-	}
-	*/
+
+
 }
