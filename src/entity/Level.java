@@ -2,6 +2,8 @@ package entity;
 
 import java.util.ArrayList;
 
+import javax.swing.Box.Filler;
+
 public class Level {
 	
 	protected int lvlID;
@@ -23,13 +25,15 @@ public class Level {
 	
 	public void initializeLevel(){
 		this.board = new Board();
-		if(type.equals("Puzzle"))
+		if(type.equals("Puzzle")){
 			board.makeBoard(new PuzzleTile[rows][columns], rows, columns, 1);
+		}
+
 		else if(type.equals("Lighting"))
 			board.makeBoard(new LightningTile[rows][columns], rows, columns, 1);
 		else
 			board.makeBoard(new ReleaseTile[rows][columns], rows, columns, 1);
-		
+			//board.fillArray(typeOfTile);
 		//still need to fill array here
 		//initialize bullPen
 		//TODO: finish

@@ -13,23 +13,19 @@ public abstract class Tile extends JPanel{
 	protected int row;
 	protected int column;
 	protected boolean isCovered = false;
-	protected int width;
-	protected int height;
 	protected boolean isNull = false;
 	protected int tileID;
 	BoardBoss board;
 	protected boolean isHighlight = false;
 	
 	
-	public Tile (BoardBoss board, int row, int column, int w,int h, int tileID){
+	public Tile (BoardBoss board, int row, int column,int tileID){
 		this.row = row;
 		this.column = column;
 		this.board=board;
 		this.addMouseListener(new MListener(this, board));
 		this.addMouseMotionListener(new MListener(this, board));
 		this.addMouseWheelListener(new MListener(this, board));
-		this.width = w;
-		this.height = h;
 		this.tileID = tileID;
 	}
 	
@@ -74,15 +70,7 @@ public abstract class Tile extends JPanel{
 	public boolean isNull(){
 		return isNull;
 	}
-	
-	/**
-	 * 
-	 * @return Width of tile in Pixels
-	 * 
-	 */
-	public int getTileWidth(){
-		return width;
-	}
+
 	
 	public boolean isHighlight() {
 		return isHighlight;
@@ -92,18 +80,9 @@ public abstract class Tile extends JPanel{
 		isHighlight = b;
 	}
 
-	/**
-	 * 
-	 * @return Height of tile in Pixels
-	 * 
-	 */
-	public int getTileHeight(){
-		return height;
-	}
 	
 	public void setTileID(int id) {
 		tileID=id;
-		return;
 	}
 	
 	public int getTileID() {

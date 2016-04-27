@@ -13,8 +13,6 @@ public class LevelBuilder{
 	int newLvlID;
 	
 	public LevelBuilder(){
-		//Alex, how do you add a piece onto a bull pen? i notice the addHex method but i do not know what tileID whould be
-		//Im looking to fill inventory with all hex in here.
 	}
 	
 	/**
@@ -38,6 +36,7 @@ public class LevelBuilder{
 		}
 		SaveMove theSave = (SaveMove) m;
 		this.level = theSave.loadSavedState(); //change the current state of level to the state that the SaveMove Object held.
+		//so this works properly but since we are gonna be dealing with filestreams  this method has to be changed such that it reads a file
 	}
 	
 	public void NewLevel(){
