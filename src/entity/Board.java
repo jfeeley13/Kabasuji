@@ -65,9 +65,9 @@ public class Board extends BoardBoss{
 			else {
 				if(boardArray[x][height-6+i].getTileID()<1000) isOverPiece=true;
 			}
-			} catch (Exception e) {return false;}
+			} catch (Exception e) {}
 		}
-		
+		System.out.println("I'm here");
 		if(isOverPiece) return false;
 		if(selectedPiece!=null & lifted) {
 			for(int k=0; k<6;k++){
@@ -79,7 +79,7 @@ public class Board extends BoardBoss{
 
 						return false;
 					}
-				} catch (NullPointerException e) {}
+				} catch (Exception e) {}
 			}
 			for(int i=0; i<width; i++) 
 				for(int j=0; j<height; j++) {
@@ -114,6 +114,7 @@ public class Board extends BoardBoss{
 				tileID = boardArray[x][y].getTileID();
 				//System.out.println(tileID);
 				System.out.println("Selected Piece!");
+
 				for(int j=0; j<width; j++) 
 					for(int k=0; k<height; k++) 
 						if(boardArray[j][k].tileID==tileID) {
@@ -123,6 +124,7 @@ public class Board extends BoardBoss{
 							boardArray[j][k].setTileID(tileID+1000);
 
 						}
+
 				selectedPiece = hex;
 				lifted = false;
 				penPiece = false;
@@ -142,6 +144,15 @@ public class Board extends BoardBoss{
 		
 		for(int i=0; i<6;i++){
 			if(!borderCheck(tile)) posy=height-6;
+			
+			int testWidth = widthCheck(tile);
+			
+			if(testWidth>0) {
+				if(tile.getCoords()[0]>width/2)
+					posx = width - testWidth;
+				else
+					posx = 1;
+			}
 			int x = 0;
 			int y = 0;
 			switch(rotated) {
@@ -229,20 +240,31 @@ public class Board extends BoardBoss{
 	 * 	this method stops that from happening
 	 */
 	public boolean borderCheck(Tile tile) {
-		int x=0;
 		int y=0;
 		
 		try {
-		x=selectedPiece.shape[5].row+tile.getCoords()[0];
 		y=selectedPiece.shape[5].column+tile.getCoords()[1];
 			
-		if(x<width && y<height) {
+		if(y<height) {
 			return true;
 		}
 		else
 			return false;
 		} catch (NullPointerException e) {};
 		return false;
+	}
+	
+	public int widthCheck(Tile tile) {
+		int x=0;
+		int y=0;
+		for(int i=0; i<6; i++) {
+			try {
+				x=selectedPiece.shape[i].row+tile.getCoords()[0];
+				y=height-6;
+				Tile tileX = boardArray[x][y];
+			} catch (Exception e) {return i;}
+		}
+		return 0;
 	}
 	
 	public int returnHeight() {
