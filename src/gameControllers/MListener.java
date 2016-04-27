@@ -77,6 +77,8 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 		
 		}
 		
+		System.out.println("Pieces in bullpen: " + BoardBoss.penPieces);
+		
 
 	}
 
