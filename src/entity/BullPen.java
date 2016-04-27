@@ -52,7 +52,8 @@ public class BullPen extends BoardBoss{
 		boolean allTilesEmpty=liftHex(tile, hex);
 		
 		
-
+		
+		
 		if(selectedPiece==null && !init) return false;
 		for(int i=0;i<6;i++) {
 			int x=hex.shape[i].row+tile.getCoords()[0];
@@ -79,7 +80,6 @@ public class BullPen extends BoardBoss{
 			for(int i=0; i<6;i++){
 				int x=hex.shape[i].row+tile.getCoords()[0];
 				int y=hex.shape[i].column+tile.getCoords()[1];
-				System.out.println("x: " + x + ", " + "y: " + y);
 				boardArray[x][y].coverTile();
 				boardArray[x][y].setBackground(Color.BLUE);
 				boardArray[x][y].setBorder(selectBorder);
@@ -89,7 +89,7 @@ public class BullPen extends BoardBoss{
 			}
 			pieceList.put(tileID, hex);
 			System.out.println("Piece Placed!");
-
+			
 		}
 		else {
 			if((selectedPiece!=null && lifted && !penPiece)) {
@@ -116,10 +116,11 @@ public class BullPen extends BoardBoss{
 						}
 					}
 				pieceList.put(tileID, hex);
+				penPieces+=1;
 				System.out.println("Piece Placed!");
 				}
 		}
-
+		
 		lifted = true;
 		return true;
 	}
@@ -129,7 +130,6 @@ public class BullPen extends BoardBoss{
 	 * 
 	 */
 	public boolean liftHex(Tile tile, Hexomino hex){
- 		System.out.println(hex);
 		for(int i=0; i<6;i++){
 			int x=tile.getCoords()[0];
 			int y=tile.getCoords()[1];
@@ -149,14 +149,13 @@ public class BullPen extends BoardBoss{
 				selectedPiece = hex;
 				lifted = false;
 				penPiece = false;
-				
+				penPieces-=1;
 				drawHex(tile,x,y, Color.GREEN);
 				return false;
 			}
 
 			
 		}
-
 		return true;
 
 	}
@@ -169,6 +168,8 @@ public class BullPen extends BoardBoss{
 	public void drawHex(Tile tile, int posx, int posy, Color c) {
 		
 		if(!borderCheck(tile)) posy=height-6;
+
+
 		for(int i=0; i<6;i++){
 			int x = 0;
 			int y = 0;
