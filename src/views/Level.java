@@ -338,6 +338,15 @@ public class Level{
 		
 		frame.getContentPane().setLayout(groupLayout);
 
+		
+		/**
+		 * 
+		 *  BOARD INIT
+		 * 	@param x ROWS
+		 *  @param y COLUMNS
+		 *  
+		 */
+		
 		int x = 6;
 		int y = 6;
 
@@ -346,28 +355,50 @@ public class Level{
 		board.setMinimumSize(new Dimension(384,384));
 		board.setMaximumSize(new Dimension(384,384));
 		
+		
+		/**
+		 *  boardArray[][] holds all the tiles
+		 *  of the board being created
+		 * 
+		 */
+		
 		Tile boardArray[][] = new Tile[x][y];
 		
 		Border BoardTileBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
 		
 		
+		/** 
+		 *  go through every single tile at every row and column
+		 * 
+		 */
 		for(int TileCol = 0; TileCol <y;TileCol++){
 			for(int TileRow = 0; TileRow <x;TileRow++){
 
+				// create a new tile
 				PuzzleTile AddedTile = new PuzzleTile(board, TileRow,TileCol, 9999);
 
+				// the new tile will be empty (white)
 				AddedTile.setBackground(Color.WHITE);
 
+				// set border around tile (black border)
 				AddedTile.setBorder(BoardTileBorder);
 
+				// add tile to boardArray
 				boardArray[TileRow][TileCol] = AddedTile;
 				board.add(AddedTile);
 			}
 		}
+		// make the board with the given boardArray
 		board.makeBoard(boardArray, x, y, 1);
 
 
-
+		/**
+		 * 
+		 *  BULLPEN INIT
+		 * 	@param x ROWS
+		 *  @param y COLUMNS
+		 *  
+		 */
 		x = 14;
 		y = 35;
 		
@@ -377,32 +408,64 @@ public class Level{
 		
 		pen.setLayout(new GridLayout(y, x));
 		
-		Tile penArray[][] = new Tile[x+6][y+6];
+		
+		/**
+		 *  penArray[][] holds all the tiles
+		 *  of the board being created
+		 * 
+		 */
+		Tile penArray[][] = new Tile[x][y];
 
 
 		
 		Border penTileBorder = BorderFactory.createLineBorder(Color.WHITE, 1);
 		
+		/** 
+		 *  go through every single tile at every row and column
+		 * 
+		 */
 		for(int TileRow = 0; TileRow <y;TileRow++){
 			for(int TileCol = 0; TileCol <x;TileCol++){
-
+				
+				// create a new tile
 				PuzzleTile AddedTile = new PuzzleTile(pen, TileCol,TileRow, 9999);
+				
+				// the new tile will be empty (white)
 				AddedTile.setBackground(Color.WHITE);
 
+				// set border around tile (white border)
 				AddedTile.setBorder(penTileBorder);
 				
+				// add tile to boardArray
 				penArray[TileCol][TileRow] = AddedTile;
 				pen.add(AddedTile);
 			}
 		}
-		pen.selectedPiece = null;
+		
+		pen.selectedPiece = null; // there is no piece being picked up yet (obviously)
+		
+		// make the board with the given boardArray
 		pen.makeBoard(penArray, x, y, 2);
+		
+		// begin filling bullpen with pieces
 		pen.init = true;
+		
+		// add two pieces
 		pen.addHex(penArray[2][2], 1, allhex.getHexList().get(1));
 		pen.addHex(penArray[4][4], 2, allhex.getHexList().get(2));
+		
+		// end filling bullpen with pieces
 		pen.init=false;
 		
 		
+		
+		/**
+		 * 
+		 *  BOARD INIT
+		 * 	@param x ROWS
+		 *  @param y COLUMNS
+		 *  
+		 */
 		
 		x=5;
 		y=12;
@@ -412,30 +475,45 @@ public class Level{
 		boardPen.setMaximumSize(new Dimension(26, crossHeight));
 		boardPen.setLayout(new GridLayout(y, x));
 		
-		Tile boardPenArray[][] = new Tile[x+6][y+6];
+		
+		/**
+		 *  boardPenArray[][] holds all the tiles
+		 *  of the board being created
+		 * 
+		 */
+		Tile boardPenArray[][] = new Tile[x][y];
 		
 		Border boardPenTileBorder = BorderFactory.createLineBorder(Color.decode("#4169aa"), 1);
-		//boardPenTileBorder = BorderFactory.createLineBorder(Color.WHITE, 1);
+
 		
 		for(int TileRow = 0; TileRow <y;TileRow++){
 			for(int TileCol = 0; TileCol <x;TileCol++){
 
+				// create a new tile
 				PuzzleTile AddedTile = new PuzzleTile(boardPen, TileCol,TileRow, 9999);
 
+				// the new tile will be empty (Color is background color)
 				AddedTile.setBackground(Color.decode("#4169aa"));
 
+				// set border around tile (background color)
 				AddedTile.setBorder(boardPenTileBorder);
 
+				// add tile to boardArray
 				boardPenArray[TileCol][TileRow] = AddedTile;
 				boardPen.add(AddedTile);
 			}
 		}
 
+		// make the board with the given boardArray
 		boardPen.makeBoard(boardPenArray, x, y,3);
 		
 
 	}
 	
+	/**
+	 *  Updates UI elements such as moves left and timer
+	 * 
+	 */
 	public void setLabel() {
 		if (gameType == "Lightning Level") {
 			label.setText(levelTime/2+"");
