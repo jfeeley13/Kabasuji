@@ -63,7 +63,7 @@ public class Board extends BoardBoss{
 				if(boardArray[x][y].getTileID()<1000) isOverPiece=true;
 			}
 			else {
-				if(boardArray[x][height-6].getTileID()<1000) isOverPiece=true;
+				if(boardArray[x][height-6+i].getTileID()<1000) isOverPiece=true;
 			}
 			} catch (Exception e) {return false;}
 		}
