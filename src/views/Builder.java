@@ -52,7 +52,9 @@ import javax.swing.border.LineBorder;
 import javax.swing.event.ChangeListener;
 import javax.swing.SpinnerNumberModel;
 
-import gameControllers.SaveController;
+import builderControllers.CreateNewLevelController;
+import builderControllers.LevelBuilderController;
+import gameControllers.ExitController;
 
 
 public class Builder extends JFrame implements MouseListener{
@@ -142,16 +144,16 @@ public class Builder extends JFrame implements MouseListener{
 		JLabel lblBoardSize = new JLabel("Board Size:");	
 		lblBoardSize.setHorizontalAlignment(SwingConstants.CENTER);
 		
-		final JSpinner RowSpinner = new JSpinner();	//row spinner
-		RowSpinner.setModel(new SpinnerNumberModel(6, 1, 12, 1));
-		RowSpinner.setValue(row);
+		final JSpinner ColSpinner = new JSpinner();	//row spinner
+		ColSpinner.setModel(new SpinnerNumberModel(6, 1, 12, 1));
+		ColSpinner.setValue(col);
 		
 		JLabel lblX = new JLabel("x");
 		lblX.setHorizontalAlignment(SwingConstants.LEFT);
 		
-		final JSpinner ColumnSpinner = new JSpinner();	//column spinner
-		ColumnSpinner.setModel(new SpinnerNumberModel(6, 1, 12, 1));
-		ColumnSpinner.setValue(col);
+		final JSpinner RowSpinner = new JSpinner();	//column spinner
+		RowSpinner.setModel(new SpinnerNumberModel(6, 1, 12, 1));
+		RowSpinner.setValue(row);
 		
 		final JComboBox levelComboBox = new JComboBox();	//select which level to create
 		levelComboBox.addItem("Puzzle Level");
@@ -223,40 +225,17 @@ public class Builder extends JFrame implements MouseListener{
 		
 		
 		JButton btnSave = new JButton("Save");
+		//TODO: save controller
 		
 		JButton btnExit = new JButton("Exit");
-		btnExit.addActionListener(new SaveController(this));
-
-		/*btnExit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				SaveMenu nw = new SaveMenu();
-				//frame.dispose();
-				nw.setVisible(true);
-				
-				SaveController sc = new SaveController(this);
-				
-				BuildStart nw = new BuildStart();
-				setVisible(false);
-				//nw.openWindow();
-				SaveMenu nw = new SaveMenu();
-				//frame.dispose();
-				nw.setVisible(true);
-							
-			}
-		});
-		*/
+		btnExit.addActionListener(new ExitController(this));
 		
 		JButton btnCreate = new JButton("Create");
-		//TODO: this needs a controller
 		btnCreate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				col = (Integer) ColumnSpinner.getValue();
 				row = (Integer) RowSpinner.getValue();
-				Builder nw = new Builder(levelComboBox.getSelectedItem().toString(), row, col);
-				nw.setVisible(true);
-				nw.setLocationRelativeTo(null);
-				
-				
+				col = (Integer) ColSpinner.getValue();
+				new LevelBuilderController(Builder.this).process(levelComboBox.getSelectedItem().toString(), row, col);	
 			}
 		});
 		
@@ -289,10 +268,7 @@ public class Builder extends JFrame implements MouseListener{
 		JButton btnChangeLevel = new JButton("New Level");
 		btnChangeLevel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String newType = levelComboBox.getItemAt(0).toString();
-				Builder nw = new Builder(levelComboBox.getSelectedItem().toString(), row, col);
-				nw.setVisible(true);
-				//nw.openBuildWindow(levelComboBox.getSelectedItem().toString(), row, col);
+				new LevelBuilderController(Builder.this).process(levelComboBox.getSelectedItem().toString(), row, col);	
 			}
 		});
 		
@@ -314,11 +290,11 @@ public class Builder extends JFrame implements MouseListener{
 											.addPreferredGap(ComponentPlacement.RELATED)
 											.addComponent(lblBoardSize)
 											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(RowSpinner, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
+											.addComponent(ColSpinner, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
 											.addPreferredGap(ComponentPlacement.UNRELATED)
 											.addComponent(lblX, GroupLayout.PREFERRED_SIZE, 8, GroupLayout.PREFERRED_SIZE)
 											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(ColumnSpinner, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
+											.addComponent(RowSpinner, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
 											.addPreferredGap(ComponentPlacement.RELATED)
 											.addComponent(btnCreate, GroupLayout.PREFERRED_SIZE, 72, GroupLayout.PREFERRED_SIZE))
 										.addComponent(lblRightClickTo))
@@ -379,8 +355,8 @@ public class Builder extends JFrame implements MouseListener{
 									.addGap(12))
 								.addGroup(groupLayout.createSequentialGroup()
 									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-										.addComponent(ColumnSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(RowSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+										.addComponent(RowSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addComponent(ColSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 									.addGap(5))))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addPreferredGap(ComponentPlacement.UNRELATED)
