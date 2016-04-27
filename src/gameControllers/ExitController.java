@@ -6,11 +6,11 @@ import java.awt.event.ActionListener;
 import views.SaveMenu;
 import views.Builder;
 
-public class SaveController implements ActionListener{
+public class ExitController implements ActionListener{
 	Builder parentView;
 
 	
-	public SaveController(Builder parentView){
+	public ExitController(Builder parentView){
 		this.parentView = parentView;
 	
 	}
