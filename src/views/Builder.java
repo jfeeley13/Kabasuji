@@ -546,7 +546,7 @@ public class Builder extends JFrame implements MouseListener{
 		for(int TileRow = 0; TileRow <y;TileRow++){
 			for(int TileCol = 0; TileCol <x;TileCol++){
 				
-				PuzzleTile AddedTile = new PuzzleTile(board, TileCol,TileRow, x, y, 999);
+				PuzzleTile AddedTile = new PuzzleTile(board, TileCol,TileRow, 999);
 
 				AddedTile.setBackground(Color.white);
 
@@ -578,7 +578,7 @@ public class Builder extends JFrame implements MouseListener{
 		for(int TileRow = 0; TileRow <y;TileRow++){
 			for(int TileCol = 0; TileCol <x;TileCol++){
 
-				PuzzleTile AddedTile = new PuzzleTile(Bullpen, TileCol,TileRow, x, y, 999);
+				PuzzleTile AddedTile = new PuzzleTile(Bullpen, TileCol,TileRow, 999);
 
 				AddedTile.setBackground(Color.white);
 
@@ -613,7 +613,7 @@ public class Builder extends JFrame implements MouseListener{
 		for(int TileRow = 0; TileRow <y;TileRow++){
 			for(int TileCol = 0; TileCol <x;TileCol++){
 
-				PuzzleTile AddedTile = new PuzzleTile(Inventory, TileCol,TileRow, x, y, 999);
+				PuzzleTile AddedTile = new PuzzleTile(Inventory, TileCol,TileRow, 999);
 
 				AddedTile.setBackground(Color.black);
 
