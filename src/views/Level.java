@@ -67,7 +67,7 @@ public class Level{
 	public static String gameType;
 	static int level;
 	public static int levelTime=30;
-	static int timeVar = 20;
+	static int timeVar = 25;
 	static JLabel label;
 	AllHex allhex = new AllHex();
 
@@ -80,7 +80,8 @@ public class Level{
 	public static void openLevel(String type, int levelnum) {
 		gameType = type;
 		level = levelnum;
-		levelTime*=timeVar;
+		levelTime=30*timeVar;
+
 		
 		
 		EventQueue.invokeLater(new Runnable() {
@@ -128,6 +129,7 @@ public class Level{
 	 * Initialize the contents of the frame.
 	 */	
 	private void initialize() {
+		
 		int crossHeight = 348;
 		frame = new JFrame();
 		Color myColor = Color.decode("#4169aa");

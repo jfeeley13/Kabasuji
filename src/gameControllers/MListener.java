@@ -69,7 +69,6 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 		else {
 			hex=BoardBoss.selectedPiece;
 		}
-		System.out.println("real shit: " + hex);
 		boolean placed = this.tile.getBoard().addHex(this.tile, ids.get(ids.size()-1), hex);
 		if(!placed) {
 			System.out.println("Didn't place anything!");
@@ -77,7 +76,6 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 		
 		}
 		
-		System.out.println("Pieces in bullpen: " + BoardBoss.penPieces);
 		
 
 	}

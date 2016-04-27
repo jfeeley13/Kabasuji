@@ -80,7 +80,6 @@ public class BullPen extends BoardBoss{
 			for(int i=0; i<6;i++){
 				int x=hex.shape[i].row+tile.getCoords()[0];
 				int y=hex.shape[i].column+tile.getCoords()[1];
-				System.out.println("x: " + x + ", " + "y: " + y);
 				boardArray[x][y].coverTile();
 				boardArray[x][y].setBackground(Color.BLUE);
 				boardArray[x][y].setBorder(selectBorder);
@@ -131,7 +130,6 @@ public class BullPen extends BoardBoss{
 	 * 
 	 */
 	public boolean liftHex(Tile tile, Hexomino hex){
- 		System.out.println(hex);
 		for(int i=0; i<6;i++){
 			int x=tile.getCoords()[0];
 			int y=tile.getCoords()[1];
