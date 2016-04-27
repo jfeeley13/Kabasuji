@@ -302,13 +302,16 @@ public class Board extends BoardBoss{
 		Tile[][] newBoard = new Tile[newRows][newCols];
 		if(newRows == this.width && this.height == newCols)
 			return;
+		//case 1: new board is smaller
 		if(newCols < height && newRows < width)
 			copyContents(newBoard, newRows, newCols);
+		//case 2: new board height is smaller
 		else if(newCols < height)
 			copyContents(newBoard, width, newCols);
 		else if(newRows < width)
 			copyContents(newBoard, newRows, height);
 		else{
+			//case 4: new board is bigger in height and width
 			copyContents(newBoard, width, height);
 			for(int i = width - 1; i < newRows; i++){
 				for(int j = height; j < newCols; j++){
