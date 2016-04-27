@@ -63,7 +63,7 @@ public class Board extends BoardBoss{
 				if(boardArray[x][y].getTileID()<1000) isOverPiece=true;
 			}
 			else {
-				if(boardArray[x][height-6].getTileID()<1000) isOverPiece=true;
+				if(boardArray[x][height-6+i].getTileID()<1000) isOverPiece=true;
 			}
 			} catch (Exception e) {return false;}
 		}
@@ -109,7 +109,7 @@ public class Board extends BoardBoss{
 		for(int i=0; i<6;i++){
 			int x=tile.getCoords()[0];
 			int y=tile.getCoords()[1];
-			
+
 			if(boardArray[x][y].isCovered()==true && selectedPiece==null){
 				tileID = boardArray[x][y].getTileID();
 				//System.out.println(tileID);
@@ -119,7 +119,7 @@ public class Board extends BoardBoss{
 						if(boardArray[j][k].tileID==tileID) {
 
 							boardArray[j][k].isCovered = false;
-
+							boardArray[j][k].setBackground(Color.WHITE);
 							boardArray[j][k].setTileID(tileID+1000);
 
 						}
