@@ -324,7 +324,7 @@ public class Level{
 			label.setText(levelTime/2+"");
 		}
 		else{
-			label.setText("  40");
+			label.setText(BoardBoss.moves+"");
 		}
 		
 		JLabel label_1 = new JLabel("                                                                       ");
@@ -525,7 +525,7 @@ public class Level{
 			}
 		}
 		
-		if (gameType == "Puzzle Level") {
+		if (gameType == "Puzzle Level" || gameType == "Release Level") {
 			
 			if(BoardBoss.moves>=0)
 				label.setText(BoardBoss.moves+"");
