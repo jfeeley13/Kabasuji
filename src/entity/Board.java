@@ -67,7 +67,7 @@ public class Board extends BoardBoss{
 			}
 			} catch (Exception e) {}
 		}
-		System.out.println("I'm here");
+
 		if(isOverPiece) return false;
 		if(selectedPiece!=null & lifted) {
 			for(int k=0; k<6;k++){
