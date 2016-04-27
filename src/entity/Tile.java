@@ -2,6 +2,8 @@ package entity;
 
 import javax.swing.JPanel;
 
+import org.omg.CosNaming.IstringHelper;
+
 import gameControllers.MListener;
 
 public abstract class Tile extends JPanel{
@@ -98,6 +100,10 @@ public abstract class Tile extends JPanel{
 	public int[] getCoords(){
 		int coords[] = {row , column};
 		return coords;
+	}
+	
+	public String toString(){
+		return "Tile " + tileID + " "+ row+" " +column + " "  + isNull;
 	}
 }
 
