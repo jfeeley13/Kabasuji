@@ -89,5 +89,16 @@ public abstract class BoardBoss extends JPanel{
 	public boolean borderCheck(Tile tile) {
 		return true;
 	}
+	/**
+	 * Fills the boardArray parameter with a given type of tile
+	 * @param typeOfTile Any subclass object of the Tile class.
+	 */
+	public void fillArray(Tile typeOfTile){
+		for(int i= 0; i < width; i++){
+			for(int j = 0; j < height; j++){
+				boardArray[i][j] = typeOfTile; 
+			}
+		}
+	}
 
 }
