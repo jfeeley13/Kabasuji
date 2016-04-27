@@ -64,9 +64,10 @@ public class Level{
 	private static JFrame frame;
 	private JTable table_c;
 	private JTable table;
-	static String gameType;
+	public static String gameType;
 	static int level;
-	public static int levelTime=60;
+	public static int levelTime=30;
+	static int timeVar = 20;
 	static JLabel label;
 	AllHex allhex = new AllHex();
 
@@ -79,6 +80,7 @@ public class Level{
 	public static void openLevel(String type, int levelnum) {
 		gameType = type;
 		level = levelnum;
+		levelTime*=timeVar;
 		
 		
 		EventQueue.invokeLater(new Runnable() {
@@ -516,7 +518,7 @@ public class Level{
 	 */
 	public void setLabel() {
 		if (gameType == "Lightning Level") {
-			label.setText(levelTime/2+"");
+			label.setText(levelTime/timeVar+"");
 			if(levelTime==0) {
 				GameOver hs = new GameOver();
 				hs.newwindow();

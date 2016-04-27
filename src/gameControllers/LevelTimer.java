@@ -48,10 +48,12 @@ public class LevelTimer{
 	public static void main(final Level level) throws Exception{
         ActionListener taskPerformer = new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-            	//if(level.levelTime>=0) {
-            	//	level.levelTime-=1;
-            	//	
-            	//}
+            	if(level.gameType=="Lightning Level") {
+            		if(level.levelTime>=0) {
+            			level.levelTime-=1;
+            		
+            		}
+            	}
             	level.setLabel();
             }
         };
