@@ -51,12 +51,25 @@ public class BullPen extends BoardBoss{
 		boolean isOverPiece = false;
 		boolean allTilesEmpty=liftHex(tile, hex);
 		
-		
+		int minX = 0;
+		int minY = 0;
 
 		if(selectedPiece==null && !init) return false;
-		for(int i=0;i<6;i++) {
+
+/**		for(int i=0;i<6;i++) {
 			int x=hex.shape[i].row+tile.getCoords()[0];
 			int y=hex.shape[i].column+tile.getCoords()[1];
+			if (x<0){
+				minX = Math.abs(x);
+			}
+			if(y<0){
+				minY = Math.abs(y);
+			}
+		}*/
+		
+		for(int i=0;i<6;i++) {
+			int x=hex.shape[i].row+tile.getCoords()[0] + minX;
+			int y=hex.shape[i].column+tile.getCoords()[1] + minY;
 			if(init) 
 				if(boardArray[x][y].getTileID()<1000) 
 					isOverPiece=true;
@@ -77,8 +90,8 @@ public class BullPen extends BoardBoss{
 		if(init){
 			
 			for(int i=0; i<6;i++){
-				int x=hex.shape[i].row+tile.getCoords()[0];
-				int y=hex.shape[i].column+tile.getCoords()[1];
+				int x=hex.shape[i].row+tile.getCoords()[0] + minX;
+				int y=hex.shape[i].column+tile.getCoords()[1] + minY;
 				System.out.println("x: " + x + ", " + "y: " + y);
 				boardArray[x][y].coverTile();
 				boardArray[x][y].setBackground(Color.BLUE);

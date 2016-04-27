@@ -193,14 +193,9 @@ public class Level{
 		
 		JButton rotateButton = new JButton("\u21BB");
 		rotateButton.setPreferredSize(new Dimension(50, 20));	
-
-
 		
 		JButton flipButton = new JButton("\u21C4");
 		flipButton.setPreferredSize(new Dimension(50, 20));	
-		
-		
-		
 		
 		
 		JLabel lblBoard = new JLabel("Board");
@@ -335,7 +330,6 @@ public class Level{
 		toolBar.add(lblLevel);
 		
 		
-		
 		frame.getContentPane().setLayout(groupLayout);
 
 		int x = 6;
@@ -398,8 +392,9 @@ public class Level{
 		pen.selectedPiece = null;
 		pen.makeBoard(penArray, x, y, 2);
 		pen.init = true;
-		pen.addHex(penArray[2][2], 1, allhex.getHexList().get(1));
-		pen.addHex(penArray[4][4], 2, allhex.getHexList().get(2));
+//		pen.addHex(penArray[2][2], 1, allhex.getHex(1));
+		pen.addHex(penArray[4][4], 2, allhex.getHex(2));
+		pen.addHex(penArray[8][6], 3, allhex.getHex(3));
 		pen.init=false;
 		
 		

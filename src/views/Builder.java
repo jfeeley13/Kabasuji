@@ -14,6 +14,7 @@ import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JViewport;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JSpinner;
@@ -39,6 +40,7 @@ import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.table.DefaultTableModel;
 
+import entity.AllHex;
 import entity.Board;
 import entity.BoardBoss;
 import entity.BullPen;
@@ -50,8 +52,12 @@ import java.awt.Color;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.event.ChangeListener;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.SpinnerNumberModel;
 
+import gameControllers.LvlBuilderMouseListener;
+import gameControllers.MListener;
 import gameControllers.SaveController;
 
 
@@ -59,14 +65,16 @@ public class Builder extends JFrame implements MouseListener{
 
 	private JFrame frame;
 	private JTextField txtGame;
-	private JTextField textField;
+	private JTextField timerORMoveTextField;
 	private JTextField textField_1;
 	static String gameType;
-	int row = 6;
-	int col = 6;
-	int boardTileWidth = 32; //Pixels
-	int boardTileHeight = 32;
-	
+	private int row = 6;
+	private int col = 6;
+	private int boardTileWidth = 32; //Pixels
+	private int boardTileHeight = 32;
+	private int gameTimer = 0;
+	private int moveCounter = 0;
+	private AllHex allHex = new AllHex();
 
 //	/**
 //	 * Launch the application.
@@ -127,6 +135,8 @@ public class Builder extends JFrame implements MouseListener{
 	private void initialize() {
 		//frame = new JFrame();
 
+		
+		
 		Color myColor = Color.decode("#4169aa");
 		getContentPane().setBackground(myColor);
 		
@@ -255,8 +265,6 @@ public class Builder extends JFrame implements MouseListener{
 				Builder nw = new Builder(levelComboBox.getSelectedItem().toString(), row, col);
 				nw.setVisible(true);
 				nw.setLocationRelativeTo(null);
-				
-				
 			}
 		});
 		
@@ -270,9 +278,7 @@ public class Builder extends JFrame implements MouseListener{
 		
 		JLabel lblBullPin = new JLabel("Bull Pen:");
 		
-		//JPanel board = new JPanel();
 		BoardBoss board = new Board();
-		
 		
 		JSpinner SetNumSpinner = new JSpinner();
 		SetNumSpinner.setModel(new SpinnerNumberModel(1, 1, 6, 1));
@@ -486,12 +492,42 @@ public class Builder extends JFrame implements MouseListener{
 			lblTimer.setText("  Moves:");
 		}
 		
+		timerORMoveTextField = new JTextField();
+		timerORMoveTextField.setText("00");
+		toolBar.add(timerORMoveTextField);
+		timerORMoveTextField.setColumns(10);
 		
-		textField = new JTextField();
-		textField.setText("00");
-		toolBar.add(textField);
-		textField.setColumns(10);
-		
+		// Listen for changes in the text
+		timerORMoveTextField.getDocument().addDocumentListener(new DocumentListener() {
+		  public void warn() {
+			  //0 is put in to handle nullPointerException, 0 is ignored if actual number is inputed
+		     if (Integer.parseInt("0"+timerORMoveTextField.getText()) != 0){
+		 		if (gameType == "Lightning Level"){
+					gameTimer = Integer.parseInt("0"+timerORMoveTextField.getText());
+			    	System.out.println("Time Set to " + Integer.parseInt("0"+timerORMoveTextField.getText()));
+				}
+				else{
+					moveCounter = Integer.parseInt("0"+timerORMoveTextField.getText());
+			    	System.out.println("Number of Moves Changed to " + Integer.parseInt("0"+timerORMoveTextField.getText()));
+				}		    	 
+		     }
+		  }
+		  
+		  @Override
+		  public void insertUpdate(DocumentEvent e) {
+			  warn();
+
+		  }
+		  @Override
+		  public void removeUpdate(DocumentEvent e) {
+			  warn();
+		  }
+		  @Override
+		  public void changedUpdate(DocumentEvent e) {
+			  warn();
+		  }
+		});
+				
 		JLabel label = new JLabel(":");
 		toolBar.add(label);
 		if (gameType == "Lightning Level"){
@@ -572,7 +608,6 @@ public class Builder extends JFrame implements MouseListener{
 		Tile penArray[][] = new Tile[x+6][y+6];
 
 
-		
 		Border penTileBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
 		
 		for(int TileRow = 0; TileRow <y;TileRow++){
@@ -591,8 +626,7 @@ public class Builder extends JFrame implements MouseListener{
 		Bullpen.selectedPiece = null;
 		Bullpen.makeBoard(penArray, x, y, 2);
 		Bullpen.init = true;
-		//Bullpen.addHex(penArray[2][2], 1);
-		//Bullpen.addHex(penArray[4][4], 2);
+		Bullpen.addHex(penArray[2][4], 1, allHex.getHex(2));
 		Bullpen.init=false;
 	
 		
@@ -617,8 +651,8 @@ public class Builder extends JFrame implements MouseListener{
 
 				AddedTile.setBackground(Color.black);
 
-				AddedTile.setBorder(penTileBorder);
-
+				AddedTile.setBorder(invTileBorder);
+				
 				penArray[TileCol][TileRow] = AddedTile;
 				Inventory.add(AddedTile);
 			}
@@ -631,17 +665,6 @@ public class Builder extends JFrame implements MouseListener{
 
 		}
 	
-	}
-
-	private ChangeListener changeColNum(Object value) {
-		col = (Integer) value;
-		return null;
-	}
-
-
-	private ChangeListener changeRowNum(Object value) {
-		row = (Integer) value;
-		return null;
 	}
 
 

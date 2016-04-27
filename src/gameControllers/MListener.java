@@ -1,6 +1,9 @@
 package gameControllers;
 
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Insets;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.PointerInfo;
@@ -14,6 +17,8 @@ import java.util.Collections;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import javax.swing.BorderFactory;
+import javax.swing.border.Border;
 import javax.swing.event.MouseInputAdapter;
 
 import entity.Board;
@@ -94,8 +99,12 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+/**		//Code used to delete tiles
+		System.out.println("Deleeeeeete"); 
+		this.tile.setBackground(Color.decode("#4169aa"));
+		Border removedTileBorder = BorderFactory.createLineBorder(Color.decode("#4169aa"), 1);
+		this.tile.setBorder(removedTileBorder);
+		this.tile.invalidate();*/
 	}
 
 	@Override
@@ -146,9 +155,22 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
     public void mouseMoved(MouseEvent e) {
     	if(tile.getBoard().selectedPiece!=null && tile.getBoard().lifted && !tile.getBoard().penPiece) {
     		
+    		int minX = 0;
+    		int minY = 0;
     		
-    		int x = this.tile.getCoords()[0];
-    		int y = this.tile.getCoords()[1];
+ /*   		for(int i=0;i<6;i++) {
+    			int x=BoardBoss.selectedPiece.getShape().getCoords() + tile.getCoords()[0];
+    			int y=tile.getCoords()[1];
+    			if (x<0){
+    				minX = Math.abs(x);
+    			}
+    			if(y<0){
+    				minY = Math.abs(y);
+    			}
+    		}
+   */ 		
+    		int x = this.tile.getCoords()[0]+minX;
+    		int y = this.tile.getCoords()[1]+minY;
     		
     		int tileID= this.tile.getTileID();
     		

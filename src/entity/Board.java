@@ -213,14 +213,13 @@ public class Board extends BoardBoss{
 		for(int j=0; j<width; j++) 
 			for(int k=0; k<height; k++) 
 				if(boardArray[j][k].tileID<1000) {
-					
+
 					if(!boardArray[j][k].isHighlight)
 						boardArray[j][k].setBackground(Color.BLUE);
 					else {
 						boardArray[j][k].setHighlight(false);
 					}
 				}
-
 	}
 	
 	
