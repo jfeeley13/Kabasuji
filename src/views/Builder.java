@@ -39,6 +39,7 @@ import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.table.DefaultTableModel;
 
+import entity.AllHex;
 import entity.Board;
 import entity.BoardBoss;
 import entity.BullPen;
@@ -68,7 +69,7 @@ public class Builder extends JFrame implements MouseListener{
 	int col = 6;
 	int boardTileWidth = 32; //Pixels
 	int boardTileHeight = 32;
-	
+	AllHex allhex = new AllHex();
 
 //	/**
 //	 * Launch the application.
@@ -554,7 +555,7 @@ public class Builder extends JFrame implements MouseListener{
 		for(int TileRow = 0; TileRow <y;TileRow++){
 			for(int TileCol = 0; TileCol <x;TileCol++){
 
-				PuzzleTile AddedTile = new PuzzleTile(Bullpen, TileCol,TileRow, 999);
+				PuzzleTile AddedTile = new PuzzleTile(Bullpen, TileCol,TileRow, 9999);
 
 				AddedTile.setBackground(Color.white);
 
@@ -567,7 +568,7 @@ public class Builder extends JFrame implements MouseListener{
 		Bullpen.selectedPiece = null;
 		Bullpen.makeBoard(penArray, x, y, 2);
 		Bullpen.init = true;
-		//Bullpen.addHex(penArray[2][2], 1);
+		Bullpen.addHex(penArray[2][2], 1, allhex.getHexList().get(2));
 		//Bullpen.addHex(penArray[4][4], 2);
 		Bullpen.init=false;
 	
