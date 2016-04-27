@@ -249,6 +249,10 @@ public class Board extends BoardBoss{
 		return this.height;
 	}
 	
+	public int returnWidth() {
+		return this.width;
+	}
+	
 	public Tile[][] returnBoard() {
 		return boardArray;
 	}

@@ -82,6 +82,10 @@ public abstract class BoardBoss extends JPanel{
 		return this.height;
 	}
 	
+	public int returnWidth() {
+		return this.width;
+	}
+	
 	public Tile[][] returnBoard() {
 		return boardArray;
 	}
