@@ -348,7 +348,7 @@ public class Level{
 		for(int TileCol = 0; TileCol <y;TileCol++){
 			for(int TileRow = 0; TileRow <x;TileRow++){
 
-				PuzzleTile AddedTile = new PuzzleTile(board, TileRow,TileCol, 12, 12, 999);
+				PuzzleTile AddedTile = new PuzzleTile(board, TileRow,TileCol, 999);
 
 				AddedTile.setBackground(Color.WHITE);
 
@@ -380,7 +380,7 @@ public class Level{
 		for(int TileRow = 0; TileRow <y;TileRow++){
 			for(int TileCol = 0; TileCol <x;TileCol++){
 
-				PuzzleTile AddedTile = new PuzzleTile(pen, TileCol,TileRow, x, y, 999);
+				PuzzleTile AddedTile = new PuzzleTile(pen, TileCol,TileRow, 999);
 
 				AddedTile.setBackground(Color.WHITE);
 
@@ -415,7 +415,7 @@ public class Level{
 		for(int TileRow = 0; TileRow <y;TileRow++){
 			for(int TileCol = 0; TileCol <x;TileCol++){
 
-				PuzzleTile AddedTile = new PuzzleTile(boardPen, TileCol,TileRow, x, y, 999);
+				PuzzleTile AddedTile = new PuzzleTile(boardPen, TileCol,TileRow, 999);
 
 				AddedTile.setBackground(Color.decode("#4169aa"));
 

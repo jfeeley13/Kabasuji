@@ -59,7 +59,7 @@ public class Board extends BoardBoss{
 	
 	public boolean addHex(Tile tile, int tileID){
 		//HexTile[] shape = {new HexTile(this,0,0, width, height),new HexTile(this,0,1, width, height),new HexTile(this,0,-2, width, height),new HexTile(this,0,-3, width, height),new HexTile(this,0,-4, width, height),new HexTile(this,1,0, width, height)};
-		HexTile[] shape2 = {new HexTile(this,0,0, width, height,1),new HexTile(this,0,1, width, height,1),new HexTile(this,0,2, width, height,1),new HexTile(this,0,3, width, height,1),new HexTile(this,0,4, width, height,1),new HexTile(this,0,5, width, height,1)};
+		HexTile[] shape2 = {new HexTile(this,0,0,1),new HexTile(this,0,1,1),new HexTile(this,0,2,1),new HexTile(this,0,3,1),new HexTile(this,0,4,1),new HexTile(this,0,5,1)};
 		Hexomino hex = new Hexomino(1, shape2);	
 	
 		boolean allTilesEmpty=CheckTiles(tile, shape2);
