@@ -58,7 +58,7 @@ import builderControllers.LevelBuilderController;
 import gameControllers.ExitController;
 
 
-public class Builder extends JFrame implements MouseListener{
+public class Builder extends JFrame{
 
 	private JFrame frame;
 	private JTextField txtGame;
@@ -506,7 +506,6 @@ public class Builder extends JFrame implements MouseListener{
 		
 		/**Mouse Listener*/
 		this.setLocationRelativeTo(null);
-		board.addMouseListener(this);
 		
 		
 		int x = col;
@@ -523,7 +522,7 @@ public class Builder extends JFrame implements MouseListener{
 		for(int TileRow = 0; TileRow <y;TileRow++){
 			for(int TileCol = 0; TileCol <x;TileCol++){
 				
-				PuzzleTile AddedTile = new PuzzleTile(board, TileCol,TileRow, 999);
+				PuzzleTile AddedTile = new PuzzleTile(board, TileCol,TileRow, 9999);
 
 				AddedTile.setBackground(Color.white);
 
@@ -550,7 +549,7 @@ public class Builder extends JFrame implements MouseListener{
 
 
 		
-		Border penTileBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
+		Border penTileBorder = BorderFactory.createLineBorder(Color.WHITE, 1);
 		
 		for(int TileRow = 0; TileRow <y;TileRow++){
 			for(int TileCol = 0; TileCol <x;TileCol++){
@@ -570,6 +569,7 @@ public class Builder extends JFrame implements MouseListener{
 		Bullpen.init = true;
 		Bullpen.addHex(penArray[2][2], 1, allhex.getHexList().get(2));
 		//Bullpen.addHex(penArray[4][4], 2);
+		BoardBoss.penPieces = 1;
 		Bullpen.init=false;
 	
 		
@@ -590,17 +590,17 @@ public class Builder extends JFrame implements MouseListener{
 		for(int TileRow = 0; TileRow <y;TileRow++){
 			for(int TileCol = 0; TileCol <x;TileCol++){
 
-				PuzzleTile AddedTile = new PuzzleTile(Inventory, TileCol,TileRow, 999);
+				PuzzleTile AddedTile = new PuzzleTile(Inventory, TileCol,TileRow, 9999);
 
 				AddedTile.setBackground(Color.black);
 
 				AddedTile.setBorder(penTileBorder);
 
-				penArray[TileCol][TileRow] = AddedTile;
+				invArray[TileCol][TileRow] = AddedTile;
 				Inventory.add(AddedTile);
 			}
 			Inventory.selectedPiece = null;
-			Inventory.makeBoard(penArray, x, y, 2);
+			Inventory.makeBoard(invArray, x, y, 2);
 			Inventory.init = true;
 			//Inventory.addHex(penArray[2][2], 1);
 			//Inventory.addHex(penArray[4][4], 2);
@@ -622,15 +622,6 @@ public class Builder extends JFrame implements MouseListener{
 	}
 
 
-	@Override
-	public void mouseClicked(MouseEvent me) {
-		int pixRow = me.getY();
-		int pixCol = me.getX();
-
-		System.out.println(pixRow);
-		System.out.println(pixCol);
-		
-	}
 
 	public void quit(Builder parentView) {
 		//parentView.setVisible(false);	
@@ -639,30 +630,4 @@ public class Builder extends JFrame implements MouseListener{
 	}
 
 
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 }

@@ -69,7 +69,7 @@ public class Level{
 	public static int levelTime=30;
 	static int timeVar = 25;
 	static JLabel label;
-	AllHex allhex = new AllHex();
+	public static AllHex allhex = new AllHex();
 
 
 	

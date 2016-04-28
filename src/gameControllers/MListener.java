@@ -16,6 +16,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.swing.event.MouseInputAdapter;
 
+import entity.AllHex;
 import entity.Board;
 import entity.BoardBoss;
 import entity.BullPen;
@@ -30,6 +31,7 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 	static int lastTileID;
 	static Tile lastGoodTile;
 	BoardBoss board;
+	static BoardBoss bullPen;
 	static BoardBoss lastBoard;
 	Random r = new Random();
 	static ArrayList<Integer> ids = new ArrayList<Integer>();
@@ -47,20 +49,14 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 	@Override
 	public void mousePressed(MouseEvent e) {
 		
+		if(tile.getBoard().getID()==2) bullPen=tile.getBoard();
 		lastID = tile.getBoard().getID();
 
 		//System.out.println("Clicked!");
-		randint = r.nextInt(993)+7;
-		if(!ids.contains(randint)) ids.add(randint);
-		else {
-			while(ids.contains(randint)) {
-				randint = r.nextInt(993)+7;
-			}
-			ids.add(randint);
-		}
+		
 		//System.out.println("Piece id: " + ids.get(ids.size()-1));
 		
-		
+		generateRandom();
 		
 		Hexomino hex;
 		if(BoardBoss.selectedPiece==null) {
@@ -75,9 +71,38 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 			ids.remove(ids.size()-1);
 		
 		}
+		else {
+			if(this.tile.getBoard().getID()==1) {
+				bullPen.clearPen();
+				bullPen.refill=true;
+				generateRandom();
+				int quickrand = r.nextInt(2)+1;
+				bullPen.addHex(bullPen.returnBoard()[6][1], ids.get(ids.size()-1), Level.allhex.getHexList().get(quickrand));
+				generateRandom();
+				quickrand = r.nextInt(2)+1;
+				bullPen.addHex(bullPen.returnBoard()[6][9], ids.get(ids.size()-1), Level.allhex.getHexList().get(quickrand));
+				generateRandom();
+				quickrand = r.nextInt(2)+1;
+				bullPen.addHex(bullPen.returnBoard()[6][17], ids.get(ids.size()-1), Level.allhex.getHexList().get(quickrand));
+				bullPen.refill=false;
+			}
+			
+		}
+		
 		
 		
 
+	}
+	
+	private void generateRandom() {
+		randint = r.nextInt(993)+7;
+		if(!ids.contains(randint)) ids.add(randint);
+		else {
+			while(ids.contains(randint)) {
+				randint = r.nextInt(993)+7;
+			}
+			ids.add(randint);
+		}
 	}
 
 	@Override
@@ -145,7 +170,6 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 	
     public void mouseMoved(MouseEvent e) {
     	if(tile.getBoard().selectedPiece!=null && tile.getBoard().lifted && !tile.getBoard().penPiece) {
-    		
     		
     		int x = this.tile.getCoords()[0];
     		int y = this.tile.getCoords()[1];

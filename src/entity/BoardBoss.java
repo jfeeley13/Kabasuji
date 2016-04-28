@@ -23,6 +23,7 @@ public abstract class BoardBoss extends JPanel{
 	int height = 12;
 	public static Hexomino selectedPiece;							/** the piece currently being "lifted" */
 	public static boolean init = true;								/** is the level being initalized (bullpen being filled with pieces?) */
+	public static boolean refill = false;
 	public static boolean lifted = false;							/** has a piece been lifted off the board/pen by the user? */
 	public static boolean penPiece = false;							/** is the piece being lifted a bullpen piece? */
 	protected int tileID;											/** id of tile that hexomino is being added to */
@@ -104,6 +105,10 @@ public abstract class BoardBoss extends JPanel{
 				boardArray[i][j] = typeOfTile; 
 			}
 		}
+	}
+	
+	public void clearPen() {
+		return;
 	}
 
 }
