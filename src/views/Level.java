@@ -363,8 +363,8 @@ int x=6,y=6;
 		 *  
 		 */
 		
-		int x = 6;
-		int y = 6;
+		int x = 10;
+		int y = 9;
 
 		board.setLayout(new GridLayout(y,x));
 		board.setPreferredSize(new Dimension(384,384));
@@ -378,7 +378,7 @@ int x=6,y=6;
 		 * 
 		 */
 		
-		//Tile boardArray[][] = new Tile[x][y];
+		Tile boardArray[][] = new Tile[x][y];
 		
 		Border BoardTileBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
 		
@@ -563,6 +563,8 @@ int x=6,y=6;
 
 			int covered=0;
 			
+			
+			/**
 			for(int i = 0; i < y; i++){
 				for(Tile t : boardArray[i]){
 					if(t.isCovered()==true) {
@@ -588,6 +590,7 @@ int x=6,y=6;
 				views.LevelSelection.lblNewLabel.setText("    \u2605\u2605\u2605");
 
 			}
+			*/
 		}
 	}
 	
