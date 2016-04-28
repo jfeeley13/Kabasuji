@@ -76,21 +76,25 @@ public class Level{
 	static int timeVar = 25;
 	static JLabel label;
 	public static AllHex allhex = new AllHex();
-
+	public static String starPArray[] = new String[6];
+	public static String starLArray[] = new String[6];
+	public static String starRArray[] = new String[6];
 	JLabel stars;
-int x=6,y=6;
+	int x=6,y=6;
 	Tile boardArray[][] = new Tile[x][y];
+	static JLabel starLabel;
 
 	
 
 	/**
 	 * Launch the application.
+	 * @param lblNewLabel 
 	 */
-	public static void openLevel(String type, int levelnum) {
+	public static void openLevel(String type, int levelnum, JLabel lbl) {
 		gameType = type;
 		level = levelnum;
 		levelTime=30*timeVar;
-
+		starLabel = lbl;
 		
 		
 		EventQueue.invokeLater(new Runnable() {
@@ -363,8 +367,8 @@ int x=6,y=6;
 		 *  
 		 */
 		
-		int x = 10;
-		int y = 9;
+		int x = 6;
+		int y = 6;
 
 		board.setLayout(new GridLayout(y,x));
 		board.setPreferredSize(new Dimension(384,384));
@@ -378,7 +382,7 @@ int x=6,y=6;
 		 * 
 		 */
 		
-		Tile boardArray[][] = new Tile[x][y];
+		//Tile boardArray[][] = new Tile[x][y];
 		
 		Border BoardTileBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
 		
@@ -468,13 +472,16 @@ int x=6,y=6;
 		pen.init = true;
 		
 		// add two pieces
-		pen.addHex(penArray[6][3], 1, allhex.getHexList().get(1));
+		pen.addHex(penArray[2][2], 1, allhex.getHexList().get(1));
 	//	pen.addHex(penArray[4][4], 2, allhex.getHexList().get(2));
 	//	BoardBoss.penPieces=2;		
 		
-		pen.addHex(penArray[6][11], 2, allhex.getHexList().get(1));
-		pen.addHex(penArray[6][20], 3, allhex.getHexList().get(1));
-
+		pen.addHex(penArray[3][2], 2, allhex.getHexList().get(1));
+		pen.addHex(penArray[4][2], 3, allhex.getHexList().get(1));
+		pen.addHex(penArray[5][2], 4, allhex.getHexList().get(1));
+		pen.addHex(penArray[6][2], 5, allhex.getHexList().get(1));
+		pen.addHex(penArray[7][2], 6, allhex.getHexList().get(1));
+		//pen.addHex(penArray[4][4], 2, allhex.getHexList().get(2));
 		
 		// end filling bullpen with pieces
 		pen.init=false;
@@ -559,12 +566,12 @@ int x=6,y=6;
 			}
 		}
 
+		/* STARS */
 		if (gameType == "Puzzle Level" || gameType == "Lightning Level") {
-
 			int covered=0;
-			
-			
-			/**
+			int all=x * y;
+
+			//Y is the width of the array? **might break if change board size
 			for(int i = 0; i < y; i++){
 				for(Tile t : boardArray[i]){
 					if(t.isCovered()==true) {
@@ -573,24 +580,49 @@ int x=6,y=6;
 				}
 			}
 		
-			int all=x * y;
+			//1 star if 12 tiles uncovered (2 pieces)
 			if(covered==all-12){
-				stars.setText("    \u2605");
-				label.setText("");
-				views.LevelSelection.lblNewLabel.setText("    \u2605");
+				stars.setText("    \u2605");				
+				if (gameType == "Puzzle Level"){
+					starPArray[level]="    \u2605";					//put current score in star array to be read by level selection screen
+				}
+				else if (gameType == "Lightning Level"){
+					starLArray[level]="    \u2605";
+				}
+				else{
+					starRArray[level]="    \u2605";
+				}
+				
+				
 			}
+			
+			//2 stars if 6 tiles uncovered (1 pieces)
 			else if(covered==all-6){
 				stars.setText("    \u2605\u2605");
-				views.LevelSelection.lblNewLabel.setText("    \u2605\u2605");
-
-	
+				if (gameType == "Puzzle Level"){
+					starPArray[level]="    \u2605\u2605";
+				}
+				else if (gameType == "Lightning Level"){
+					starLArray[level]="    \u2605\u2605";
+				}
+				else{
+					starRArray[level]="    \u2605\u2605";
+				}
 			}
+			
+			//3 stars if all tiles covered
 			else if(covered==all){
 				stars.setText("    \u2605\u2605\u2605");
-				views.LevelSelection.lblNewLabel.setText("    \u2605\u2605\u2605");
-
+				if (gameType == "Puzzle Level"){
+					starPArray[level]="    \u2605\u2605\u2605";
+				}
+				else if (gameType == "Lightning Level"){
+					starLArray[level]="    \u2605\u2605\u2605";
+				}
+				else{
+					starRArray[level]="    \u2605\u2605\u2605";
+				}
 			}
-			*/
 		}
 	}
 	

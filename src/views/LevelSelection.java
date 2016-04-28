@@ -2,24 +2,38 @@ package views;
 
 import java.awt.Color;
 import java.awt.EventQueue;
+
 import javax.swing.JFrame;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JPanel;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
 import java.awt.Font;
+
 import javax.swing.UIManager;
+
 import java.awt.GridLayout;
+
 import javax.swing.SwingConstants;
 
 
 public class LevelSelection {
-	static JLabel lblNewLabel;
-	JLabel label;
+	static JLabel lblNewLabel, label, label_1, label_2, label_3, label_5, label_6, label_7, label_8, label_9, label_10, label_11, label_12, label_13, label_14;
+	static JLabel Puzzlestars[] = {lblNewLabel, label, label_1, label_2, label_3};
+	static JLabel Lightningstars[] = {label_5, label_6, label_7, label_8, label_9};
+	static JLabel Releasestars[] = {label_10, label_11, label_12, label_13, label_14};
+	static JButton button_1, button_2, button_3, button_4, button_5, button_6,  button_7, button_8, button_9, button_10, button_11, button_12, button_13, button_14, button_15; 
+	static JButton Puzzlebuttons[] = {button_1, button_2, button_3, button_4, button_5};
+	static JButton Lightningbuttons[] = {button_6,  button_7, button_8, button_9, button_10};
+	static JButton Releasebuttons[] = {button_11, button_12, button_13, button_14, button_15};
+	
 	private JFrame frame;
 	
 
@@ -47,24 +61,35 @@ public class LevelSelection {
 	 */
 	public LevelSelection() {
 		initialize();
+		
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
 		frame = new JFrame();
 		Color myColor = Color.decode("#4b89d0");
 		frame.getContentPane().setBackground(myColor); //frame.getContentPane().setBackground(UIManager.getColor("ComboBox.selectionBackground"));
 		frame.setBounds(100, 100, 500, 320);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		//Puzzle level panel
 		JPanel panel_2 = new JPanel();
 		Color myColor2 = Color.decode("#4169aa");
 		panel_2.setBackground(myColor2);
-		
+		panel_2.setLayout(new GridLayout(0, 2, 0, 0));
+
+		//Lightning Level panel
+		JPanel panel = new JPanel();
+		panel.setBackground(myColor2);
+		panel.setLayout(new GridLayout(0, 2, 0, 0));
+
+		//Release Level panel
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(myColor2);
+		panel_1.setLayout(new GridLayout(0, 2, 0, 0));
 		
 		JLabel lblPuzzleLevel = new JLabel("Puzzle Level");
 		lblPuzzleLevel.setFont(new Font("Meiryo", Font.BOLD, 13));
@@ -85,155 +110,104 @@ public class LevelSelection {
 			}
 		});
 		
-		JButton button_9 = new JButton("1");
-		button_9.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Level nw = new Level();
-				frame.dispose();
-				Level.openLevel("Release Level", 1);
+		//In a loop of 5 load arrays buttons/labels
+		for(int i=0;i<5;i++){
+			final int level=i+1;
+			Puzzlestars[i] = new JLabel(" ");
+			Puzzlestars[i].setHorizontalAlignment(SwingConstants.CENTER);
+			Puzzlestars[i].setFont(new Font("Lucida Grande", Font.ITALIC, 8));
+			Puzzlebuttons[i] = new JButton(" "+ level);
+			panel_2.add(Puzzlebuttons[i]);
+			panel_2.add(Puzzlestars[i]);
+	
+			//action listener for each button
+			Puzzlebuttons[i].addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					Level nw = new Level();
+					frame.dispose();
+					Level.openLevel("Puzzle Level", level, Puzzlestars[level-1]);
+				}
+			});
+			
+			//check level star array for current score
+			Puzzlestars[i].setText(Level.starPArray[level]);
+			
+			//if no score label locked
+			if (Puzzlestars[i].getText()==(null)){
+				if (level==1){										//level 1 is unlocked
+					Puzzlestars[i].setText(" ");
+				}
+				else{
+					Puzzlestars[i].setText("locked");
+				}
 			}
-		});
-		panel_1.setLayout(new GridLayout(0, 2, 0, 0));
-		panel_1.add(button_9);
-		
-		JLabel label_10 = new JLabel("         ");
-		label_10.setHorizontalAlignment(SwingConstants.CENTER);
-		panel_1.add(label_10);
-		
-		JButton button_10 = new JButton("2");
-		panel_1.add(button_10);
-		
-		JLabel label_11 = new JLabel("locked    ");
-		label_11.setHorizontalAlignment(SwingConstants.CENTER);
-		label_11.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
-		panel_1.add(label_11);
-		
-		JButton button_11 = new JButton("3");
-		panel_1.add(button_11);
-		
-		JLabel label_12 = new JLabel("locked    ");
-		label_12.setHorizontalAlignment(SwingConstants.CENTER);
-		label_12.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
-		panel_1.add(label_12);
-		
-		JButton button_12 = new JButton("4");
-		panel_1.add(button_12);
-		
-		JLabel lblnoStars = new JLabel("locked    ");
-		lblnoStars.setHorizontalAlignment(SwingConstants.CENTER);
-		lblnoStars.setFont(new Font("Lucida Grande", Font.PLAIN, 8));
-		panel_1.add(lblnoStars);
-		
-		JButton button_13 = new JButton("5");
-		panel_1.add(button_13);
-		
-		JLabel lblLocked_2 = new JLabel("locked   ");
-		lblLocked_2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLocked_2.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
-		panel_1.add(lblLocked_2);
-		
-		JButton btnNewButton = new JButton("1");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Level nw = new Level();
-				frame.dispose();
-				Level.openLevel("Puzzle Level", 1);
+			else{
+				Puzzlestars[i].setForeground(Color.YELLOW);			//label has a score, make it yellow 
+				Puzzlestars[i+1].setText(" ");						//next label is unlocked
 			}
-		});
-		panel_2.setLayout(new GridLayout(0, 2, 0, 0));
-		panel_2.add(btnNewButton);
-		
-		JButton button = new JButton("2");
-		button.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+
+
+			Lightningstars[i]= new JLabel("locked ");
+			Lightningstars[i].setHorizontalAlignment(SwingConstants.CENTER);
+			Lightningstars[i].setFont(new Font("Lucida Grande", Font.ITALIC, 8));
+			Lightningbuttons[i] = new JButton(" "+ (i+1));
+			panel.add(Lightningbuttons[i]);
+			panel.add(Lightningstars[i]);
+			
+			Lightningbuttons[i].addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					Level nw = new Level();
+					frame.dispose();
+					Level.openLevel("Lightning Level", level, Lightningstars[level-1]);
+				}
+			});
+			
+			Lightningstars[i].setText(Level.starLArray[level]);
+			if (Lightningstars[i].getText()==(null)){
+				if (level==1){
+					Lightningstars[i].setText(" ");
+				}
+				else{
+					Lightningstars[i].setText("locked");
+				}
 			}
-		});
-		
-		lblNewLabel = new JLabel(" ");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setForeground(Color.YELLOW);
-		panel_2.add(lblNewLabel);
-		panel_2.add(button);
-		
-		label = new JLabel("locked    ");
-		
-		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
-		panel_2.add(label);
-		
-		JButton button_1 = new JButton("3");
-		panel_2.add(button_1);
-		
-		JLabel label_3 = new JLabel("locked    ");
-		label_3.setHorizontalAlignment(SwingConstants.CENTER);
-		label_3.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
-		panel_2.add(label_3);
-		
-		JButton button_2 = new JButton("4");
-		panel_2.add(button_2);
-		
-		JLabel label_1 = new JLabel("locked    ");
-		label_1.setHorizontalAlignment(SwingConstants.CENTER);
-		label_1.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
-		panel_2.add(label_1);
-		
-		JButton button_3 = new JButton("5");
-		panel_2.add(button_3);
-		
-		JLabel lblNoStars = new JLabel("locked    ");
-		lblNoStars.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNoStars.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
-		panel_2.add(lblNoStars);
-		
-		JPanel panel = new JPanel();
-		panel.setBackground(myColor2);
-		
-		JButton button_4 = new JButton("1");
-		button_4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Level nw = new Level();
-				frame.dispose();
-				Level.openLevel("Lightning Level", 1);
+			else{
+				Lightningstars[i].setForeground(Color.YELLOW);
+				Lightningstars[i+1].setText(" ");
 			}
-		});
-		panel.setLayout(new GridLayout(0, 2, 0, 0));
-		panel.add(button_4);
-		
-		JLabel label_5 = new JLabel("         ");
-		label_5.setHorizontalAlignment(SwingConstants.CENTER);
-		panel.add(label_5);
-		
-		JButton button_5 = new JButton("2");
-		panel.add(button_5);
-		
-		JLabel label_6 = new JLabel("locked    ");
-		label_6.setHorizontalAlignment(SwingConstants.CENTER);
-		label_6.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
-		panel.add(label_6);
-		
-		JButton button_6 = new JButton("3");
-		panel.add(button_6);
-		
-		JLabel label_7 = new JLabel("locked    ");
-		label_7.setHorizontalAlignment(SwingConstants.CENTER);
-		label_7.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
-		panel.add(label_7);
-		
-		JButton button_7 = new JButton("4");
-		panel.add(button_7);
-		
-		JLabel label_8 = new JLabel("locked    ");
-		label_8.setHorizontalAlignment(SwingConstants.CENTER);
-		label_8.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
-		panel.add(label_8);
-		
-		JButton button_8 = new JButton("5");
-		panel.add(button_8);
-		
-		JLabel label_9 = new JLabel("locked    ");
-		label_9.setHorizontalAlignment(SwingConstants.CENTER);
-		label_9.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
-		panel.add(label_9);
+
+			Releasestars[i]= new JLabel("locked ");
+			Releasestars[i].setHorizontalAlignment(SwingConstants.CENTER);
+			Releasestars[i].setFont(new Font("Lucida Grande", Font.ITALIC, 8));
+			Releasebuttons[i] = new JButton(" "+ (i+1));
+			panel_1.add(Releasebuttons[i]);
+			panel_1.add(Releasestars[i]);
+			
+			
+			Releasebuttons[i].addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					Level nw = new Level();
+					frame.dispose();
+					Level.openLevel("Release Level", level, Releasestars[level-1]);
+				}
+			});
+			
+			Releasestars[i].setText(Level.starRArray[level]);
+			if (Releasestars[i].getText()==(null)){
+				if (level==1){
+					Releasestars[i].setText(" ");
+				}
+				else{
+					Releasestars[i].setText("locked");
+				}
+			}
+			else{
+				Releasestars[i].setForeground(Color.YELLOW);
+				Releasestars[i+1].setText(" ");
+			}
+
+		}
+
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
@@ -278,8 +252,5 @@ public class LevelSelection {
 		frame.getContentPane().setLayout(groupLayout);
 	}
 
-	public void setVisible(boolean b) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 }
