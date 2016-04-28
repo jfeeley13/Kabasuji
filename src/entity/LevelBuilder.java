@@ -1,6 +1,6 @@
 package entity;
 
-public class LevelBuilder implements IMove{
+public class LevelBuilder{
 
 	protected Level level;
 	protected BullPen inventory;
