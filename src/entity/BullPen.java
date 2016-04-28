@@ -59,6 +59,7 @@ public class BullPen extends BoardBoss{
 			int x=hex.shape[i].row+tile.getCoords()[0];
 			int y=hex.shape[i].column+tile.getCoords()[1];
 			if(init) 
+				System.out.println(x + " " + y);
 				if(boardArray[x][y].getTileID()<1000) 
 					isOverPiece=true;
 			
@@ -136,8 +137,6 @@ public class BullPen extends BoardBoss{
 			
 			if(boardArray[x][y].isCovered()==true && selectedPiece==null){
 				tileID = boardArray[x][y].getTileID();
-				//System.out.println(tileID);
-				System.out.println("Selected Piece!");
 				for(int j=0; j<width; j++) 
 					for(int k=0; k<height; k++) 
 						if(boardArray[j][k].tileID==tileID) {

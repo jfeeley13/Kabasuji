@@ -58,7 +58,7 @@ import builderControllers.LevelBuilderController;
 import gameControllers.ExitController;
 
 
-public class Builder extends JFrame implements MouseListener{
+public class Builder extends JFrame{
 
 	private JFrame frame;
 	private JTextField txtGame;
@@ -206,11 +206,13 @@ public class Builder extends JFrame implements MouseListener{
 		JScrollPane bullPen_scroll = new JScrollPane();
 		bullPen_scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 	    bullPen_scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		bullPen_scroll.setVisible(true);
 
 		
 		BoardBoss Bullpen = new BullPen();
 		Bullpen.setPreferredSize(new Dimension(100, 3000));
 		bullPen_scroll.setViewportView(Bullpen);
+	
 		
 		
 		JScrollPane inventory_scrollPane = new JScrollPane();
@@ -418,30 +420,39 @@ public class Builder extends JFrame implements MouseListener{
 		
 		BoardBoss Inventory = new BullPen();
 		inventory_scrollPane.setViewportView(Inventory);
-		Inventory.setPreferredSize( new Dimension(35000,100));		
+		Inventory.setPreferredSize( new Dimension(4000,100));		
 		
 		GroupLayout gl_Inventory = new GroupLayout(Inventory);
 		gl_Inventory.setHorizontalGroup(
 			gl_Inventory.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 540, Short.MAX_VALUE)
+				.addGap(0, 90, Short.MAX_VALUE)
 		);
 		gl_Inventory.setVerticalGroup(
 			gl_Inventory.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 90, Short.MAX_VALUE)
+				.addGap(0, 540, Short.MAX_VALUE)
 		);
 		Inventory.setLayout(gl_Inventory);
 
 
-		
-		JSplitPane splitPane = new JSplitPane();
-		splitPane.setPreferredSize(new Dimension(100, 20));	
+		GroupLayout gl_bullpen = new GroupLayout(Bullpen);
+		gl_bullpen.setHorizontalGroup(
+			gl_bullpen.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 90, Short.MAX_VALUE)
+		);
+		gl_bullpen.setVerticalGroup(
+			gl_bullpen.createParallelGroup(Alignment.LEADING)
+				.addGap(0, 540, Short.MAX_VALUE)
+		);
+		Bullpen.setLayout(gl_bullpen);
 
-		bullPen_scroll.setColumnHeaderView(splitPane);
 		
 		
-		BoardBoss BullPen = new BullPen();
-		bullPen_scroll.setViewportView(BullPen);
+//		JSplitPane BP_splitPane = new JSplitPane();
+//		BP_splitPane.setPreferredSize(new Dimension(100, 20));	
 
+//		bullPen_scroll.setColumnHeaderView(BP_splitPane);
+		
+		
 		
 		JLabel lblLevelName = new JLabel("Level Name:");
 		toolBar.add(lblLevelName);
@@ -504,11 +515,6 @@ public class Builder extends JFrame implements MouseListener{
 		getContentPane().setLayout(groupLayout);
 
 		
-		/**Mouse Listener*/
-		this.setLocationRelativeTo(null);
-		board.addMouseListener(this);
-		
-		
 		int x = col;
 		int y = row;
 		
@@ -546,7 +552,7 @@ public class Builder extends JFrame implements MouseListener{
 		
 		Bullpen.setLayout(new GridLayout(y, x));
 		
-		Tile penArray[][] = new Tile[x+6][y+6];
+		Tile penArray[][] = new Tile[x][y];
 
 
 		
@@ -568,42 +574,41 @@ public class Builder extends JFrame implements MouseListener{
 		Bullpen.selectedPiece = null;
 		Bullpen.makeBoard(penArray, x, y, 2);
 		Bullpen.init = true;
-		Bullpen.addHex(penArray[2][2], 1, allhex.getHexList().get(2));
+//		Bullpen.addHex(penArray[2][2], 1, allhex.getHexList().get(2));
 		//Bullpen.addHex(penArray[4][4], 2);
 		Bullpen.init=false;
 	
 		
-		x = 20;
-		y = 41;
+		x = 400;
+		y = 10;
 				
-		Inventory.setPreferredSize(new Dimension(140, 410));
-		Inventory.setMinimumSize(new Dimension(140, 410));
-		Inventory.setMaximumSize(new Dimension(140, 410));
+//		Inventory.setPreferredSize(new Dimension(140, 410));
+//		Inventory.setMinimumSize(new Dimension(140, 410));
+//		Inventory.setMaximumSize(new Dimension(140, 410));
 		
 		Inventory.setLayout(new GridLayout(y, x));
-		Tile invArray[][] = new Tile[x+6][y+6];
-		
+		Tile invArray[][] = new Tile[x][y];
 
 
-		Border invTileBorder = BorderFactory.createLineBorder(Color.WHITE, 1);
+		Border invTileBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
 
 		for(int TileRow = 0; TileRow <y;TileRow++){
 			for(int TileCol = 0; TileCol <x;TileCol++){
 
-				PuzzleTile AddedTile = new PuzzleTile(Inventory, TileCol,TileRow, 999);
+				PuzzleTile AddedTile = new PuzzleTile(Inventory, TileCol,TileRow, 998);
 
-				AddedTile.setBackground(Color.black);
+				AddedTile.setBackground(Color.white);
 
-				AddedTile.setBorder(penTileBorder);
-
-				penArray[TileCol][TileRow] = AddedTile;
+				AddedTile.setBorder(invTileBorder);
+				
+				invArray[TileCol][TileRow] = AddedTile;
 				Inventory.add(AddedTile);
 			}
 			Inventory.selectedPiece = null;
-			Inventory.makeBoard(penArray, x, y, 2);
+			Inventory.makeBoard(invArray, x, y, 3);
 			Inventory.init = true;
-			//Inventory.addHex(penArray[2][2], 1);
-			//Inventory.addHex(penArray[4][4], 2);
+			Inventory.addHex(invArray[2][2], 2, allhex.getHexList().get(2));
+//			Inventory.addHex(penArray[4][4], 2);
 			Inventory.init=false;
 
 		}
@@ -622,16 +627,7 @@ public class Builder extends JFrame implements MouseListener{
 	}
 
 
-	@Override
-	public void mouseClicked(MouseEvent me) {
-		int pixRow = me.getY();
-		int pixCol = me.getX();
-
-		System.out.println(pixRow);
-		System.out.println(pixCol);
-		
-	}
-
+	
 	public void quit(Builder parentView) {
 		//parentView.setVisible(false);	
 		BuildStart bs = new BuildStart();
@@ -639,30 +635,4 @@ public class Builder extends JFrame implements MouseListener{
 	}
 
 
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 }
