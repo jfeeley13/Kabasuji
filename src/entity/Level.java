@@ -60,8 +60,56 @@ public class Level {
 	public String toString(){
 		return "Level " + lvlID + "/n" 
 				+"AchievedStars" + starsAcheived + "/n"
-				+" SolutionPieces: " + solutionPieces.toString() + "/n"
-				+ " Board:" + board.toString();
+				+" SolutionPieces " + solutionPieces.toString() + "/n"
+				+ " Board " + board.toString();
+	}
+
+	public int getStarsAcheived() {
+		return starsAcheived;
+	}
+
+	public void setStarsAcheived(int starsAcheived) {
+		this.starsAcheived = starsAcheived;
+	}
+
+	public Board getBoard() {
+		return board;
+	}
+
+	public void setBoard(Board board) {
+		this.board = board;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public int getRows() {
+		return rows;
+	}
+
+	public void setRows(int rows) {
+		this.rows = rows;
+	}
+
+	public int getColumns() {
+		return columns;
+	}
+
+	public void setColumns(int columns) {
+		this.columns = columns;
+	}
+
+	public ArrayList<Hexomino> getSolutionPieces() {
+		return solutionPieces;
+	}
+
+	public void setSolutionPieces(ArrayList<Hexomino> solutionPieces) {
+		this.solutionPieces = solutionPieces;
 	}
 	
 	

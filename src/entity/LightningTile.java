@@ -11,6 +11,10 @@ public class LightningTile extends Tile{
 	public void markTile(){
 		
 	}
+	
+	public String toString(){
+		return "Tile " + tileID + " "+"LightingTile"+ " " +row+" " +column + " "  + isNull; 
+	}
 
 	
 	

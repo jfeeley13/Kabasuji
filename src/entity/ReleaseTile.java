@@ -20,5 +20,9 @@ public class ReleaseTile extends Tile{
 		return false;
 					
 	}
+	
+	public String toString(){
+		return "Tile " + tileID + " "+"ReleaseTile"+ " " +row+" " +column + " "  + isNull + " " + setColor + " " + setNum; 
+	}
 
 }

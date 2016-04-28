@@ -51,6 +51,8 @@ import java.awt.Color;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.event.ChangeListener;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.SpinnerNumberModel;
 
 import builderControllers.CreateNewLevelController;
@@ -58,18 +60,21 @@ import builderControllers.LevelBuilderController;
 import gameControllers.ExitController;
 
 
-public class Builder extends JFrame implements MouseListener{
+public class Builder extends JFrame{
 
 	private JFrame frame;
 	private JTextField txtGame;
 	private JTextField textField;
 	private JTextField textField_1;
 	static String gameType;
+	private int gameTimer = 0;
+	private int moveCounter = 0;
 	int row = 6;
 	int col = 6;
 	int boardTileWidth = 32; //Pixels
 	int boardTileHeight = 32;
 	AllHex allhex = new AllHex();
+	private JTextField timerORMoveTextField;
 
 //	/**
 //	 * Launch the application.
@@ -312,7 +317,7 @@ public class Builder extends JFrame implements MouseListener{
 										.addComponent(btnGenerate, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE))
 									.addGap(77))
 								.addComponent(inventory_scrollPane, GroupLayout.PREFERRED_SIZE, 575, GroupLayout.PREFERRED_SIZE)
-								.addComponent(board, GroupLayout.PREFERRED_SIZE, row*boardTileHeight, GroupLayout.PREFERRED_SIZE)
+								.addComponent(board, GroupLayout.PREFERRED_SIZE, col*boardTileWidth, GroupLayout.PREFERRED_SIZE)
 								.addGroup(groupLayout.createSequentialGroup()
 									.addGap(6)
 									.addComponent(lblPressFFor)))
@@ -386,7 +391,7 @@ public class Builder extends JFrame implements MouseListener{
 								.addComponent(btnExit)))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(11)
-							.addComponent(board, GroupLayout.PREFERRED_SIZE, col*boardTileWidth, GroupLayout.PREFERRED_SIZE)
+							.addComponent(board, GroupLayout.PREFERRED_SIZE, row*boardTileHeight, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(lblInventory)
 							.addPreferredGap(ComponentPlacement.RELATED)
@@ -478,6 +483,42 @@ public class Builder extends JFrame implements MouseListener{
 			label.setVisible(false);
 		}
 		
+		timerORMoveTextField = new JTextField();
+		timerORMoveTextField.setText("00");
+		toolBar.add(timerORMoveTextField);
+		timerORMoveTextField.setColumns(10);
+		
+		// Listen for changes in the text
+		timerORMoveTextField.getDocument().addDocumentListener(new DocumentListener() {
+		  public void warn() {
+			  //0 is put in to handle nullPointerException, 0 is ignored if actual number is inputed
+		     if (Integer.parseInt("0"+timerORMoveTextField.getText()) != 0){
+		 		if (gameType == "Lightning Level"){
+					gameTimer = Integer.parseInt("0"+timerORMoveTextField.getText());
+			    	System.out.println("Time Set to " + Integer.parseInt("0"+timerORMoveTextField.getText()));
+				}
+				else{
+					moveCounter = Integer.parseInt("0"+timerORMoveTextField.getText());
+			    	System.out.println("Number of Moves Changed to " + Integer.parseInt("0"+timerORMoveTextField.getText()));
+				}		    	 
+		     }
+		  }
+		  
+		  @Override
+		  public void insertUpdate(DocumentEvent e) {
+			  warn();
+
+		  }
+		  @Override
+		  public void removeUpdate(DocumentEvent e) {
+			  warn();
+		  }
+		  @Override
+		  public void changedUpdate(DocumentEvent e) {
+			  warn();
+		  }
+		});
+		
 		textField_1 = new JTextField();
 		textField_1.setText("00");
 		toolBar.add(textField_1);
@@ -506,24 +547,23 @@ public class Builder extends JFrame implements MouseListener{
 		
 		/**Mouse Listener*/
 		this.setLocationRelativeTo(null);
-		board.addMouseListener(this);
 		
 		
 		int x = col;
 		int y = row;
 		
-		board.setLayout(new GridLayout(x,y));
+		board.setLayout(new GridLayout(y,x));
 		
 		Tile boardArray[][] = new Tile[x][y];
 		
 		Border BoardTileBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
 		
-		board.setPreferredSize(new Dimension(col*boardTileWidth,row*boardTileHeight));
+		board.setPreferredSize(new Dimension(row*boardTileHeight, col*boardTileWidth));
 		
 		for(int TileRow = 0; TileRow <y;TileRow++){
 			for(int TileCol = 0; TileCol <x;TileCol++){
 				
-				PuzzleTile AddedTile = new PuzzleTile(board, TileCol,TileRow, 999);
+				PuzzleTile AddedTile = new PuzzleTile(board, TileCol,TileRow, 9999);
 
 				AddedTile.setBackground(Color.white);
 
@@ -550,7 +590,7 @@ public class Builder extends JFrame implements MouseListener{
 
 
 		
-		Border penTileBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
+		Border penTileBorder = BorderFactory.createLineBorder(Color.WHITE, 1);
 		
 		for(int TileRow = 0; TileRow <y;TileRow++){
 			for(int TileCol = 0; TileCol <x;TileCol++){
@@ -570,37 +610,38 @@ public class Builder extends JFrame implements MouseListener{
 		Bullpen.init = true;
 		Bullpen.addHex(penArray[2][2], 1, allhex.getHexList().get(2));
 		//Bullpen.addHex(penArray[4][4], 2);
+		BoardBoss.penPieces = 1;
 		Bullpen.init=false;
 	
 		
-		x = 20;
-		y = 41;
+		x = 400;
+		y = 10;
 				
-		Inventory.setPreferredSize(new Dimension(140, 410));
-		Inventory.setMinimumSize(new Dimension(140, 410));
-		Inventory.setMaximumSize(new Dimension(140, 410));
+		Inventory.setPreferredSize(new Dimension(4000, 100));
+		//Inventory.setMinimumSize(new Dimension(140, 410));
+		//Inventory.setMaximumSize(new Dimension(140, 410));
 		
 		Inventory.setLayout(new GridLayout(y, x));
-		Tile invArray[][] = new Tile[x+6][y+6];
+		Tile invArray[][] = new Tile[x][y];
 		
 
 
-		Border invTileBorder = BorderFactory.createLineBorder(Color.WHITE, 1);
+		Border invTileBorder = BorderFactory.createLineBorder(Color.white, 1);
 
 		for(int TileRow = 0; TileRow <y;TileRow++){
 			for(int TileCol = 0; TileCol <x;TileCol++){
 
-				PuzzleTile AddedTile = new PuzzleTile(Inventory, TileCol,TileRow, 999);
+				PuzzleTile AddedTile = new PuzzleTile(Inventory, TileCol,TileRow, 9999);
 
-				AddedTile.setBackground(Color.black);
+				AddedTile.setBackground(Color.white);
 
-				AddedTile.setBorder(penTileBorder);
+				AddedTile.setBorder(invTileBorder);
 
-				penArray[TileCol][TileRow] = AddedTile;
+				invArray[TileCol][TileRow] = AddedTile;
 				Inventory.add(AddedTile);
 			}
 			Inventory.selectedPiece = null;
-			Inventory.makeBoard(penArray, x, y, 2);
+			Inventory.makeBoard(invArray, x, y, 2);
 			Inventory.init = true;
 			//Inventory.addHex(penArray[2][2], 1);
 			//Inventory.addHex(penArray[4][4], 2);
@@ -622,15 +663,6 @@ public class Builder extends JFrame implements MouseListener{
 	}
 
 
-	@Override
-	public void mouseClicked(MouseEvent me) {
-		int pixRow = me.getY();
-		int pixCol = me.getX();
-
-		System.out.println(pixRow);
-		System.out.println(pixCol);
-		
-	}
 
 	public void quit(Builder parentView) {
 		//parentView.setVisible(false);	
@@ -639,30 +671,4 @@ public class Builder extends JFrame implements MouseListener{
 	}
 
 
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 }

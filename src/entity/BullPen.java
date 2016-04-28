@@ -53,8 +53,8 @@ public class BullPen extends BoardBoss{
 		
 		
 		
-		
-		if(selectedPiece==null && !init) return false;
+		if(selectedPiece==null && !(init || refill)) return false;
+		/**
 		for(int i=0;i<6;i++) {
 			int x=hex.shape[i].row+tile.getCoords()[0];
 			int y=hex.shape[i].column+tile.getCoords()[1];
@@ -72,10 +72,9 @@ public class BullPen extends BoardBoss{
 			
 				
 		}
-
-		
+		*/
 		if(isOverPiece) return false;
-		if(init){
+		if(init || refill){
 			
 			for(int i=0; i<6;i++){
 				int x=hex.shape[i].row+tile.getCoords()[0];
@@ -84,7 +83,7 @@ public class BullPen extends BoardBoss{
 				boardArray[x][y].setBackground(Color.BLUE);
 				boardArray[x][y].setBorder(selectBorder);
 				boardArray[x][y].isHighlight=false;
-				selectedPiece=null;
+				//selectedPiece=null;
 				boardArray[x][y].setTileID(tileID);
 			}
 			pieceList.put(tileID, hex);
@@ -92,10 +91,27 @@ public class BullPen extends BoardBoss{
 			
 		}
 		else {
+			if(selectedPiece!=null && lifted && !penPiece) {
+				selectedPiece=null;
+				for(int i=0; i<width; i++) 
+					for(int j=0; j<height; j++) {
+						if(boardArray[i][j].getBackground()==Color.GREEN) {
+							boardArray[i][j].setBackground(Color.WHITE);
+							boardArray[i][j].setBorder(whiteBorder);
+							boardArray[i][j].isHighlight=false;
+						
+						}
+					}
+			}
+		}
+		/**
+		else {
 			if((selectedPiece!=null && lifted && !penPiece)) {
 				for(int k=0; k<6;k++){
 					int x=hex.shape[k].row+tile.getCoords()[0];
 					int y=hex.shape[k].column+tile.getCoords()[1];
+					boardArray[x][y].setBorder(selectBorder);
+					if(borderCheck(tile)) y=height-6;
 					try {
 						if(boardArray[x][y].isCovered()) {
 							
@@ -120,7 +136,7 @@ public class BullPen extends BoardBoss{
 				System.out.println("Piece Placed!");
 				}
 		}
-		
+		*/
 		lifted = true;
 		return true;
 	}
@@ -130,9 +146,11 @@ public class BullPen extends BoardBoss{
 	 * 
 	 */
 	public boolean liftHex(Tile tile, Hexomino hex){
-		for(int i=0; i<6;i++){
+		
+
 			int x=tile.getCoords()[0];
 			int y=tile.getCoords()[1];
+
 			
 			if(boardArray[x][y].isCovered()==true && selectedPiece==null){
 				tileID = boardArray[x][y].getTileID();
@@ -151,11 +169,10 @@ public class BullPen extends BoardBoss{
 				penPiece = false;
 				penPieces-=1;
 				drawHex(tile,x,y, Color.GREEN);
+
 				return false;
 			}
 
-			
-		}
 		return true;
 
 	}
@@ -192,7 +209,7 @@ public class BullPen extends BoardBoss{
 			try {
 				boardArray[x][y].setHighlight(true);
 			
-
+			
 			try {
 				
 				if(!boardArray[x][y].isCovered) {
@@ -314,5 +331,14 @@ public class BullPen extends BoardBoss{
 		return boardArray;
 	}
 
+	public void clearPen() {
+		for(int i=0;i<width;i++)
+			for(int j=0; j<height;j++) {
+				boardArray[i][j].isCovered=false;
+				boardArray[i][j].tileID=9999;
+				boardArray[i][j].setBackground(Color.WHITE);
+				boardArray[i][j].setBorder(whiteBorder);
+			}
+	}
 
 }

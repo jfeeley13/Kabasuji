@@ -9,4 +9,7 @@ public class PuzzleTile extends Tile{
 	}
 	
 	
+	public String toString(){
+		return "Tile " + tileID + " "+"PuzzleTile"+ " " +row+" " +column + " "  + isNull; 
+	}
 }

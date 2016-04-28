@@ -53,27 +53,16 @@ public class Board extends BoardBoss{
 		boolean allTilesEmpty=liftHex(tile, hex);
 		
 		
-		
+		System.out.println("1");
 		if(selectedPiece==null && !init) return false;
-		for(int i=0; i<6;i++){
-			int x=hex.shape[i].row+tile.getCoords()[0];
-			int y=hex.shape[i].column+tile.getCoords()[1];
-			try {
-			if(borderCheck(tile)) {
-				if(boardArray[x][y].getTileID()<1000) isOverPiece=true;
-			}
-			else {
-				if(boardArray[x][height-6+i].getTileID()<1000) isOverPiece=true;
-			}
-			} catch (Exception e) {}
-		}
-
-		if(isOverPiece) return false;
+		
+		
+		
 		if(selectedPiece!=null & lifted) {
 			for(int k=0; k<6;k++){
 				int x=hex.shape[k].row+tile.getCoords()[0];
 				int y=hex.shape[k].column+tile.getCoords()[1];
-				if(!borderCheck(tile)) y=height-6;
+				if(!borderCheck(tile)) y=height-6+k;
 				try {
 					if(boardArray[x][y].isCovered()) {
 
@@ -96,6 +85,7 @@ public class Board extends BoardBoss{
 			System.out.println("Piece Placed!");
 			BoardBoss.moves-=1;
 			}
+		System.out.println("3");
 		lifted = true;
 		hasWon();
 		return true;
@@ -106,10 +96,12 @@ public class Board extends BoardBoss{
 	 * 
 	 */
 	public boolean liftHex(Tile tile,Hexomino hex){
-		for(int i=0; i<6;i++){
+
 			int x=tile.getCoords()[0];
 			int y=tile.getCoords()[1];
+			
 
+			
 			if(boardArray[x][y].isCovered()==true && selectedPiece==null){
 				tileID = boardArray[x][y].getTileID();
 				//System.out.println(tileID);
@@ -131,7 +123,7 @@ public class Board extends BoardBoss{
 				drawHex(tile,x,y, Color.GREEN);
 				return false;
 			}	
-		}
+
 		return true;
 
 	}
@@ -294,6 +286,7 @@ public class Board extends BoardBoss{
 				}
 			}
 		}
+		
 		System.out.println("You win!");
 		moves=-1;
 		YouWin hs = new YouWin();

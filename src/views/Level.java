@@ -3,6 +3,7 @@ package views;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.EventQueue;
+
 import javax.swing.JFrame;
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
@@ -10,8 +11,10 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.LineBorder;
+
 import java.awt.Color;
 import java.awt.Container;
+
 import javax.swing.table.DefaultTableModel;
 
 import entity.AllHex;
@@ -24,6 +27,7 @@ import entity.Hexomino;
 import entity.PuzzleTile;
 import entity.Tile;
 import gameControllers.MListener;
+
 import javax.swing.JToolBar;
 import javax.swing.JLabel;
 import javax.swing.JTextPane;
@@ -50,12 +54,14 @@ import javax.swing.JToggleButton;
 import javax.swing.JSplitPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.KeyEvent;
 import java.awt.Panel;
+
 import javax.swing.JScrollBar;
 
 
@@ -69,8 +75,11 @@ public class Level{
 	public static int levelTime=30;
 	static int timeVar = 25;
 	static JLabel label;
-	AllHex allhex = new AllHex();
+	public static AllHex allhex = new AllHex();
 
+	JLabel stars;
+int x=6,y=6;
+	Tile boardArray[][] = new Tile[x][y];
 
 	
 
@@ -302,9 +311,12 @@ public class Level{
 		lblLvlNum.setText(String.valueOf(level));
 		toolBar.add(lblLvlNum);
 		
-		JLabel stars = new JLabel("    \u2605\u2605\u2605");
-		stars.setForeground(Color.LIGHT_GRAY);
+		//stars is \u2605
+		stars = new JLabel("    ");
+		stars.setForeground(Color.YELLOW);
 		toolBar.add(stars);
+		
+		
 		
 		JLabel lblNewLabel_3 = new JLabel("                                   ");
 		toolBar.add(lblNewLabel_3);
@@ -351,8 +363,8 @@ public class Level{
 		 *  
 		 */
 		
-		int x = 6;
-		int y = 6;
+		int x = 10;
+		int y = 9;
 
 		board.setLayout(new GridLayout(y,x));
 		board.setPreferredSize(new Dimension(384,384));
@@ -395,6 +407,7 @@ public class Level{
 		// make the board with the given boardArray
 		board.makeBoard(boardArray, x, y, 1);
 
+	
 
 		/**
 		 * 
@@ -455,9 +468,14 @@ public class Level{
 		pen.init = true;
 		
 		// add two pieces
-		pen.addHex(penArray[2][2], 1, allhex.getHexList().get(1));
-		pen.addHex(penArray[4][4], 2, allhex.getHexList().get(2));
-		BoardBoss.penPieces=2;		
+		pen.addHex(penArray[6][3], 1, allhex.getHexList().get(1));
+	//	pen.addHex(penArray[4][4], 2, allhex.getHexList().get(2));
+	//	BoardBoss.penPieces=2;		
+		
+		pen.addHex(penArray[6][11], 2, allhex.getHexList().get(1));
+		pen.addHex(penArray[6][20], 3, allhex.getHexList().get(1));
+
+		
 		// end filling bullpen with pieces
 		pen.init=false;
 		
@@ -540,5 +558,41 @@ public class Level{
 				label.setText(0+"");
 			}
 		}
+
+		if (gameType == "Puzzle Level" || gameType == "Lightning Level") {
+
+			int covered=0;
+			
+			
+			/**
+			for(int i = 0; i < y; i++){
+				for(Tile t : boardArray[i]){
+					if(t.isCovered()==true) {
+						covered++;
+					}
+				}
+			}
+		
+			int all=x * y;
+			if(covered==all-12){
+				stars.setText("    \u2605");
+				label.setText("");
+				views.LevelSelection.lblNewLabel.setText("    \u2605");
+			}
+			else if(covered==all-6){
+				stars.setText("    \u2605\u2605");
+				views.LevelSelection.lblNewLabel.setText("    \u2605\u2605");
+
+	
+			}
+			else if(covered==all){
+				stars.setText("    \u2605\u2605\u2605");
+				views.LevelSelection.lblNewLabel.setText("    \u2605\u2605\u2605");
+
+			}
+			*/
+		}
 	}
+	
+
 }
