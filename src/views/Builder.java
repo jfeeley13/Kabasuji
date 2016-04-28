@@ -317,7 +317,7 @@ public class Builder extends JFrame{
 										.addComponent(btnGenerate, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE))
 									.addGap(77))
 								.addComponent(inventory_scrollPane, GroupLayout.PREFERRED_SIZE, 575, GroupLayout.PREFERRED_SIZE)
-								.addComponent(board, GroupLayout.PREFERRED_SIZE, row*boardTileHeight, GroupLayout.PREFERRED_SIZE)
+								.addComponent(board, GroupLayout.PREFERRED_SIZE, col*boardTileWidth, GroupLayout.PREFERRED_SIZE)
 								.addGroup(groupLayout.createSequentialGroup()
 									.addGap(6)
 									.addComponent(lblPressFFor)))
@@ -391,7 +391,7 @@ public class Builder extends JFrame{
 								.addComponent(btnExit)))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(11)
-							.addComponent(board, GroupLayout.PREFERRED_SIZE, col*boardTileWidth, GroupLayout.PREFERRED_SIZE)
+							.addComponent(board, GroupLayout.PREFERRED_SIZE, row*boardTileHeight, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(lblInventory)
 							.addPreferredGap(ComponentPlacement.RELATED)
@@ -552,13 +552,13 @@ public class Builder extends JFrame{
 		int x = col;
 		int y = row;
 		
-		board.setLayout(new GridLayout(x,y));
+		board.setLayout(new GridLayout(y,x));
 		
 		Tile boardArray[][] = new Tile[x][y];
 		
 		Border BoardTileBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
 		
-		board.setPreferredSize(new Dimension(col*boardTileWidth,row*boardTileHeight));
+		board.setPreferredSize(new Dimension(row*boardTileHeight, col*boardTileWidth));
 		
 		for(int TileRow = 0; TileRow <y;TileRow++){
 			for(int TileCol = 0; TileCol <x;TileCol++){
