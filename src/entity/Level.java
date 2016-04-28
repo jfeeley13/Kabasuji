@@ -1,5 +1,7 @@
 package entity;
 
+import java.util.ArrayList;
+
 public class Level {
 	
 	protected int lvlID;
@@ -7,10 +9,11 @@ public class Level {
 	protected int starsAcheived;
 	protected Board board;
 	protected BullPen pen;
-	
-	public Level(int lvlID, BullPen pen){
+	String type;
+	protected ArrayList<Hexomino> solutionPieces;
+	public Level(int lvlID, String type){
 		this.lvlID = lvlID;
-		this.pen = pen;
+		this.type = type;
 	}
 	
 	public void initializeLevel(){
@@ -19,6 +22,11 @@ public class Level {
 	
 	public boolean levelComplete(){
 		return board.hasWon();
+	}
+
+	public void setBoardDimensions(int rows, int columns) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	
