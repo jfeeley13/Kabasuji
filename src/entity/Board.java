@@ -222,4 +222,63 @@ public class Board extends BoardBoss{
 		else
 			return false;
 	}
+	
+	
+	/**
+	 * Resizes the field boardArray in Board class
+	 * @param newRows new number of rows in board
+	 * @param newCols new number of columns in board
+	 */
+	public void resizeBoardArray(int newRows, int newCols){
+		//check if the new dimension are smaller or bigger than previous array
+		Tile[][] newBoard = new Tile[newRows][newCols];
+		if(newRows == this.width && this.height == newCols)
+			return;
+		//case 1: new board is smaller
+		if(newCols < height && newRows < width)
+			copyContents(newBoard, newRows, newCols);
+		//case 2: new board height is smaller
+		else if(newCols < height)
+			copyContents(newBoard, width, newCols);
+		else if(newRows < width)
+			copyContents(newBoard, newRows, height);
+		else{
+			//case 4: new board is bigger in height and width
+			copyContents(newBoard, width, height);
+			for(int i = width - 1; i < newRows; i++){
+				for(int j = height; j < newCols; j++){
+					//just copy the origin tile to the new places to ensure it is the same type of tile.
+					newBoard[i][j] = boardArray[0][0]; 
+				}
+			}
+		}
+		this.width = newRows;
+		this.height = newCols;
+		//not update width and height
+	}
+	/**
+	 * Copies the contents of boardArray into a newBoard up to a specified row and column limit
+	 * @param newBoard 
+	 * @param row
+	 * @param cols
+	 */
+	public void copyContents(Tile[][] newBoard ,int row, int cols){
+		for(int i= 0; i < row; i++){
+			for(int j = 0; j < cols; j++){
+				newBoard[i][j] = boardArray[i][j]; 
+			}
+		}
+	}
+	
+	public String toString(){
+		String returnString = "BoardWidth " + width + " BoardHeight" + height + "\n";
+		for(int i = 0; i < width; i++){
+			for(Tile t: boardArray[i])
+				returnString = returnString + t.toString() + "\n";
+		}
+		return returnString;
+	}
+	
+	
+	
 }
