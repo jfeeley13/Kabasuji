@@ -52,6 +52,12 @@ public class Level {
 	public void setSolutionPieces(ArrayList<Hexomino> solutionPieces) {
 		this.solutionPieces = solutionPieces;
 	}
+	public String toString(){
+		return "Level " + lvlID + "/n" 
+				+"AchievedStars" + starsAcheived + "/n"
+				+" SolutionPieces " + solutionPieces.toString() + "/n"
+				+ " Board " + board.toString();
+	}
 	
 	
 }
