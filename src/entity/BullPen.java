@@ -54,6 +54,7 @@ public class BullPen extends BoardBoss{
 		
 		
 		if(selectedPiece==null && !(init || refill)) return false;
+		/**
 		for(int i=0;i<6;i++) {
 			int x=hex.shape[i].row+tile.getCoords()[0];
 			int y=hex.shape[i].column+tile.getCoords()[1];
@@ -71,7 +72,7 @@ public class BullPen extends BoardBoss{
 			
 				
 		}
-
+		*/
 		if(isOverPiece) return false;
 		if(init || refill){
 			
@@ -88,6 +89,20 @@ public class BullPen extends BoardBoss{
 			pieceList.put(tileID, hex);
 			System.out.println("Piece Placed!");
 			
+		}
+		else {
+			if(selectedPiece!=null && lifted && !penPiece) {
+				selectedPiece=null;
+				for(int i=0; i<width; i++) 
+					for(int j=0; j<height; j++) {
+						if(boardArray[i][j].getBackground()==Color.GREEN) {
+							boardArray[i][j].setBackground(Color.WHITE);
+							boardArray[i][j].setBorder(whiteBorder);
+							boardArray[i][j].isHighlight=false;
+						
+						}
+					}
+			}
 		}
 		/**
 		else {
