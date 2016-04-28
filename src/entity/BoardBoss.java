@@ -17,7 +17,7 @@ public abstract class BoardBoss extends JPanel{
 	 * *
 	 */
 	private static final long serialVersionUID = 1L;
-	protected Tile boardArray[][];
+	protected static Tile boardArray[][];
 	Board board;
 	int width = 12;
 	int height = 12;

@@ -18,8 +18,10 @@ import javax.swing.SwingConstants;
 
 
 public class LevelSelection {
+	static JLabel lblNewLabel;
 
 	private JFrame frame;
+	
 
 	/**
 	 * Launch the application.
@@ -147,7 +149,7 @@ public class LevelSelection {
 			}
 		});
 		
-		JLabel lblNewLabel = new JLabel("\u2605\u2605\u2605");
+		lblNewLabel = new JLabel(" ");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setForeground(Color.YELLOW);
 		panel_2.add(lblNewLabel);
@@ -183,7 +185,7 @@ public class LevelSelection {
 		panel_2.add(lblNoStars);
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(UIManager.getColor("Desktop.background"));
+		panel.setBackground(myColor2);
 		
 		JButton button_4 = new JButton("1");
 		button_4.addActionListener(new ActionListener() {
