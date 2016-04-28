@@ -28,6 +28,30 @@ public class Level {
 		// TODO Auto-generated method stub
 		
 	}
+
+	public int getStarsAcheived() {
+		return starsAcheived;
+	}
+
+	public void setStarsAcheived(int starsAcheived) {
+		this.starsAcheived = starsAcheived;
+	}
+
+	public Board getBoard() {
+		return board;
+	}
+
+	public void setBoard(Board board) {
+		this.board = board;
+	}
+
+	public ArrayList<Hexomino> getSolutionPieces() {
+		return solutionPieces;
+	}
+
+	public void setSolutionPieces(ArrayList<Hexomino> solutionPieces) {
+		this.solutionPieces = solutionPieces;
+	}
 	
 	
 }
