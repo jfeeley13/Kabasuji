@@ -19,7 +19,7 @@ import javax.swing.SwingConstants;
 
 public class LevelSelection {
 	static JLabel lblNewLabel;
-
+	JLabel label;
 	private JFrame frame;
 	
 
@@ -155,7 +155,8 @@ public class LevelSelection {
 		panel_2.add(lblNewLabel);
 		panel_2.add(button);
 		
-		JLabel label = new JLabel("locked    ");
+		label = new JLabel("locked    ");
+		
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setFont(new Font("Lucida Grande", Font.ITALIC, 8));
 		panel_2.add(label);

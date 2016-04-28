@@ -51,6 +51,8 @@ import java.awt.Color;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.event.ChangeListener;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.SpinnerNumberModel;
 
 import builderControllers.CreateNewLevelController;
@@ -65,11 +67,14 @@ public class Builder extends JFrame{
 	private JTextField textField;
 	private JTextField textField_1;
 	static String gameType;
+	private int gameTimer = 0;
+	private int moveCounter = 0;
 	int row = 6;
 	int col = 6;
 	int boardTileWidth = 32; //Pixels
 	int boardTileHeight = 32;
 	AllHex allhex = new AllHex();
+	private JTextField timerORMoveTextField;
 
 //	/**
 //	 * Launch the application.
@@ -478,6 +483,42 @@ public class Builder extends JFrame{
 			label.setVisible(false);
 		}
 		
+		timerORMoveTextField = new JTextField();
+		timerORMoveTextField.setText("00");
+		toolBar.add(timerORMoveTextField);
+		timerORMoveTextField.setColumns(10);
+		
+		// Listen for changes in the text
+		timerORMoveTextField.getDocument().addDocumentListener(new DocumentListener() {
+		  public void warn() {
+			  //0 is put in to handle nullPointerException, 0 is ignored if actual number is inputed
+		     if (Integer.parseInt("0"+timerORMoveTextField.getText()) != 0){
+		 		if (gameType == "Lightning Level"){
+					gameTimer = Integer.parseInt("0"+timerORMoveTextField.getText());
+			    	System.out.println("Time Set to " + Integer.parseInt("0"+timerORMoveTextField.getText()));
+				}
+				else{
+					moveCounter = Integer.parseInt("0"+timerORMoveTextField.getText());
+			    	System.out.println("Number of Moves Changed to " + Integer.parseInt("0"+timerORMoveTextField.getText()));
+				}		    	 
+		     }
+		  }
+		  
+		  @Override
+		  public void insertUpdate(DocumentEvent e) {
+			  warn();
+
+		  }
+		  @Override
+		  public void removeUpdate(DocumentEvent e) {
+			  warn();
+		  }
+		  @Override
+		  public void changedUpdate(DocumentEvent e) {
+			  warn();
+		  }
+		});
+		
 		textField_1 = new JTextField();
 		textField_1.setText("00");
 		toolBar.add(textField_1);
@@ -573,28 +614,28 @@ public class Builder extends JFrame{
 		Bullpen.init=false;
 	
 		
-		x = 20;
-		y = 41;
+		x = 400;
+		y = 10;
 				
-		Inventory.setPreferredSize(new Dimension(140, 410));
-		Inventory.setMinimumSize(new Dimension(140, 410));
-		Inventory.setMaximumSize(new Dimension(140, 410));
+		Inventory.setPreferredSize(new Dimension(4000, 100));
+		//Inventory.setMinimumSize(new Dimension(140, 410));
+		//Inventory.setMaximumSize(new Dimension(140, 410));
 		
 		Inventory.setLayout(new GridLayout(y, x));
-		Tile invArray[][] = new Tile[x+6][y+6];
+		Tile invArray[][] = new Tile[x][y];
 		
 
 
-		Border invTileBorder = BorderFactory.createLineBorder(Color.WHITE, 1);
+		Border invTileBorder = BorderFactory.createLineBorder(Color.white, 1);
 
 		for(int TileRow = 0; TileRow <y;TileRow++){
 			for(int TileCol = 0; TileCol <x;TileCol++){
 
 				PuzzleTile AddedTile = new PuzzleTile(Inventory, TileCol,TileRow, 9999);
 
-				AddedTile.setBackground(Color.black);
+				AddedTile.setBackground(Color.white);
 
-				AddedTile.setBorder(penTileBorder);
+				AddedTile.setBorder(invTileBorder);
 
 				invArray[TileCol][TileRow] = AddedTile;
 				Inventory.add(AddedTile);

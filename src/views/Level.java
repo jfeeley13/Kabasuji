@@ -577,6 +577,7 @@ int x=6,y=6;
 			int all=x * y;
 			if(covered==all-12){
 				stars.setText("    \u2605");
+				label.setText("");
 				views.LevelSelection.lblNewLabel.setText("    \u2605");
 			}
 			else if(covered==all-6){
