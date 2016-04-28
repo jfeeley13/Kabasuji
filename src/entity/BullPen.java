@@ -89,7 +89,7 @@ public class BullPen extends BoardBoss{
 			System.out.println("Piece Placed!");
 			
 		}
-		
+		/**
 		else {
 			if((selectedPiece!=null && lifted && !penPiece)) {
 				for(int k=0; k<6;k++){
@@ -121,7 +121,7 @@ public class BullPen extends BoardBoss{
 				System.out.println("Piece Placed!");
 				}
 		}
-		
+		*/
 		lifted = true;
 		return true;
 	}
