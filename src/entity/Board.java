@@ -21,8 +21,8 @@ public class Board extends BoardBoss{
 	private static final long serialVersionUID = 1L;
 	protected Tile boardArray[][];
 
-	int width;
-	int height;
+	int columns;
+	int rows;
 	protected int tileID;
 	protected int boardID = 1;
 
@@ -33,13 +33,12 @@ public class Board extends BoardBoss{
 	 * 
 	 * */
 	
-	public void makeBoard(Tile[][] boardArray, int width, int height, int id){
+	public void makeBoard(Tile[][] boardArray, int row, int col, int id){
 		this.boardArray = boardArray;
-		this.width = width;
-		this.height = height;
+		this.columns = col;
+		this.rows = row;
 		this.boardID = id;
 	}
-	
 	
 	/** adds hexomino to Tile tile
 	 *  with specified id tileID
@@ -60,18 +59,18 @@ public class Board extends BoardBoss{
 		
 		if(selectedPiece!=null & lifted) {
 			for(int k=0; k<6;k++){
-				int x=hex.shape[k].row+tile.getCoords()[0];
-				int y=hex.shape[k].column+tile.getCoords()[1];
-				if(!borderCheck(tile)) y=height-6+k;
+				int Row=hex.shape[k].row+tile.getCoords()[0];
+				int Col=hex.shape[k].column+tile.getCoords()[1];
+				if(!borderCheck(tile)) Row=rows-6+k;
 				try {
-					if(boardArray[x][y].isCovered()) {
+					if(boardArray[Row][Col].isCovered()) {
 
 						return false;
 					}
 				} catch (Exception e) {}
 			}
-			for(int i=0; i<width; i++) 
-				for(int j=0; j<height; j++) {
+			for(int i=0; i<rows; i++) 
+				for(int j=0; j<columns; j++) {
 					if(boardArray[i][j].getBackground()==Color.GREEN) {
 						boardArray[i][j].coverTile();
 						boardArray[i][j].setBackground(Color.BLUE);
@@ -90,6 +89,7 @@ public class Board extends BoardBoss{
 		hasWon();
 		return true;
 	}
+
 	
 	/** Attempts to lift hexomino
 	 *  of shape HexTile[] shape off Tile tile 
@@ -97,18 +97,18 @@ public class Board extends BoardBoss{
 	 */
 	public boolean liftHex(Tile tile,Hexomino hex){
 
-			int x=tile.getCoords()[0];
-			int y=tile.getCoords()[1];
+			int Row=tile.getCoords()[0];
+			int Col=tile.getCoords()[1];
 			
 
 			
-			if(boardArray[x][y].isCovered()==true && selectedPiece==null){
-				tileID = boardArray[x][y].getTileID();
+			if(boardArray[Row][Col].isCovered()==true && selectedPiece==null){
+				tileID = boardArray[Row][Col].getTileID();
 				//System.out.println(tileID);
 				System.out.println("Selected Piece!");
 
-				for(int j=0; j<width; j++) 
-					for(int k=0; k<height; k++) 
+				for(int j=0; j<rows; j++) 
+					for(int k=0; k<columns; k++) 
 						if(boardArray[j][k].tileID==tileID) {
 
 							boardArray[j][k].isCovered = false;
@@ -120,7 +120,7 @@ public class Board extends BoardBoss{
 				selectedPiece = hex;
 				lifted = false;
 				penPiece = false;
-				drawHex(tile,x,y, Color.GREEN);
+				drawHex(tile,rows,columns, Color.GREEN);
 				return false;
 			}	
 
@@ -128,60 +128,60 @@ public class Board extends BoardBoss{
 
 	}
 	
+	
 	/** 
 	 * 	code for drawing lifted piece as green
 	 * 	over tiles
 	 */
-	public void drawHex(Tile tile, int posx, int posy, Color c) {
+	public void drawHex(Tile tile, int column, int row, Color c) {
 		
+		if(!borderCheck(tile)) row=rows-6;
+
+
 		for(int i=0; i<6;i++){
-			if(!borderCheck(tile)) posy=height-6;
-			
-			int testWidth = widthCheck(tile);
-			
-			if(testWidth>0) {
-				if(tile.getCoords()[0]>width/2)
-					posx = width - testWidth;
-				else
-					posx = 1;
-			}
-			int x = 0;
-			int y = 0;
+			int Row = 0;
+			int Col = 0;
 			switch(rotated) {
-			case 1:	x=selectedPiece.shape[i].row+posx;
-					y=selectedPiece.shape[i].column+posy;
+			case 1:	Row=getSelectedPiece().shape[i].row+row;
+					Col=getSelectedPiece().shape[i].column+column;
 					break;
-			case 2:	x=selectedPiece.shape[i].column+posx;
-					y=selectedPiece.shape[i].row+posy;
+			case 2:	Row=getSelectedPiece().shape[i].row+row;
+					Col=getSelectedPiece().shape[i].column+column;
 					break;
-			case 3:	x=selectedPiece.shape[i].row+posx;
-					y=posy-selectedPiece.shape[5-i].column;
+			case 3:	Row=getSelectedPiece().shape[i].row+row;
+					Col=column-getSelectedPiece().shape[5-i].column;
 					break;
-			case 4:	x=posx-selectedPiece.shape[i].column;
-					y=selectedPiece.shape[i].row+posy;
+			case 4:	Row=row-getSelectedPiece().shape[i].row;
+					Col=getSelectedPiece().shape[i].column+column;
 					break;
 			}
-			
-			try{
-				boardArray[x][y].setHighlight(true);
-			
+
 
 			try {
-				if(!boardArray[x][y].isCovered) {
-					boardArray[x][y].setTileID(tileID+1000);					
+				boardArray[Row][Col].setHighlight(true);
+			
+			
+			try {
+				
+				if(!boardArray[Row][Col].isCovered) {
+					boardArray[Row][Col].setTileID(tileID+1000);
+					
 				}
-				boardArray[x][y].setBackground(c);
+				boardArray[Row][Col].setBorder(selectBorder);
+				boardArray[Row][Col].setBackground(c);
+				
+				
+			} catch(Exception e) {
 
-			} catch(NullPointerException e) {
 
 			}
-			} catch(Exception e) {};
-			
+			} catch (Exception e) {};
 
 		}	
+
 	}
 	
-	
+
 	/**
 	 * 	refresh the board
 	 * 	setting pieces to their
@@ -191,8 +191,8 @@ public class Board extends BoardBoss{
 	 * 	clear any potential paint artifacts)
 	 */
 	public void refresh() {
-		for(int j=0; j<width; j++) 
-			for(int k=0; k<height; k++) {
+		for(int j=0; j<rows; j++) 
+			for(int k=0; k<columns; k++) {
 				if(boardArray[j][k].isHighlight) {
 					boardArray[j][k].setBackground(Color.WHITE);
 				}
@@ -201,11 +201,7 @@ public class Board extends BoardBoss{
 				}
 			}
 	}
-	
-	public int getID() {
-		return boardID;
-	}
-	
+
 	
 	/** 
 	 * 	redraw all the current pieces,
@@ -213,8 +209,8 @@ public class Board extends BoardBoss{
 	 * 
 	 */
 	public void redraw() {
-		for(int j=0; j<width; j++) 
-			for(int k=0; k<height; k++) 
+		for(int j=0; j<rows; j++) 
+			for(int k=0; k<columns; k++) 
 				if(boardArray[j][k].tileID<1000) {
 					
 					if(!boardArray[j][k].isHighlight)
@@ -226,50 +222,78 @@ public class Board extends BoardBoss{
 
 	}
 	
+	public int getID() {
+		return boardID;
+	}
+	
+	public boolean rotateCheck(Tile tile) {
+		int Row=0;
+		int Col=0;
+
+		switch(rotated) {
+		case 1:	Row=getSelectedPiece().shape[5].row+tile.getCoords()[0];
+				Col=getSelectedPiece().shape[5].column+tile.getCoords()[1];
+				break;
+		case 2:	Row=getSelectedPiece().shape[5].row+tile.getCoords()[0];
+				Col=getSelectedPiece().shape[5].column+tile.getCoords()[1];
+				break;
+		case 3:	Row=getSelectedPiece().shape[5].row+tile.getCoords()[0];
+				Col=tile.getCoords()[1]-getSelectedPiece().shape[5-5].column;
+				break;
+		case 4:	Row=tile.getCoords()[0]-getSelectedPiece().shape[5].row;
+				Col=getSelectedPiece().shape[5].column+tile.getCoords()[1];
+				break;
+		}
+
+		if(Col>columns-2 || Row>rows-2 || Col<0 || Row<0) return false;
+		return true;
+	}
+	
 	
 	/**
 	 * 	is piece at Tile tile escaping borders?
 	 * 	this method stops that from happening
 	 */
+	
 	public boolean borderCheck(Tile tile) {
-		int y=0;
-		
+		int colCheck=0;
+		int rowCheck=0;
+
 		try {
-		y=selectedPiece.shape[5].column+tile.getCoords()[1];
-			
-		if(y<height) {
+		rowCheck=getSelectedPiece().shape[5].row+tile.getCoords()[0];
+		colCheck=getSelectedPiece().shape[5].column+tile.getCoords()[1];
+		} catch (Exception e) {}
+		if(colCheck<columns && rowCheck<rows) {
 			return true;
 		}
 		else
 			return false;
-		} catch (NullPointerException e) {};
-		return false;
 	}
+
 	
-	public int widthCheck(Tile tile) {
-		int x=0;
-		int y=0;
-		for(int i=0; i<6; i++) {
-			try {
-				x=selectedPiece.shape[i].row+tile.getCoords()[0];
-				y=height-6;
-				Tile tileX = boardArray[x][y];
-			} catch (Exception e) {return i;}
-		}
-		return 0;
+	public int returnRows() {
+		return this.rows;
 	}
-	
-	public int returnHeight() {
-		return this.height;
-	}
-	
-	public int returnWidth() {
-		return this.width;
-	}
+
 	
 	public Tile[][] returnBoard() {
 		return boardArray;
 	}
+
+	
+	public int widthCheck(Tile tile) {
+		int Row=0;
+		int Col=0;
+		for(int i=0; i<6; i++) {
+			try {
+				Row=selectedPiece.shape[i].row+tile.getCoords()[0];
+				Col=columns-6;
+				Tile tileX = boardArray[Row][Col];
+			} catch (Exception e) {return i;}
+		}
+		return 0;
+	}
+
 	
 	
 	/**
@@ -278,7 +302,7 @@ public class Board extends BoardBoss{
 	 * 	and sets win status
 	 */
 	public boolean hasWon(){
-		for(int i = 0; i < width; i++){
+		for(int i = 0; i < columns; i++){
 			for(Tile t : boardArray[i]){
 				if(!t.hasWon()) {
 					
@@ -304,9 +328,9 @@ public class Board extends BoardBoss{
 		colorList[0] = Color.GREEN;
 		colorList[1] = Color.RED;
 		colorList[2] = Color.BLUE;
-		for(int i=0; i<width; i++) 
-			for(int j=0; j<height; j++) {
-				boardArray[j][i].setBackground(colorList[1]);
+		for(int i=0; i<rows; i++) 
+			for(int j=0; j<columns; j++) {
+				boardArray[i][j].setBackground(colorList[1]);
 				k=(k+1)%3;
 			}
 	}
@@ -319,28 +343,28 @@ public class Board extends BoardBoss{
 	public void resizeBoardArray(int newRows, int newCols){
 		//check if the new dimension are smaller or bigger than previous array
 		Tile[][] newBoard = new Tile[newRows][newCols];
-		if(newRows == this.width && this.height == newCols)
+		if(newRows == this.rows && this.columns == newCols)
 			return;
 		//case 1: new board is smaller
-		if(newCols < height && newRows < width)
+		if(newCols < columns && newRows < rows)
 			copyContents(newBoard, newRows, newCols);
 		//case 2: new board height is smaller
-		else if(newCols < height)
-			copyContents(newBoard, width, newCols);
-		else if(newRows < width)
-			copyContents(newBoard, newRows, height);
+		else if(newCols < columns)
+			copyContents(newBoard, rows, newCols);
+		else if(newRows < rows)
+			copyContents(newBoard, newRows, columns);
 		else{
 			//case 4: new board is bigger in height and width
-			copyContents(newBoard, width, height);
-			for(int i = width - 1; i < newRows; i++){
-				for(int j = height; j < newCols; j++){
+			copyContents(newBoard, rows, columns);
+			for(int i = rows - 1; i < newRows; i++){
+				for(int j = columns; j < newCols; j++){
 					//just copy the origin tile to the new places to ensure it is the same type of tile.
 					newBoard[i][j] = boardArray[0][0]; 
 				}
 			}
 		}
-		this.width = newRows;
-		this.height = newCols;
+		this.rows = newRows;
+		this.columns = newCols;
 		//not update width and height
 	}
 	/**
@@ -357,6 +381,7 @@ public class Board extends BoardBoss{
 		}
 	}
 	
+
 
 
 }
