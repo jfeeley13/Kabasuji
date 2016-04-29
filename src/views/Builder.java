@@ -605,13 +605,16 @@ public class Builder extends JFrame{
 				Bullpen.add(AddedTile);
 			}
 		}
-		Bullpen.selectedPiece = null;
+		Bullpen.setSelectedPiece(null);
 		Bullpen.makeBoard(penArray, x, y, 2);
-		Bullpen.init = true;
+		Bullpen.setInit(true);
 		Bullpen.addHex(penArray[2][2], 1, allhex.getHexList().get(2));
+		Bullpen.addHex(penArray[4][2], 2, allhex.getHexList().get(2));
+		Bullpen.addHex(penArray[6][2], 3, allhex.getHexList().get(2));
+		Bullpen.addHex(penArray[8][2], 4, allhex.getHexList().get(2));
 		//Bullpen.addHex(penArray[4][4], 2);
-		BoardBoss.penPieces = 1;
-		Bullpen.init=false;
+		BoardBoss.setPenPieces(1);
+		Bullpen.setInit(false);
 	
 		
 		x = 400;
@@ -640,12 +643,12 @@ public class Builder extends JFrame{
 				invArray[TileCol][TileRow] = AddedTile;
 				Inventory.add(AddedTile);
 			}
-			Inventory.selectedPiece = null;
-			Inventory.makeBoard(invArray, x, y, 2);
-			Inventory.init = true;
-			//Inventory.addHex(penArray[2][2], 1);
+			Inventory.setSelectedPiece(null);
+			Inventory.makeBoard(invArray, x, y, 3);
+			Inventory.setInit(true);
+			Inventory.addHex(invArray[8][2], 4, allhex.getHexList().get(2));
 			//Inventory.addHex(penArray[4][4], 2);
-			Inventory.init=false;
+			Inventory.setInit(false);
 
 		}
 	

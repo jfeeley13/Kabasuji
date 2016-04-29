@@ -16,8 +16,8 @@ public class BoardPen extends BoardBoss{
 	private static final long serialVersionUID = 1L;
 	protected Tile boardArray[][];
 
-	int width;
-	int height;
+	int rows;
+	int columns;
 	protected int tileID;
 	protected int boardID;
 
@@ -28,10 +28,10 @@ public class BoardPen extends BoardBoss{
 	 * 
 	 * */
 	
-	public void makeBoard(Tile[][] boardArray, int width, int height, int id){
+	public void makeBoard(Tile[][] boardArray, int row, int col, int id){
 		this.boardArray = boardArray;
-		this.width = width;
-		this.height = height;
+		this.rows = row;
+		this.columns = col;
 		this.boardID = id;
 	}
 
@@ -46,53 +46,59 @@ public class BoardPen extends BoardBoss{
 
 	}
 	
-	
 	/** 
 	 * 	code for drawing lifted piece as green
 	 * 	over tiles
 	 */
-	public void drawHex(Tile tile, int posx, int posy, Color c) {
+	public void drawHex(Tile tile, int column, int row, Color c) {
+		
+		if(!borderCheck(tile)) row=rows-6;
+
 
 		for(int i=0; i<6;i++){
-			int x = 0;
-			int y = 0;
+			int Row = 0;
+			int Col = 0;
 			switch(rotated) {
-			case 1:	x=selectedPiece.shape[i].row+posx;
-					y=selectedPiece.shape[i].column+posy;
+			case 1:	Row=getSelectedPiece().shape[i].row+row;
+					Col=getSelectedPiece().shape[i].column+column;
 					break;
-			case 2:	x=selectedPiece.shape[i].column+posx;
-					y=selectedPiece.shape[i].row+posy;
+			case 2:	Row=getSelectedPiece().shape[i].row+row;
+					Col=getSelectedPiece().shape[i].column+column;
 					break;
-			case 3:	x=selectedPiece.shape[i].row+posx;
-					y=posy-selectedPiece.shape[5-i].column;
+			case 3:	Row=getSelectedPiece().shape[i].row+row;
+					Col=column-getSelectedPiece().shape[5-i].column;
 					break;
-			case 4:	x=posx-selectedPiece.shape[i].column;
-					y=selectedPiece.shape[i].row+posy;
+			case 4:	Row=row-getSelectedPiece().shape[i].row;
+					Col=getSelectedPiece().shape[i].column+column;
 					break;
 			}
-			
-			try{
-				boardArray[x][y].setHighlight(true);
-			
+
 
 			try {
+				boardArray[Row][Col].setHighlight(true);
+			
+			
+			try {
 				
-				boardArray[x][y].setTileID(tileID+1000);
-				boardArray[x][y].setBorder(selectBorder);
-				boardArray[x][y].setBackground(c);
-
-
+				if(!boardArray[Row][Col].isCovered) {
+					boardArray[Row][Col].setTileID(tileID+1000);
+					
+				}
+				boardArray[Row][Col].setBorder(selectBorder);
+				boardArray[Row][Col].setBackground(c);
 				
-			} catch(NullPointerException e) {
+				
+			} catch(Exception e) {
 
 
 			}
-			} catch(Exception e) {};
-			
+			} catch (Exception e) {};
 
 		}	
+
 	}
 	
+
 	/**
 	 * 	refresh the board
 	 * 	setting pieces to their
@@ -101,15 +107,18 @@ public class BoardPen extends BoardBoss{
 	 * 	(used after moving from bullpen/board to
 	 * 	clear any potential paint artifacts)
 	 */
-	
 	public void refresh() {
-		for(int j=0; j<width; j++) 
-			for(int k=0; k<height; k++) 
+		for(int j=0; j<rows; j++) 
+			for(int k=0; k<columns; k++) {
 				if(boardArray[j][k].isHighlight) {
-					boardArray[j][k].setBorder(boardPenBorder);
 					boardArray[j][k].setBackground(Color.decode("#4169aa"));
 				}
+				if(boardArray[j][k].isCovered) {
+					boardArray[j][k].setBackground(Color.decode("#4169aa"));
+				}
+			}
 	}
+
 	
 	/** 
 	 * 	redraw all the current pieces,
@@ -117,12 +126,17 @@ public class BoardPen extends BoardBoss{
 	 * 
 	 */
 	public void redraw() {
-		for(int j=0; j<width; j++) 
-			for(int k=0; k<height; k++) 
+		for(int j=0; j<rows; j++) 
+			for(int k=0; k<columns; k++) 
 				if(boardArray[j][k].tileID<1000) {
-
-					boardArray[j][k].setBackground(Color.BLUE);
+					
+					if(!boardArray[j][k].isHighlight)
+						boardArray[j][k].setBackground(Color.decode("#4169aa"));
+					else {
+						boardArray[j][k].setHighlight(false);
+					}
 				}
+
 	}
 	
 	public int getID() {
@@ -130,38 +144,57 @@ public class BoardPen extends BoardBoss{
 	}
 	
 	public boolean rotateCheck(Tile tile) {
+		int Row=0;
+		int Col=0;
+
+		switch(rotated) {
+		case 1:	Row=getSelectedPiece().shape[5].row+tile.getCoords()[0];
+				Col=getSelectedPiece().shape[5].column+tile.getCoords()[1];
+				break;
+		case 2:	Row=getSelectedPiece().shape[5].row+tile.getCoords()[0];
+				Col=getSelectedPiece().shape[5].column+tile.getCoords()[1];
+				break;
+		case 3:	Row=getSelectedPiece().shape[5].row+tile.getCoords()[0];
+				Col=tile.getCoords()[1]-getSelectedPiece().shape[5-5].column;
+				break;
+		case 4:	Row=tile.getCoords()[0]-getSelectedPiece().shape[5].row;
+				Col=getSelectedPiece().shape[5].column+tile.getCoords()[1];
+				break;
+		}
+
+		if(Col>columns-2 || Row>rows-2 || Col<0 || Row<0) return false;
 		return true;
 	}
-
+	
 	
 	/**
 	 * 	is piece at Tile tile escaping borders?
 	 * 	this method stops that from happening
 	 */
+	
 	public boolean borderCheck(Tile tile) {
-		int x=0;
-		int y=0;
+		int colCheck=0;
+		int rowCheck=0;
 
-
-		x=selectedPiece.shape[5].row+tile.getCoords()[0];
-		y=selectedPiece.shape[5].column+tile.getCoords()[1];
-		
-		if(x<width && y<height) {
+		try {
+		rowCheck=getSelectedPiece().shape[5].row+tile.getCoords()[0];
+		colCheck=getSelectedPiece().shape[5].column+tile.getCoords()[1];
+		} catch (Exception e) {}
+		if(colCheck<columns && rowCheck<rows) {
 			return true;
 		}
 		else
 			return false;
 	}
+
 	
-	public int returnHeight() {
-		return this.height;
+	public int returnRows() {
+		return this.rows;
 	}
 
 	
 	public Tile[][] returnBoard() {
 		return boardArray;
 	}
-
-
 
 }

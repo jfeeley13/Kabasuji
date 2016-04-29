@@ -110,6 +110,9 @@ public class LevelSelection {
 			}
 		});
 		
+
+		
+		
 		//In a loop of 5 load arrays buttons/labels
 		for(int i=0;i<5;i++){
 			final int level=i+1;
@@ -125,13 +128,13 @@ public class LevelSelection {
 				public void actionPerformed(ActionEvent e) {
 					Level nw = new Level();
 					frame.dispose();
-					Level.openLevel("Puzzle Level", level, Puzzlestars[level-1]);
+					Level.openLevel("Puzzle Level", level);
 				}
 			});
 			
 			//check level star array for current score
 			Puzzlestars[i].setText(Level.starPArray[level]);
-			
+		//	System.out.println("P i is "+ Level.starPArray[level]);
 			//if no score label locked
 			if (Puzzlestars[i].getText()==(null)){
 				if (level==1){										//level 1 is unlocked
@@ -158,11 +161,13 @@ public class LevelSelection {
 				public void actionPerformed(ActionEvent e) {
 					Level nw = new Level();
 					frame.dispose();
-					Level.openLevel("Lightning Level", level, Lightningstars[level-1]);
+					Level.openLevel("Lightning Level", level);
 				}
 			});
 			
 			Lightningstars[i].setText(Level.starLArray[level]);
+		//	System.out.println("L i is "+ Level.starLArray[level]);
+
 			if (Lightningstars[i].getText()==(null)){
 				if (level==1){
 					Lightningstars[i].setText(" ");
@@ -188,7 +193,7 @@ public class LevelSelection {
 				public void actionPerformed(ActionEvent e) {
 					Level nw = new Level();
 					frame.dispose();
-					Level.openLevel("Release Level", level, Releasestars[level-1]);
+					Level.openLevel("Release Level", level);
 				}
 			});
 			
@@ -205,7 +210,6 @@ public class LevelSelection {
 				Releasestars[i].setForeground(Color.YELLOW);
 				Releasestars[i+1].setText(" ");
 			}
-
 		}
 
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
