@@ -16,11 +16,12 @@ public abstract class BoardBoss extends JPanel{
 	/**
 	 * *
 	 */
+
 	private static final long serialVersionUID = 1L;
 	protected static Tile boardArray[][];
 	Board board;
-	int width = 12;
-	int height = 12;
+	int columns = 12;
+	int rows = 12;
 	public static Hexomino selectedPiece;							/** the piece currently being "lifted" */
 	public static boolean init = true;								/** is the level being initalized (bullpen being filled with pieces?) */
 	public static boolean refill = false;
@@ -44,7 +45,7 @@ public abstract class BoardBoss extends JPanel{
 	 * 
 	 * */
 	
-	public void makeBoard(Tile[][] boardArray, int width, int height, int id){
+	public void makeBoard(Tile[][] boardArray, int row, int col, int id){
 		this.boardArray = boardArray;
 		this.boardID = id;
 	}
@@ -58,7 +59,7 @@ public abstract class BoardBoss extends JPanel{
 	}
 	
 	
-	public void drawHex(Tile tile, int posx, int posy, Color c) {
+	public void drawHex(Tile tile, int column, int row, Color c) {
 
 	}
 	
@@ -80,12 +81,12 @@ public abstract class BoardBoss extends JPanel{
 		
 	}
 	
-	public int returnHeight() {
-		return this.height;
+	public int returnRows() {
+		return this.rows;
 	}
 	
-	public int returnWidth() {
-		return this.width;
+	public int returnCol() {
+		return this.columns;
 	}
 	
 	public Tile[][] returnBoard() {
@@ -100,8 +101,8 @@ public abstract class BoardBoss extends JPanel{
 	 * @param typeOfTile Any subclass object of the Tile class.
 	 */
 	public void fillArray(Tile typeOfTile){
-		for(int i= 0; i < width; i++){
-			for(int j = 0; j < height; j++){
+		for(int i= 0; i < columns; i++){
+			for(int j = 0; j < rows; j++){
 				boardArray[i][j] = typeOfTile; 
 			}
 		}
@@ -109,6 +110,90 @@ public abstract class BoardBoss extends JPanel{
 	
 	public void clearPen() {
 		return;
+	}
+
+
+
+	public static int getMoves() {
+		return moves;
+	}
+
+
+
+	public static void setMoves(int moves) {
+		BoardBoss.moves = moves;
+	}
+
+
+
+	public static boolean isInit() {
+		return init;
+	}
+
+
+
+	public static void setInit(boolean init) {
+		BoardBoss.init = init;
+	}
+
+
+
+	public static Hexomino getSelectedPiece() {
+		return selectedPiece;
+	}
+
+
+
+	public static void setSelectedPiece(Hexomino selectedPiece) {
+		BoardBoss.selectedPiece = selectedPiece;
+	}
+
+
+
+	public static HashMap getPieceList() {
+		return pieceList;
+	}
+
+
+
+	public static void setPieceList(HashMap pieceList) {
+		BoardBoss.pieceList = pieceList;
+	}
+
+
+
+	public static boolean isLifted() {
+		return lifted;
+	}
+
+
+
+	public static void setLifted(boolean lifted) {
+		BoardBoss.lifted = lifted;
+	}
+
+
+
+	public static boolean isPenPiece() {
+		return penPiece;
+	}
+
+
+
+	public static void setPenPiece(boolean penPiece) {
+		BoardBoss.penPiece = penPiece;
+	}
+
+
+
+	public static int getPenPieces() {
+		return penPieces;
+	}
+
+
+
+	public static void setPenPieces(int penPieces) {
+		BoardBoss.penPieces = penPieces;
 	}
 
 }

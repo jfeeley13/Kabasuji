@@ -49,7 +49,7 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 	@Override
 	public void mousePressed(MouseEvent e) {
 		
-		if(tile.getBoard().getID()==2) bullPen=tile.getBoard();
+		if(tile.getBoard().getID()==3) bullPen=tile.getBoard();
 		lastID = tile.getBoard().getID();
 
 		//System.out.println("Clicked!");
@@ -59,11 +59,11 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 		generateRandom();
 		
 		Hexomino hex;
-		if(BoardBoss.selectedPiece==null) {
-			hex = (Hexomino) BoardBoss.pieceList.get(tile.getTileID());
+		if(BoardBoss.getSelectedPiece()==null) {
+			hex = (Hexomino) BoardBoss.getPieceList().get(tile.getTileID());
 		}
 		else {
-			hex=BoardBoss.selectedPiece;
+			hex=BoardBoss.getSelectedPiece();
 		}
 		boolean placed = this.tile.getBoard().addHex(this.tile, ids.get(ids.size()-1), hex);
 		if(!placed) {
@@ -73,19 +73,19 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 		}
 		else {
 			if(this.tile.getBoard().getID()==1) {
-				bullPen.clearPen();
-				int boardWidth =bullPen.returnWidth()/2;
-				bullPen.refill=true;
-				generateRandom();
-				int quickrand = r.nextInt(2)+1;
-				bullPen.addHex(bullPen.returnBoard()[boardWidth][3], ids.get(ids.size()-1), Level.allhex.getHexList().get(1));
-				generateRandom();
-				quickrand = r.nextInt(2)+1;
-				bullPen.addHex(bullPen.returnBoard()[boardWidth][11], ids.get(ids.size()-1), Level.allhex.getHexList().get(1));
-				generateRandom();
-				quickrand = r.nextInt(2)+1;
-				bullPen.addHex(bullPen.returnBoard()[boardWidth][20], ids.get(ids.size()-1), Level.allhex.getHexList().get(1));
-				bullPen.refill=false;
+//				bullPen.clearPen();
+//				int boardWidth =bullPen.returnWidth()/2;
+//				bullPen.refill=true;
+//				generateRandom();
+//				int quickrand = r.nextInt(2)+1;
+//				bullPen.addHex(bullPen.returnBoard()[boardWidth][3], ids.get(ids.size()-1), Level.allhex.getHexList().get(1));
+//				generateRandom();
+//				quickrand = r.nextInt(2)+1;
+//				bullPen.addHex(bullPen.returnBoard()[boardWidth][11], ids.get(ids.size()-1), Level.allhex.getHexList().get(1));
+//				generateRandom();
+//				quickrand = r.nextInt(2)+1;
+//				bullPen.addHex(bullPen.returnBoard()[boardWidth][20], ids.get(ids.size()-1), Level.allhex.getHexList().get(1));
+//				bullPen.refill=false;
 			}
 			
 		}
@@ -170,10 +170,10 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 	}
 	
     public void mouseMoved(MouseEvent e) {
-    	if(tile.getBoard().selectedPiece!=null && tile.getBoard().lifted && !tile.getBoard().penPiece) {
+    	if(tile.getBoard().getSelectedPiece()!=null && tile.getBoard().isLifted() && !tile.getBoard().isPenPiece()) {
     		
-    		int x = this.tile.getCoords()[0];
-    		int y = this.tile.getCoords()[1];
+    		int row = this.tile.getCoords()[0];
+    		int col= this.tile.getCoords()[1];
     		
     		int tileID= this.tile.getTileID();
     		
@@ -181,11 +181,11 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
     		
     		this.tile.getBoard().refresh();
     		if(this.tile.getBoard().borderCheck(this.tile)) {
-    			this.tile.getBoard().drawHex(this.tile, x, y, Color.GREEN);
+    			this.tile.getBoard().drawHex(this.tile, col, row, Color.GREEN);
     			lastGoodTile=this.tile;
     		}
     		else 	
-    			this.tile.getBoard().drawHex(this.tile, x, this.tile.getBoard().returnHeight()-6, Color.GREEN);
+    			this.tile.getBoard().drawHex(this.tile, col, this.tile.getBoard().returnRows()-6, Color.GREEN);
 
 
     		int id = tile.getBoard().getID();
