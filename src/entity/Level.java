@@ -53,10 +53,8 @@ public class Level {
 		this.solutionPieces = solutionPieces;
 	}
 	public String toString(){
-		return "Level " + lvlID + "/n" 
-				+"AchievedStars" + starsAcheived + "/n"
-				+" SolutionPieces " + solutionPieces.toString() + "/n"
-				+ " Board " + board.toString();
+		return lvlID + "/n" + starsAcheived + "/n" + solutionPieces.toString() + "/n"
+				+ " Board \n" + board.toString();
 	}
 	
 	

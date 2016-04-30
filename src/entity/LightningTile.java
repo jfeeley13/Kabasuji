@@ -12,7 +12,11 @@ public class LightningTile extends Tile{
 		
 	}
 	public String toString(){
-		return "Tile " + tileID + " "+ "LightingTile" + " " + row+" " +column + " "  + isNull;
+		return 	tileID + "\n" 
+				+ row + "\n" 
+				+ column + "\n"
+				+ isNull + "\n"
+				+ "1" + "\n";
 	}
 
 	

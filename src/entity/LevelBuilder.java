@@ -14,6 +14,14 @@ public class LevelBuilder{
 	public LevelBuilder(){
 	}
 	
+	public Level getLevel() {
+		return level;
+	}
+
+	public void setLevel(Level level) {
+		this.level = level;
+	}
+
 	/**
 	 * Saves the current state of the level
 	 */

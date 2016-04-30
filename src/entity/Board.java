@@ -271,7 +271,7 @@ public class Board extends BoardBoss{
 	}
 	
 	public String toString(){
-		String returnString = "BoardWidth " + width + " BoardHeight" + height + "\n";
+		String returnString = width + "\n" + height + "\n";
 		for(int i = 0; i < width; i++){
 			for(Tile t: boardArray[i])
 				returnString = returnString + t.toString() + "\n";

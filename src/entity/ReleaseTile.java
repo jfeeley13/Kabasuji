@@ -22,11 +22,13 @@ public class ReleaseTile extends Tile{
 	}
 
 	public String toString(){
-		return "Tile " + tileID + " " + "ReleaseTile" + " "
-				+ row+" " 
-				+column + " "
-				+setColor+ " " 
-				+ setNum + " " + isNull;
+		return 	tileID + "\n" 
+				+ row + "\n" 
+				+ column + "\n"
+				+ isNull + "\n"
+				+ "2" + "\n"
+				+ setColor + "\n" 
+				+ setNum + "\n";
 	}
 	
 }
