@@ -12,7 +12,7 @@ public abstract class Tile extends JPanel{
 	private static final long serialVersionUID = 1L;
 	protected int row;
 	protected int column;
-	protected boolean isCovered = false;
+	private boolean isCovered = false;
 	protected boolean isNull = false;
 	protected int tileID;
 	BoardBoss board;
@@ -30,7 +30,7 @@ public abstract class Tile extends JPanel{
 	}
 	
 	public  boolean hasWon(){
-		return this.isCovered;
+		return this.isCovered();
 	}
 
 	/**
@@ -47,7 +47,7 @@ public abstract class Tile extends JPanel{
 	}
 	
 	public void coverTile(){
-		this.isCovered = true;
+		this.setCovered(true);
 	}
 	
 	/**
@@ -98,6 +98,11 @@ public abstract class Tile extends JPanel{
 	public int[] getCoords(){
 		int coords[] = {row , column};
 		return coords;
+	}
+
+	public boolean setCovered(boolean isCovered) {
+		this.isCovered = isCovered;
+		return isCovered;
 	}
 }
 

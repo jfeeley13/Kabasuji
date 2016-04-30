@@ -159,7 +159,7 @@ public class BullPen extends BoardBoss{
 				for(int j=0; j<rows; j++) 
 					for(int k=0; k<columns; k++) 
 						if(boardArray[j][k].tileID==tileID) {
-							boardArray[j][k].isCovered = false;
+							boardArray[j][k].setCovered(false);
 							boardArray[j][k].setTileID(tileID+1000);
 							boardArray[j][k].setBackground(Color.WHITE);
 							boardArray[j][k].setBorder(whiteBorder);
@@ -212,7 +212,7 @@ public class BullPen extends BoardBoss{
 			
 			try {
 				
-				if(!boardArray[Row][Col].isCovered) {
+				if(!boardArray[Row][Col].isCovered()) {
 					boardArray[Row][Col].setTileID(tileID+1000);
 					
 				}
@@ -246,7 +246,7 @@ public class BullPen extends BoardBoss{
 					boardArray[j][k].setBorder(whiteBorder);
 					boardArray[j][k].setBackground(Color.WHITE);
 			}
-			if(boardArray[j][k].isCovered) {
+			if(boardArray[j][k].isCovered()) {
 				boardArray[j][k].setBackground(Color.BLUE);
 			}
 		}
@@ -334,7 +334,7 @@ public class BullPen extends BoardBoss{
 	public void clearPen() {
 		for(int i=0;i<rows;i++)
 			for(int j=0; j<columns ;j++) {
-				boardArray[i][j].isCovered=false;
+				boardArray[i][j].setCovered(false);
 				boardArray[i][j].tileID=9999;
 				boardArray[i][j].setBackground(Color.WHITE);
 				boardArray[i][j].setBorder(whiteBorder);

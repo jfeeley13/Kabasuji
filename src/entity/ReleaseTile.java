@@ -15,7 +15,7 @@ public class ReleaseTile extends Tile{
 	public boolean hasWon(){
 		if(setColor == null)
 			return true;
-		else if(this.isCovered)
+		else if(this.isCovered())
 			return true;
 		return false;
 					

@@ -80,7 +80,7 @@ public class BoardPen extends BoardBoss{
 			
 			try {
 				
-				if(!boardArray[Row][Col].isCovered) {
+				if(!boardArray[Row][Col].isCovered()) {
 					boardArray[Row][Col].setTileID(tileID+1000);
 					
 				}
@@ -113,7 +113,7 @@ public class BoardPen extends BoardBoss{
 				if(boardArray[j][k].isHighlight) {
 					boardArray[j][k].setBackground(Color.decode("#4169aa"));
 				}
-				if(boardArray[j][k].isCovered) {
+				if(boardArray[j][k].isCovered()) {
 					boardArray[j][k].setBackground(Color.decode("#4169aa"));
 				}
 			}

@@ -603,15 +603,22 @@ public class Level{
 			int all=rows * columns;
 
 			//Y is the width of the array? **might break if change board size
+			/*
 			for(int i = 0; i < columns; i++){
 				for(Tile t : boardArray[i]){
-					/*if(t.isCovered()==true) {
+					if(t.isCovered()==true) {
 						covered++;
 					}
-					*/
+					
 				}
 			}
-
+		
+			for(int j=0; j<rows; j++) 
+				for(int k=0; k<columns; k++) 
+					if(boardArray[j][k].isCovered()==true) {
+						covered++;
+					}
+	*/
 			//1 star if 12 tiles uncovered (2 pieces)
 			if(covered==all-12){
 				//System.out.println( "COVERED is 12");
