@@ -82,7 +82,7 @@ public class Level{
 	/** Level Number (1-5)*/
 	private static int levelNum;
 	
-	/** TIme left in the level*/
+	/** Time left in the level*/
 	private static int levelTime;
 	
 	/** Ensures the timer counts in seconds*/
@@ -330,7 +330,7 @@ public class Level{
 		splitPane.setRightComponent(flipButton);
 		splitPane.setEnabled(true);
 		**/
-		
+		 
 	
 		/**Level number display*/
 		JLabel lblNewLabel = new JLabel("Level:   " + levelNum);
@@ -498,7 +498,7 @@ public class Level{
 		
 		// add two pieces
 		pen.addHex(penArray[2][2], 1, allhex.getHexList().get(1));
-	//	pen.addHex(penArray[4][4], 2, allhex.getHexList().get(2));
+		pen.addHex(penArray[4][4], 2, allhex.getHexList().get(2));
 	//	BoardBoss.penPieces=2;		
 		
 //		pen.addHex(penArray[3][2], 2, allhex.getHexList().get(1));
@@ -506,7 +506,7 @@ public class Level{
 //		pen.addHex(penArray[5][2], 4, allhex.getHexList().get(1));
 //		pen.addHex(penArray[6][2], 5, allhex.getHexList().get(1));
 //		pen.addHex(penArray[7][2], 6, allhex.getHexList().get(1));
-		//pen.addHex(penArray[4][4], 2, allhex.getHexList().get(2));
+//		pen.addHex(penArray[4][4], 2, allhex.getHexList().get(2));
 		
 		// end filling bullpen with pieces
 		pen.init=false;		
