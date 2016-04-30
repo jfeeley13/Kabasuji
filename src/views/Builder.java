@@ -195,7 +195,7 @@ public class Builder extends JFrame{
 	    bullPen_scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		BoardBoss Bullpen = new BullPen(); //Actual BullPen
 		bullPen_scroll.setViewportView(Bullpen);
-		JLabel lblBullPin = new JLabel("Bull Pen:");
+		JLabel lblBullPen = new JLabel("Bull Pen:");
 
 		
 		/**Inventory Elements Initialized*/
@@ -303,7 +303,7 @@ public class Builder extends JFrame{
 									.addComponent(btnUndo, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addComponent(btnTest, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE))
-								.addComponent(lblBullPin)
+								.addComponent(lblBullPen)
 								.addGroup(groupLayout.createSequentialGroup()
 									.addGap(6)
 									.addComponent(btnSave, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
@@ -346,7 +346,7 @@ public class Builder extends JFrame{
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-							.addComponent(lblBullPin)
+							.addComponent(lblBullPen)
 							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 								.addComponent(SetColorComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 								.addGroup(groupLayout.createSequentialGroup()

@@ -64,6 +64,7 @@ import java.awt.event.KeyEvent;
 import java.awt.Panel;
 
 import javax.swing.JScrollBar;
+import javax.swing.ScrollPaneConstants;
 
 
 
@@ -230,7 +231,7 @@ public class Level{
 		BoardBoss boardPen2 = new BoardPen();
 		
 		BoardBoss board = new Board();
-		BoardBoss pen = new BullPen();
+//		bullPen_scroll.setViewportView(pen);
 		
 		
 		/**Piece Manipulation Button Initialization*/
@@ -245,11 +246,17 @@ public class Level{
 		/**Auto Generated Window Builder Code*/
 		
 		JLabel lblBoard = new JLabel("Board");
+		
+		JScrollPane bpScrollPane = new JScrollPane();
+		
+		
+		bpScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		bpScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		GroupLayout groupLayout = new GroupLayout(LevelFrame.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addComponent(toolBar, GroupLayout.DEFAULT_SIZE, 1056, Short.MAX_VALUE)
-				.addGroup(groupLayout.createSequentialGroup()
+				.addComponent(toolBar, GroupLayout.DEFAULT_SIZE, 1188, Short.MAX_VALUE)
+				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
 					.addGap(26)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
@@ -260,14 +267,12 @@ public class Level{
 							.addComponent(lblF1))
 						.addComponent(board, GroupLayout.PREFERRED_SIZE, 348, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblBoard))
-					//.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(boardPen, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)
-							//.addPreferredGap(ComponentPlacement.UNRELATED)
-							//.addComponent(boardPen2, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
-							//.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(pen, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(bpScrollPane, GroupLayout.PREFERRED_SIZE, 162, GroupLayout.PREFERRED_SIZE)
+							.addGap(146))
 						.addComponent(btnExit))
 					.addGap(360))
 		);
@@ -275,37 +280,34 @@ public class Level{
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addComponent(toolBar, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-							.addGap(22)
+					.addGap(22)
+					.addComponent(lblBoard)
+					.addGap(18)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addGroup(groupLayout.createSequentialGroup()
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								
+								.addComponent(boardPen, GroupLayout.PREFERRED_SIZE, 348, GroupLayout.DEFAULT_SIZE)
 								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(lblBoard)
-									.addGap(18)
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addComponent(boardPen, GroupLayout.DEFAULT_SIZE, crossHeight, GroupLayout.DEFAULT_SIZE)
-										//.addComponent(boardPen2, GroupLayout.DEFAULT_SIZE, crossHeight, GroupLayout.DEFAULT_SIZE)
-										.addComponent(pen, GroupLayout.DEFAULT_SIZE, 348, GroupLayout.DEFAULT_SIZE)
-										.addGroup(groupLayout.createSequentialGroup()
-											.addComponent(board, GroupLayout.PREFERRED_SIZE, 348, GroupLayout.PREFERRED_SIZE)
-											.addGap(33)
-											.addComponent(ReleaseTileTable, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(lblF1)))))
+									.addComponent(board, GroupLayout.PREFERRED_SIZE, 348, GroupLayout.PREFERRED_SIZE)
+									.addGap(33)
+									.addComponent(ReleaseTileTable, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(lblF1)))
 							.addGap(34))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(48)
-							
-							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(bpScrollPane, GroupLayout.PREFERRED_SIZE, 349, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
 							.addComponent(btnExit)
 							.addGap(21))))
 		);
+		
+		BoardBoss pen = new BullPen();
+		bpScrollPane.setViewportView(pen);
+		pen.setBackground(Color.WHITE);
 	
 		/**Color set for area between bullPen and board*/
 		boardPen.setBackground(Color.decode("#4169aa"));
 		boardPen2.setBackground(Color.decode("#4169aa"));
-		pen.setBackground(Color.decode("#4169aa"));
 		//boardPen.setBackground(Color.WHITE);
 		
 
@@ -442,17 +444,11 @@ public class Level{
 		 *  @param y COLUMNS
 		 *  
 		 */
-		int x = 14;
-		int y = 35;
+		int x = 12;
+		int y = 70;
 		
 		int bpRow = y;
 		int bpCol = x;
-		
-		pen.setPreferredSize(new Dimension(bpCol*10, bpRow*10));
-		pen.setMinimumSize(new Dimension(bpCol*10, bpRow*10));
-		pen.setMaximumSize(new Dimension(bpCol*10, bpRow*10));
-		
-		pen.setLayout(new GridLayout(bpRow, bpCol));
 		
 		
 		/**
@@ -460,11 +456,19 @@ public class Level{
 		 *  of the board being created
 		 * 
 		 */
+		bpScrollPane.setPreferredSize(new Dimension(bpCol*10,bpRow*10));
+		bpScrollPane.setMaximumSize(new Dimension(bpCol*10,bpRow*10));
+		bpScrollPane.setMinimumSize(new Dimension(bpCol*10,bpRow*10));
+		
+		pen.setLayout(new GridLayout(bpRow,bpCol));
+		pen.setPreferredSize(new Dimension(bpCol*10,bpRow*15));
+		pen.setMinimumSize(new Dimension(bpCol*10,bpRow*15));
+		pen.setMaximumSize(new Dimension(bpCol*10,bRow*15));
+
 		Tile penArray[][] = new Tile[bpRow][bpCol];
 
-
 		
-		Border penTileBorder = BorderFactory.createLineBorder(Color.WHITE, 1);
+		Border penTileBorder = BorderFactory.createLineBorder(Color.black, 1);
 		
 		/** 
 		 *  go through every single tile at every row and column
@@ -488,28 +492,17 @@ public class Level{
 			}
 		}
 		
-		pen.selectedPiece = null; // there is no piece being picked up yet (obviously)
-		
-		// make the board with the given boardArray
+		pen.setSelectedPiece(null);
 		pen.makeBoard(penArray, bpRow, bpCol, 2);
-		
-		// begin filling bullpen with pieces
-		pen.init = true;
-		
-		// add two pieces
-		pen.addHex(penArray[2][2], 1, allhex.getHexList().get(1));
-		pen.addHex(penArray[4][4], 2, allhex.getHexList().get(2));
-	//	BoardBoss.penPieces=2;		
-		
-//		pen.addHex(penArray[3][2], 2, allhex.getHexList().get(1));
-//		pen.addHex(penArray[4][2], 3, allhex.getHexList().get(1));
-//		pen.addHex(penArray[5][2], 4, allhex.getHexList().get(1));
-//		pen.addHex(penArray[6][2], 5, allhex.getHexList().get(1));
-//		pen.addHex(penArray[7][2], 6, allhex.getHexList().get(1));
-//		pen.addHex(penArray[4][4], 2, allhex.getHexList().get(2));
-		
-		// end filling bullpen with pieces
-		pen.init=false;		
+		pen.setInit(true);
+		pen.addHex(penArray[2][2], 1, allhex.getHexList().get(2));
+//		pen.addHex(penArray[4][2], 2, allhex.getHexList().get(2));
+//		pen.addHex(penArray[6][2], 3, allhex.getHexList().get(2));
+//		pen.addHex(penArray[8][2], 4, allhex.getHexList().get(2));
+//		pen.addHex(penArray[4][4], 2);
+		BoardBoss.setPenPieces(1);
+		pen.setInit(false);
+
 		
 		
 		/**
@@ -519,8 +512,8 @@ public class Level{
 		 *  @param y COLUMNS
 		 *  
 		 */
-		int intPenRow=(int) (rows*1.5);
-		int intPenCol=(int) (3*1.5);
+		int intPenRow=(int) (rows*2);
+		int intPenCol=(int) (3*2);
 		
 		
 //		TODO Why is 348 the height of the board even though it is 32*6 = 192?
@@ -538,7 +531,6 @@ public class Level{
 		Tile boardPenArray[][] = new Tile[intPenRow][intPenCol];
 		
 		Border boardPenTileBorder = BorderFactory.createLineBorder(Color.decode("#4169aa"), 1);
-		Border blackBorder = BorderFactory.createLineBorder(Color.black, 1);
 
 		
 		for(int TileRow = 0; TileRow <intPenRow;TileRow++){
@@ -551,7 +543,7 @@ public class Level{
 				AddedTile.setBackground(Color.decode("#4169aa"));
 
 				// set border around tile (background color)
-				AddedTile.setBorder(blackBorder);
+				AddedTile.setBorder(boardPenTileBorder);
 
 				// add tile to boardArray
 				boardPenArray[TileRow][TileCol] = AddedTile;
@@ -640,7 +632,5 @@ public class Level{
 	public void setLvlTime(int time){
 		levelTime = time;
 	}
-	
-	
 }
 
