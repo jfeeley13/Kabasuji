@@ -57,6 +57,11 @@ public class Level {
 		solutionPieces.add(hex);
 	}
 	
+	public String toString(){
+		return lvlID + "/n" + starsAcheived + "/n" + solutionPieces.toString() + "/n"
+				+ " Board \n" + board.toString();
+	}
+	
 	
 	
 }
