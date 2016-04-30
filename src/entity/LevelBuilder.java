@@ -40,7 +40,7 @@ public class LevelBuilder{
 	}
 	
 	public void NewLevel(){
-		level = new Level(newLvlID, type);
+		level = new Level(newLvlID);
 	}
 	
 	/**

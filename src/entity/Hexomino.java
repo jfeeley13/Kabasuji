@@ -71,4 +71,8 @@ public class Hexomino {
 		return coords;
 	}
 	
+	public String toString(){
+		return pID + "\n";
+	}
+	
 }

@@ -2,6 +2,8 @@ package entity;
 
 import java.util.ArrayList;
 
+import javax.swing.plaf.basic.BasicScrollPaneUI.HSBChangeListener;
+
 public class AllHex {
 
 
@@ -42,6 +44,10 @@ public class AllHex {
 	}
 	public ArrayList<Hexomino> getHexList() {
 		return hexList;
+	}
+	
+	public Hexomino getHex(int id){
+		return hexList.get(id);
 	}
 	
 }
