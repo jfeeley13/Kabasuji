@@ -8,5 +8,13 @@ public class PuzzleTile extends Tile{
 	
 	}
 	
+	public String toString(){
+		return 	tileID + "\n" 
+				+ row + "\n" 
+				+ column + "\n"
+				+ isNull + "\n"
+				+ "0" + "\n";
+	}
+	
 	
 }
