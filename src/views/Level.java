@@ -161,6 +161,7 @@ public class Level{
 		btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				LevelSelection nw = new LevelSelection();
+				resetLevel();
 				frame.dispose();
 				nw.openWindow();
 			}
@@ -536,6 +537,10 @@ public class Level{
 	 *  Updates UI elements such as moves left and timer
 	 * 
 	 */
+	
+	private void resetLevel() {
+		BoardBoss.moves=8;
+	}
 	public void setLabel() {
 		if (gameType == "Lightning Level") {
 			label.setText(levelTime/timeVar+"");
