@@ -473,14 +473,7 @@ public class Level{
 		
 		// add two pieces
 		pen.addHex(penArray[2][2], 1, allhex.getHexList().get(1));
-	//	pen.addHex(penArray[4][4], 2, allhex.getHexList().get(2));
-	//	BoardBoss.penPieces=2;		
-		
-		pen.addHex(penArray[3][2], 2, allhex.getHexList().get(1));
-		pen.addHex(penArray[4][2], 3, allhex.getHexList().get(1));
-		pen.addHex(penArray[5][2], 4, allhex.getHexList().get(1));
-		pen.addHex(penArray[6][2], 5, allhex.getHexList().get(1));
-		pen.addHex(penArray[7][2], 6, allhex.getHexList().get(1));
+
 		//pen.addHex(penArray[4][4], 2, allhex.getHexList().get(2));
 		
 		// end filling bullpen with pieces
