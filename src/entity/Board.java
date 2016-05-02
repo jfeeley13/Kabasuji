@@ -326,7 +326,7 @@ public class Board extends BoardBoss{
 			//case 4: new board is bigger in height and width
 			copyContents(newBoard, width, height);
 			for(int i = width - 1; i < newRows; i++){
-				for(int j = height; j < newCols; j++){
+				for(int j = height - 1; j < newCols; j++){
 					//just copy the origin tile to the new places to ensure it is the same type of tile.
 					newBoard[i][j] = boardArray[0][0]; 
 				}

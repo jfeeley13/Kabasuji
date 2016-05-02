@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Paths;
 
 import entity.Level;
 
@@ -20,11 +21,11 @@ public class SaveController{
 	}
 	
 	public void save(){
-		File f = new File("%appdata%/" + fileName);
+		File f = new File(fileName);
 		try {
-			FileWriter fw = new FileWriter(f);
 			if(!f.exists())
 				f.createNewFile();
+			FileWriter fw = new FileWriter(f);
 			BufferedWriter bw  = new BufferedWriter(fw);
 			bw.write(level.toString());
 			bw.close();
