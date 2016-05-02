@@ -55,23 +55,16 @@ public class Board extends BoardBoss{
 		
 		System.out.println("1");
 		if(selectedPiece==null && !init) return false;
-		
-		
-		
-		if(selectedPiece!=null & lifted) {
-			for(int k=0; k<6;k++){
-				int x=hex.shape[k].row+tile.getCoords()[0];
-				int y=hex.shape[k].column+tile.getCoords()[1];
-				try {
-					if(boardArray[x][y].isCovered()) {
 
+		if(selectedPiece!=null & lifted) {
+			for(int i=0; i<width; i++) 
+				for(int j=0; j<height; j++) 
+					if(boardArray[i][j].getBackground()==Color.GREEN && boardArray[i][j].isCovered)
 						return false;
-					}
-				} catch (Exception e) {}
-			}
+			
 			for(int i=0; i<width; i++) 
 				for(int j=0; j<height; j++) {
-					if(boardArray[i][j].getBackground()==Color.GREEN) {
+					if(boardArray[i][j].getBackground()==Color.GREEN && !boardArray[i][j].isCovered) {
 						boardArray[i][j].coverTile();
 						boardArray[i][j].setBackground(Color.BLUE);
 						boardArray[i][j].isHighlight=false;
@@ -144,7 +137,7 @@ public class Board extends BoardBoss{
 				Tile testTile = boardArray[x][y];
 			} catch (Exception e) {
 				if(x!=lastX) {
-					if(tile.getCoords()[0]<width/2)
+					if((tile.getCoords()[0]<width/2-1))
 						widthOver-=1;
 					else
 						widthOver+=1;
@@ -156,7 +149,10 @@ public class Board extends BoardBoss{
 		for(int i=0; i<6; i++) {
 			int y=0;
 			int x=0;
+
 			y=selectedPiece.shape[i].column+posy;
+			
+
 			try {
 				Tile testTile = boardArray[x][y];
 			} catch (Exception e) {
@@ -165,10 +161,9 @@ public class Board extends BoardBoss{
 				lastY=y;
 				}
 		}
+		
 		System.out.println(heightOver);
 		for(int i=0; i<6;i++){
-	
-			
 
 			int x = 0;
 			int y = 0;
