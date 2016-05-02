@@ -52,7 +52,8 @@ public class BoardPen extends BoardBoss{
 	 */
 	public void drawHex(Tile tile, int column, int row, Color c) {
 		
-		if(!borderCheck(tile)) row=rows-6;
+		if(!borderCheck(tile)[0]) row=rows-1;
+		if(!borderCheck(tile)[1]) column = columns - 2;
 
 
 		for(int i=0; i<6;i++){
@@ -172,7 +173,7 @@ public class BoardPen extends BoardBoss{
 	 * 	this method stops that from happening
 	 */
 	
-	public boolean borderCheck(Tile tile) {
+/*	public boolean borderCheck(Tile tile) {
 		int colCheck=0;
 		int rowCheck=0;
 
@@ -185,6 +186,32 @@ public class BoardPen extends BoardBoss{
 		}
 		else
 			return false;
+	}*/
+	
+	public boolean[] borderCheck(Tile tile) {
+		boolean result[] = {true,true};
+		int RowVal=0;
+		int ColVal=0;
+		boolean hitColLimit = false;
+		boolean hitRowLimit = false;
+				
+		try {
+			for (int i = 0; i < 5; i++){
+				RowVal=getSelectedPiece().shape[i].row+tile.getCoords()[0];
+				ColVal=getSelectedPiece().shape[i].column+tile.getCoords()[1];
+				if (RowVal<0||RowVal>rows-2) hitRowLimit = true;
+				if (ColVal<0||ColVal>columns-2) hitColLimit = true;
+			}
+		} catch (Exception e) {}
+		result[0] = hitRowLimit;
+		result[1] = hitColLimit;
+		return result;
+//		if(hitRowLimit) {
+//			System.out.println("Hit a Limit!");
+//			result[0] = false;
+//		}
+//		else
+//			return true;
 	}
 
 	

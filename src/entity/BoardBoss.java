@@ -93,8 +93,9 @@ public abstract class BoardBoss extends JPanel{
 		return boardArray;
 	}
 	
-	public boolean borderCheck(Tile tile) {
-		return true;
+	public boolean[] borderCheck(Tile tile) {
+//		boolean derp[] = {true, true};
+		return new boolean[2];
 	}
 	/**
 	 * Fills the boardArray parameter with a given type of tile

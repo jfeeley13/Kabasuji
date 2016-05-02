@@ -96,10 +96,10 @@ public class Level{
 	public static AllHex allhex = new AllHex();
 	
 	/** Number of rows on board*/
-	int rows = 6;
+	int rows = 12;
 	
 	/**Number of columns on board*/
-	int columns = 6;
+	int columns = 12;
 	
 	/**Label for displaying stars*/
 	JLabel stars;
@@ -495,12 +495,11 @@ public class Level{
 		pen.setSelectedPiece(null);
 		pen.makeBoard(penArray, bpRow, bpCol, 2);
 		pen.setInit(true);
-		pen.addHex(penArray[2][2], 1, allhex.getHexList().get(2));
-//		pen.addHex(penArray[4][2], 2, allhex.getHexList().get(2));
-//		pen.addHex(penArray[6][2], 3, allhex.getHexList().get(2));
-//		pen.addHex(penArray[8][2], 4, allhex.getHexList().get(2));
-//		pen.addHex(penArray[4][4], 2);
-		BoardBoss.setPenPieces(1);
+//		pen.addHex(penArray[2][2], 1, allhex.getHexList().get(2));
+		pen.addHex(penArray[4][2], 2, allhex.getHexList().get(0));
+		pen.addHex(penArray[6][4], 3, allhex.getHexList().get(1));
+		pen.addHex(penArray[8][6], 4, allhex.getHexList().get(2));
+		BoardBoss.setPenPieces(3);
 		pen.setInit(false);
 
 		

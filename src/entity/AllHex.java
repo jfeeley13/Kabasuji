@@ -26,7 +26,7 @@ public class AllHex {
 //	protected Hexomino h5 = new Hexomino(1, hp5);
 //	protected Hexomino h12 = new Hexomino(1, hp12);
 
-	HexTile[] shape1 = {new HexTile(null, 0,0,1),new HexTile(null,1,0, 1),new HexTile(null,2,0, 1),new HexTile(null,3,0, 1),new HexTile(null,4,0, 1),new HexTile(null,5,0,1)};
+	HexTile[] shape1 = {new HexTile(null,0,0,1),new HexTile(null,-1,0,1),new HexTile(null,-2,0,1),new HexTile(null,-3,0,1),new HexTile(null,-4,0,1),new HexTile(null,-5,0,1)};
 	HexTile[] shape2 = {new HexTile(null,0,0,1),new HexTile(null,1,0,1),new HexTile(null,2,0,1),new HexTile(null,3,0,1),new HexTile(null,4,0,1),new HexTile(null,5,0,1)};
 	HexTile[] shape3 = {new HexTile(null,0,0,1),new HexTile(null,1,0,1),new HexTile(null,2,-1,1),new HexTile(null,3,0,1),new HexTile(null,4,0,1),new HexTile(null,5,0,1)};
 	

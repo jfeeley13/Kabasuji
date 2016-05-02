@@ -56,8 +56,6 @@ public class Hexomino {
 	}
 	
 	/**
-	 * 
-	 * 
 	 * @return List of (Row, Column) Coordinates of all the tiles that make up the Hexomino
 	 */
 	public int[][] getCoordShape(){

@@ -50,7 +50,8 @@ public class BullPen extends BoardBoss{
 	
 		boolean isOverPiece = false;
 		boolean allTilesEmpty=liftHex(tile, hex);
-		
+		int minCol = 0;
+		int minRow = 0; 
 		
 		
 		if(getSelectedPiece()==null && !(isInit() || refill)) return false;
@@ -58,11 +59,20 @@ public class BullPen extends BoardBoss{
 		for(int i=0;i<6;i++) {
 			int rows=hex.shape[i].row+tile.getCoords()[0];
 			int columns=hex.shape[i].column+tile.getCoords()[1];
+			if (rows < minRow){
+				minRow = rows;
+				rows = rows+Math.abs(rows);
+			}
+			if (columns < minCol){			
+				minCol = columns;
+				columns = columns+Math.abs(columns);
+			}
 			if(isInit()) 
 				if(boardArray[rows][columns].getTileID()<1000) 
 					isOverPiece=true;
 			
-			else if(borderCheck(tile)) 
+			else if(borderCheck(tile)[1]) 
+				System.out.println("Stuff");
 				if(boardArray[rows][columns].getTileID()<1000) 
 					isOverPiece=true;
 			
@@ -75,10 +85,19 @@ public class BullPen extends BoardBoss{
 		
 		if(isOverPiece) return false;
 		if(isInit() || refill){
-			
+			minRow = 0;
+			minCol = 0;
 			for(int i=0; i<6;i++){
 				int rows=hex.shape[i].row+tile.getCoords()[0];
 				int columns=hex.shape[i].column+tile.getCoords()[1];
+				if (rows < minRow){
+					minRow = rows;
+					rows = rows+Math.abs(rows);
+				}
+				if (columns < minCol){			
+					minCol = columns;
+					columns = columns+Math.abs(columns);
+				}
 				boardArray[rows][columns].coverTile();
 				boardArray[rows][columns].setBackground(Color.BLUE);
 				boardArray[rows][columns].setBorder(selectBorder);
@@ -184,7 +203,8 @@ public class BullPen extends BoardBoss{
 	 */
 	public void drawHex(Tile tile, int column, int row, Color c) {
 		
-		if(!borderCheck(tile)) row=rows-6;
+		if(!borderCheck(tile)[0]) row=rows-7;
+		if(!borderCheck(tile)[1]) column = columns - 2;
 
 
 		for(int i=0; i<6;i++){
@@ -306,7 +326,7 @@ public class BullPen extends BoardBoss{
 	 * 	this method stops that from happening
 	 */
 	
-	public boolean borderCheck(Tile tile) {
+/*	public boolean borderCheck(Tile tile) {
 		int colCheck=0;
 		int rowCheck=0;
 
@@ -319,6 +339,32 @@ public class BullPen extends BoardBoss{
 		}
 		else
 			return false;
+	}*/
+	
+	public boolean[] borderCheck(Tile tile) {
+		boolean result[] = {true,true};
+		int RowVal=0;
+		int ColVal=0;
+		boolean hitColLimit = false;
+		boolean hitRowLimit = false;
+				
+		try {
+			for (int i = 0; i < 5; i++){
+				RowVal=getSelectedPiece().shape[i].row+tile.getCoords()[0];
+				ColVal=getSelectedPiece().shape[i].column+tile.getCoords()[1];
+				if (RowVal<0||RowVal>rows-2) hitRowLimit = true;
+				if (ColVal<0||ColVal>columns-2) hitColLimit = true;
+			}
+		} catch (Exception e) {}
+		result[0] = hitRowLimit;
+		result[1] = hitColLimit;
+		return result;
+//		if(hitRowLimit) {
+//			System.out.println("Hit a Limit!");
+//			result[0] = false;
+//		}
+//		else
+//			return true;
 	}
 
 	

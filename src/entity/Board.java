@@ -61,7 +61,9 @@ public class Board extends BoardBoss{
 			for(int k=0; k<6;k++){
 				int Row=hex.shape[k].row+tile.getCoords()[0];
 				int Col=hex.shape[k].column+tile.getCoords()[1];
-				if(!borderCheck(tile)) Row=rows-6+k;
+//				if(borderCheck(tile)[0]) Row=rows-6+k;
+//				if(borderCheck(tile)[1]) Col=columns-6+k;
+				
 				try {
 					if(boardArray[Row][Col].isCovered()) {
 
@@ -77,7 +79,6 @@ public class Board extends BoardBoss{
 						boardArray[i][j].isHighlight=false;
 						selectedPiece=null;
 						boardArray[i][j].setTileID(tileID);
-					
 					}
 				}
 			pieceList.put(tileID, hex);
@@ -135,7 +136,8 @@ public class Board extends BoardBoss{
 	 */
 	public void drawHex(Tile tile, int column, int row, Color c) {
 		
-		if(!borderCheck(tile)) row=rows-6;
+		if(borderCheck(tile)[0]) row=rows-getSelectedPiece().shape[5].row;
+		if(borderCheck(tile)[1]) column = getSelectedPiece().shape[2].column;
 
 
 		for(int i=0; i<6;i++){
@@ -255,19 +257,30 @@ public class Board extends BoardBoss{
 	 * 	this method stops that from happening
 	 */
 	
-	public boolean borderCheck(Tile tile) {
-		int colCheck=0;
-		int rowCheck=0;
-
+	public boolean[] borderCheck(Tile tile) {
+		boolean result[] = {false,false};
+		int RowVal=0;
+		int ColVal=0;
+		boolean hitColLimit = false;
+		boolean hitRowLimit = false;
+				
 		try {
-		rowCheck=getSelectedPiece().shape[5].row+tile.getCoords()[0];
-		colCheck=getSelectedPiece().shape[5].column+tile.getCoords()[1];
+			for (int i = 0; i < 5; i++){
+				RowVal=getSelectedPiece().shape[i].row+tile.getCoords()[0];
+				ColVal=getSelectedPiece().shape[i].column+tile.getCoords()[1];
+				if (RowVal<0||RowVal>rows-2) hitRowLimit = true;
+				if (ColVal<0||ColVal>columns) hitColLimit = true;
+			}
 		} catch (Exception e) {}
-		if(colCheck<columns && rowCheck<rows) {
-			return true;
-		}
-		else
-			return false;
+		result[0] = hitRowLimit;
+		result[1] = hitColLimit;
+		return result;
+//		if(hitRowLimit) {
+//			System.out.println("Hit a Limit!");
+//			result[0] = false;
+//		}
+//		else
+//			return true;
 	}
 
 	

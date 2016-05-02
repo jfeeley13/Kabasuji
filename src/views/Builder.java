@@ -193,10 +193,11 @@ public class Builder extends JFrame{
 		JScrollPane bullPen_scroll = new JScrollPane(); //ScrollPane
 		bullPen_scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 	    bullPen_scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		BoardBoss Bullpen = new BullPen(); //Actual BullPen
-		bullPen_scroll.setViewportView(Bullpen);
 		JLabel lblBullPen = new JLabel("Bull Pen:");
 
+		
+		BoardBoss Bullpen = new BullPen(); //Actual BullPen
+//		bullPen_scroll.setViewportView(Bullpen);
 		
 		/**Inventory Elements Initialized*/
 		JScrollPane inventory_scrollPane = new JScrollPane();
@@ -377,6 +378,9 @@ public class Builder extends JFrame{
 					.addContainerGap())
 		);
 		
+//		BoardBoss Bullpen = new BullPen(); //Actual BullPen
+//		bullPen_scroll.setViewportView(Bullpen);
+		
 		/**Initialize all rotate and flip buttons inside of the inventory*/
 		JSplitPane invSplitPane = new JSplitPane();
 		invSplitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
@@ -416,13 +420,13 @@ public class Builder extends JFrame{
 
 
 		/**Initialize the BullPen elements*/
-		JSplitPane splitPane = new JSplitPane();
-		splitPane.setPreferredSize(new Dimension(100, 20));	
-
-		bullPen_scroll.setColumnHeaderView(splitPane);
-		
-		BoardBoss BullPen = new BullPen();
-		bullPen_scroll.setViewportView(BullPen);
+//		JSplitPane splitPane = new JSplitPane();
+//		splitPane.setPreferredSize(new Dimension(100, 20));	
+//
+//		bullPen_scroll.setColumnHeaderView(splitPane);
+//		
+//		BoardBoss BullPen = new BullPen();
+//		bullPen_scroll.setViewportView(BullPen);
 
 		
 		JLabel lblLevelName = new JLabel("Level Name:");
@@ -517,8 +521,8 @@ public class Builder extends JFrame{
 		this.setLocationRelativeTo(null);
 		
 		
-		int bRow = rows;
-		int bCol = columns;
+		int bRow = rows = 6;
+		int bCol = columns = 6;
 		
 		board.setLayout(new GridLayout(bRow,bCol));
 		
