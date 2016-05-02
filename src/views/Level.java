@@ -442,7 +442,6 @@ public class Level{
 		pen.addHex(penArray[2][2], 1, allhex.getHexList().get(2));
 		pen.init=(false);
 		
-<<<<<<< Updated upstream
 		// add two pieces
 		int pos = BoardBoss.bullPenPosition;
 		pen.addHex(penArray[pen.returnWidth()/2][3], 1, Level.allhex.getHexList().get(pos));
@@ -451,7 +450,6 @@ public class Level{
 		// end filling bullpen with pieces
 		BoardBoss.bullPenPosition+=1;
 		pen.init=false;
-=======
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(new Dimension(100,50));
 		panel.setMaximumSize(new Dimension(100,50));
@@ -462,7 +460,6 @@ public class Level{
 		
 		JButton RotateCW_btn = new JButton("\u21BB");
 		panel.add(RotateCW_btn);
->>>>>>> Stashed changes
 		
 		JButton RotateCCW_btn = new JButton("\u21BA");
 		RotateCCW_btn.addActionListener(new ActionListener() {

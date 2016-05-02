@@ -162,7 +162,6 @@ public class Board extends BoardBoss{
 				}
 		}
 		
-		System.out.println(heightOver);
 		for(int i=0; i<6;i++){
 
 			int x = 0;
