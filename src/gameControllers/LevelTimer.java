@@ -28,36 +28,26 @@ import views.Level;
 
 
 public class LevelTimer{
-	Tile tile;
-	static int lastID;
-	static int lastTileID;
-	BoardBoss board;
-	static BoardBoss lastBoard;
-	Random r = new Random();
-	static ArrayList<Integer> ids = new ArrayList<Integer>();
-	int randint;
-
-	
-	
-	public LevelTimer(Tile tile, BoardBoss board){
-		this.tile=tile;
-		this.board = board;
-	}
+	static Timer timer;
 	
 	
 	public static void main(final Level level) throws Exception{
         ActionListener taskPerformer = new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
             	if(level.gameType=="Lightning Level") {
-            		if(level.levelTime>=0) {
+            		if(level.levelTime>0) {
             			level.levelTime-=1;
-            		
             		}
+            		if(level.levelTime == 0){
+            			timer = null;
+            		}
+            		
             	}
             	level.setLabel();
             }
         };
-        Timer timer = new Timer(100 ,taskPerformer);
+        if(timer == null)
+        	timer = new Timer(100 ,taskPerformer);
         timer.setRepeats(true);
         timer.start();
 
