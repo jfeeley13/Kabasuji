@@ -156,7 +156,7 @@ public class Board extends BoardBoss{
 			try {
 				Tile testTile = boardArray[x][y];
 			} catch (Exception e) {
-				if(y!=lastY)
+				if(y>lastY)
 					heightOver+=1;
 				lastY=y;
 				}
