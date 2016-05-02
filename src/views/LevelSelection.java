@@ -119,22 +119,12 @@ public class LevelSelection {
 			Puzzlebuttons[i] = new JButton(" "+ level);
 			panel_2.add(Puzzlebuttons[i]);
 			panel_2.add(Puzzlestars[i]);
-	
-			//action listener for each button
-			Puzzlebuttons[i].addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					Level nw = new Level();
-					frame.dispose();
-					Level.openLevel("Puzzle Level", level, Puzzlestars[level-1]);
-				}
-			});
 			
 			//check level star array for current score
 			Puzzlestars[i].setText(Level.starPArray[level]);
 			
 			//if no score label locked
 			if (Puzzlestars[i].getText()==(null)){
-				System.out.println(Puzzlestars[i].getText());
 				if (level==1){										//level 1 is unlocked
 					Puzzlestars[i].setText(" ");
 				}
@@ -146,6 +136,16 @@ public class LevelSelection {
 				Puzzlestars[i].setForeground(Color.YELLOW);			//label has a score, make it yellow 
 				Puzzlestars[i+1].setText(" ");						//next label is unlocked
 			}
+			//action listener for each button
+			if(Puzzlestars[i].getText()!="locked"){
+				Puzzlebuttons[i].addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						Level nw = new Level();
+						frame.dispose();
+						Level.openLevel("Puzzle Level", level, Puzzlestars[level-1]);
+					}
+				});
+			}
 
 
 			Lightningstars[i]= new JLabel("locked ");
@@ -154,14 +154,6 @@ public class LevelSelection {
 			Lightningbuttons[i] = new JButton(" "+ (i+1));
 			panel.add(Lightningbuttons[i]);
 			panel.add(Lightningstars[i]);
-			
-			Lightningbuttons[i].addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					Level nw = new Level();
-					frame.dispose();
-					Level.openLevel("Lightning Level", level, Lightningstars[level-1]);
-				}
-			});
 			
 			Lightningstars[i].setText(Level.starLArray[level]);
 			if (Lightningstars[i].getText()==(null)){
@@ -176,6 +168,15 @@ public class LevelSelection {
 				Lightningstars[i].setForeground(Color.YELLOW);
 				Lightningstars[i+1].setText(" ");
 			}
+			if(Lightningstars[i].getText()!="locked"){
+				Lightningbuttons[i].addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						Level nw = new Level();
+						frame.dispose();
+						Level.openLevel("Lightning Level", level, Lightningstars[level-1]);
+					}
+				});
+			}
 
 			Releasestars[i]= new JLabel("locked ");
 			Releasestars[i].setHorizontalAlignment(SwingConstants.CENTER);
@@ -184,14 +185,6 @@ public class LevelSelection {
 			panel_1.add(Releasebuttons[i]);
 			panel_1.add(Releasestars[i]);
 			
-			
-			Releasebuttons[i].addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					Level nw = new Level();
-					frame.dispose();
-					Level.openLevel("Release Level", level, Releasestars[level-1]);
-				}
-			});
 			
 			Releasestars[i].setText(Level.starRArray[level]);
 			if (Releasestars[i].getText()==(null)){
@@ -205,6 +198,15 @@ public class LevelSelection {
 			else{
 				Releasestars[i].setForeground(Color.YELLOW);
 				Releasestars[i+1].setText(" ");
+			}
+			if(Releasestars[i].getText()!="locked"){
+				Releasebuttons[i].addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						Level nw = new Level();
+						frame.dispose();
+						Level.openLevel("Release Level", level, Releasestars[level-1]);
+					}
+				});
 			}
 
 		}

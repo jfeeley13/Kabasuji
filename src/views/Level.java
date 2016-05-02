@@ -475,8 +475,6 @@ public class Level{
 		
 		// add two pieces
 		pen.addHex(penArray[2][2], 1, allhex.getHexList().get(0));
-		pen.addHex(penArray[4][4], 1, allhex.getHexList().get(0));
-		pen.addHex(penArray[6][6], 1, allhex.getHexList().get(0));
 
 		//pen.addHex(penArray[4][4], 2, allhex.getHexList().get(2));
 		
@@ -602,8 +600,6 @@ public class Level{
 						starRArray[level+1]="   ";	
 					}
 				}
-				
-				
 			}
 			
 			//2 stars if 6 tiles uncovered (1 pieces)
@@ -635,6 +631,4 @@ public class Level{
 			}
 		}
 	}
-	
-
 }

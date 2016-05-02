@@ -235,7 +235,7 @@ public class Builder extends JFrame{
 		JButton btnSave = new JButton("Save");
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new SaveController(LevelBuilder.getLevel(), txtGame.toString()).save();	
+				new SaveController(LevelBuilder.getLevel(), txtGame.getText()).save();	
 			}
 		});
 
