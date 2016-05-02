@@ -50,7 +50,7 @@ public class SaveMenu extends JFrame {
 		JButton btnSave = new JButton("Save");
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new SaveController(LevelBuilder.getLevel(), parentView.txtGame.toString()).save();	
+				new SaveController(LevelBuilder.getLevel(), parentView.txtGame.getText()).save();	
 			}
 		});
 		

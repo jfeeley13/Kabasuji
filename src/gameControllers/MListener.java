@@ -74,7 +74,7 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 		else {
 			if(this.tile.getBoard().getID()==1) {
 				bullPen.clearPen();
-				int boardWidth =bullPen.returnWidth()/2;
+				int boardWidth =(bullPen.returnWidth()/2)-1;
 				bullPen.refill=true;
 				int pos = BoardBoss.bullPenPosition;
 				generateRandom();
@@ -161,8 +161,6 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 	    			   else
 	    				   this.tile.getBoard().rotated = (this.tile.getBoard().rotated % 4) + 1;
 	    		   }
-	    	   
-	           
 	    	   }
 	       }
 	       **/

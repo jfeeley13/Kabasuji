@@ -1,8 +1,12 @@
 package gameControllers;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import views.Builder;
 import views.Level;
 
-public class FlipController {
+public class FlipController implements ActionListener{
 	Level level;
 	//Piece piece
 	
@@ -14,10 +18,16 @@ public class FlipController {
 		this.level = level;
 	}
 	
+	public FlipController(Builder builder, int i) {
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
-	 * Entry method
+	 * action method
 	 */
-	public void entry(){
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 }

@@ -42,6 +42,7 @@ import javax.swing.table.DefaultTableModel;
 import entity.AllHex;
 import entity.Board;
 import entity.BoardBoss;
+import entity.BoardPen;
 import entity.BullPen;
 import entity.LevelBuilder;
 import entity.PuzzleTile;
@@ -60,11 +61,16 @@ import builderControllers.CreateNewLevelController;
 import builderControllers.LevelBuilderController;
 import builderControllers.SaveController;
 import gameControllers.ExitController;
+import gameControllers.FlipController;
+import gameControllers.RotateController;
+
+import javax.swing.ScrollPaneConstants;
 
 
 public class Builder extends JFrame{
 
 	private JFrame frame;
+	int crossHeight = 348;
 	JTextField txtGame;
 	private JTextField textField;
 	private JTextField textField_1;
@@ -77,6 +83,7 @@ public class Builder extends JFrame{
 	int boardTileHeight = 32;
 	AllHex allhex = new AllHex();
 	private JTextField timerORMoveTextField;
+	private JPanel pen2;
 
 //	/**
 //	 * Launch the application.
@@ -163,6 +170,11 @@ public class Builder extends JFrame{
 		RowSpinner.setModel(new SpinnerNumberModel(6, 1, 12, 1));
 		RowSpinner.setValue(row);
 		
+		//LevelBuilder.NewLevel(6);
+		//LevelBuilder.setMoves();
+		//LevelBuilder.setBoardDimensions(row, col);
+
+		
 		final JComboBox levelComboBox = new JComboBox();	//select which level to create
 		levelComboBox.addItem("Puzzle Level");
 		levelComboBox.addItem("Lightning Level");
@@ -209,15 +221,12 @@ public class Builder extends JFrame{
 		});
 		
 		
-		/**BullPen Elements Initialized*/
+		/**BullPen Elements Initialized
 		JScrollPane bullPen_scroll = new JScrollPane();
 		bullPen_scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 	    bullPen_scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-
+	    */
 		
-		BoardBoss Bullpen = new BullPen();
-		Bullpen.setPreferredSize(new Dimension(100, 3000));
-		bullPen_scroll.setViewportView(Bullpen);
 		
 		
 		JScrollPane inventory_scrollPane = new JScrollPane();
@@ -262,9 +271,6 @@ public class Builder extends JFrame{
 		
 		JLabel lblBullPin = new JLabel("Bull Pen:");
 		
-		//JPanel board = new JPanel();
-		BoardBoss board = new Board();
-		
 		
 		JSpinner SetNumSpinner = new JSpinner();
 		SetNumSpinner.setModel(new SpinnerNumberModel(1, 1, 6, 1));
@@ -288,145 +294,179 @@ public class Builder extends JFrame{
 		JLabel lblRightClickTo = new JLabel("Right click to add/delete tile");
 		lblRightClickTo.setFont(new Font("Lucida Grande", Font.ITALIC, 13));
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		
+		//JPanel board = new JPanel();
+		BoardBoss board = new Board();
+		
+		BoardBoss boardpen = new BoardPen();
+		boardpen.setBackground(UIManager.getColor("Color2"));
+
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+					.addComponent(toolBar, GroupLayout.DEFAULT_SIZE, 782, Short.MAX_VALUE)
+					.addGap(12))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(12)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(12)
+							.addComponent(lblPressFFor)
+							.addGap(474)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblInventory)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addGroup(groupLayout.createSequentialGroup()
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(lblBoardSize)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(ColSpinner, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.UNRELATED)
-											.addComponent(lblX, GroupLayout.PREFERRED_SIZE, 8, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(RowSpinner, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(btnCreate, GroupLayout.PREFERRED_SIZE, 72, GroupLayout.PREFERRED_SIZE))
-										.addComponent(lblRightClickTo))
-									.addGap(6)
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addGroup(groupLayout.createSequentialGroup()
-											.addComponent(SetColorComboBox, 0, 86, Short.MAX_VALUE)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(SetNumSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-										.addComponent(levelComboBox, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE))
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addComponent(btnChangeLevel, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
-										.addComponent(btnGenerate, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE))
-									.addGap(77))
-								.addComponent(inventory_scrollPane, GroupLayout.PREFERRED_SIZE, 575, GroupLayout.PREFERRED_SIZE)
-								.addComponent(board, GroupLayout.PREFERRED_SIZE, row*boardTileHeight, GroupLayout.PREFERRED_SIZE)
 								.addGroup(groupLayout.createSequentialGroup()
 									.addGap(6)
-									.addComponent(lblPressFFor)))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+									.addComponent(btnSave, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(btnExit, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE))
 								.addGroup(groupLayout.createSequentialGroup()
 									.addComponent(btnUndo, GroupLayout.PREFERRED_SIZE, 65, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addComponent(btnTest, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE))
-								.addComponent(lblBullPin)
 								.addGroup(groupLayout.createSequentialGroup()
 									.addGap(6)
-									.addComponent(btnSave, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(btnExit, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGap(9)
-									.addComponent(Bullpen, GroupLayout.PREFERRED_SIZE, 131, GroupLayout.PREFERRED_SIZE))))
+									.addComponent(lblBullPin))))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(toolBar, GroupLayout.DEFAULT_SIZE, 749, Short.MAX_VALUE)))
-					.addContainerGap())
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(lblBoardSize)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(ColSpinner, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
+									.addGap(3)
+									.addComponent(lblX, GroupLayout.PREFERRED_SIZE, 8, GroupLayout.PREFERRED_SIZE)
+									.addGap(18)
+									.addComponent(RowSpinner, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE))
+								.addComponent(lblRightClickTo))
+							.addGap(17)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(btnCreate, GroupLayout.PREFERRED_SIZE, 72, GroupLayout.PREFERRED_SIZE)
+									.addGap(18)
+									.addComponent(levelComboBox, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnChangeLevel, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(SetColorComboBox, GroupLayout.PREFERRED_SIZE, 125, GroupLayout.PREFERRED_SIZE)
+									.addGap(18)
+									.addComponent(SetNumSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addGap(18)
+									.addComponent(btnGenerate, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE))))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(inventory_scrollPane, GroupLayout.PREFERRED_SIZE, 575, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblInventory)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(board, GroupLayout.PREFERRED_SIZE, 457, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(boardpen, GroupLayout.PREFERRED_SIZE, 135, GroupLayout.PREFERRED_SIZE)))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE)))
+					.addGap(55))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
+					.addGap(6)
 					.addComponent(toolBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-								.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-									.addComponent(btnUndo)
-									.addComponent(btnTest)
-									.addComponent(btnCreate)
-									.addComponent(levelComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-									.addComponent(btnChangeLevel))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(lblX)
-									.addGap(12))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-										.addComponent(RowSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(ColSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-									.addGap(5))))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(lblBoardSize)))
-					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-							.addComponent(lblBullPin)
+							.addComponent(lblBoardSize)
+							.addComponent(ColSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-								.addComponent(SetColorComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addComponent(btnGenerate)
-										.addComponent(SetNumSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-									.addPreferredGap(ComponentPlacement.RELATED))))
-						.addGroup(groupLayout.createSequentialGroup()
+								.addComponent(RowSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+									.addComponent(btnCreate)
+									.addComponent(levelComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addComponent(btnChangeLevel)
+									.addComponent(btnUndo)
+									.addComponent(btnTest))))
+						.addComponent(lblX))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 							.addComponent(lblRightClickTo)
-							.addGap(12)))
+							.addComponent(SetColorComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(btnGenerate)
+								.addComponent(lblBullPin))
+							.addComponent(SetNumSpinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(Bullpen, GroupLayout.PREFERRED_SIZE, 375, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(btnSave)
-								.addComponent(btnExit)))
+							.addComponent(boardpen, GroupLayout.PREFERRED_SIZE, 325, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap())
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(11)
-							.addComponent(board, GroupLayout.PREFERRED_SIZE, col*boardTileWidth, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblInventory)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(inventory_scrollPane, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(lblPressFFor)))
-					.addContainerGap())
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 384, GroupLayout.PREFERRED_SIZE)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(board, GroupLayout.PREFERRED_SIZE, 325, GroupLayout.PREFERRED_SIZE)
+									.addGap(27)
+									.addComponent(lblInventory)))
+							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+										.addComponent(lblPressFFor)
+										.addComponent(btnSave)
+										.addComponent(btnExit))
+									.addGap(34))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(inventory_scrollPane, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)
+									.addGap(75))))))
 		);
 		
-		JSplitPane splitPane_2 = new JSplitPane();
-		splitPane_2.setOrientation(JSplitPane.VERTICAL_SPLIT);
-		inventory_scrollPane.setRowHeaderView(splitPane_2);
+		//JPanel bullpen = new JPanel();
+		BoardBoss bullpen = new BullPen();
+		scrollPane.setViewportView(bullpen);
+		bullpen.setLayout(new GridLayout(14, 35));
+		bullpen.setPreferredSize(new Dimension(140,350));
+		
+		
+		JPanel panel_1 = new JPanel();
+		scrollPane.setColumnHeaderView(panel_1);
+		panel_1.setPreferredSize(new Dimension(100, 50));
+		panel_1.setLayout(new GridLayout(2, 2, 0, 0));
+		
+		JButton btnNewButton_1 = new JButton("\u21BB");
+		panel_1.add(btnNewButton_1);
+		btnNewButton_1.addActionListener(new RotateController(this, 1));
+		
+		JButton btnR = new JButton("\u21BA");
+		panel_1.add(btnR);
+		btnR.addActionListener(new RotateController(this, 2));
+
+		
+		JButton btnNewButton = new JButton("\u21C4");
+		panel_1.add(btnNewButton);
+		btnNewButton.addActionListener(new FlipController(this, 1));
+
+		JButton btnR_1 = new JButton("\u21C5");
+		panel_1.add(btnR_1);
+		btnR_1.addActionListener(new FlipController(this, 2));
+
+		
+		JPanel panel_2 = new JPanel();
+		inventory_scrollPane.setRowHeaderView(panel_2);
+		panel_2.setPreferredSize(new Dimension(60, 50));
+		panel_2.setLayout(new GridLayout(2, 2, 0, 0));
 		
 		JButton RotateCW_btn = new JButton("\u21BB");
-		splitPane_2.setLeftComponent(RotateCW_btn);
-		RotateCW_btn.setPreferredSize(new Dimension(50, 38));	
+		panel_2.add(RotateCW_btn);
 		
-		JButton RotateCCW_btn = new JButton("\u27F2");
-		splitPane_2.setLeftComponent(RotateCCW_btn);
-		RotateCCW_btn.setPreferredSize(new Dimension(50, 38));	
+		
+		JButton RotateCCW_btn = new JButton("\u21BA");
+		panel_2.add(RotateCCW_btn);
 
 		JButton VertFlip_btn = new JButton("\u21C4");
-		splitPane_2.setRightComponent(VertFlip_btn);
-		VertFlip_btn.setPreferredSize(new Dimension(50, 10));	
+		panel_2.add(VertFlip_btn);
 		
 		JButton HorFlip_btn = new JButton("\u21C5");
-		splitPane_2.setRightComponent(HorFlip_btn);
-		HorFlip_btn.setPreferredSize(new Dimension(50, 10));
+		panel_2.add(HorFlip_btn);
 		
 		BoardBoss Inventory = new BullPen();
 		inventory_scrollPane.setViewportView(Inventory);
@@ -448,11 +488,7 @@ public class Builder extends JFrame{
 		JSplitPane splitPane = new JSplitPane();
 		splitPane.setPreferredSize(new Dimension(100, 20));	
 
-		bullPen_scroll.setColumnHeaderView(splitPane);
-		
-		
-		BoardBoss BullPen = new BullPen();
-		bullPen_scroll.setViewportView(BullPen);
+
 
 		
 		JLabel lblLevelName = new JLabel("Level Name:");
@@ -555,17 +591,37 @@ public class Builder extends JFrame{
 		/**Mouse Listener*/
 		this.setLocationRelativeTo(null);
 		
+
 		
-		int x = col;
-		int y = row;
 		
-		board.setLayout(new GridLayout(x,y));
+		int x = row;
+		int y = col;
+		
+		/**
+		 * 
+		 *  BOARD INIT
+		 * 	@param x ROWS
+		 *  @param y COLUMNS
+		 *  
+		 */
+
+		board.setLayout(new GridLayout(y,x));
+		board.setPreferredSize(new Dimension(col*boardTileWidth,row*boardTileHeight));
+
+		//board.setPreferredSize(new Dimension(384,384));
+		//board.setMinimumSize(new Dimension(384,384));
+		//board.setMaximumSize(new Dimension(384,384));
+		
+		/**
+		 *  boardArray[][] holds all the tiles
+		 *  of the board being created
+		 * 
+		 */
 		
 		Tile boardArray[][] = new Tile[x][y];
 		
 		Border BoardTileBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
-		
-		board.setPreferredSize(new Dimension(col*boardTileWidth,row*boardTileHeight));
+
 		
 		for(int TileRow = 0; TileRow <y;TileRow++){
 			for(int TileCol = 0; TileCol <x;TileCol++){
@@ -580,21 +636,71 @@ public class Builder extends JFrame{
 				board.add(AddedTile);
 			}
 		}
+
 		board.makeBoard(boardArray, x, y, 1);
+		
+		
+		/**
+		 * 
+		 *  BOARD INIT
+		 * 	@param x ROWS
+		 *  @param y COLUMNS
+		 *  
+		 */
+		
+		x=5;
+		y=12;
+		
+		boardpen.setPreferredSize(new Dimension(26, crossHeight));
+		boardpen.setMinimumSize(new Dimension(26, crossHeight));
+		boardpen.setMaximumSize(new Dimension(26, crossHeight));
+		boardpen.setLayout(new GridLayout(y, x));
+		
+		/**
+		 *  boardPenArray[][] holds all the tiles
+		 *  of the board being created
+		 * 
+		 */
+		Tile boardPenArray[][] = new Tile[x][y];
+		
+		Border boardPenTileBorder = BorderFactory.createLineBorder(Color.decode("#4169aa"), 1);
 
+		
+		for(int TileRow = 0; TileRow <y;TileRow++){
+			for(int TileCol = 0; TileCol <x;TileCol++){
 
+				// create a new tile
+				PuzzleTile AddedTile = new PuzzleTile(boardpen, TileCol,TileRow, 9999);
 
+				// the new tile will be empty (Color is background color)
+				AddedTile.setBackground(Color.decode("#4169aa"));
+
+				// set border around tile (background color)
+				AddedTile.setBorder(boardPenTileBorder);
+
+				// add tile to boardArray
+				boardPenArray[TileCol][TileRow] = AddedTile;
+				boardpen.add(AddedTile);
+			}
+		}
+
+		// make the board with the given boardArray
+		boardpen.makeBoard(boardPenArray, x, y,3);
+		
+
+		/**
+		 *  penArray[][] holds all the tiles
+		 *  of the board being created
+		 * 
+		 */
 		x = 14;
 		y = 35;
 		
-		Bullpen.setPreferredSize(new Dimension(140, 410));
-		Bullpen.setMinimumSize(new Dimension(140, 410));
-		Bullpen.setMaximumSize(new Dimension(140, 410));
-		
-		Bullpen.setLayout(new GridLayout(y, x));
-		
 		Tile penArray[][] = new Tile[x+6][y+6];
-
+		bullpen.setPreferredSize(new Dimension(140, 350));
+		bullpen.setMaximumSize(new Dimension(140,350));
+		bullpen.setMinimumSize(new Dimension(140,350));
+		bullpen.setLayout(new GridLayout(35, 14));
 
 		
 		Border penTileBorder = BorderFactory.createLineBorder(Color.WHITE, 1);
@@ -602,23 +708,27 @@ public class Builder extends JFrame{
 		for(int TileRow = 0; TileRow <y;TileRow++){
 			for(int TileCol = 0; TileCol <x;TileCol++){
 
-				PuzzleTile AddedTile = new PuzzleTile(Bullpen, TileCol,TileRow, 9999);
+				PuzzleTile AddedTile = new PuzzleTile(bullpen, TileCol,TileRow, 9999);
 
 				AddedTile.setBackground(Color.white);
 
 				AddedTile.setBorder(penTileBorder);
 
 				penArray[TileCol][TileRow] = AddedTile;
-				Bullpen.add(AddedTile);
+				bullpen.add(AddedTile);
 			}
 		}
-		Bullpen.selectedPiece = null;
-		Bullpen.makeBoard(penArray, x, y, 2);
-		Bullpen.init = true;
-		Bullpen.addHex(penArray[2][2], 1, allhex.getHexList().get(2));
+	
+		bullpen.makeBoard(penArray, x, y, 2);
+
+		
+		bullpen.selectedPiece=null;
+		bullpen.init=(true);
+		bullpen.addHex(penArray[2][2], 1, allhex.getHexList().get(2));
+		bullpen.init=(false);
+		
 		//Bullpen.addHex(penArray[4][4], 2);
 		BoardBoss.penPieces = 1;
-		Bullpen.init=false;
 	
 		
 		x = 400;
@@ -650,8 +760,12 @@ public class Builder extends JFrame{
 			Inventory.selectedPiece = null;
 			Inventory.makeBoard(invArray, x, y, 2);
 			Inventory.init = true;
-			//Inventory.addHex(penArray[2][2], 1);
-			//Inventory.addHex(penArray[4][4], 2);
+			for(int i=0;i<34;i++){
+				//Inventory.addHex(invArray[i+10][2], i, Level.allhex.getHexList().get(i));
+			}
+
+			//Inventory.addHex(invArray[20][3], 1, Level.allhex.getHexList().get(1));
+			//Inventory.addHex(invArray[4][4], 2, Level.allhex.getHexList().get(2));
 			Inventory.init=false;
 
 		}
@@ -676,6 +790,4 @@ public class Builder extends JFrame{
 		BuildStart bs = new BuildStart();
 		bs.setVisible(true);
 	}
-
-
 }

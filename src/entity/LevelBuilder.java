@@ -39,7 +39,8 @@ public class LevelBuilder{
 		//so this works properly but since we are gonna be dealing with filestreams  this method has to be changed such that it reads a file
 	}
 	
-	public void NewLevel(){
+	public void NewLevel(int num){
+		newLvlID = num;
 		setLevel(new Level(newLvlID));
 	}
 	
@@ -69,6 +70,14 @@ public class LevelBuilder{
 		Level currentState = getLevel();
 		moveDone(previousState, currentState);
 		
+	}
+	
+	public void setType(){
+		Level previousState = getLevel();
+		//Where is the timer attribute
+		//change timer here
+		Level currentState = getLevel();
+		moveDone(previousState, currentState);
 	}
 	
 	public void setTimer(){
