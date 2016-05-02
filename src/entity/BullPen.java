@@ -49,7 +49,8 @@ public class BullPen extends BoardBoss{
 
 	
 		boolean isOverPiece = false;
-		boolean allTilesEmpty=liftHex(tile, hex);
+		System.out.println("tile   "+tile);
+		liftHex(tile, hex);
 		
 		
 		

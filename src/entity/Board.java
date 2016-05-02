@@ -187,7 +187,7 @@ public class Board extends BoardBoss{
 
 			try {
 				if(!boardArray[x][y].isCovered) {
-					boardArray[x][y].setTileID(tileID+1000);					
+					boardArray[x][y].setTileID(1000);					
 				}
 				boardArray[x][y].setBackground(c);
 

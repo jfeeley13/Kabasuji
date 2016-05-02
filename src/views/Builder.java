@@ -434,11 +434,10 @@ public class Builder extends JFrame{
 		
 		JButton btnNewButton_1 = new JButton("\u21BB");
 		panel_1.add(btnNewButton_1);
-		btnNewButton_1.addActionListener(new RotateController(this, 1));
+		
 		
 		JButton btnR = new JButton("\u21BA");
 		panel_1.add(btnR);
-		btnR.addActionListener(new RotateController(this, 2));
 
 		
 		JButton btnNewButton = new JButton("\u21C4");
@@ -687,6 +686,19 @@ public class Builder extends JFrame{
 		// make the board with the given boardArray
 		boardpen.makeBoard(boardPenArray, x, y,3);
 		
+		Tile currentTile= boardPenArray[0][0];
+		for(int TileRow = 0; TileRow <y;TileRow++){
+			for(int TileCol = 0; TileCol <x;TileCol++){
+				if(boardPenArray[TileCol][TileRow].getTileID()==1000){
+					currentTile=boardPenArray[TileCol][TileRow];
+					break;
+				}
+			}
+		}
+		btnNewButton_1.addActionListener(new RotateController(this, currentTile));
+		btnR.addActionListener(new RotateController(this, currentTile));
+
+		
 
 		/**
 		 *  penArray[][] holds all the tiles
@@ -727,6 +739,11 @@ public class Builder extends JFrame{
 		bullpen.addHex(penArray[2][2], 1, allhex.getHexList().get(2));
 		bullpen.init=(false);
 		
+		
+				
+	
+
+		
 		//Bullpen.addHex(penArray[4][4], 2);
 		BoardBoss.penPieces = 1;
 	
@@ -755,13 +772,15 @@ public class Builder extends JFrame{
 				AddedTile.setBorder(invTileBorder);
 
 				invArray[TileCol][TileRow] = AddedTile;
+				System.out.println("here   "+ invArray[TileCol][TileRow]);
+
 				Inventory.add(AddedTile);
 			}
+			Inventory.makeBoard(invArray, x, y, 4);
 			Inventory.selectedPiece = null;
-			Inventory.makeBoard(invArray, x, y, 2);
 			Inventory.init = true;
-			for(int i=0;i<34;i++){
-				//Inventory.addHex(invArray[i+10][2], i, Level.allhex.getHexList().get(i));
+			for(int i=1;i<5;i++){
+				Inventory.addHex(invArray[i+10][2], i, Level.allhex.getHexList().get(i));
 			}
 
 			//Inventory.addHex(invArray[20][3], 1, Level.allhex.getHexList().get(1));

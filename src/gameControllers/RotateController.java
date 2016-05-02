@@ -18,8 +18,9 @@ public class RotateController implements ActionListener {
 	 * 
 	 * @param builder, int num current level view to be modified
 	 */
-	public RotateController(Builder builder, int num){
+	public RotateController(Builder builder, Tile selected){
 		//this.currentLevel = builder, int num;
+		tile=selected;
 		
 	}
 	
@@ -32,6 +33,7 @@ public class RotateController implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
+		System.out.println();
 		this.tile.getBoard().rotated = (this.tile.getBoard().rotated % 4) + 1;
 		   if(this.tile.getBoard().rotateCheck(this.tile)) {
 			   System.out.println(this.tile.getBoard().rotated);

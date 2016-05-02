@@ -212,7 +212,8 @@ public class Level{
 		BoardBoss board = new Board();
 		
 		JButton rotateButton = new JButton("\u21BB");
-		rotateButton.setPreferredSize(new Dimension(50, 20));	
+		rotateButton.setPreferredSize(new Dimension(50, 20));
+		
 
 
 		
