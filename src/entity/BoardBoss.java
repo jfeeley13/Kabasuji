@@ -35,6 +35,7 @@ public abstract class BoardBoss extends JPanel{
 	protected Border boardPenBorder = BorderFactory.createLineBorder(Color.decode("#4169aa"), 1);
 	public static HashMap pieceList = new HashMap();
 	public static int penPieces = 0;
+	public static int bullPenPosition=0;
 
 	
 	/** Board Creation method 
