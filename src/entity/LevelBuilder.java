@@ -5,7 +5,7 @@ import java.util.Stack;
 
 public class LevelBuilder{
 	
-	protected Level level;
+	private static Level level;
 	protected BullPen inventory;
 	protected String lvlName;
 	private Stack<IMove> moves = new Stack<IMove>();
@@ -20,7 +20,7 @@ public class LevelBuilder{
 	 */
 	public void SaveLevel(){
 		SaveMove savedState = new SaveMove();
-		savedState.doMove(level);
+		savedState.doMove(getLevel());
 		while(!moves.isEmpty()){
 			moves.pop(); //ditch all moves before this save is done
 		}
@@ -35,12 +35,12 @@ public class LevelBuilder{
 			m = moves.pop(); //ditch all moves after the SaveMove we are looking for
 		}
 		SaveMove theSave = (SaveMove) m;
-		this.level = theSave.loadSavedState(); //change the current state of level to the state that the SaveMove Object held.
+		this.setLevel(theSave.loadSavedState()); //change the current state of level to the state that the SaveMove Object held.
 		//so this works properly but since we are gonna be dealing with filestreams  this method has to be changed such that it reads a file
 	}
 	
 	public void NewLevel(){
-		level = new Level(newLvlID);
+		setLevel(new Level(newLvlID));
 	}
 	
 	/**
@@ -50,10 +50,10 @@ public class LevelBuilder{
 	 * @param t ReleaseTile in which the set number and color will be added
 	 */
 	public void addSet(String color, int number, ReleaseTile t){
-		Level previousState = level;
+		Level previousState = getLevel();
 		t.setColor = color;
 		t.setNum = number;	
-		Level currentState = level;
+		Level currentState = getLevel();
 		moveDone(previousState, currentState);
 	}
 	
@@ -64,27 +64,27 @@ public class LevelBuilder{
 	 * @param columns
 	 */
 	public void setBoardDimensions(int rows, int columns){
-		Level previousState = level;
-		level.setBoardDimensions(rows, columns);
-		Level currentState = level;
+		Level previousState = getLevel();
+		getLevel().setBoardDimensions(rows, columns);
+		Level currentState = getLevel();
 		moveDone(previousState, currentState);
 		
 	}
 	
 	public void setTimer(){
-		Level previousState = level;
+		Level previousState = getLevel();
 		//Where is the timer attribute
 		//change timer here
-		Level currentState = level;
+		Level currentState = getLevel();
 		moveDone(previousState, currentState);
 	}
 	
 	public void setMoves(){
-		Level previousState = level;
+		Level previousState = getLevel();
 		//Where is the move attribute
 		//change moves here
 		//I see it in BoardBoss, but shouldnt it be only on board? since only the subclass board uses this atttribute
-		Level currentState = level;
+		Level currentState = getLevel();
 		moveDone(previousState, currentState);
 	}
 	
@@ -117,10 +117,18 @@ public class LevelBuilder{
 	 * @param hex
 	 */
 	public void addSolutionPiece(Hexomino hex){
-		Level previousState = level;
-		level.solutionPieces.add(hex);
-		Level currentState = level;
+		Level previousState = getLevel();
+		getLevel().solutionPieces.add(hex);
+		Level currentState = getLevel();
 		moveDone(previousState, currentState);
+	}
+
+	public static Level getLevel() {
+		return level;
+	}
+
+	public void setLevel(Level level) {
+		this.level = level;
 	}
 	
 	

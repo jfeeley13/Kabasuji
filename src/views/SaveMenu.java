@@ -1,7 +1,8 @@
 package views;
 
 import gameControllers.QuitController;
-
+import builderControllers.SaveController;
+import entity.LevelBuilder;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -47,7 +48,11 @@ public class SaveMenu extends JFrame {
 		lblAreYouSure.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JButton btnSave = new JButton("Save");
-		btnSave.addActionListener(new QuitController(this, parentView, true));
+		btnSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new SaveController(LevelBuilder.getLevel(), parentView.txtGame.toString()).save();	
+			}
+		});
 		
 		JButton btnExit = new JButton("Exit");
 		btnExit.addActionListener(new QuitController(this, parentView, false));
