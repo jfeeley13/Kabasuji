@@ -78,13 +78,10 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 				bullPen.refill=true;
 				int pos = BoardBoss.bullPenPosition;
 				generateRandom();
-				int quickrand = r.nextInt(36);
 				bullPen.addHex(bullPen.returnBoard()[boardWidth][3], ids.get(ids.size()-1), Level.allhex.getHexList().get(pos));
 				generateRandom();
-				quickrand = r.nextInt(36);
 				bullPen.addHex(bullPen.returnBoard()[boardWidth][11], ids.get(ids.size()-1), Level.allhex.getHexList().get(pos+1));
 				generateRandom();
-				quickrand = r.nextInt(36);
 				bullPen.addHex(bullPen.returnBoard()[boardWidth][20], ids.get(ids.size()-1), Level.allhex.getHexList().get(pos+2));
 				bullPen.refill=false;
 				BoardBoss.bullPenPosition+=1;

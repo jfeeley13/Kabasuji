@@ -93,6 +93,7 @@ public class Level{
 	public static void openLevel(String type, int levelnum, JLabel lbl) {
 		gameType = type;
 		level = levelnum;
+		
 
 		levelTime=30*timeVar;
 		starLabel = lbl;
@@ -285,28 +286,6 @@ public class Level{
 		pen.setBackground(Color.decode("#4169aa"));
 		//boardPen.setBackground(Color.WHITE);
 		
-
-		/**
-		JSplitPane splitPane = new JSplitPane();
-		splitPane.setEnabled(false);
-		splitPane.setPreferredSize(new Dimension(100, 20));	
-		scrollPane.setColumnHeaderView(splitPane);
-		
-		JButton rotateButton = new JButton("\u21BB");
-		rotateButton.setPreferredSize(new Dimension(50, 20));	
-
-		splitPane.setLeftComponent(rotateButton);
-		
-		JButton flipButton = new JButton("\u21C4");
-		flipButton.setPreferredSize(new Dimension(50, 20));	
-
-		flipButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		splitPane.setRightComponent(flipButton);
-		splitPane.setEnabled(true);
-		**/
 		
 	
 		
@@ -474,11 +453,12 @@ public class Level{
 		pen.init = true;
 		
 		// add two pieces
-		pen.addHex(penArray[2][2], 1, allhex.getHexList().get(0));
-
-		//pen.addHex(penArray[4][4], 2, allhex.getHexList().get(2));
-		
+		int pos = BoardBoss.bullPenPosition;
+		pen.addHex(penArray[pen.returnWidth()/2][3], 1, Level.allhex.getHexList().get(pos));
+		pen.addHex(penArray[pen.returnWidth()/2][11], 2, Level.allhex.getHexList().get(pos+1));
+		pen.addHex(penArray[pen.returnWidth()/2][20], 3, Level.allhex.getHexList().get(pos+2));
 		// end filling bullpen with pieces
+		BoardBoss.bullPenPosition+=1;
 		pen.init=false;
 		
 		
