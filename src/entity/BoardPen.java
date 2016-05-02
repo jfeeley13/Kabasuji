@@ -52,13 +52,30 @@ public class BoardPen extends BoardBoss{
 	 * 	over tiles
 	 */
 	public void drawHex(Tile tile, int posx, int posy, Color c) {
-
+		int widthOver=0;
+		int heightOver=0;
+		for(int i=0; i<6; i++) {
+			int y=0;
+			int x=0;
+			x=selectedPiece.shape[i].row+posx;
+			try {
+				Tile testTile = boardArray[x][y];
+			} catch (Exception e) {widthOver+=1;}
+		}
+		for(int i=0; i<6; i++) {
+			int y=0;
+			int x=0;
+			y=selectedPiece.shape[i].column+posy;
+			try {
+				Tile testTile = boardArray[x][y];
+			} catch (Exception e) {heightOver+=1;}
+		}
 		for(int i=0; i<6;i++){
 			int x = 0;
 			int y = 0;
 			switch(rotated) {
-			case 1:	x=selectedPiece.shape[i].row+posx;
-					y=selectedPiece.shape[i].column+posy;
+			case 1:	x=selectedPiece.shape[i].row+posx-widthOver;
+					y=selectedPiece.shape[i].column+posy-heightOver;
 					break;
 			case 2:	x=selectedPiece.shape[i].column+posx;
 					y=selectedPiece.shape[i].row+posy;
@@ -138,20 +155,7 @@ public class BoardPen extends BoardBoss{
 	 * 	is piece at Tile tile escaping borders?
 	 * 	this method stops that from happening
 	 */
-	public boolean borderCheck(Tile tile) {
-		int x=0;
-		int y=0;
-
-
-		x=selectedPiece.shape[5].row+tile.getCoords()[0];
-		y=selectedPiece.shape[5].column+tile.getCoords()[1];
-		
-		if(x<width && y<height) {
-			return true;
-		}
-		else
-			return false;
-	}
+	
 	
 	public int returnHeight() {
 		return this.height;

@@ -54,25 +54,7 @@ public class BullPen extends BoardBoss{
 		
 		
 		if(selectedPiece==null && !(init || refill)) return false;
-		/**
-		for(int i=0;i<6;i++) {
-			int x=hex.shape[i].row+tile.getCoords()[0];
-			int y=hex.shape[i].column+tile.getCoords()[1];
-			if(init) 
-				if(boardArray[x][y].getTileID()<1000) 
-					isOverPiece=true;
-			
-			else if(borderCheck(tile)) 
-				if(boardArray[x][y].getTileID()<1000) 
-					isOverPiece=true;
-			
-			else 
-				if(boardArray[x][height-6].getTileID()<1000) 
-					isOverPiece=true;
-			
-				
-		}
-		*/
+		
 		if(isOverPiece) return false;
 		if(init || refill){
 			
@@ -104,39 +86,7 @@ public class BullPen extends BoardBoss{
 					}
 			}
 		}
-		/**
-		else {
-			if((selectedPiece!=null && lifted && !penPiece)) {
-				for(int k=0; k<6;k++){
-					int x=hex.shape[k].row+tile.getCoords()[0];
-					int y=hex.shape[k].column+tile.getCoords()[1];
-					boardArray[x][y].setBorder(selectBorder);
-					if(borderCheck(tile)) y=height-6;
-					try {
-						if(boardArray[x][y].isCovered()) {
-							
-							return false;
-						}
-					} catch (NullPointerException e) {}
-				}
-				for(int i=0; i<width; i++) 
-					for(int j=0; j<height; j++) {
-						if(boardArray[i][j].getBackground()==Color.GREEN) {
-							boardArray[i][j].coverTile();
-							boardArray[i][j].setBorder(selectBorder);
-							boardArray[i][j].setBackground(Color.BLUE);
-							boardArray[i][j].isHighlight=false;
-							selectedPiece=null;
-							boardArray[i][j].setTileID(tileID);
-						
-						}
-					}
-				pieceList.put(tileID, hex);
-				penPieces+=1;
-				System.out.println("Piece Placed!");
-				}
-		}
-		*/
+		
 		lifted = true;
 		return true;
 	}
@@ -183,16 +133,32 @@ public class BullPen extends BoardBoss{
 	 * 	over tiles
 	 */
 	public void drawHex(Tile tile, int posx, int posy, Color c) {
-		
-		if(!borderCheck(tile)) posy=height-6;
+		int widthOver=0;
+		int heightOver=0;
+		for(int i=0; i<6; i++) {
+			int y=0;
+			int x=0;
+			x=selectedPiece.shape[i].row+posx;
+			try {
+				Tile testTile = boardArray[x][y];
+			} catch (Exception e) {widthOver+=1;}
+		}
+		for(int i=0; i<6; i++) {
+			int y=0;
+			int x=0;
+			y=selectedPiece.shape[i].column+posy;
+			try {
+				Tile testTile = boardArray[x][y];
+			} catch (Exception e) {heightOver+=1;}
+		}
 
 
 		for(int i=0; i<6;i++){
 			int x = 0;
 			int y = 0;
 			switch(rotated) {
-			case 1:	x=selectedPiece.shape[i].row+posx;
-					y=selectedPiece.shape[i].column+posy;
+			case 1:	x=selectedPiece.shape[i].row+posx-widthOver;
+					y=selectedPiece.shape[i].column+posy-heightOver;
 					break;
 			case 2:	x=selectedPiece.shape[i].column+posx;
 					y=selectedPiece.shape[i].row+posy;
@@ -306,20 +272,6 @@ public class BullPen extends BoardBoss{
 	 * 	this method stops that from happening
 	 */
 	
-	public boolean borderCheck(Tile tile) {
-		int x=0;
-		int y=0;
-
-		try {
-		x=selectedPiece.shape[5].row+tile.getCoords()[0];
-		y=selectedPiece.shape[5].column+tile.getCoords()[1];
-		} catch (Exception e) {}
-		if(x<width && y<height) {
-			return true;
-		}
-		else
-			return false;
-	}
 
 	
 	public int returnHeight() {

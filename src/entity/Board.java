@@ -62,7 +62,6 @@ public class Board extends BoardBoss{
 			for(int k=0; k<6;k++){
 				int x=hex.shape[k].row+tile.getCoords()[0];
 				int y=hex.shape[k].column+tile.getCoords()[1];
-				if(!borderCheck(tile)) y=height-6+k;
 				try {
 					if(boardArray[x][y].isCovered()) {
 
@@ -133,23 +132,34 @@ public class Board extends BoardBoss{
 	 * 	over tiles
 	 */
 	public void drawHex(Tile tile, int posx, int posy, Color c) {
+		int widthOver=0;
+		int heightOver=0;
+		for(int i=0; i<6; i++) {
+			int y=0;
+			int x=0;
+			x=selectedPiece.shape[i].row+posx;
+			try {
+				Tile testTile = boardArray[x][y];
+			} catch (Exception e) {widthOver+=1;}
+		}
+		for(int i=0; i<6; i++) {
+			int y=0;
+			int x=0;
+			y=selectedPiece.shape[i].column+posy;
+			try {
+				Tile testTile = boardArray[x][y];
+			} catch (Exception e) {heightOver+=1;}
+		}
 		
 		for(int i=0; i<6;i++){
-			if(!borderCheck(tile)) posy=height-6;
+	
 			
-			int testWidth = widthCheck(tile);
-			
-			if(testWidth>0) {
-				if(tile.getCoords()[0]>width/2)
-					posx = width - testWidth;
-				else
-					posx = 1;
-			}
+
 			int x = 0;
 			int y = 0;
 			switch(rotated) {
-			case 1:	x=selectedPiece.shape[i].row+posx;
-					y=selectedPiece.shape[i].column+posy;
+			case 1:	x=selectedPiece.shape[i].row+posx-widthOver;
+					y=selectedPiece.shape[i].column+posy-heightOver;
 					break;
 			case 2:	x=selectedPiece.shape[i].column+posx;
 					y=selectedPiece.shape[i].row+posy;
@@ -231,33 +241,7 @@ public class Board extends BoardBoss{
 	 * 	is piece at Tile tile escaping borders?
 	 * 	this method stops that from happening
 	 */
-	public boolean borderCheck(Tile tile) {
-		int y=0;
-		
-		try {
-		y=selectedPiece.shape[5].column+tile.getCoords()[1];
-			
-		if(y<height) {
-			return true;
-		}
-		else
-			return false;
-		} catch (NullPointerException e) {};
-		return false;
-	}
 	
-	public int widthCheck(Tile tile) {
-		int x=0;
-		int y=0;
-		for(int i=0; i<6; i++) {
-			try {
-				x=selectedPiece.shape[i].row+tile.getCoords()[0];
-				y=height-6;
-				Tile tileX = boardArray[x][y];
-			} catch (Exception e) {return i;}
-		}
-		return 0;
-	}
 	
 	public int returnHeight() {
 		return this.height;
