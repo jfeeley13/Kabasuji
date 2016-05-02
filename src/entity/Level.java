@@ -20,28 +20,13 @@ public class Level {
 		starsAcheived = 0;
 	}
 	
-	public void initializeLevel(String type){
-		this.board = new Board();
-		if(type.equals("Puzzle")){
-			board.makeBoard(new PuzzleTile[rows][columns], rows, columns, 1);
-		}
-
-		else if(type.equals("Lighting"))
-			board.makeBoard(new LightningTile[rows][columns], rows, columns, 1);
-		else
-			board.makeBoard(new ReleaseTile[rows][columns], rows, columns, 1);
-			//board.fillArray(typeOfTile);
-		//still need to fill array here
-		//initialize bullPen
-		//TODO: finish
-	}
 	/**
 	 * 
 	 * @return
 	 */
 	public boolean levelComplete(){
 		return board.hasWon();
-		//TODO: currently this only checks the winning condition of 3start
+		
 	}
 	
 	public void setBoardDimensions(int newRows, int newColumns){

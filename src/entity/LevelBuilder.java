@@ -12,37 +12,11 @@ public class LevelBuilder{
 	String type;
 	int newLvlID;
 	
-	public LevelBuilder(){
+	public LevelBuilder(Level level){
+		this.level = level;
 	}
 	
-	/**
-	 * Saves the current state of the level
-	 */
-	public void SaveLevel(){
-		SaveMove savedState = new SaveMove();
-		savedState.doMove(getLevel());
-		while(!moves.isEmpty()){
-			moves.pop(); //ditch all moves before this save is done
-		}
-		moves.push(savedState); //push the save now
-	}
-	/**
-	 * Sets the state of the level to the state of the most recent SaveMove
-	 */
-	public void LoadSave(){
-		IMove m = moves.pop();
-		while(!(m instanceof SaveMove)){
-			m = moves.pop(); //ditch all moves after the SaveMove we are looking for
-		}
-		SaveMove theSave = (SaveMove) m;
-		this.setLevel(theSave.loadSavedState()); //change the current state of level to the state that the SaveMove Object held.
-		//so this works properly but since we are gonna be dealing with filestreams  this method has to be changed such that it reads a file
-	}
 	
-	public void NewLevel(int num){
-		newLvlID = num;
-		setLevel(new Level(newLvlID));
-	}
 	
 	/**
 	 * 
@@ -69,16 +43,15 @@ public class LevelBuilder{
 		getLevel().setBoardDimensions(rows, columns);
 		Level currentState = getLevel();
 		moveDone(previousState, currentState);
-		
 	}
 	
-	public void setType(){
-		Level previousState = getLevel();
-		//Where is the timer attribute
-		//change timer here
-		Level currentState = getLevel();
-		moveDone(previousState, currentState);
+	public void setBoardRows(int rows){
+		setBoardDimensions(rows, LevelBuilder.level.getColumns());
 	}
+	public void setBoardColumns(int cols){
+		setBoardDimensions(LevelBuilder.level.getRows(), cols);
+	}
+	
 	
 	public void setTimer(){
 		Level previousState = getLevel();
@@ -97,6 +70,8 @@ public class LevelBuilder{
 		moveDone(previousState, currentState);
 	}
 	
+
+	
 	/**
 	 * Makes a LevelBuilderMove Object and pushes it onto the stack of moves. This method should be called whenever any editing of the
 	 * Level is made.
@@ -114,8 +89,6 @@ public class LevelBuilder{
 	 */
 	public void undo(){
 		IMove unknownMove = moves.pop();
-		if(unknownMove instanceof SaveMove)
-			return; //cant undo a save
 		LevelBuilderMove notSaveMove = (LevelBuilderMove) unknownMove; 
 		notSaveMove.revertMove();
 
@@ -127,7 +100,7 @@ public class LevelBuilder{
 	 */
 	public void addSolutionPiece(Hexomino hex){
 		Level previousState = getLevel();
-		getLevel().solutionPieces.add(hex);
+		this.level.solutionPieces.add(hex);
 		Level currentState = getLevel();
 		moveDone(previousState, currentState);
 	}
