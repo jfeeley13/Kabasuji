@@ -180,12 +180,8 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
     		
     		
     		this.tile.getBoard().refresh();
-    		if(this.tile.getBoard().borderCheck(this.tile)) {
-    			this.tile.getBoard().drawHex(this.tile, x, y, Color.GREEN);
-    			lastGoodTile=this.tile;
-    		}
-    		else 	
-    			this.tile.getBoard().drawHex(this.tile, x, this.tile.getBoard().returnHeight()-6, Color.GREEN);
+ 
+    		this.tile.getBoard().drawHex(this.tile, x, y, Color.GREEN);
 
 
     		int id = tile.getBoard().getID();

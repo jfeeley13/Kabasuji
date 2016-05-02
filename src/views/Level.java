@@ -93,6 +93,7 @@ public class Level{
 	public static void openLevel(String type, int levelnum, JLabel lbl) {
 		gameType = type;
 		level = levelnum;
+
 		levelTime=30*timeVar;
 		starLabel = lbl;
 		
