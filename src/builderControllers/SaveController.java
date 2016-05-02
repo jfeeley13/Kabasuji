@@ -1,5 +1,7 @@
 package builderControllers;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -8,7 +10,7 @@ import java.io.IOException;
 
 import entity.Level;
 
-public class SaveController {
+public class SaveController implements ActionListener{
 	Level level;
 	String fileName;
 
@@ -33,5 +35,11 @@ public class SaveController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 }

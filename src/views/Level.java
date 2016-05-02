@@ -474,7 +474,9 @@ public class Level{
 		pen.init = true;
 		
 		// add two pieces
-		pen.addHex(penArray[2][2], 1, allhex.getHexList().get(1));
+		pen.addHex(penArray[2][2], 1, allhex.getHexList().get(0));
+		pen.addHex(penArray[4][4], 1, allhex.getHexList().get(0));
+		pen.addHex(penArray[6][6], 1, allhex.getHexList().get(0));
 
 		//pen.addHex(penArray[4][4], 2, allhex.getHexList().get(2));
 		
@@ -584,12 +586,21 @@ public class Level{
 				stars.setText("    \u2605");				
 				if (gameType == "Puzzle Level"){
 					starPArray[level]="    \u2605";					//put current score in star array to be read by level selection screen
+					if(starPArray[level+1] == null){
+						starPArray[level+1]="   ";	
+					}
 				}
 				else if (gameType == "Lightning Level"){
 					starLArray[level]="    \u2605";
+					if(starLArray[level+1] == null){
+						starLArray[level+1]="   ";	
+					}
 				}
 				else{
 					starRArray[level]="    \u2605";
+					if(starRArray[level+1] == null){
+						starRArray[level+1]="   ";	
+					}
 				}
 				
 				

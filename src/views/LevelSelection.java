@@ -134,6 +134,7 @@ public class LevelSelection {
 			
 			//if no score label locked
 			if (Puzzlestars[i].getText()==(null)){
+				System.out.println(Puzzlestars[i].getText());
 				if (level==1){										//level 1 is unlocked
 					Puzzlestars[i].setText(" ");
 				}

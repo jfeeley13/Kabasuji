@@ -43,6 +43,7 @@ import entity.AllHex;
 import entity.Board;
 import entity.BoardBoss;
 import entity.BullPen;
+import entity.LevelBuilder;
 import entity.PuzzleTile;
 import entity.Tile;
 
@@ -57,13 +58,14 @@ import javax.swing.SpinnerNumberModel;
 
 import builderControllers.CreateNewLevelController;
 import builderControllers.LevelBuilderController;
+import builderControllers.SaveController;
 import gameControllers.ExitController;
 
 
 public class Builder extends JFrame{
 
 	private JFrame frame;
-	private JTextField txtGame;
+	JTextField txtGame;
 	private JTextField textField;
 	private JTextField textField_1;
 	static String gameType;
@@ -231,7 +233,12 @@ public class Builder extends JFrame{
 		
 		
 		JButton btnSave = new JButton("Save");
-		//TODO: save controller
+		btnSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new SaveController(LevelBuilder.getLevel(), txtGame.toString()).save();	
+			}
+		});
+
 		
 		JButton btnExit = new JButton("Exit");
 		btnExit.addActionListener(new ExitController(this));
