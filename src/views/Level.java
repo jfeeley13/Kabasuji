@@ -403,21 +403,25 @@ public class Level{
 					ReleaseTile AddedTile = new ReleaseTile(board, TileRow,TileCol, 9999);
 					//					AddedTile.addSetNum(2,Color.ORANGE);
 					// set border around tile (black border)
-					AddedTile.setBorder(BoardTileBorder);
+					//AddedTile.setBorder(BoardTileBorder);
 					// add tile to boardArray
 					boardArray[TileRow][TileCol] = AddedTile;
 					board.add(AddedTile);
-				}else if(gameType == "Lightning Level"){
-					LightningTile AddedTile = new LightningTile(board, TileRow,TileCol, 9999);
-					AddedTile.setBackground(Color.YELLOW);
+				}if(gameType=="Puzzle Level"){
+					// create a new tile
+					PuzzleTile AddedTile = new PuzzleTile(board, TileRow,TileCol, 9999);
+					// the new tile will be empty (white)
+					AddedTile.setBackground(Color.WHITE);
 					// set border around tile (black border)
 					AddedTile.setBorder(BoardTileBorder);
 					// add tile to boardArray
 					boardArray[TileRow][TileCol] = AddedTile;
 					board.add(AddedTile);
-				}else if(gameType == "Puzzle Level"){
-					PuzzleTile AddedTile = new PuzzleTile(board, TileRow,TileCol, 9999);
-					AddedTile.setBackground(Color.GREEN);
+				}else if(gameType=="Lightning Level"){
+					// create a new tile
+					LightningTile AddedTile = new LightningTile(board, TileRow,TileCol, 9999);
+					// the new tile will be empty (white)
+					AddedTile.setBackground(Color.WHITE);
 					// set border around tile (black border)
 					AddedTile.setBorder(BoardTileBorder);
 					// add tile to boardArray
@@ -506,8 +510,8 @@ public class Level{
 		
 		pen.selectedPiece=null;
 		pen.init=(true);
-		pen.addHex(penArray[2][2], 1, allhex.getHexList().get(2));
-		pen.init=(false);
+		//pen.addHex(penArray[2][2], 1, allhex.getHexList().get(2));
+		//pen.init=(false);
 		
 		// add two pieces
 		int pos = BoardBoss.bullPenPosition;
@@ -638,7 +642,7 @@ public class Level{
 			//Y is the width of the array? **might break if change board size
 			for(int i = 0; i < y; i++){
 				for(Tile t : boardArray[i]){
-					if(t.isCovered()==true) {
+					if(t.isCovered()==true || t.checkMark() == true) {
 						covered++;
 					}
 				}

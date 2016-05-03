@@ -74,10 +74,8 @@ public class Board extends BoardBoss{
 					}
 				}
 			pieceList.put(tileID, hex);
-			System.out.println("Piece Placed!");
 			BoardBoss.moves-=1;
 			}
-		System.out.println("3");
 		lifted = true;
 		hasWon();
 		return true;
@@ -210,12 +208,16 @@ public class Board extends BoardBoss{
 	 * 	clear any potential paint artifacts)
 	 */
 	public void refresh() {
-		for(int j=0; j<rows; j++) 
-			for(int k=0; k<cols; k++) {
-				if(boardArray[j][k].isHighlight) {
+
+		for(int j=0; j<cols; j++) 
+			for(int k=0; k<rows; k++) {
+				if(boardArray[j][k].isHighlight ) {
 					boardArray[j][k].setBackground(Color.WHITE);
 				}
-				if(boardArray[j][k].isCovered) {
+				if(boardArray[j][k].isCovered){
+					boardArray[j][k].setBackground(Color.BLUE);
+				}
+				if(boardArray[j][k].checkMark()){
 					boardArray[j][k].setBackground(Color.BLUE);
 				}
 			}
@@ -251,8 +253,8 @@ public class Board extends BoardBoss{
 	}
 	public int getGreenTiles() {
 		 		int greenBois=0;
-		 		for(int i=0;i<width;i++)
-		 			for(int j=0;j<height;j++)
+		 		for(int i=0;i<cols;i++)
+		 			for(int j=0;j<rows;j++)
 		 				if(boardArray[i][j].getBackground()==Color.GREEN) greenBois+=1;
 		 		return greenBois;
 		 	}

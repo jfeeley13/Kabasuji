@@ -621,7 +621,7 @@ public class Builder extends JFrame{
 		 */
 		
 		Tile boardArray[][] = new Tile[x][y];
-		
+		board.setBackground(Color.decode("#4169aa"));
 		Border BoardTileBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
 
 		

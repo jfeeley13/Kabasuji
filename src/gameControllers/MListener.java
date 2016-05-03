@@ -150,8 +150,12 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		if(e.getButton() == 3){
+			this.tile.toggleTile();
+			if(this.tile.checkValid()){
+				this.tile.setBackground(Color.ORANGE);
+			}else this.tile.setBackground(Color.MAGENTA);
+		}
 	}
 
 	@Override
@@ -185,14 +189,14 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 
     		int id = tile.getBoard().getID();
     		if(id!=lastID) {
-    			System.out.println("refresh!  "+lastBoard.getID());
+    			//System.out.println("refresh!  "+lastBoard.getID());
     			lastBoard.refresh();
     		}
     		
     		
     			//this.tile.getBoard().redraw();
         		if(greenbois<6) {
-            		System.out.println("less than 6 ");
+            		//System.out.println("less than 6 ");
 
         			this.tile.getBoard().setBoard(lastBoardState);
         			this.tile.getBoard().drawHex(this.tile, x, y, Color.GREEN);
@@ -210,5 +214,6 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
     public void mouseDragged(MouseEvent e) {
     	mouseMoved(e);
     }
+    
 
 }

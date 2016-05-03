@@ -52,13 +52,13 @@ public class ReleaseTile extends Tile{
 		return 	tileID + "\n" 
 				+ row + "\n" 
 				+ column + "\n"
-				+ isNull + "\n"
+				+ isValid + "\n"
 				+ "2" + "\n"
 				+ setColor + "\n" 
 				+ setNum + "\n";
 	}
 	public void coverTile(){
-
+		this.isCovered=true;
 		if(setColor != Color.BLACK&& setNum != 0){
 			if(setColor == Color.GREEN){
 				pArray[0][setNum-1].setBackground(setColor);
