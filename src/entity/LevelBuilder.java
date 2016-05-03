@@ -45,14 +45,6 @@ public class LevelBuilder{
 		moveDone(previousState, currentState);
 	}
 	
-	public void setBoardRows(int rows){
-		setBoardDimensions(rows, LevelBuilder.level.getColumns());
-	}
-	public void setBoardColumns(int cols){
-		setBoardDimensions(LevelBuilder.level.getRows(), cols);
-	}
-	
-	
 	public void setTimer(){
 		Level previousState = getLevel();
 		//Where is the timer attribute

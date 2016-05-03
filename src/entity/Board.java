@@ -363,7 +363,7 @@ public class Board extends BoardBoss{
 		else if(type.equals("Lighting Level"))
 			t = new LightningTile(this, 0, 0, 999);
 		else
-			t = new ReleaseTile(this, 0, 0, null, 0, 999);
+			t = new ReleaseTile(this, 0, 0, 999);
 		for(int i = 0; i < rows; i++){
 			for(int j =0; j < cols; j++){
 				boardArray[i][j] = t;
