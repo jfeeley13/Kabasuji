@@ -49,7 +49,7 @@ public class BullPen extends BoardBoss{
 
 	
 		boolean isOverPiece = false;
-		System.out.println("tile   "+tile);
+//		System.out.println("tile   "+tile);
 		liftHex(tile, hex);
 		
 		

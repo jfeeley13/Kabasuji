@@ -607,8 +607,10 @@ public class Builder extends JFrame{
 		 *  
 		 */
 
-		board.setLayout(new GridLayout(y,x));
+		board.setLayout(new GridLayout(col,row));
 		board.setPreferredSize(new Dimension(col*boardTileWidth,row*boardTileHeight));
+		board.setMaximumSize(new Dimension(col*boardTileWidth,row*boardTileHeight));
+		board.setMinimumSize(new Dimension(col*boardTileWidth,row*boardTileHeight));
 
 		//board.setPreferredSize(new Dimension(384,384));
 		//board.setMinimumSize(new Dimension(384,384));
@@ -620,13 +622,13 @@ public class Builder extends JFrame{
 		 * 
 		 */
 		
-		Tile boardArray[][] = new Tile[x][y];
+		Tile boardArray[][] = new Tile[row][col];
 		
 		Border BoardTileBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
 
 		
-		for(int TileRow = 0; TileRow <y;TileRow++){
-			for(int TileCol = 0; TileCol <x;TileCol++){
+		for(int TileRow = 0; TileRow <col;TileRow++){
+			for(int TileCol = 0; TileCol <row;TileCol++){
 				
 				PuzzleTile AddedTile = new PuzzleTile(board, TileCol,TileRow, 9999);
 
@@ -639,7 +641,7 @@ public class Builder extends JFrame{
 			}
 		}
 
-		board.makeBoard(boardArray, x, y, 1);
+		board.makeBoard(boardArray, row, col, 1);
 		
 		
 		/**
@@ -738,7 +740,7 @@ public class Builder extends JFrame{
 		BoardBoss.penPieces = 1;
 	
 		
-		x = 240;
+		x = 400;
 		y = 20;
 				
 		Inventory.setPreferredSize(new Dimension(4000, 100));
@@ -803,7 +805,7 @@ public class Builder extends JFrame{
 	
 	public void rotateFlip(Tile tiles){
 		Tile datboi=tiles;
-		System.out.println("ROTATE FLIP ");
+//		System.out.println("ROTATE FLIP ");
 
 		
 		/*rotate controllers get current selected piece in bullpen

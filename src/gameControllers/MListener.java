@@ -68,6 +68,7 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 		Hexomino hex;
 		if(BoardBoss.selectedPiece==null) {
 			hex = (Hexomino) BoardBoss.pieceList.get(tile.getTileID());
+			System.out.println("Stuff...yo");
 			
 
 		}
@@ -83,12 +84,12 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 
 					if(tile.getBoard().returnBoard()[i][j].getBackground()==Color.GREEN || tile.getBoard().returnBoard()[i][j].getTileID()==1000) {
 						 datboi = tile.getBoard().returnBoard()[i][j];
-							System.out.println("Selected piece "+datboi);
+//							System.out.println("Selected piece "+datboi);
 							break;
 					}
 				}
 			}
-			System.out.println("Selected piece2 "+datboi);
+//			System.out.println("Selected piece2 "+datboi);
 			
 
 					
@@ -166,10 +167,11 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 	}
 	
     public void mouseMoved(MouseEvent e) {
+  
+
     	if(tile.getBoard().selectedPiece!=null && tile.getBoard().lifted && !tile.getBoard().penPiece && tile.getBoard().getID()!=4){
     		
-
-    		int x = this.tile.getCoords()[0];
+     		int x = this.tile.getCoords()[0];
     		int y = this.tile.getCoords()[1];
     		
     		int tileID= this.tile.getTileID();
@@ -195,7 +197,7 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
     		
     			//this.tile.getBoard().redraw();
         		if(greenbois<6) {
-            		System.out.println("less than 6 ");
+//            		System.out.println("less than 6 ");
 
         			this.tile.getBoard().setBoard(lastBoardState);
         			this.tile.getBoard().drawHex(this.tile, x, y, Color.GREEN);
@@ -208,6 +210,12 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
     		lastTile=tile;
     		
 
+    	}else if (tile.getBoard().selectedPiece==null){
+     		int x = this.tile.getCoords()[0];
+    		int y = this.tile.getCoords()[1];
+    		
+    		BoardBoss.rotated = 1;
+			this.tile.getBoard().refresh();
     	}
      }	
     public void mouseDragged(MouseEvent e) {

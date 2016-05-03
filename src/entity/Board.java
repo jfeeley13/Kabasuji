@@ -251,9 +251,10 @@ public class Board extends BoardBoss{
 	}
 	public int getGreenTiles() {
 		 		int greenBois=0;
-		 		for(int i=0;i<width;i++)
-		 			for(int j=0;j<height;j++)
-		 				if(boardArray[i][j].getBackground()==Color.GREEN) greenBois+=1;
+//		 		for(int i=0;i<width;i++)
+//		 			for(int j=0;j<height;j++)		 				
+//		 				if(boardArray[i][j].getBackground()==Color.GREEN) greenBois+=1;
+//		 		System.out.println("GreenTiles = " +greenBois);
 		 		return greenBois;
 		 	}
 	
@@ -295,10 +296,10 @@ public class Board extends BoardBoss{
 				k=(k+1)%3;
 			}
 	}
-	public void setBoard(Tile[][] board) {
- 		boardArray=board.clone();
- 		return;
- 	}
+//	public void setBoard(Tile[][] board) {
+// 		boardArray=board.clone();
+// 		return;
+// 	}
 	
 	/**
 	 * Resizes the field boardArray in Board class

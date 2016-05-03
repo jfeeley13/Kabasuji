@@ -52,8 +52,11 @@ public class Inventory extends BoardBoss{
 	
 		boolean isOverPiece = false;
 		liftHex(tile, hex);
-		
-		
+		if(BoardBoss.rotated != 1){
+			clearPen();
+			refill = true;
+//			return false; 
+		}
 		
 		if(selectedPiece==null && !(init || refill)) return false;
 		
@@ -84,9 +87,9 @@ public class Inventory extends BoardBoss{
 				for(int i=0; i<width; i++) 
 					for(int j=0; j<height; j++) {
 						if(boardArray[i][j].getBackground()==Color.GREEN) {
-							boardArray[i][j].setBackground(Color.WHITE);
+							boardArray[i][j].setBackground(Color.BLUE);
 						
-							boardArray[i][j].setBorder(whiteBorder);
+							boardArray[i][j].setBorder(selectBorder);
 							boardArray[i][j].isHighlight=false;
 						
 						}
@@ -114,7 +117,7 @@ public class Inventory extends BoardBoss{
 				//System.out.println(tileID);
 				System.out.println("Selected Piece!");
 				for(int j=0; j<width; j++) 
-					for(int k=0; k<height; k++) 
+					for(int k=0; k<height; k++){ 
 						/*if(boardArray[j][k].tileID==tileID) {
 							boardArray[j][k].isCovered = false;
 							boardArray[j][k].setTileID(tileID+1000);
@@ -122,8 +125,8 @@ public class Inventory extends BoardBoss{
 							boardArray[j][k].setBorder(whiteBorder);
 						}
 						*/
-						boardArray[j][k].setBorder(whiteBorder);
-
+//						boardArray[j][k].setBorder(whiteBorder);
+					}
 				selectedPiece = hex;
 				lifted = false;
 				penPiece = false;
@@ -148,7 +151,7 @@ public class Inventory extends BoardBoss{
 
 		int widthOver=0;
 		int heightOver=0;
-		int tileID = tile.getTileID();
+		tileID = tile.getTileID();
 		int orgX =0;
 		int orgY =0;
 		int setX=0;
@@ -158,6 +161,7 @@ public class Inventory extends BoardBoss{
 				if(boardArray[i][j].getTileID()==tileID && boardArray[i][j].isOrigin) {
 					orgX=i;
 					orgY=j;
+//					System.out.println("Origin = (" + orgX +"," + orgY +")" );
 				}
 				
 				switch(rotated) {
@@ -174,7 +178,7 @@ public class Inventory extends BoardBoss{
 						setY=orgY+(i-orgX);
 						break;
 				}
-				if(boardArray[i][j].getTileID()==tileID) {
+				if(boardArray[i][j].getTileID()==tileID && boardArray[i][j].getTileID()<1000) {
 					boardArray[setX][setY].setHighlight(true);
 					boardArray[setX][setY].setBackground(c);
 					boardArray[setX][setY].setBorder(selectBorder);
@@ -259,8 +263,8 @@ public class Inventory extends BoardBoss{
 					boardArray[j][k].setBorder(whiteBorder);
 					boardArray[j][k].setBackground(Color.WHITE);
 			}
-			if(boardArray[j][k].isCovered) {
-				boardArray[j][k].setBackground(Color.BLUE);
+			if(boardArray[j][k].isCovered && boardArray[j][k].getTileID()== tileID && boardArray[j][k].getBorder() ==  whiteBorder) {
+				boardArray[j][k].setBackground(Color.WHITE);
 			}
 		}
 	}
