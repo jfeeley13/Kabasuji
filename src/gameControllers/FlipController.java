@@ -3,6 +3,7 @@ package gameControllers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import entity.Tile;
 import views.Builder;
 import views.Level;
 
@@ -18,7 +19,7 @@ public class FlipController implements ActionListener{
 		this.level = level;
 	}
 	
-	public FlipController(Builder builder, int i) {
+	public FlipController(Builder builder, Tile currentTile, int i) {
 		// TODO Auto-generated constructor stub
 	}
 

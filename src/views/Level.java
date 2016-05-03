@@ -26,7 +26,9 @@ import entity.HexTile;
 import entity.Hexomino;
 import entity.PuzzleTile;
 import entity.Tile;
+import gameControllers.FlipController;
 import gameControllers.MListener;
+import gameControllers.RotateController;
 
 import javax.swing.JToolBar;
 import javax.swing.JLabel;
@@ -76,6 +78,7 @@ public class Level{
 	public static int levelTime=30;
 	static int timeVar = 25;
 	static JLabel label;
+	JButton RotateCW_btn,RotateCCW_btn ,VertFlip_btn,HorFlip_btn;
 	public static AllHex allhex = new AllHex();
 	public static String starPArray[] = new String[6];
 	public static String starLArray[] = new String[6];
@@ -83,6 +86,8 @@ public class Level{
 	JLabel stars;
 	int x=6,y=6;
 	Tile boardArray[][] = new Tile[x][y];
+	Tile penArray[][] = new Tile[14][35];
+
 	static JLabel starLabel;
 
 	
@@ -405,7 +410,7 @@ public class Level{
 		 *  of the board being created
 		 * 
 		 */
-		Tile penArray[][] = new Tile[x][y];
+		//Tile penArray[][] = new Tile[x][y];
 
 		pen.setPreferredSize(new Dimension(140, 350));
 		pen.setMaximumSize(new Dimension(140,350));
@@ -440,15 +445,15 @@ public class Level{
 		
 		pen.selectedPiece=null;
 		pen.init=(true);
-		pen.addHex(penArray[2][2], 1, allhex.getHexList().get(2));
-		pen.init=(false);
-		
 		// add two pieces
 		int pos = BoardBoss.bullPenPosition;
 		pen.addHex(penArray[pen.returnWidth()/2][3], 1, Level.allhex.getHexList().get(pos));
 		pen.addHex(penArray[pen.returnWidth()/2][11], 2, Level.allhex.getHexList().get(pos+1));
 		pen.addHex(penArray[pen.returnWidth()/2][20], 3, Level.allhex.getHexList().get(pos+2));
 		// end filling bullpen with pieces
+		pen.init=(false);
+		
+
 		BoardBoss.bullPenPosition+=1;
 		pen.init=false;
 		JPanel panel = new JPanel();
@@ -459,20 +464,16 @@ public class Level{
 		bullpen_scrollPane.setColumnHeaderView(panel);
 		panel.setLayout(new GridLayout(2, 2, 0, 0));
 		
-		JButton RotateCW_btn = new JButton("\u21BB");
+		RotateCW_btn = new JButton("\u21BB");
 		panel.add(RotateCW_btn);
 		
-		JButton RotateCCW_btn = new JButton("\u21BA");
-		RotateCCW_btn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
+		RotateCCW_btn = new JButton("\u21BA");
 		panel.add(RotateCCW_btn);
 		
-		JButton HorFlip_btn = new JButton("\u21C4");
+		HorFlip_btn = new JButton("\u21C4");
 		panel.add(HorFlip_btn);
 		
-		JButton VertFlip_btn = new JButton("\u21C5");
+		VertFlip_btn = new JButton("\u21C5");
 		panel.add(VertFlip_btn);
 		
 		
@@ -520,13 +521,8 @@ public class Level{
 				boardPen.add(AddedTile);
 			}
 		}
-
 		// make the board with the given boardArray
 		boardPen.makeBoard(boardPenArray, x, y,3);
-		
-	
-
-
 	}
 	
 	/**
@@ -625,5 +621,26 @@ public class Level{
 				}
 			}
 		}
+	}
+	
+	public void rotateFlip(){
+		
+		//rotate controllers get current selected piece in bullpen
+		Tile currentTile= null;
+		for(int TileRow = 0; TileRow <14;TileRow++){
+			for(int TileCol = 0; TileCol <35;TileCol++){
+				if(penArray[TileCol][TileRow].getTileID()==1000){
+					currentTile=penArray[TileCol][TileRow];
+					break;
+				}
+			}
+		}
+		if(currentTile!=null){
+			/*RotateCW_btn.addActionListener(new RotateController(this, currentTile, 1));
+			RotateCCW_btn.addActionListener(new RotateController(this, currentTile, 2));
+			VertFlip_btn.addActionListener(new FlipController(this, currentTile, 1));	
+			HorFlip_btn.addActionListener(new FlipController(this,currentTile, 2));*/
+		}
+		
 	}
 }

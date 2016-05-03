@@ -10,7 +10,7 @@ import views.Level;
 
 public class RotateController implements ActionListener {
 	//Piece piece
-	Level currentLevel;
+	Builder currentLevel;
 	int num; 			//1 for flip < and 2 for flip >
 	Tile tile;
 	
@@ -18,39 +18,38 @@ public class RotateController implements ActionListener {
 	 * 
 	 * @param builder, int num current level view to be modified
 	 */
-	public RotateController(Builder builder, Tile selected){
+	public RotateController(Builder builder, Tile selected, int number){
 		//this.currentLevel = builder, int num;
 		tile=selected;
-		
+		currentLevel=builder;
+		num=number;
+
 	}
 	
 	/**
 	 * entry method
 	 */
-	public void entry(){
-		
-	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		System.out.println();
+		tile = MListener.datboi;
+		if(num==1){
 		this.tile.getBoard().rotated = (this.tile.getBoard().rotated % 4) + 1;
 		   if(this.tile.getBoard().rotateCheck(this.tile)) {
-			   System.out.println(this.tile.getBoard().rotated);
 			   this.tile.getBoard().refresh();
 			   this.tile.getBoard().drawHex(this.tile, 1, 1, Color.GREEN);
 		   }
 		   else {
 			   this.tile.getBoard().rotated = (this.tile.getBoard().rotated % 4) - 1;
 		   }
+		}
  
  
-	    //else {
+	    else {
 		   this.tile.getBoard().rotated = (this.tile.getBoard().rotated % 4) - 1;
 		   if(this.tile.getBoard().rotated<=0) this.tile.getBoard().rotated+=4;
 		   if(this.tile.getBoard().rotateCheck(this.tile)) {
 		   
-			   System.out.println(this.tile.getBoard().rotated);
 			   this.tile.getBoard().refresh();
 			   this.tile.getBoard().drawHex(this.tile, 1, 1, Color.GREEN);
 
@@ -62,6 +61,7 @@ public class RotateController implements ActionListener {
 				   this.tile.getBoard().rotated = (this.tile.getBoard().rotated % 4) + 1;
 		   }
 	   }
+	}
 		
 	}
 //}

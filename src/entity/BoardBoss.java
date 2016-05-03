@@ -93,6 +93,9 @@ public abstract class BoardBoss extends JPanel{
 		return boardArray;
 	}
 	
+	public void rotateFlip(Tile datboi){
+	}
+	
 
 	/**
 	 * Fills the boardArray parameter with a given type of tile
