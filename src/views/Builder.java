@@ -150,6 +150,8 @@ public class Builder extends JFrame{
 	 */
 	private void initialize() {
 		//frame = new JFrame();
+		entity.Level newlvl = new entity.Level(6);
+		LevelBuilder.setLevel(newlvl);
 
 		Color myColor = Color.decode("#4169aa");
 		getContentPane().setBackground(myColor);
@@ -176,12 +178,7 @@ public class Builder extends JFrame{
 		final JSpinner RowSpinner = new JSpinner();	//column spinner
 		RowSpinner.setModel(new SpinnerNumberModel(6, 6, 12, 1));
 		RowSpinner.setValue(row);
-		
-		//LevelBuilder.NewLevel(6);
-		//LevelBuilder.setMoves();
-		//LevelBuilder.setBoardDimensions(row, col);
 
-		
 		final JComboBox levelComboBox = new JComboBox();	//select which level to create
 		levelComboBox.addItem("Puzzle Level");
 		levelComboBox.addItem("Lightning Level");
@@ -251,7 +248,27 @@ public class Builder extends JFrame{
 		JButton btnSave = new JButton("Save");
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("level builder level "+LevelBuilder.getLevel());	//null
+				LevelBuilder.getLevel().setLvlID(6);						//levelID starts at 6
+				LevelBuilder.getLevel().setname(txtGame.getText());			//save level name
+				row = (Integer) RowSpinner.getValue();						//save board dimensions
+				col = (Integer) ColSpinner.getValue();
+				LevelBuilder.getLevel().initializeBoard(gameType, row, col);
+
+				if (gameType == "Lightning Level"){
+					gameTimer = Integer.parseInt("0"+timerORMoveTextField.getText());
+				}
+				else{
+					moveCounter = Integer.parseInt("0"+timerORMoveTextField.getText());
+				}
+				System.out.println(timerORMoveTextField.getText());
+				LevelBuilder.getLevel().setTimer(gameTimer);
+				LevelBuilder.getLevel().setMoves(moveCounter);
+
+				System.out.println("level builder level id "+LevelBuilder.getLevel().getLvlID());
+				System.out.println("level builder level name "+LevelBuilder.getLevel().getName());	
+				System.out.println("level builder level moves "+ LevelBuilder.getLevel().getTimer());	
+				System.out.println("level builder level timer "+LevelBuilder.getLevel().getMoves());	
+
 				new SaveController(LevelBuilder.getLevel(), txtGame.getText()).save();	
 			}
 		});
@@ -778,8 +795,9 @@ public class Builder extends JFrame{
 		//	RotateCW_btn.addActionListener(new RotateController(this, MListener.datboi, 1));
 
 			rotateFlip(MListener.datboi);
+			
 
-
+			
 	}
 
 	private ChangeListener changeColNum(Object value) {

@@ -72,7 +72,6 @@ import javax.swing.ScrollPaneConstants;
 public class Level{
 
 	private static JFrame frame;
-	private JTable table_c;
 	private JTable table;
 	public static String gameType;
 	public static JPanel PanelArray[][] = new JPanel[3][6];
@@ -640,7 +639,7 @@ public class Level{
 			int all=x * y;
 
 			//Y is the width of the array? **might break if change board size
-			for(int i = 0; i < y; i++){
+			for(int i = 0; i <y; i++){
 				for(Tile t : boardArray[i]){
 					if(t.isCovered()==true || t.checkMark() == true) {
 						covered++;

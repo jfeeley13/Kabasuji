@@ -110,6 +110,8 @@ public abstract class BoardBoss extends JPanel{
 	 * @param typeOfTile Any subclass object of the Tile class.
 	 */
 	public void fillArray(Tile typeOfTile){
+		System.out.println("tile   "+typeOfTile);
+
 		for(int i= 0; i < width; i++){
 			for(int j = 0; j < height; j++){
 				boardArray[i][j] = typeOfTile; 

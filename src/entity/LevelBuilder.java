@@ -11,7 +11,7 @@ public class LevelBuilder{
 	protected String lvlName;
 	private Stack<IMove> moves = new Stack<IMove>();
 	String type;
-	int newLvlID;
+	int newLvlID, movesnum,timer;
 	
 	public LevelBuilder(String type){
 		this.type = type;
@@ -61,18 +61,19 @@ public class LevelBuilder{
 		
 	}
 	
-	public void setTimer(){
+	public void setTimer(int gameTimer){
 		Level previousState = getLevel();
-		//Where is the timer attribute
-		//change timer here
+		//TODO: Set timer
+		timer=gameTimer;
 		Level currentState = getLevel();
+
 		moveDone(previousState, currentState);
 	}
 	
-	public void setMoves(){
+	public void setMoves(int moveCounter){
 		Level previousState = getLevel();
 		//Where is the move attribute
-		//change moves here
+		movesnum=moveCounter;
 		//I see it in BoardBoss, but shouldnt it be only on board? since only the subclass board uses this atttribute
 		Level currentState = getLevel();
 		moveDone(previousState, currentState);
@@ -115,7 +116,7 @@ public class LevelBuilder{
 		return level;
 	}
 
-	public void setLevel(Level level) {
+	public static void setLevel(Level level) {
 		LevelBuilder.level = level;
 	}
 	

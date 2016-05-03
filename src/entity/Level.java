@@ -6,7 +6,8 @@ import javax.swing.Box.Filler;
 
 public class Level {
 	
-	protected int lvlID;
+	protected int lvlID, moves, timer;
+	String name, type;
 	protected boolean locked;
 	protected int starsAcheived;
 	protected Board board;
@@ -29,16 +30,16 @@ public class Level {
 		
 		if(type.equals("Puzzle Level")){
 			board.makeBoard(new PuzzleTile[rows][columns], rows, columns, 1);
-			board.fillArray(new PuzzleTile(board, 0, 0, 999));
+			board.fillBoard(type);
 		}
 
 		else if(type.equals("Lighting Level")){
 			board.makeBoard(new LightningTile[rows][columns], rows, columns, 1);
-			board.fillArray(new LightningTile(board, 0, 0, 999));
+			board.fillBoard(type);
 		}
 		else{
 			board.makeBoard(new ReleaseTile[rows][columns], rows, columns, 1);
-			board.fillArray(new ReleaseTile(board, 0, 0, 999));
+			board.fillBoard(type);
 		}
 		
 		return board;
@@ -109,6 +110,32 @@ public class Level {
 	public void setPen(BullPen pen) {
 		this.pen = pen;
 	}
+
+	public void setTimer(int gameTimer) {
+		this.timer=gameTimer;
+	}
+
+	public void setMoves(int moveCounter) {
+		this.moves=moveCounter;
+	}
+
+	public void setname(String text) {
+		this.name=text;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public int getTimer() {
+		return timer;
+	}
+
+	public int getMoves() {
+		return moves;
+	}
+
+
 
 
 	
