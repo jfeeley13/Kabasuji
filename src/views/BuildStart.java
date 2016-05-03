@@ -1,6 +1,7 @@
 package views;
 
 import builderControllers.CreateNewLevelController;
+import builderControllers.LoadController;
 
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -80,6 +81,11 @@ public class BuildStart extends JFrame {
 		});
 		
 		JButton btnCustomLevels = new JButton("Load Levels");
+		btnCustomLevels.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new LoadController("game1");	
+			}
+		});
 		
 		JButton btnLevelBuilder = new JButton("Help");
 		btnLevelBuilder.addActionListener(new ActionListener() {

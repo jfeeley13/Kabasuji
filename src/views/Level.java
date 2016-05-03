@@ -449,8 +449,9 @@ public class Level{
 				boardArray[i][j+1].addSetNum(i+1, Color.ORANGE);
 				boardArray[i][j+2].addSetNum(i+1, Color.PINK);
 			}
-			board.makeBoard(boardArray, x, y, 1);
 		}
+		board.makeBoard(boardArray, x, y, 1);
+	
 
 	
 

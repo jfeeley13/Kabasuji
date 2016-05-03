@@ -21,7 +21,8 @@ public class SaveController{
 	}
 	
 	public void save(){
-		File f = new File(fileName);
+		//File f = new File(fileName);
+		File f = new File (LoadController.getStoredDirectory(), fileName);
 		try {
 			if(!f.exists())
 				f.createNewFile();

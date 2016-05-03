@@ -29,9 +29,16 @@ public class LoadController {
 	boolean isNull;
 	int type;
 	
+	public static File getStoredDirectory() {
+		String currentDirectory = System.getProperty("user.dir");
+		File f = new File (currentDirectory, "Data/");
+		
+		return f;
+	}
 	
 	public LoadController(String fileName){
-			File f = new File("%appdata%/" + fileName);
+			//File f = new File("%appdata%/" + fileName);
+			File f = new File (getStoredDirectory(), fileName);
 			FileReader fr;
 			BufferedReader br;
 			try {
