@@ -25,6 +25,7 @@ public class Board extends BoardBoss{
 	int rows;
 	protected int tileID;
 	protected int boardID = 1;
+	int moves;
 
 	/** Board Creation method 
 	 *  
@@ -74,7 +75,7 @@ public class Board extends BoardBoss{
 					}
 				}
 			pieceList.put(tileID, hex);
-			BoardBoss.moves-=1;
+			moves-=1;
 			}
 		lifted = true;
 		hasWon();
@@ -376,16 +377,41 @@ public class Board extends BoardBoss{
 			t = new LightningTile(this, 0, 0, 999);
 		else
 			t = new ReleaseTile(this, 0, 0, 999);
+		
 		for(int i = 0; i < rows; i++){
 			for(int j =0; j < cols; j++){
 				boardArray[i][j] = t;
-				t.setColumn(j);
+				t.setColumn(t.getColumn() + 1);
 			}
-			t.setRow(i);
+			t.setRow(t.getRow()+ 1);
 		}
 			
 	}
+	
+	public void setMoves(int moves){
+		this.moves = moves;
+	}
+	
+	public int getMoves(){
+		return moves;
+	}
 
+
+	public int getCols() {
+		return this.cols;
+	}
+
+
+	public int getRows() {
+		return this.rows;
+	}
+
+
+	public Tile[][] getBoardArray() {
+		return boardArray;
+	}
+
+	
 
 
 }

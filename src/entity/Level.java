@@ -7,7 +7,7 @@ import javax.swing.Box.Filler;
 public class Level {
 	
 	protected int lvlID, moves, timer;
-	String name, type;
+	String name;
 	protected boolean locked;
 	protected int starsAcheived;
 	protected Board board;
@@ -26,7 +26,7 @@ public class Level {
 	 * @return the board of the lvel, now initialized
 	 */
 	public Board initializeBoard(String type, int rows, int columns){
-		this.board = new Board();
+			Board board = new Board();
 		
 		if(type.equals("Puzzle Level")){
 			board.makeBoard(new PuzzleTile[rows][columns], rows, columns, 1);
@@ -41,6 +41,8 @@ public class Level {
 			board.makeBoard(new ReleaseTile[rows][columns], rows, columns, 1);
 			board.fillBoard(type);
 		}
+		
+		this.board = board;
 		
 		return board;
 	}
@@ -117,6 +119,7 @@ public class Level {
 
 	public void setMoves(int moveCounter) {
 		this.moves=moveCounter;
+		board.setMoves(moveCounter);
 	}
 
 	public void setname(String text) {

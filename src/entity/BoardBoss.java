@@ -29,8 +29,7 @@ public abstract class BoardBoss extends JPanel{
 	protected int tileID;											/** id of tile that hexomino is being added to */
 	protected int boardID;											/** id of board */
 	public static int rotated = 1;									/** rotate state */
-	public static int flipped = 1;									/** flipped state */
-	public static int moves = 8;									/** remaining moves */
+	public static int flipped = 1;									/** flipped state */									/** remaining moves */
 	protected Border selectBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
 	protected Border whiteBorder = BorderFactory.createLineBorder(Color.WHITE, 1);
 	protected Border boardPenBorder = BorderFactory.createLineBorder(Color.decode("#4169aa"), 1);
@@ -103,21 +102,6 @@ public abstract class BoardBoss extends JPanel{
  	public void setBoard(Tile[][] board) {
  		return;
  	}
-	
-
-	/**
-	 * Fills the boardArray parameter with a given type of tile
-	 * @param typeOfTile Any subclass object of the Tile class.
-	 */
-	public void fillArray(Tile typeOfTile){
-		System.out.println("tile   "+typeOfTile);
-
-		for(int i= 0; i < width; i++){
-			for(int j = 0; j < height; j++){
-				boardArray[i][j] = typeOfTile; 
-			}
-		}
-	}
 	
 	public void clearPen() {
 		return;

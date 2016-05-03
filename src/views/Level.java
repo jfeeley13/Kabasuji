@@ -76,8 +76,7 @@ public class Level{
 	public static String gameType;
 	public static JPanel PanelArray[][] = new JPanel[3][6];
 	public static int PanelsCovered[] = {0,0,0};
-	static int level;
-	public static int levelTime=30;
+	static int levelID;
 	static int timeVar = 25;
 	static JLabel label;
 	public static AllHex allhex = new AllHex();
@@ -85,30 +84,31 @@ public class Level{
 	public static String starLArray[] = new String[6];
 	public static String starRArray[] = new String[6];
 	JLabel stars;
-	int x=6,y=6;
-	Tile boardArray[][] = new Tile[x][y];
 	static JLabel starLabel;
 	private int rowA,rowB,rowC = 0;
 	private boolean aFlag,bFlag, cFlag = false;
+	public static int levelTime;
+	static entity.Level level;
+	static int rows;
+	static int cols;
+	static Board board;
 	
 
 	/**
 	 * Launch the application.
 	 * @param lblNewLabel 
 	 */
-	public static void openLevel(String type, int levelnum, JLabel lbl) {
+	public static void openLevel(String type, JLabel lbl) {
 		gameType = type;
-		level = levelnum;
-		
 
-		levelTime=30*timeVar;
+		levelTime= level.getTimer()*timeVar;
 		starLabel = lbl;
 		
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Level window = new Level();
+					Level window = new Level(Level.level);
 					window.frame.setLocationRelativeTo(null);
 					window.frame.setVisible(true);
 					window.frame.setResizable(false);
@@ -137,7 +137,8 @@ public class Level{
 	/**
 	 * Create the application.
 	 */
-	public Level() {
+	public Level(entity.Level level) {
+		Level.level = level;
 		initialize();
 		try {
 			gameControllers.LevelTimer.main(this);
@@ -150,6 +151,13 @@ public class Level{
 	 * Initialize the contents of the frame.
 	 */	
 	private void initialize() {
+		
+		Level.board = Level.level.getBoard();
+		
+		Level.rows = Level.board.getRows();
+		Level.cols = Level.board.getCols();
+		
+
 		
 		int crossHeight = 348;
 		frame = new JFrame();
@@ -180,42 +188,15 @@ public class Level{
 
 	    scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 	    
-	   // scrollPane.setViewportBorder(new LineBorder(Color.RED));
-        //scrollpane.setColumnHeaderView(table.getTableHeader());
-
-		/*
-		table_c = new JTable();
-		table_c.setVisible(false);
-		if (gameType == "Release Level"){
-			table_c.setVisible(true);	
-		}
-		
-		table_c.setForeground(Color.BLACK);
-		table_c.setBorder(new LineBorder(new Color(0, 0, 0)));
-		table_c.setModel(new DefaultTableModel(
-			new Object[][] {
-				{"1", "2", "3", "4", "5", "6"},
-				{"1", "2", "3", "4", "5", "6"},
-				{"1", "2", "3", "4", "5", "6"},
-			},
-			new String[] {
-				"New column", "New column", "New column", "New column", "New column", "New column"
-			}
-		));
-		table_c.setRowSelectionAllowed(false);
-		table_c.setBackground(UIManager.getColor("List.dropLineColor"));
-		*/
 	    
 		JLabel lblF1 = new JLabel("Press F1 for Help");
 		lblF1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblF1.setFont(new Font("Lucida Grande", Font.ITALIC, 13));
 		
 		
-		BoardBoss boardPen = new BoardPen();
-		BoardBoss boardPen2 = new BoardPen();
+		BoardPen boardPen = new BoardPen();
+		BoardPen boardPen2 = new BoardPen();
 		
-
-		BoardBoss board = new Board();
 		
 		JButton rotateButton = new JButton("\u21BB");
 		rotateButton.setPreferredSize(new Dimension(50, 20));
@@ -315,7 +296,7 @@ public class Level{
 		toolBar.add(lblNewLabel);
 		
 		JLabel lblLvlNum = new JLabel("     ");
-		lblLvlNum.setText(String.valueOf(level));
+		lblLvlNum.setText(String.valueOf(levelID));
 		toolBar.add(lblLvlNum);
 		
 		//stars is \u2605
@@ -344,7 +325,7 @@ public class Level{
 			label.setText(levelTime/2+"");
 		}
 		else{
-			label.setText(BoardBoss.moves+"");
+			label.setText(level.getBoard().getMoves()+"");
 		}
 		
 		JLabel label_1 = new JLabel("                                                                       ");
@@ -389,71 +370,16 @@ public class Level{
 		Border BoardTileBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
 		
 		
-		/** 
-		 *  go through every single tile at every row and column
-		 * 
-		 */
-		for(int TileCol = 0; TileCol <y;TileCol++){
-			for(int TileRow = 0; TileRow <x;TileRow++){
-
-//				Tile AddedTile = new PuzzleTile(board, TileRow,TileCol, 9999);
-				// create a new tile
-				if(gameType == "Release Level"){
-					ReleaseTile AddedTile = new ReleaseTile(board, TileRow,TileCol, 9999);
-					//					AddedTile.addSetNum(2,Color.ORANGE);
-					// set border around tile (black border)
-					//AddedTile.setBorder(BoardTileBorder);
-					// add tile to boardArray
-					boardArray[TileRow][TileCol] = AddedTile;
-					board.add(AddedTile);
-				}if(gameType=="Puzzle Level"){
-					// create a new tile
-					PuzzleTile AddedTile = new PuzzleTile(board, TileRow,TileCol, 9999);
-					// the new tile will be empty (white)
-					AddedTile.setBackground(Color.WHITE);
-					// set border around tile (black border)
-					AddedTile.setBorder(BoardTileBorder);
-					// add tile to boardArray
-					boardArray[TileRow][TileCol] = AddedTile;
-					board.add(AddedTile);
-				}else if(gameType=="Lightning Level"){
-					// create a new tile
-					LightningTile AddedTile = new LightningTile(board, TileRow,TileCol, 9999);
-					// the new tile will be empty (white)
-					AddedTile.setBackground(Color.WHITE);
-					// set border around tile (black border)
-					AddedTile.setBorder(BoardTileBorder);
-					// add tile to boardArray
-					boardArray[TileRow][TileCol] = AddedTile;
-					board.add(AddedTile);
-				}else System.out.println("Board type not found");
-
-				//				AddedTile.addSetNum(2,Color.ORANGE);
-
-				// the new tile will be empty (white)
-				//				AddedTile.setBackground(Color.WHITE);
-
-				//				// set border around tile (black border)
-				//				AddedTile.setBorder(BoardTileBorder);
-				//
-				//				// add tile to boardArray
-				//				boardArray[TileRow][TileCol] = AddedTile;
-				//				board.add(AddedTile);
+		for(int i = 0; i < rows; i++){
+			for(Tile t: Level.board.getBoardArray()[i]){
+				t.setBackground(Color.WHITE);
+				// set border around tile (black border)
+				t.setBorder(BoardTileBorder);
+				Level.board.add(t);
+				System.out.println(t.toString());
 			}
 		}
-		//		TODO Add numbers here using random number generator
-		//		OR add them in function based on random number generator
-		//		addSetNum()
-		// make the board with the given boardArray
-		if (gameType == "Release Level"){
-			int j=1;
-			for (int i = 0; i<=5; i++){
-				boardArray[i][j].addSetNum(i+1, Color.GREEN);
-				boardArray[i][j+1].addSetNum(i+1, Color.ORANGE);
-				boardArray[i][j+2].addSetNum(i+1, Color.PINK);
-			}
-		}
-		board.makeBoard(boardArray, x, y, 1);
+		
 	
 
 	
@@ -608,7 +534,7 @@ public class Level{
 	 */
 	
 	private void resetLevel() {
-		BoardBoss.moves=8;
+		//BoardBoss.moves=8;
 	}
 	public void setLabel() {
 		if (gameType == "Lightning Level") {
@@ -621,14 +547,14 @@ public class Level{
 		
 		if (gameType == "Puzzle Level" || gameType == "Release Level") {
 			
-			if(BoardBoss.moves>=0)
-				label.setText(BoardBoss.moves+"");
-			if(BoardBoss.moves==0) {
+			if(Level.board.getMoves()>=0)
+				label.setText(Level.board.getMoves()+"");
+			if(Level.board.getMoves()==0) {
 				GameOver hs = new GameOver();
 				hs.newwindow();
-				BoardBoss.moves=-1;
+				Level.board.setMoves(Level.board.getMoves() -1);
 			}
-			if(BoardBoss.moves==-1) {
+			if(Level.board.getMoves()==-1) {
 				label.setText(0+"");
 			}
 		}
@@ -636,11 +562,11 @@ public class Level{
 		/* STARS */
 		if (gameType == "Puzzle Level" || gameType == "Lightning Level") {
 			int covered=0;
-			int all=x * y;
+			int all=rows * cols;
 
 			//Y is the width of the array? **might break if change board size
-			for(int i = 0; i <y; i++){
-				for(Tile t : boardArray[i]){
+			for(int i = 0; i <rows; i++){
+				for(Tile t : Level.board.getBoardArray()[i]){
 					if(t.isCovered()==true || t.checkMark() == true) {
 						covered++;
 					}
@@ -651,21 +577,21 @@ public class Level{
 			if(covered==all-12){
 				stars.setText("    \u2605");				
 				if (gameType == "Puzzle Level"){
-					starPArray[level]="    \u2605";					//put current score in star array to be read by level selection screen
-					if(starPArray[level+1] == null){
-						starPArray[level+1]="   ";	
+					starPArray[levelID]="    \u2605";					//put current score in star array to be read by level selection screen
+					if(starPArray[levelID+1] == null){
+						starPArray[levelID+1]="   ";	
 					}
 				}
 				else if (gameType == "Lightning Level"){
-					starLArray[level]="    \u2605";
-					if(starLArray[level+1] == null){
-						starLArray[level+1]="   ";	
+					starLArray[levelID]="    \u2605";
+					if(starLArray[levelID+1] == null){
+						starLArray[levelID+1]="   ";	
 					}
 				}
 				else{
-					starRArray[level]="    \u2605";
-					if(starRArray[level+1] == null){
-						starRArray[level+1]="   ";	
+					starRArray[levelID]="    \u2605";
+					if(starRArray[levelID+1] == null){
+						starRArray[levelID+1]="   ";	
 					}
 				}
 			}
@@ -674,13 +600,13 @@ public class Level{
 			else if(covered==all-6){
 				stars.setText("    \u2605\u2605");
 				if (gameType == "Puzzle Level"){
-					starPArray[level]="    \u2605\u2605";
+					starPArray[levelID]="    \u2605\u2605";
 				}
 				else if (gameType == "Lightning Level"){
-					starLArray[level]="    \u2605\u2605";
+					starLArray[levelID]="    \u2605\u2605";
 				}
 				else{
-					starRArray[level]="    \u2605\u2605";
+					starRArray[levelID]="    \u2605\u2605";
 				}
 			}
 			
@@ -688,13 +614,13 @@ public class Level{
 			else if(covered==all){
 				stars.setText("    \u2605\u2605\u2605");
 				if (gameType == "Puzzle Level"){
-					starPArray[level]="    \u2605\u2605\u2605";
+					starPArray[levelID]="    \u2605\u2605\u2605";
 				}
 				else if (gameType == "Lightning Level"){
-					starLArray[level]="    \u2605\u2605\u2605";
+					starLArray[levelID]="    \u2605\u2605\u2605";
 				}
 				else{
-					starRArray[level]="    \u2605\u2605\u2605";
+					starRArray[levelID]="    \u2605\u2605\u2605";
 				}
 			}
 		}
@@ -715,17 +641,17 @@ public class Level{
 
 		if(rowA == 6 || rowB == 6 || rowC == 6){
 			stars.setText("    \u2605");				
-			starRArray[level]="    \u2605";
+			starRArray[levelID]="    \u2605";
 			if(rowA+rowB == 12||rowA+rowC == 12 ||rowC+rowB == 12){
 				stars.setText("    \u2605\u2605");
-				starRArray[level]="    \u2605\u2605";
+				starRArray[levelID]="    \u2605\u2605";
 				if (rowA+rowB+rowC == 18){
 					stars.setText("    \u2605\u2605\u2605");
-					starRArray[level]="    \u2605\u2605\u2605";
+					starRArray[levelID]="    \u2605\u2605\u2605";
 				}
 			}
-		}else if(starRArray[level+1] == null)
-			starRArray[level+1]="   ";	
+		}else if(starRArray[levelID+1] == null)
+			starRArray[levelID+1]="   ";	
 		
 	}
 	}

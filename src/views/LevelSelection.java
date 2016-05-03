@@ -23,6 +23,8 @@ import java.awt.GridLayout;
 
 import javax.swing.SwingConstants;
 
+import entity.AllLevels;
+
 
 public class LevelSelection {
 	static JLabel lblNewLabel, label, label_1, label_2, label_3, label_5, label_6, label_7, label_8, label_9, label_10, label_11, label_12, label_13, label_14;
@@ -140,9 +142,11 @@ public class LevelSelection {
 			if(Puzzlestars[i].getText()!="locked"){
 				Puzzlebuttons[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						Level nw = new Level();
+						AllLevels allLevels =  new AllLevels();
+						allLevels.initializePuzzleLevels();
+						Level nw = new Level(allLevels.getPuzzleLevel(1) );
 						frame.dispose();
-						Level.openLevel("Puzzle Level", level, Puzzlestars[level-1]);
+						Level.openLevel("Puzzle Level",Puzzlestars[level-1]);
 					}
 				});
 			}
@@ -171,9 +175,11 @@ public class LevelSelection {
 			if(Lightningstars[i].getText()!="locked"){
 				Lightningbuttons[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						Level nw = new Level();
+						AllLevels allLevels =  new AllLevels();
+						allLevels.initializePuzzleLevels();
+						Level nw = new Level( allLevels.getPuzzleLevel(1) );
 						frame.dispose();
-						Level.openLevel("Lightning Level", level, Lightningstars[level-1]);
+						Level.openLevel("Lighting Level",Lightningstars[level-1]);
 					}
 				});
 			}
@@ -202,9 +208,10 @@ public class LevelSelection {
 			if(Releasestars[i].getText()!="locked"){
 				Releasebuttons[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						Level nw = new Level();
-						frame.dispose();
-						Level.openLevel("Release Level", level, Releasestars[level-1]);
+						AllLevels allLevels = new AllLevels();
+						allLevels.initializePuzzleLevels();
+						Level nw = new Level( allLevels.getPuzzleLevel(1));
+						Level.openLevel("Release Level" ,Releasestars[level-1]);
 					}
 				});
 			}
