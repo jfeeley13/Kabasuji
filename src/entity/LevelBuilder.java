@@ -1,5 +1,6 @@
 package entity;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -49,7 +50,7 @@ public class LevelBuilder{
 	 * @param number set number
 	 * @param t ReleaseTile in which the set number and color will be added
 	 */
-	public void addSet(String color, int number, ReleaseTile t){
+	public void addSet(Color color, int number, ReleaseTile t){
 		Level previousState = getLevel();
 		t.setColor = color;
 		t.setNum = number;	

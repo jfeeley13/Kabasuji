@@ -59,7 +59,7 @@ public class LoadController {
 					if(type == 2){
 						String setColor = br.readLine();
 						int setNum = Integer.parseInt(br.readLine());
-						ReleaseTile rt = new ReleaseTile(board, row, col, setColor, setNum, tileID);
+						ReleaseTile rt = new ReleaseTile(board, row, col, tileID);
 						tileArray[row][col] = rt;
 					}
 					else if(type == 1){

@@ -103,6 +103,7 @@ public class AllHex {
 	protected Hexomino h35 = new Hexomino(25, shape35);
 	
 	public AllHex() {
+		hexList.add(new Hexomino(0, shape1));
 		hexList.add(h1);
 		hexList.add(h2);
 		hexList.add(h3);
@@ -147,5 +148,12 @@ public class AllHex {
 		return hexList.get(id);
 	}
 	
+	public ArrayList<Hexomino> getHexominos(int ... hexNums){
+		ArrayList <Hexomino> hexList = new ArrayList <Hexomino>();
+		for (int i = 0; i < hexNums.length; i++){
+			hexList.add(getHex(hexNums[i]));
+		}
+		return hexList;
+	}
 }
 
