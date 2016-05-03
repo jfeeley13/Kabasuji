@@ -57,13 +57,13 @@ public class Board extends BoardBoss{
 		if(selectedPiece==null && !init) return false;
 
 		if(selectedPiece!=null & lifted) {
-			for(int i=0; i<width; i++) 
-				for(int j=0; j<height; j++) 
+			for(int i=0; i<rows; i++) 
+				for(int j=0; j<cols; j++) 
 					if(boardArray[i][j].getBackground()==Color.GREEN && boardArray[i][j].isCovered)
 						return false;
 			
-			for(int i=0; i<width; i++) 
-				for(int j=0; j<height; j++) {
+			for(int i=0; i<rows; i++) 
+				for(int j=0; j<cols; j++) {
 					if(boardArray[i][j].getBackground()==Color.GREEN && !boardArray[i][j].isCovered) {
 						boardArray[i][j].coverTile();
 						boardArray[i][j].setBackground(Color.BLUE);
@@ -99,8 +99,8 @@ public class Board extends BoardBoss{
 				//System.out.println(tileID);
 				System.out.println("Selected Piece!");
 
-				for(int j=0; j<width; j++) 
-					for(int k=0; k<height; k++) 
+				for(int j=0; j<rows; j++) 
+					for(int k=0; k<cols; k++) 
 						if(boardArray[j][k].tileID==tileID) {
 
 							boardArray[j][k].isCovered = false;
