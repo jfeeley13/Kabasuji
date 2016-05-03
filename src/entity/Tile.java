@@ -19,6 +19,7 @@ public abstract class Tile extends JPanel{
 	protected int tileID;
 	BoardBoss board;
 	protected boolean isHighlight = false;
+	boolean isOrigin;
 	
 	
 	public Tile (BoardBoss board, int row, int column,int tileID){

@@ -61,8 +61,11 @@ public class Inventory extends BoardBoss{
 		if(init || refill){
 			
 			for(int i=0; i<6;i++){
+				
 				int x=hex.shape[i].row+tile.getCoords()[0];
 				int y=hex.shape[i].column+tile.getCoords()[1];
+				
+				if(i==0) boardArray[x][y].isOrigin=true;
 
 				boardArray[x][y].coverTile();
 				boardArray[x][y].setBackground(Color.BLUE);
@@ -145,8 +148,41 @@ public class Inventory extends BoardBoss{
 
 		int widthOver=0;
 		int heightOver=0;
-		
-
+		int tileID = tile.getTileID();
+		int orgX =0;
+		int orgY =0;
+		int setX=0;
+		int setY=0;
+		for(int i=0; i<width;i++)
+			for(int j=0; j<height;j++) {
+				if(boardArray[i][j].getTileID()==tileID && boardArray[i][j].isOrigin) {
+					orgX=i;
+					orgY=j;
+				}
+				
+				switch(rotated) {
+				case 1:	setX=i;
+						setY=j;
+						break;
+				case 2:	setX=orgX+(j-orgY);
+						setY=orgY-(i-orgX);
+						break;
+				case 3:	setX=orgX-(i-orgX);
+						setY=orgY-j+6;
+						break;
+				case 4:	setX=orgX-(j-orgY);
+						setY=orgY+(i-orgX);
+						break;
+				}
+				if(boardArray[i][j].getTileID()==tileID) {
+					boardArray[setX][setY].setHighlight(true);
+					boardArray[setX][setY].setBackground(c);
+					boardArray[setX][setY].setBorder(selectBorder);
+				}
+					
+					
+			}
+		/*
 		for(int i=0; i<6;i++){
 			int x = 0;
 			int y = 0;
@@ -164,6 +200,7 @@ public class Inventory extends BoardBoss{
 					y=selectedPiece.shape[i].row+posy-widthOver;
 					break;
 			}
+			/*
 			switch(flipped) {
 			case 1:	x=selectedPiece.shape[i].row+posx*-1;
 					y=selectedPiece.shape[i].column+posy-heightOver;
@@ -178,20 +215,20 @@ public class Inventory extends BoardBoss{
 					y=selectedPiece.shape[i].row+posy-widthOver;
 					break;
 			}
+			
 
-
+			
 
 			try {
 				boardArray[x][y].setHighlight(true);
 			
 			
 			try {
-				
-				//if(boardArray[x][y].isCovered) {
+				if(boardArray[x][y].isCovered) {
 					boardArray[x][y].setTileID(1000);
 					
-				//}
-				boardArray[x][y].setBorder(selectBorder);
+				}
+				
 				boardArray[x][y].setBackground(c);
 				
 				
@@ -200,8 +237,9 @@ public class Inventory extends BoardBoss{
 
 			}
 			} catch (Exception e) {};
-
-		}	
+			
+		}*/
+	
 
 	}
 	

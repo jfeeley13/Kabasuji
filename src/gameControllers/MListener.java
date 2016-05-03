@@ -99,6 +99,9 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 		}
 		
 		if(!placed) {
+			if(tile.getBoard().getID()==4) {
+				tile.getBoard().drawHex(tile, tile.getCoords()[0], tile.getCoords()[1], Color.GREEN);
+			}
 			System.out.println("Didn't place anything!");
 			ids.remove(ids.size()-1);
 		

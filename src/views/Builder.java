@@ -739,14 +739,14 @@ public class Builder extends JFrame{
 	
 		
 		x = 240;
-		y = 10;
+		y = 20;
 				
 		Inventory.setPreferredSize(new Dimension(4000, 100));
 		//Inventory.setMinimumSize(new Dimension(140, 410));
 		//Inventory.setMaximumSize(new Dimension(140, 410));
 		
 		Inventory.setLayout(new GridLayout(y, x));
-		//Tile invArray[][] = new Tile[x][y];
+		Tile invArray[][] = new Tile[x][y];
 		
 
 
@@ -771,7 +771,7 @@ public class Builder extends JFrame{
 			Inventory.selectedPiece = null;
 			Inventory.init = true;
 			for(int i=1;i<34;i++){
-				Inventory.addHex(invArray[i*7][2], i, Level.allhex.getHexList().get(i-1));
+				Inventory.addHex(invArray[i*7][10], i, Level.allhex.getHexList().get(i-1));
 			}
 			Inventory.init=false;
 			
