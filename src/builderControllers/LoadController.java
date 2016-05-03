@@ -39,6 +39,7 @@ public class LoadController {
 	public LoadController(String fileName){
 			//File f = new File("%appdata%/" + fileName);
 			File f = new File (getStoredDirectory(), fileName);
+			System.out.println(f);
 			FileReader fr;
 			BufferedReader br;
 			try {

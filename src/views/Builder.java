@@ -44,6 +44,7 @@ import entity.Board;
 import entity.BoardBoss;
 import entity.BoardPen;
 import entity.BullPen;
+import entity.Inventory;
 import entity.LevelBuilder;
 import entity.PuzzleTile;
 import entity.Tile;
@@ -62,6 +63,7 @@ import builderControllers.LevelBuilderController;
 import builderControllers.SaveController;
 import gameControllers.ExitController;
 import gameControllers.FlipController;
+import gameControllers.MListener;
 import gameControllers.RotateController;
 
 import javax.swing.ScrollPaneConstants;
@@ -74,6 +76,7 @@ public class Builder extends JFrame{
 	JTextField txtGame;
 	private JTextField textField;
 	private JTextField textField_1;
+	JButton RotateCW_btn,RotateCCW_btn ,VertFlip_btn,HorFlip_btn, btnNewButton_1,btnR ,btnNewButton,btnR_1;
 	static String gameType;
 	private int gameTimer = 0;
 	private int moveCounter = 0;
@@ -84,6 +87,10 @@ public class Builder extends JFrame{
 	AllHex allhex = new AllHex();
 	private JTextField timerORMoveTextField;
 	private JPanel pen2;
+	Tile invArray[][] = new Tile[240][10];
+	Tile penArray[][] = new Tile[20][41];
+
+
 
 //	/**
 //	 * Launch the application.
@@ -160,14 +167,14 @@ public class Builder extends JFrame{
 		lblBoardSize.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		final JSpinner ColSpinner = new JSpinner();	//row spinner
-		ColSpinner.setModel(new SpinnerNumberModel(6, 1, 12, 1));
+		ColSpinner.setModel(new SpinnerNumberModel(6, 6, 12, 1));
 		ColSpinner.setValue(col);
 		
 		JLabel lblX = new JLabel("x");
 		lblX.setHorizontalAlignment(SwingConstants.LEFT);
 		
 		final JSpinner RowSpinner = new JSpinner();	//column spinner
-		RowSpinner.setModel(new SpinnerNumberModel(6, 1, 12, 1));
+		RowSpinner.setModel(new SpinnerNumberModel(6, 6, 12, 1));
 		RowSpinner.setValue(row);
 		
 		//LevelBuilder.NewLevel(6);
@@ -244,6 +251,7 @@ public class Builder extends JFrame{
 		JButton btnSave = new JButton("Save");
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				System.out.println("level builder level "+LevelBuilder.getLevel());	//null
 				new SaveController(LevelBuilder.getLevel(), txtGame.getText()).save();	
 			}
 		});
@@ -432,21 +440,17 @@ public class Builder extends JFrame{
 		panel_1.setPreferredSize(new Dimension(100, 50));
 		panel_1.setLayout(new GridLayout(2, 2, 0, 0));
 		
-		JButton btnNewButton_1 = new JButton("\u21BB");
+		 btnNewButton_1 = new JButton("\u21BB");
 		panel_1.add(btnNewButton_1);
-		
-		
-		JButton btnR = new JButton("\u21BA");
+
+		btnR = new JButton("\u21BA");
 		panel_1.add(btnR);
 
-		
-		JButton btnNewButton = new JButton("\u21C4");
+		 btnNewButton = new JButton("\u21C4");
 		panel_1.add(btnNewButton);
-		btnNewButton.addActionListener(new FlipController(this, 1));
 
-		JButton btnR_1 = new JButton("\u21C5");
+		btnR_1 = new JButton("\u21C5");
 		panel_1.add(btnR_1);
-		btnR_1.addActionListener(new FlipController(this, 2));
 
 		
 		JPanel panel_2 = new JPanel();
@@ -454,20 +458,19 @@ public class Builder extends JFrame{
 		panel_2.setPreferredSize(new Dimension(60, 50));
 		panel_2.setLayout(new GridLayout(2, 2, 0, 0));
 		
-		JButton RotateCW_btn = new JButton("\u21BB");
+		RotateCW_btn = new JButton("\u21BB");
 		panel_2.add(RotateCW_btn);
 		
-		
-		JButton RotateCCW_btn = new JButton("\u21BA");
+		RotateCCW_btn = new JButton("\u21BA");
 		panel_2.add(RotateCCW_btn);
 
-		JButton VertFlip_btn = new JButton("\u21C4");
+		VertFlip_btn = new JButton("\u21C4");
 		panel_2.add(VertFlip_btn);
 		
-		JButton HorFlip_btn = new JButton("\u21C5");
+		HorFlip_btn = new JButton("\u21C5");
 		panel_2.add(HorFlip_btn);
-		
-		BoardBoss Inventory = new BullPen();
+				
+		BoardBoss Inventory = new Inventory();
 		inventory_scrollPane.setViewportView(Inventory);
 		Inventory.setPreferredSize( new Dimension(35000,100));		
 		
@@ -686,19 +689,6 @@ public class Builder extends JFrame{
 		// make the board with the given boardArray
 		boardpen.makeBoard(boardPenArray, x, y,3);
 		
-		Tile currentTile= boardPenArray[0][0];
-		for(int TileRow = 0; TileRow <y;TileRow++){
-			for(int TileCol = 0; TileCol <x;TileCol++){
-				if(boardPenArray[TileCol][TileRow].getTileID()==1000){
-					currentTile=boardPenArray[TileCol][TileRow];
-					break;
-				}
-			}
-		}
-		btnNewButton_1.addActionListener(new RotateController(this, currentTile));
-		btnR.addActionListener(new RotateController(this, currentTile));
-
-		
 
 		/**
 		 *  penArray[][] holds all the tiles
@@ -708,7 +698,6 @@ public class Builder extends JFrame{
 		x = 14;
 		y = 35;
 		
-		Tile penArray[][] = new Tile[x+6][y+6];
 		bullpen.setPreferredSize(new Dimension(140, 350));
 		bullpen.setMaximumSize(new Dimension(140,350));
 		bullpen.setMinimumSize(new Dimension(140,350));
@@ -736,19 +725,20 @@ public class Builder extends JFrame{
 		
 		bullpen.selectedPiece=null;
 		bullpen.init=(true);
-		bullpen.addHex(penArray[2][2], 1, allhex.getHexList().get(2));
+		int pos = BoardBoss.bullPenPosition;
+		//bullpen.addHex(bullpen.returnBoard()[bullpen.returnWidth()/2][3], 1, Level.allhex.getHexList().get(pos));
+		//bullpen.addHex(bullpen.returnBoard()[bullpen.returnWidth()/2][11], 2, Level.allhex.getHexList().get(pos+1));
+		//bullpen.addHex(bullpen.returnBoard()[bullpen.returnWidth()/2][20],3, Level.allhex.getHexList().get(pos+2));
+		//bullpen.refill=false;
+		BoardBoss.bullPenPosition+=1;		
 		bullpen.init=(false);
-		
-		
-				
 	
-
 		
 		//Bullpen.addHex(penArray[4][4], 2);
 		BoardBoss.penPieces = 1;
 	
 		
-		x = 400;
+		x = 240;
 		y = 10;
 				
 		Inventory.setPreferredSize(new Dimension(4000, 100));
@@ -756,7 +746,7 @@ public class Builder extends JFrame{
 		//Inventory.setMaximumSize(new Dimension(140, 410));
 		
 		Inventory.setLayout(new GridLayout(y, x));
-		Tile invArray[][] = new Tile[x][y];
+		//Tile invArray[][] = new Tile[x][y];
 		
 
 
@@ -772,23 +762,24 @@ public class Builder extends JFrame{
 				AddedTile.setBorder(invTileBorder);
 
 				invArray[TileCol][TileRow] = AddedTile;
-				System.out.println("here   "+ invArray[TileCol][TileRow]);
 
 				Inventory.add(AddedTile);
 			}
+		}
 			Inventory.makeBoard(invArray, x, y, 4);
+
 			Inventory.selectedPiece = null;
 			Inventory.init = true;
-			for(int i=1;i<5;i++){
-				Inventory.addHex(invArray[i+10][2], i, Level.allhex.getHexList().get(i));
+			for(int i=1;i<34;i++){
+				Inventory.addHex(invArray[i*7][2], i, Level.allhex.getHexList().get(i-1));
 			}
-
-			//Inventory.addHex(invArray[20][3], 1, Level.allhex.getHexList().get(1));
-			//Inventory.addHex(invArray[4][4], 2, Level.allhex.getHexList().get(2));
 			Inventory.init=false;
+			
+		//	RotateCW_btn.addActionListener(new RotateController(this, MListener.datboi, 1));
 
-		}
-	
+			rotateFlip(MListener.datboi);
+
+
 	}
 
 	private ChangeListener changeColNum(Object value) {
@@ -808,5 +799,36 @@ public class Builder extends JFrame{
 		parentView.setVisible(false);	
 		BuildStart bs = new BuildStart();
 		bs.setVisible(true);
+	}
+	
+	public void rotateFlip(Tile tiles){
+		Tile datboi=tiles;
+		System.out.println("ROTATE FLIP ");
+
+		
+		/*rotate controllers get current selected piece in bullpen
+		Tile currentTile= null;
+		for(int TileRow = 0; TileRow <35;TileRow++){
+			for(int TileCol = 0; TileCol <14;TileCol++){
+				if(penArray[TileCol][TileRow].getBackground()==Color.GREEN){
+					currentTile=penArray[TileCol][TileRow];
+					System.out.println("CURRENT TILE "+currentTile);
+					break;
+				}
+			}
+		}
+			btnNewButton_1.addActionListener(new RotateController(this, currentTile, 1));
+			btnR.addActionListener(new RotateController(this, currentTile, 2));
+			btnNewButton.addActionListener(new FlipController(this, currentTile, 1));	
+			btnR_1.addActionListener(new FlipController(this,currentTile, 2));
+		*/
+		
+		System.out.println("CURRENT TILE1 "+datboi);
+		//datboi is current selected tile
+			RotateCW_btn.addActionListener(new RotateController(MListener.datboi, 1));
+			RotateCCW_btn.addActionListener(new RotateController( MListener.datboi, 2));
+			VertFlip_btn.addActionListener(new FlipController(MListener.datboi, 1));	
+			HorFlip_btn.addActionListener(new FlipController(MListener.datboi, 2));
+		
 	}
 }
