@@ -173,6 +173,21 @@ public class BullPen extends BoardBoss{
 					y=selectedPiece.shape[i].row+posy;
 					break;
 			}
+			//TODO: flip logic
+			switch(flipped) {
+			case 1:	x=selectedPiece.shape[i].row+posx-widthOver;
+					y=selectedPiece.shape[i].column+posy-heightOver;
+					break;
+			case 2:	x=selectedPiece.shape[i].row+posx*-1;
+					y=selectedPiece.shape[i].column+posy;
+					break;
+			case 3:	x=selectedPiece.shape[i].row+posx;
+					y=posy-selectedPiece.shape[5-i].column;
+					break;
+			case 4:	x=posx-selectedPiece.shape[i].column;
+					y=selectedPiece.shape[i].row+posy;
+					break;
+			}
 
 
 

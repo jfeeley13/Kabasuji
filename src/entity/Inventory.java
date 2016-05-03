@@ -164,6 +164,20 @@ public class Inventory extends BoardBoss{
 					y=selectedPiece.shape[i].row+posy-widthOver;
 					break;
 			}
+			switch(flipped) {
+			case 1:	x=selectedPiece.shape[i].row+posx*-1;
+					y=selectedPiece.shape[i].column+posy-heightOver;
+					break;
+			case 2:	x=selectedPiece.shape[i].column+posx-heightOver;
+					y=selectedPiece.shape[i].row+posy-widthOver;
+					break;
+			case 3:	x=selectedPiece.shape[i].row+posx-widthOver;
+					y=posy-selectedPiece.shape[5-i].column-heightOver;
+					break;
+			case 4:	x=posx-selectedPiece.shape[i].column-heightOver;
+					y=selectedPiece.shape[i].row+posy-widthOver;
+					break;
+			}
 
 
 

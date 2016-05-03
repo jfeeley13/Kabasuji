@@ -29,6 +29,7 @@ public abstract class BoardBoss extends JPanel{
 	protected int tileID;											/** id of tile that hexomino is being added to */
 	protected int boardID;											/** id of board */
 	public static int rotated = 1;									/** rotate state */
+	public static int flipped = 1;									/** rotate state */
 	public static int moves = 8;									/** remaining moves */
 	protected Border selectBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
 	protected Border whiteBorder = BorderFactory.createLineBorder(Color.WHITE, 1);
