@@ -21,8 +21,8 @@ public class Board extends BoardBoss{
 	private static final long serialVersionUID = 1L;
 	protected Tile boardArray[][];
 
-	int width;
-	int height;
+	int cols;
+	int rows;
 	protected int tileID;
 	protected int boardID = 1;
 
@@ -33,10 +33,10 @@ public class Board extends BoardBoss{
 	 * 
 	 * */
 	
-	public void makeBoard(Tile[][] boardArray, int width, int height, int id){
+	public void makeBoard(Tile[][] boardArray, int rows, int columns, int id){
 		this.boardArray = boardArray;
-		this.width = width;
-		this.height = height;
+		this.cols = columns;
+		this.rows = rows;
 		this.boardID = id;
 	}
 	
@@ -210,8 +210,8 @@ public class Board extends BoardBoss{
 	 * 	clear any potential paint artifacts)
 	 */
 	public void refresh() {
-		for(int j=0; j<width; j++) 
-			for(int k=0; k<height; k++) {
+		for(int j=0; j<rows; j++) 
+			for(int k=0; k<cols; k++) {
 				if(boardArray[j][k].isHighlight) {
 					boardArray[j][k].setBackground(Color.WHITE);
 				}
@@ -232,8 +232,8 @@ public class Board extends BoardBoss{
 	 * 
 	 */
 	public void redraw() {
-		for(int j=0; j<width; j++) 
-			for(int k=0; k<height; k++) 
+		for(int j=0; j<rows; j++) 
+			for(int k=0; k<cols; k++) 
 				if(boardArray[j][k].tileID<1000) {
 					
 					if(!boardArray[j][k].isHighlight)
@@ -246,20 +246,6 @@ public class Board extends BoardBoss{
 	}
 	
 	
-	/**
-	 * 	is piece at Tile tile escaping borders?
-	 * 	this method stops that from happening
-	 */
-	
-	
-	public int returnHeight() {
-		return this.height;
-	}
-	
-	public int returnWidth() {
-		return this.width;
-	}
-	
 	public Tile[][] returnBoard() {
 		return boardArray;
 	}
@@ -271,7 +257,7 @@ public class Board extends BoardBoss{
 	 * 	and sets win status
 	 */
 	public boolean hasWon(){
-		for(int i = 0; i < width; i++){
+		for(int i = 0; i < rows; i++){
 			for(Tile t : boardArray[i]){
 				if(!t.hasWon()) {
 					
@@ -306,35 +292,42 @@ public class Board extends BoardBoss{
 	
 	/**
 	 * Resizes the field boardArray in Board class
-	 * @param newRows new number of rows in board
-	 * @param newCols new number of columns in board
+	 * @param newColumns new number of rows in board
+	 * @param newRows new number of columns in board
 	 */
-	public void resizeBoardArray(int newRows, int newCols){
+	public Board resizeBoardArray(int newRows, int newColumns){
 		//check if the new dimension are smaller or bigger than previous array
-		Tile[][] newBoard = new Tile[newRows][newCols];
-		if(newRows == this.width && this.height == newCols)
-			return;
+		Tile[][] newBoard = new Tile[newRows][newColumns];
+		if(newColumns == this.cols && this.rows == newRows)
+			return this;
 		//case 1: new board is smaller
-		if(newCols < height && newRows < width)
-			copyContents(newBoard, newRows, newCols);
+		if(newRows < rows && newColumns < cols)
+			copyContents(newBoard, newRows, newColumns);
 		//case 2: new board height is smaller
-		else if(newCols < height)
-			copyContents(newBoard, width, newCols);
-		else if(newRows < width)
-			copyContents(newBoard, newRows, height);
+		else if(newRows < rows)
+			copyContents(newBoard, newRows, cols);
+		else if(newColumns < cols)
+			copyContents(newBoard, rows, newColumns);
 		else{
 			//case 4: new board is bigger in height and width
-			copyContents(newBoard, width, height);
-			for(int i = width - 1; i < newRows; i++){
-				for(int j = height - 1; j < newCols; j++){
+			copyContents(newBoard, rows, cols);
+			Tile t = boardArray[0][0];
+			t.setRow(rows - 1);
+			t.setColumn(cols - 1);
+			for(int i = rows - 1; i < newRows; i++){
+				for(int j = cols; j < newColumns; j++){
 					//just copy the origin tile to the new places to ensure it is the same type of tile.
-					newBoard[i][j] = boardArray[0][0]; 
+					newBoard[i][j] = t;
+					t.setColumn(j);
 				}
+				t.setRow(i);
 			}
 		}
-		this.width = newRows;
-		this.height = newCols;
-		//not update width and height
+		this.cols = newColumns;
+		this.rows = newRows;
+		this.boardArray = newBoard;
+		return this;
+		//now update width and height
 	}
 	/**
 	 * Copies the contents of boardArray into a newBoard up to a specified row and column limit
@@ -351,14 +344,34 @@ public class Board extends BoardBoss{
 	}
 	
 	public String toString(){
-		String returnString = width + "\n" + height + "\n";
-		for(int i = 0; i < width; i++){
+		String returnString = cols + "\n" + rows + "\n";
+		for(int i = 0; i < cols; i++){
 			for(Tile t: boardArray[i])
 				returnString = returnString + t.toString() + "\n";
 		}
 		return returnString;
 	}
 	
-
+	/**
+	 * Fills the boardArray of the board
+	 * @param type String representing the type of board it is
+	 */
+	public void fillBoard(String type){
+		Tile t;
+		if(type.equals("Puzzle Level"))
+			t = new PuzzleTile(this, 0, 0, 999);
+		else if(type.equals("Lighting Level"))
+			t = new LightningTile(this, 0, 0, 999);
+		else
+			t = new ReleaseTile(this, 0, 0, null, 0, 999);
+		for(int i = 0; i < rows; i++){
+			for(int j =0; j < cols; j++){
+				boardArray[i][j] = t;
+				t.setColumn(j);
+			}
+			t.setRow(i);
+		}
+			
+	}
 
 }

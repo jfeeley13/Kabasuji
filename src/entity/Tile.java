@@ -99,6 +99,24 @@ public abstract class Tile extends JPanel{
 		int coords[] = {row , column};
 		return coords;
 	}
+
+	public int getRow() {
+		return row;
+	}
+
+	public void setRow(int row) {
+		this.row = row;
+	}
+
+	public int getColumn() {
+		return column;
+	}
+
+	public void setColumn(int column) {
+		this.column = column;
+	}
+	
+	
 }
 
 
