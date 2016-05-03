@@ -37,7 +37,7 @@ public class LevelBuilder{
 	 * @param number set number
 	 * @param t ReleaseTile in which the set number and color will be added
 	 */
-	public void addSet(String color, int number, ReleaseTile t){
+	public void addSet(Color color, int number, ReleaseTile t){
 		Level previousState = getLevel();
 		t.setSetColor(color);
 		t.setSetNum(number);	

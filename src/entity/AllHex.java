@@ -147,5 +147,12 @@ public class AllHex {
 		return hexList.get(id);
 	}
 	
+	public ArrayList<Hexomino> getHexominos(int ... hexNums){
+		 ArrayList <Hexomino> hexList = new ArrayList <Hexomino>();
+		 for (int i = 0; i < hexNums.length; i++){
+		 	hexList.add(getHex(hexNums[i]));
+		 }
+		 return hexList;
+	}
 }
 

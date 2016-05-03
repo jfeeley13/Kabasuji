@@ -1,5 +1,7 @@
 package entity;
 
+import java.awt.Color;
+
 import javax.swing.JPanel;
 
 import gameControllers.MListener;
@@ -98,6 +100,9 @@ public abstract class Tile extends JPanel{
 	public int[] getCoords(){
 		int coords[] = {row , column};
 		return coords;
+	}
+	
+	public void addSetNum(int i, Color color) {		      
 	}
 
 	public int getRow() {

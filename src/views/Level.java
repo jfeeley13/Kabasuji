@@ -24,7 +24,9 @@ import entity.BoardPen;
 import entity.BullPen;
 import entity.HexTile;
 import entity.Hexomino;
+import entity.LightningTile;
 import entity.PuzzleTile;
+import entity.ReleaseTile;
 import entity.Tile;
 import gameControllers.MListener;
 
@@ -61,6 +63,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.KeyEvent;
 import java.awt.Panel;
+import java.util.ArrayList;
 
 import javax.swing.JScrollBar;
 import javax.swing.ScrollPaneConstants;
@@ -72,6 +75,8 @@ public class Level{
 	private JTable table_c;
 	private JTable table;
 	public static String gameType;
+	public static JPanel PanelArray[][] = new JPanel[3][6];
+	public static int PanelsCovered[] = {0,0,0};
 	static int level;
 	public static int levelTime=30;
 	static int timeVar = 25;
@@ -84,7 +89,8 @@ public class Level{
 	int x=6,y=6;
 	Tile boardArray[][] = new Tile[x][y];
 	static JLabel starLabel;
-
+	private int rowA,rowB,rowC = 0;
+	private boolean aFlag,bFlag, cFlag = false;
 	
 
 	/**
@@ -178,7 +184,7 @@ public class Level{
 	   // scrollPane.setViewportBorder(new LineBorder(Color.RED));
         //scrollpane.setColumnHeaderView(table.getTableHeader());
 
-		
+		/*
 		table_c = new JTable();
 		table_c.setVisible(false);
 		if (gameType == "Release Level"){
@@ -199,7 +205,8 @@ public class Level{
 		));
 		table_c.setRowSelectionAllowed(false);
 		table_c.setBackground(UIManager.getColor("List.dropLineColor"));
-		
+		*/
+	    
 		JLabel lblF1 = new JLabel("Press F1 for Help");
 		lblF1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblF1.setFont(new Font("Lucida Grande", Font.ITALIC, 13));
@@ -225,25 +232,46 @@ public class Level{
 		
 		
 		JLabel lblBoard = new JLabel("Board");
+		JPanel releasePanel = new JPanel();
+		releasePanel.setLayout(new GridLayout(3,6));
+		//		JPanel PanelArray[][] = new JPanel[3][6];
+		Border releaseBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
+
+		for(int j = 0; j<=2; j++){
+			for (int i = 0; i<=5; i++){
+				JPanel setPanel = new JPanel();
+				setPanel.setBorder(releaseBorder);
+				JLabel tileText = new JLabel("");
+				tileText.setText(Integer.toString(i+1));
+				tileText.setVerticalAlignment(SwingConstants.CENTER);
+				tileText.setHorizontalAlignment(SwingConstants.CENTER);
+				tileText.setFont(new Font("Lucida Grande", Font.BOLD, 10));
+				setPanel.add(tileText);
+				PanelArray[j][i] = setPanel;
+				releasePanel.add(setPanel);
+			}
+		}
+		if (gameType == "Release Level"){
+			releasePanel.setVisible(true);	
+		}else releasePanel.setVisible(false);
 		
 		JScrollPane bullpen_scrollPane = new JScrollPane();
 		bullpen_scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		bullpen_scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addComponent(toolBar, GroupLayout.DEFAULT_SIZE, 1156, Short.MAX_VALUE)
+				groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addComponent(toolBar, GroupLayout.DEFAULT_SIZE, 1014, Short.MAX_VALUE)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(26)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(17)
-							.addComponent(table_c, GroupLayout.PREFERRED_SIZE, 315, GroupLayout.PREFERRED_SIZE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(30)
-							.addComponent(lblF1))
-						.addComponent(board, GroupLayout.PREFERRED_SIZE, 348, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblBoard))
+						.addGap(26)
+						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addComponent(releasePanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
+								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+										.addGroup(groupLayout.createSequentialGroup()
+												.addGap(30)
+												.addComponent(lblF1))
+										.addComponent(board, GroupLayout.PREFERRED_SIZE, 348, Short.MAX_VALUE)
+										.addComponent(lblBoard)))
 					.addComponent(boardPen, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
@@ -268,7 +296,7 @@ public class Level{
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addComponent(btnExit)
 								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(table_c, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addComponent(releasePanel, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addComponent(lblF1)))))
 					.addGap(34))
@@ -292,10 +320,9 @@ public class Level{
 		toolBar.add(lblLvlNum);
 		
 		//stars is \u2605
-		stars = new JLabel("    ");
+		stars = new JLabel("         ");
 		stars.setForeground(Color.YELLOW);
-		toolBar.add(stars);
-		
+		toolBar.add(stars);		
 		
 		
 		JLabel lblNewLabel_3 = new JLabel("                                   ");
@@ -370,22 +397,60 @@ public class Level{
 		for(int TileCol = 0; TileCol <y;TileCol++){
 			for(int TileRow = 0; TileRow <x;TileRow++){
 
+//				Tile AddedTile = new PuzzleTile(board, TileRow,TileCol, 9999);
 				// create a new tile
-				PuzzleTile AddedTile = new PuzzleTile(board, TileRow,TileCol, 9999);
+				if(gameType == "Release Level"){
+					ReleaseTile AddedTile = new ReleaseTile(board, TileRow,TileCol, 9999);
+					//					AddedTile.addSetNum(2,Color.ORANGE);
+					// set border around tile (black border)
+					AddedTile.setBorder(BoardTileBorder);
+					// add tile to boardArray
+					boardArray[TileRow][TileCol] = AddedTile;
+					board.add(AddedTile);
+				}else if(gameType == "Lightning Level"){
+					LightningTile AddedTile = new LightningTile(board, TileRow,TileCol, 9999);
+					AddedTile.setBackground(Color.YELLOW);
+					// set border around tile (black border)
+					AddedTile.setBorder(BoardTileBorder);
+					// add tile to boardArray
+					boardArray[TileRow][TileCol] = AddedTile;
+					board.add(AddedTile);
+				}else if(gameType == "Puzzle Level"){
+					PuzzleTile AddedTile = new PuzzleTile(board, TileRow,TileCol, 9999);
+					AddedTile.setBackground(Color.GREEN);
+					// set border around tile (black border)
+					AddedTile.setBorder(BoardTileBorder);
+					// add tile to boardArray
+					boardArray[TileRow][TileCol] = AddedTile;
+					board.add(AddedTile);
+				}else System.out.println("Board type not found");
+
+				//				AddedTile.addSetNum(2,Color.ORANGE);
 
 				// the new tile will be empty (white)
-				AddedTile.setBackground(Color.WHITE);
+				//				AddedTile.setBackground(Color.WHITE);
 
-				// set border around tile (black border)
-				AddedTile.setBorder(BoardTileBorder);
-
-				// add tile to boardArray
-				boardArray[TileRow][TileCol] = AddedTile;
-				board.add(AddedTile);
+				//				// set border around tile (black border)
+				//				AddedTile.setBorder(BoardTileBorder);
+				//
+				//				// add tile to boardArray
+				//				boardArray[TileRow][TileCol] = AddedTile;
+				//				board.add(AddedTile);
 			}
 		}
+		//		TODO Add numbers here using random number generator
+		//		OR add them in function based on random number generator
+		//		addSetNum()
 		// make the board with the given boardArray
-		board.makeBoard(boardArray, x, y, 1);
+		if (gameType == "Release Level"){
+			int j=1;
+			for (int i = 0; i<=5; i++){
+				boardArray[i][j].addSetNum(i+1, Color.GREEN);
+				boardArray[i][j+1].addSetNum(i+1, Color.ORANGE);
+				boardArray[i][j+2].addSetNum(i+1, Color.PINK);
+			}
+			board.makeBoard(boardArray, x, y, 1);
+		}
 
 	
 
@@ -445,9 +510,13 @@ public class Level{
 		
 		// add two pieces
 		int pos = BoardBoss.bullPenPosition;
-		pen.addHex(penArray[pen.returnWidth()/2][3], 1, Level.allhex.getHexList().get(pos));
-		pen.addHex(penArray[pen.returnWidth()/2][11], 2, Level.allhex.getHexList().get(pos+1));
-		pen.addHex(penArray[pen.returnWidth()/2][20], 3, Level.allhex.getHexList().get(pos+2));
+		ArrayList <Hexomino> hexList = allhex.getHexominos(12,5,7,8,20);
+		for (int i = 0; i<hexList.size(); i++){
+			pen.addHex(penArray[pen.returnWidth()/2][i*6+1], i, hexList.get(i));
+		}
+		//		pen.addHex(penArray[pen.returnWidth()/2][3], 1, Level.allhex.getHexList().get(pos));
+		//		pen.addHex(penArray[pen.returnWidth()/2][11], 2, Level.allhex.getHexList().get(pos+1));
+		//		pen.addHex(penArray[pen.returnWidth()/2][20], 3, Level.allhex.getHexList().get(pos+2));
 		// end filling bullpen with pieces
 		BoardBoss.bullPenPosition+=1;
 		pen.init=false;
@@ -625,5 +694,35 @@ public class Level{
 				}
 			}
 		}
+	 else if(gameType == "Release Level"){
+		int checkRowA = 0;
+		int checkRowB = 0;
+		int checkRowC = 0;
+
+		for(int colNum = 0; colNum <6; colNum++){
+			if(PanelArray[0][colNum].getBackground() == Color.GREEN){checkRowA++;}
+			if(PanelArray[1][colNum].getBackground() == Color.ORANGE){checkRowB++;}
+			if(PanelArray[2][colNum].getBackground() == Color.PINK){checkRowC++;}
+		}
+		if(checkRowA > rowA)rowA = checkRowA;
+		if(checkRowB > rowB)rowB = checkRowB;
+		if(checkRowC > rowC)rowC = checkRowC;
+		//System.out.println(stars.getText());
+
+		if(rowA == 6 || rowB == 6 || rowC == 6){
+			stars.setText("    \u2605");				
+			starRArray[level]="    \u2605";
+			if(rowA+rowB == 12||rowA+rowC == 12 ||rowC+rowB == 12){
+				stars.setText("    \u2605\u2605");
+				starRArray[level]="    \u2605\u2605";
+				if (rowA+rowB+rowC == 18){
+					stars.setText("    \u2605\u2605\u2605");
+					starRArray[level]="    \u2605\u2605\u2605";
+				}
+			}
+		}else if(starRArray[level+1] == null)
+			starRArray[level+1]="   ";	
+		
+	}
 	}
 }
