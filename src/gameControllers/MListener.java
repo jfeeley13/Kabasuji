@@ -152,9 +152,10 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 	public void mouseClicked(MouseEvent e) {
 		if(e.getButton() == 3){
 			this.tile.toggleTile();
-			if(this.tile.checkValid()){
-				this.tile.setBackground(Color.ORANGE);
-			}else this.tile.setBackground(Color.MAGENTA);
+			if(this.tile.checkValid() && (!this.tile.isCovered() || !this.tile.checkMark())){
+				this.tile.setBackground(Color.WHITE);
+			}else if(!this.tile.checkValid())
+				this.tile.setBackground(Color.decode("#4169aa"));
 		}
 	}
 
@@ -183,7 +184,7 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 
 			if(greenbois==6) {
 				lastBoardState=savedBoardState.clone();
-        		System.out.println("saved ");
+//        		System.out.println("saved ");
 			}
 			
 
