@@ -59,6 +59,13 @@ public class Inventory extends BoardBoss{
 			refillInventory();
 			return false; 
 		}
+		if(BoardBoss.flipped!=1) {
+			clearPen();
+			BoardBoss.flipped=1;
+			refillInventory();
+			selectedPiece=null;
+			return false;
+		}
 		
 		if(selectedPiece==null && !(init || refill)) return false;
 		
@@ -150,7 +157,7 @@ public class Inventory extends BoardBoss{
 	 * 	over tiles
 	 */
 	public void drawHex(Tile tile, int posx, int posy, Color c) {
-
+		if(selectedPiece==null) return;
 		int widthOver=0;
 		int heightOver=0;
 		tileID = tile.getTileID();
@@ -165,26 +172,41 @@ public class Inventory extends BoardBoss{
 					orgY=j;
 //					System.out.println("Origin = (" + orgX +"," + orgY +")" );
 				}
+			}
+		for(int i=0;i<6;i++) {
 				
+				int rows = selectedPiece.shape[i].row;
+				int columns = selectedPiece.shape[i].column;
+				int x = 0;
+				int y = 0;
+				switch(flipped) {
+				case 1: rows = rows;
+						columns = columns;
+						break;
+				case 2: rows = rows * -1;
+						//columns = columns*-1;
+						break;
+				}
 				switch(rotated) {
-				case 1:	setX=i;
-						setY=j;
+				case 1:	x=rows+orgX-widthOver;
+						y=columns+orgY-heightOver;
 						break;
-				case 2:	setX=orgX+(j-orgY);
-						setY=orgY-(i-orgX);
+				case 2:	x=columns+orgX;
+						y=rows+orgY;
 						break;
-				case 3:	setX=orgX-(i-orgX);
-						setY=orgY-j+6;
+				case 3:	x=orgX-rows;
+						y=orgY-selectedPiece.shape[5-i].column;
 						break;
-				case 4:	setX=orgX-(j-orgY);
-						setY=orgY+(i-orgX);
+				case 4:	x=orgX-columns;
+						y=rows+orgY;
 						break;
 				}
-				if(boardArray[i][j].getTileID()==tileID && boardArray[i][j].getTileID()<1000) {
-					boardArray[setX][setY].setHighlight(true);
-					boardArray[setX][setY].setBackground(c);
-					boardArray[setX][setY].setBorder(selectBorder);
-				}
+				
+				//if(boardArray[x][y].getTileID()==tileID && boardArray[x][y].getTileID()<1000) {
+					boardArray[x][y].setHighlight(true);
+					boardArray[x][y].setBackground(c);
+					boardArray[x][y].setBorder(selectBorder);
+				//}
 					
 					
 			}
