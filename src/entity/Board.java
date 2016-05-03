@@ -263,7 +263,13 @@ public class Board extends BoardBoss{
 	public Tile[][] returnBoard() {
 		return boardArray;
 	}
-	
+	public int getGreenTiles() {
+		int greenBois=0;
+		for(int i=0;i<width;i++)
+			for(int j=0;j<height;j++)
+				if(boardArray[i][j].getBackground()==Color.GREEN) greenBois+=1;
+		return greenBois;
+	}
 	
 	/**
 	 * 	you win!
@@ -302,6 +308,11 @@ public class Board extends BoardBoss{
 				boardArray[j][i].setBackground(colorList[1]);
 				k=(k+1)%3;
 			}
+	}
+	public void setBoard(Tile[][] board) {
+		boardArray=board.clone();
+
+		return;
 	}
 	
 	/**

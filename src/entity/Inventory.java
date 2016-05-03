@@ -142,70 +142,9 @@ public class Inventory extends BoardBoss{
 	 * 	over tiles
 	 */
 	public void drawHex(Tile tile, int posx, int posy, Color c) {
+
 		int widthOver=0;
 		int heightOver=0;
-		for(int i=0; i<6; i++) {
-			int y=0;
-			int x=0;
-			int lastX=0;
-			switch(rotated){
-				case 1:	x=selectedPiece.shape[i].row+posx;
-						break;
-				case 2:	x=selectedPiece.shape[i].column+posx;
-						break;
-				case 3:	x=selectedPiece.shape[i].row+posx;
-						break;
-				case 4:	x=posx-selectedPiece.shape[i].column;
-						break;
-			}
-			//x=selectedPiece.shape[i].row+posx;
-			if(rotated==1){
-				try {
-					Tile testTile = boardArray[x][y];
-				} catch (Exception e) {if(x!=lastX) {
-					if((tile.getCoords()[0]<width/2-1))
-						widthOver-=1;
-					else
-						widthOver+=1;
-				}
-				lastX=x;
-				}
-			}
-			else{
-				try {
-					Tile testTile = boardArray[x][y];
-				} catch (Exception e) {if(x!=lastX) {
-					if((tile.getCoords()[0]<width/2-1))
-						widthOver+=1;
-					else
-						widthOver-=1;
-				}
-				lastX=x;
-				}
-			}
-		}
-		for(int i=0; i<6; i++) {
-			int y=0;
-			int x=0;
-			switch(rotated) {
-			case 1:	
-					y=selectedPiece.shape[i].column+posy;
-					break;
-			case 2:	
-					y=selectedPiece.shape[i].row+posy;
-					break;
-			case 3:	
-					y=posy-selectedPiece.shape[5-i].column;
-					break;
-			case 4:	
-					y=selectedPiece.shape[i].row+posy;
-					break;
-			}
-			//y=selectedPiece.shape[i].column+posy;
-			try {
-				Tile testTile = boardArray[x][y];
-			} catch (Exception e) {heightOver+=1;}
-		}
 		
 
 		for(int i=0; i<6;i++){
@@ -341,7 +280,18 @@ public class Inventory extends BoardBoss{
 		return this.width;
 	}
 	
+	public int getGreenTiles() {
+		int greenBois=0;
+		for(int i=0;i<width;i++)
+			for(int j=0;j<height;j++)
+				if(boardArray[i][j].getBackground()==Color.GREEN) greenBois+=1;
+		return greenBois;
+	}
 	
+	public void setBoard(Tile[][] board) {
+		boardArray=board;
+		return;
+	}
 
 	
 	public Tile[][] returnBoard() {

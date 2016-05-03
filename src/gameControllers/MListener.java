@@ -37,6 +37,11 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 	static ArrayList<Integer> ids = new ArrayList<Integer>();
 	int randint;
 	public static Tile datboi= null;
+	static int lastgreenbois=0;
+	static int greenbois=0;
+	static Tile[][] savedBoardState;
+	static Tile[][] lastBoardState;
+	Tile lastTile;
 
 
 	//
@@ -159,6 +164,7 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 	
     public void mouseMoved(MouseEvent e) {
     	if(tile.getBoard().selectedPiece!=null && tile.getBoard().lifted && !tile.getBoard().penPiece && tile.getBoard().getID()!=4){
+    		
 
     		int x = this.tile.getCoords()[0];
     		int y = this.tile.getCoords()[1];
@@ -166,7 +172,16 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
     		int tileID= this.tile.getTileID();
     		
     		this.tile.getBoard().refresh();
+    		
     		this.tile.getBoard().drawHex(this.tile, x, y, Color.GREEN);
+    		savedBoardState=tile.getBoard().returnBoard();
+			greenbois=tile.getBoard().getGreenTiles();
+
+			if(greenbois==6) {
+				lastBoardState=savedBoardState.clone();
+        		System.out.println("saved ");
+			}
+			
 
     		int id = tile.getBoard().getID();
     		if(id!=lastID) {
@@ -174,14 +189,21 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
     			lastBoard.refresh();
     		}
     		
-  
-    		if(tileID!=lastTileID && id==lastID) {
-    			this.tile.getBoard().redraw();
-    		}
-  
+    		
+    			//this.tile.getBoard().redraw();
+        		if(greenbois<6) {
+            		System.out.println("less than 6 ");
 
+        			this.tile.getBoard().setBoard(lastBoardState);
+        			this.tile.getBoard().drawHex(this.tile, x, y, Color.GREEN);
+        		}
+    		
+  
+    		lastTileID=tileID;
     		lastID = id;
     		lastBoard = board;
+    		lastTile=tile;
+    		
 
     	}
      }	
