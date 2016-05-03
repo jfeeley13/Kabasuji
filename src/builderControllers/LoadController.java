@@ -72,10 +72,10 @@ public class LoadController {
 					}
 				}
 				board.makeBoard(tileArray, boardWidth, boardHeight, 1);
+				
 				Level level = new Level(lvlID);
 				level.setBoard(board);
-				level.setColumns(boardWidth);
-				level.setRows(boardHeight);
+
 				level.setStarsAcheived(starsAchieved);
 				
 				

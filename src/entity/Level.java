@@ -11,7 +11,6 @@ public class Level {
 	protected int starsAcheived;
 	protected Board board;
 	protected BullPen pen;
-	int rows, columns;
 	ArrayList<Hexomino> solutionPieces; //this attribute will contain the pieces of the level, which will be copied and put into the bullpen
 	//this way we have a copy always of the solution pieces and can always restart easily the bullpen and the game with this.
 	
@@ -20,20 +19,29 @@ public class Level {
 		starsAcheived = 0;
 	}
 	
-	public void initializeLevel(String type){
+	/**
+	 * Initializes the board of a level based on the type it is
+	 * @param type String representing the  type of boardit is
+	 * @return the board of the lvel, now initialized
+	 */
+	public Board initializeBoard(String type, int rows, int columns){
 		this.board = new Board();
-		if(type.equals("Puzzle")){
+		
+		if(type.equals("Puzzle Level")){
 			board.makeBoard(new PuzzleTile[rows][columns], rows, columns, 1);
+			board.fillArray(new PuzzleTile(board, 0, 0, 999));
 		}
 
-		else if(type.equals("Lighting"))
+		else if(type.equals("Lighting Level")){
 			board.makeBoard(new LightningTile[rows][columns], rows, columns, 1);
-		else
+			board.fillArray(new LightningTile(board, 0, 0, 999));
+		}
+		else{
 			board.makeBoard(new ReleaseTile[rows][columns], rows, columns, 1);
-			//board.fillArray(typeOfTile);
-		//still need to fill array here
-		//initialize bullPen
-		//TODO: finish
+			board.fillArray(new ReleaseTile(board, 0, 0, 999));
+		}
+		
+		return board;
 	}
 	/**
 	 * 
@@ -41,13 +49,16 @@ public class Level {
 	 */
 	public boolean levelComplete(){
 		return board.hasWon();
-		//TODO: currently this only checks the winning condition of 3start
 	}
 	
-	public void setBoardDimensions(int newRows, int newColumns){
-		this.rows = newRows;
-		this.columns = newColumns;
-		board.resizeBoardArray(newRows, newColumns);
+	/**
+	 * Changes the dimensions of the board object
+	 * @param newRows
+	 * @param newColumns
+	 * @return the newly created board
+	 */
+	public Board setBoardDimensions(int newRows, int newColumns){
+		return board.resizeBoardArray(newRows, newColumns);
 	}
 	
 	public void addPiecesToSolution(Hexomino hex){
@@ -99,21 +110,7 @@ public class Level {
 		this.pen = pen;
 	}
 
-	public int getRows() {
-		return rows;
-	}
 
-	public void setRows(int rows) {
-		this.rows = rows;
-	}
-
-	public int getColumns() {
-		return columns;
-	}
-
-	public void setColumns(int columns) {
-		this.columns = columns;
-	}
 	
 	
 	

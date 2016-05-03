@@ -13,7 +13,8 @@ public class LevelBuilder{
 	String type;
 	int newLvlID;
 	
-	public LevelBuilder(){
+	public LevelBuilder(String type){
+		this.type = type;
 	}
 	
 	/**
@@ -40,8 +41,13 @@ public class LevelBuilder{
 		//so this works properly but since we are gonna be dealing with filestreams  this method has to be changed such that it reads a file
 	}
 	
-	public void NewLevel(){
-		setLevel(new Level(newLvlID));
+	/**
+	 * Returns an initialized board from a new level.
+	 * @param type
+	 * @return
+	 */
+	public Board NewLevelBoard(int rows, int cols){
+		return level.initializeBoard(this.type,rows,cols);
 	}
 	
 	/**
@@ -64,11 +70,13 @@ public class LevelBuilder{
 	 * @param rows a
 	 * @param columns
 	 */
-	public void setBoardDimensions(int rows, int columns){
+	public Board setBoardDimensions(int rows, int columns){
 		Level previousState = getLevel();
-		getLevel().setBoardDimensions(rows, columns);
+		Board returnBoard = getLevel().setBoardDimensions(rows, columns);
 		Level currentState = getLevel();
 		moveDone(previousState, currentState);
+		return returnBoard;
+		
 		
 	}
 	

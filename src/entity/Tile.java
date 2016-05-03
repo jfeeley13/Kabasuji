@@ -104,6 +104,32 @@ public abstract class Tile extends JPanel{
 
 	public void addSetNum(int i, Color color) {		
 	}
+
+	public int getRow() {
+		return row;
+	}
+
+	public void setRow(int row) {
+		this.row = row;
+	}
+
+	public int getColumn() {
+		return column;
+	}
+
+	public void setColumn(int column) {
+		this.column = column;
+	}
+
+	public void setCovered(boolean isCovered) {
+		this.isCovered = isCovered;
+	}
+
+	public void setNull(boolean isNull) {
+		this.isNull = isNull;
+	}
+
+
 }
 
 
