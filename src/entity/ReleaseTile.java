@@ -25,7 +25,7 @@ public class ReleaseTile extends Tile{
 		return 	tileID + "\n" 
 				+ row + "\n" 
 				+ column + "\n"
-				+ isNull + "\n"
+				+ isValid + "\n"
 				+ "2" + "\n"
 				+ setColor + "\n" 
 				+ setNum + "\n";

@@ -12,7 +12,7 @@ public class PuzzleTile extends Tile{
 		return 	tileID + "\n" 
 				+ row + "\n" 
 				+ column + "\n"
-				+ isNull + "\n"
+				+ isValid + "\n"
 				+ "0" + "\n";
 	}
 	

@@ -1,25 +1,16 @@
 package gameControllers;
 
 import java.awt.Color;
-import java.awt.MouseInfo;
-import java.awt.Point;
-import java.awt.PointerInfo;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Random;
-import java.util.concurrent.atomic.AtomicInteger;
-
 import javax.swing.event.MouseInputAdapter;
 
-import entity.AllHex;
-import entity.Board;
 import entity.BoardBoss;
-import entity.BullPen;
 import entity.Hexomino;
 import entity.Tile;
 import views.Level;
@@ -48,6 +39,8 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 	
 	@Override
 	public void mousePressed(MouseEvent e) {
+		
+		
 		
 		if(tile.getBoard().getID()==2) bullPen=tile.getBoard();
 		lastID = tile.getBoard().getID();
@@ -119,10 +112,15 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		if(e.getButton() == 3){
+			this.tile.toggleTile();
+			if(this.tile.checkValid()){
+				this.tile.setBackground(Color.ORANGE);
+			}else this.tile.setBackground(Color.MAGENTA);
+		}
 	}
-
+	
+	
 	@Override
 	public void mouseReleased(MouseEvent e) {
 	

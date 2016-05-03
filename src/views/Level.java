@@ -24,6 +24,7 @@ import entity.BoardPen;
 import entity.BullPen;
 import entity.HexTile;
 import entity.Hexomino;
+import entity.LightningTile;
 import entity.PuzzleTile;
 import entity.Tile;
 import gameControllers.MListener;
@@ -369,19 +370,27 @@ public class Level{
 		 */
 		for(int TileCol = 0; TileCol <y;TileCol++){
 			for(int TileRow = 0; TileRow <x;TileRow++){
-
-				// create a new tile
-				PuzzleTile AddedTile = new PuzzleTile(board, TileRow,TileCol, 9999);
-
-				// the new tile will be empty (white)
-				AddedTile.setBackground(Color.WHITE);
-
-				// set border around tile (black border)
-				AddedTile.setBorder(BoardTileBorder);
-
-				// add tile to boardArray
-				boardArray[TileRow][TileCol] = AddedTile;
-				board.add(AddedTile);
+				if(gameType=="Puzzle Level"){
+					// create a new tile
+					PuzzleTile AddedTile = new PuzzleTile(board, TileRow,TileCol, 9999);
+					// the new tile will be empty (white)
+					AddedTile.setBackground(Color.WHITE);
+					// set border around tile (black border)
+					AddedTile.setBorder(BoardTileBorder);
+					// add tile to boardArray
+					boardArray[TileRow][TileCol] = AddedTile;
+					board.add(AddedTile);
+				}else if(gameType=="Lightning Level"){
+					// create a new tile
+					LightningTile AddedTile = new LightningTile(board, TileRow,TileCol, 9999);
+					// the new tile will be empty (white)
+					AddedTile.setBackground(Color.WHITE);
+					// set border around tile (black border)
+					AddedTile.setBorder(BoardTileBorder);
+					// add tile to boardArray
+					boardArray[TileRow][TileCol] = AddedTile;
+					board.add(AddedTile);
+				}
 			}
 		}
 		// make the board with the given boardArray
@@ -568,7 +577,7 @@ public class Level{
 			//Y is the width of the array? **might break if change board size
 			for(int i = 0; i < y; i++){
 				for(Tile t : boardArray[i]){
-					if(t.isCovered()==true) {
+					if(t.isCovered()==true || t.checkMark() == true) {
 						covered++;
 					}
 				}

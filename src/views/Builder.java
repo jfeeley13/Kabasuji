@@ -537,11 +537,11 @@ public class Builder extends JFrame{
 		     if (Integer.parseInt("0"+timerORMoveTextField.getText()) != 0){
 		 		if (gameType == "Lightning Level"){
 					gameTimer = Integer.parseInt("0"+timerORMoveTextField.getText());
-			    	System.out.println("Time Set to " + Integer.parseInt("0"+timerORMoveTextField.getText()));
+//			    	System.out.println("Time Set to " + Integer.parseInt("0"+timerORMoveTextField.getText()));
 				}
 				else{
 					moveCounter = Integer.parseInt("0"+timerORMoveTextField.getText());
-			    	System.out.println("Number of Moves Changed to " + Integer.parseInt("0"+timerORMoveTextField.getText()));
+//			    	System.out.println("Number of Moves Changed to " + Integer.parseInt("0"+timerORMoveTextField.getText()));
 				}		    	 
 		     }
 		  }
@@ -618,6 +618,8 @@ public class Builder extends JFrame{
 		 */
 		
 		Tile boardArray[][] = new Tile[x][y];
+		
+		board.setBackground(Color.decode("#4169aa"));
 		
 		Border BoardTileBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
 
@@ -772,7 +774,7 @@ public class Builder extends JFrame{
 				AddedTile.setBorder(invTileBorder);
 
 				invArray[TileCol][TileRow] = AddedTile;
-				System.out.println("here   "+ invArray[TileCol][TileRow]);
+//				System.out.println("here   "+ invArray[TileCol][TileRow]);
 
 				Inventory.add(AddedTile);
 			}
@@ -780,7 +782,7 @@ public class Builder extends JFrame{
 			Inventory.selectedPiece = null;
 			Inventory.init = true;
 			for(int i=1;i<5;i++){
-				Inventory.addHex(invArray[i+10][2], i, Level.allhex.getHexList().get(i));
+//				Inventory.addHex(invArray[i+10][2], i, Level.allhex.getHexList().get(i));
 			}
 
 			//Inventory.addHex(invArray[20][3], 1, Level.allhex.getHexList().get(1));

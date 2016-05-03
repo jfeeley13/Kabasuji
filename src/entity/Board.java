@@ -53,7 +53,6 @@ public class Board extends BoardBoss{
 		boolean allTilesEmpty=liftHex(tile, hex);
 		
 		
-		System.out.println("1");
 		if(selectedPiece==null && !init) return false;
 
 		if(selectedPiece!=null & lifted) {
@@ -74,10 +73,10 @@ public class Board extends BoardBoss{
 					}
 				}
 			pieceList.put(tileID, hex);
-			System.out.println("Piece Placed!");
+//			System.out.println("Piece Placed!");
 			BoardBoss.moves-=1;
 			}
-		System.out.println("3");
+//		System.out.println("3");
 		lifted = true;
 		hasWon();
 		return true;
@@ -212,10 +211,13 @@ public class Board extends BoardBoss{
 	public void refresh() {
 		for(int j=0; j<width; j++) 
 			for(int k=0; k<height; k++) {
-				if(boardArray[j][k].isHighlight) {
-					boardArray[j][k].setBackground(Color.WHITE);
+				if(boardArray[j][k].isHighlight ) {
+					boardArray[j][k].setBackground(Color.GREEN);
 				}
-				if(boardArray[j][k].isCovered) {
+				if(boardArray[j][k].isCovered){
+					boardArray[j][k].setBackground(Color.BLUE);
+				}
+				if(boardArray[j][k].checkMark()){
 					boardArray[j][k].setBackground(Color.BLUE);
 				}
 			}

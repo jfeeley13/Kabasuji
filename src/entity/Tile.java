@@ -2,6 +2,7 @@ package entity;
 
 import javax.swing.JPanel;
 
+import gameControllers.BuilderMListener;
 import gameControllers.MListener;
 
 public abstract class Tile extends JPanel{
@@ -13,7 +14,7 @@ public abstract class Tile extends JPanel{
 	protected int row;
 	protected int column;
 	protected boolean isCovered = false;
-	protected boolean isNull = false;
+	protected boolean isValid = true;
 	protected int tileID;
 	BoardBoss board;
 	protected boolean isHighlight = false;
@@ -26,6 +27,7 @@ public abstract class Tile extends JPanel{
 		this.addMouseListener(new MListener(this, board));
 		this.addMouseMotionListener(new MListener(this, board));
 		this.addMouseWheelListener(new MListener(this, board));
+//		this.addMouseListener(new BuilderMListener(this, board));
 		this.tileID = tileID;
 	}
 	
@@ -56,7 +58,7 @@ public abstract class Tile extends JPanel{
 	 */
 	
 	public void toggleTile(){
-		this.isNull = !this.isNull;
+		this.isValid = !this.isValid;
 	}
 	
 	
@@ -67,8 +69,8 @@ public abstract class Tile extends JPanel{
 	 * @return True = Null --- False = Not Null
 	 */
 	
-	public boolean isNull(){
-		return isNull;
+	public boolean checkValid(){
+		return isValid;
 	}
 
 	
@@ -98,6 +100,10 @@ public abstract class Tile extends JPanel{
 	public int[] getCoords(){
 		int coords[] = {row , column};
 		return coords;
+	}
+	
+	public boolean checkMark(){
+		return false;
 	}
 }
 

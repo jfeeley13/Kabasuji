@@ -33,10 +33,10 @@ public class RotateController implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		System.out.println();
+//		System.out.println();
 		this.tile.getBoard().rotated = (this.tile.getBoard().rotated % 4) + 1;
 		   if(this.tile.getBoard().rotateCheck(this.tile)) {
-			   System.out.println(this.tile.getBoard().rotated);
+//			   System.out.println(this.tile.getBoard().rotated);
 			   this.tile.getBoard().refresh();
 			   this.tile.getBoard().drawHex(this.tile, 1, 1, Color.GREEN);
 		   }
@@ -50,7 +50,7 @@ public class RotateController implements ActionListener {
 		   if(this.tile.getBoard().rotated<=0) this.tile.getBoard().rotated+=4;
 		   if(this.tile.getBoard().rotateCheck(this.tile)) {
 		   
-			   System.out.println(this.tile.getBoard().rotated);
+//			   System.out.println(this.tile.getBoard().rotated);
 			   this.tile.getBoard().refresh();
 			   this.tile.getBoard().drawHex(this.tile, 1, 1, Color.GREEN);
 
