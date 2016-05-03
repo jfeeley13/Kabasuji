@@ -123,6 +123,10 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 					bullPen.refill=false;
 					BoardBoss.bullPenPosition+=1;
 			}
+				if(lastBoard.getID()==4) {
+					lastBoard.clearPen();
+					lastBoard.refillInventory();
+				}
 
 			}
 			lastBoard = board;

@@ -173,7 +173,7 @@ public class Board extends BoardBoss{
 			case 2:	x=selectedPiece.shape[i].column+posx;
 					y=selectedPiece.shape[i].row+posy;
 					break;
-			case 3:	x=selectedPiece.shape[i].row+posx;
+			case 3:	x=posx-selectedPiece.shape[i].row;
 					y=posy-selectedPiece.shape[5-i].column;
 					break;
 			case 4:	x=posx-selectedPiece.shape[i].column;

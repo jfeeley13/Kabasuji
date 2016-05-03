@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 
 import gameControllers.MListener;
+import views.Level;
 
 import java.awt.Color;
 import java.awt.Point;
@@ -54,8 +55,9 @@ public class Inventory extends BoardBoss{
 		liftHex(tile, hex);
 		if(BoardBoss.rotated != 1){
 			clearPen();
-			refill = true;
-//			return false; 
+			BoardBoss.rotated=1;
+			refillInventory();
+			return false; 
 		}
 		
 		if(selectedPiece==null && !(init || refill)) return false;
@@ -293,7 +295,7 @@ public class Inventory extends BoardBoss{
 	}
 	
 	public int getID() {
-		return boardID;
+		return 4;
 	}
 	
 	public boolean rotateCheck(Tile tile) {
@@ -362,6 +364,14 @@ public class Inventory extends BoardBoss{
 				boardArray[i][j].setBackground(Color.WHITE);
 				boardArray[i][j].setBorder(whiteBorder);
 			}
+	}
+	
+	public void refillInventory() {
+		refill=true;
+		for(int i=1;i<34;i++){
+			addHex(boardArray[i*7][10], i, Level.allhex.getHexList().get(i-1));
+		}
+		refill=false;
 	}
 
 }
