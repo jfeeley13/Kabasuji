@@ -95,7 +95,7 @@ public class Level {
 
 	public String toString(){
 		starsAcheived=3;
-		return lvlID + System.getProperty("line.separator") + starsAcheived + System.getProperty("line.separator") //+ solutionPieces.toString() 
+		return lvlID + System.getProperty("line.separator") + System.getProperty("line.separator") //+ solutionPieces.toString() 
 				+ " Board \n" + board.toString();
 		
 	}

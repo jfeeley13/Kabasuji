@@ -3,6 +3,7 @@ package entity;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 import gameControllers.MListener;
@@ -57,12 +58,12 @@ public class Board extends BoardBoss{
 		if(selectedPiece!=null & lifted) {
 			for(int i=0; i<rows; i++) 
 				for(int j=0; j<cols; j++) 
-					if(boardArray[i][j].getBackground()==Color.GREEN && boardArray[i][j].isCovered)
+					if((boardArray[i][j].getBackground()==Color.GREEN || boardArray[i][j].getBackground()==Color.RED) && (boardArray[i][j].isCovered||!boardArray[i][j].checkValid()))
 						return false;
 			
 			for(int i=0; i<rows; i++) 
 				for(int j=0; j<cols; j++) {
-					if(boardArray[i][j].getBackground()==Color.GREEN && !boardArray[i][j].isCovered) {
+					if((boardArray[i][j].getBackground()==Color.GREEN && !boardArray[i][j].isCovered)|| !boardArray[i][j].isValid() && boardArray[i][j].checkValid()) {
 						boardArray[i][j].coverTile();
 						boardArray[i][j].setBackground(Color.BLUE);
 						boardArray[i][j].isHighlight=false;
@@ -88,6 +89,7 @@ public class Board extends BoardBoss{
 			int x=tile.getCoords()[0];
 			int y=tile.getCoords()[1];
 			
+			if(!boardArray[x][y].canPickUp()) return false;
 
 			
 			if(boardArray[x][y].isCovered()==true && selectedPiece==null){
@@ -121,7 +123,43 @@ public class Board extends BoardBoss{
 	 * 	over tiles
 	 */
 	public void drawHex(Tile tile, int posx, int posy, Color c) {
-		
+
+		int widthOver=0;
+		int heightOver=0;
+		if(!tile.isValid()) return;
+		int lastX=0;
+		for(int i=0; i<6; i++) {
+			int y=0;
+			int x=0;
+			x=selectedPiece.shape[i].row+posx;
+			try {
+				Tile testTile = boardArray[x][y];
+			} catch (Exception e) {
+				if(x!=lastX) {
+					if((tile.getCoords()[0]<width/2-1))
+						widthOver-=1;
+					else
+						widthOver+=1;
+				}
+				lastX=x;
+				}
+		}
+		int lastY=0;
+		for(int i=0; i<6; i++) {
+			int y=0;
+			int x=0;
+
+			y=selectedPiece.shape[i].column+posy;
+			
+
+			try {
+				Tile testTile = boardArray[x][y];
+			} catch (Exception e) {
+				if(y>lastY)
+					heightOver+=1;
+				lastY=y;
+				}
+		}
 		
 		for(int i=0; i<6;i++){
 
@@ -145,19 +183,23 @@ public class Board extends BoardBoss{
 			try{
 				boardArray[x][y].setHighlight(true);
 			
-
-			try {
-				if(!boardArray[x][y].isCovered) {
-					boardArray[x][y].setTileID(1000);					
+				try {
+					if(!boardArray[x][y].isCovered()) {
+						boardArray[x][y].setTileID(1000);					
+					}
+					if(boardArray[x][y].checkValid()){
+						if(!boardArray[x][y].isCovered())
+							boardArray[x][y].setBackground(c);
+						else{
+							boardArray[x][y].setBackground(Color.red);
+						//	boardArray[x][y].setBorder(BorderFactory.createLineBorder(Color.red, 1));
+						}
+					}else{ boardArray[x][y].setBackground(Color.red);
+					//boardArray[x][y].setBorder(BorderFactory.createLineBorder(Color.red, 1));
+					}
+				} catch(NullPointerException e) {
 				}
-				boardArray[x][y].setBackground(c);
-
-			} catch(NullPointerException e) {
-
-			}
 			} catch(Exception e) {};
-			
-
 		}	
 	}
 	
@@ -181,6 +223,10 @@ public class Board extends BoardBoss{
 				}
 				if(boardArray[j][k].checkMark()){
 					boardArray[j][k].setBackground(Color.BLUE);
+				}
+				if((!boardArray[j][k].checkValid())){
+					boardArray[j][k].setBackground(Color.decode("#4169aa"));
+					boardArray[j][k].setBorder(BorderFactory.createLineBorder(Color.decode("#4169aa"), 1));
 				}
 			}
 	}

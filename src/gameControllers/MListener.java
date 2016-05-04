@@ -9,6 +9,7 @@ import java.awt.event.MouseWheelListener;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.swing.BorderFactory;
 import javax.swing.event.MouseInputAdapter;
 
 import entity.AllHex;
@@ -154,8 +155,18 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		System.out.println(e.getButton() == 3);
+		if(e.getButton() == 3){
+			this.tile.toggleTile();
+			if(this.tile.checkValid() && (!this.tile.isCovered() || !this.tile.checkMark())){
+				this.tile.setBackground(Color.WHITE);
+				this.tile.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+			}else if(!this.tile.checkValid()){
+//				System.out.println("IS NOW INVALID");
+				this.tile.setBackground(Color.decode("#4169aa"));
+				this.tile.setBorder(BorderFactory.createLineBorder(Color.decode("#4169aa"), 1));
+			}
+		}
 	}
 
 	@Override

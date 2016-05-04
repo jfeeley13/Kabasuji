@@ -1,30 +1,18 @@
 package views;
 
 import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.Point;
-import java.awt.Rectangle;
-
 import javax.swing.JFrame;
 import javax.swing.JToolBar;
-
-import java.awt.BorderLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
-import javax.swing.JViewport;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JSpinner;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
-import javax.swing.JToggleButton;
-import javax.swing.JTable;
-
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JScrollPane;
@@ -37,8 +25,6 @@ import javax.swing.UIManager;
 import javax.swing.SwingConstants;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
-import javax.swing.table.DefaultTableModel;
-
 import entity.AllHex;
 import entity.Board;
 import entity.BoardBoss;
@@ -52,13 +38,11 @@ import entity.Tile;
 import java.awt.Color;
 
 import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.SpinnerNumberModel;
 
-import builderControllers.CreateNewLevelController;
 import builderControllers.LevelBuilderController;
 import builderControllers.SaveController;
 import gameControllers.ExitController;
@@ -88,7 +72,7 @@ public class Builder extends JFrame{
 	private JPanel pen2;
 	Tile invArray[][] = new Tile[240][10];
 	Tile penArray[][] = new Tile[20][41];
-
+	LevelBuilder lvlBuild;
 
 
 //	/**
@@ -151,6 +135,7 @@ public class Builder extends JFrame{
 	 */
 	private void initialize() {
 		//frame = new JFrame();
+		lvlBuild = new LevelBuilder();
 		entity.Level newlvl = new entity.Level(6);
 		LevelBuilder.setLevel(newlvl);
 
@@ -216,6 +201,7 @@ public class Builder extends JFrame{
 		JButton btnUndo = new JButton("Undo");
 		btnUndo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				lvlBuild.undo();
 			}
 		});
 		
@@ -786,7 +772,7 @@ public class Builder extends JFrame{
 	
 		
 		x = 400;
-		y = 10;
+		y = 20;
 				
 		Inventory.setPreferredSize(new Dimension(4000, 100));
 		//Inventory.setMinimumSize(new Dimension(140, 410));
@@ -818,7 +804,7 @@ public class Builder extends JFrame{
 			Inventory.selectedPiece = null;
 			Inventory.init = true;
 			for(int i=1;i<34;i++){
-				Inventory.addHex(invArray[i*7][2], i, Level.allhex.getHexList().get(i-1));
+				Inventory.addHex(invArray[i*7][10], i, Level.allhex.getHexList().get(i-1));
 			}
 			Inventory.init=false;
 			

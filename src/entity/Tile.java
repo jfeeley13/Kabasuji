@@ -45,6 +45,11 @@ public abstract class Tile extends JPanel{
 	public BoardBoss getBoard(){
 		return this.board;
 	}
+	
+	/**
+	 * 
+	 * @return true = tile is covered ---- false = not Covered
+	 */
 	public boolean isCovered(){
 		return isCovered;
 	}
@@ -65,9 +70,9 @@ public abstract class Tile extends JPanel{
 	
 	/**
 	 * 
-	 * Determines if tile is null or not
+	 * Determines if tile is valid or not
 	 * 
-	 * @return True = Null --- False = Not Null
+	 * @return True = Valid --- False = Not valid
 	 */
 	
 	public boolean checkValid(){
@@ -103,6 +108,10 @@ public abstract class Tile extends JPanel{
 		return coords;
 	}
 	
+	/**
+	 	 * 
+	 	 * @return true = tile is marked ---- false = not Marked
+	 	 */
 	public boolean checkMark(){
 		 		return false;
 			}
@@ -125,7 +134,9 @@ public abstract class Tile extends JPanel{
 	public void setColumn(int column) {
 		this.column = column;
 	}
-	
+	public boolean canPickUp(){
+		return false;
+	}
 	
 }
 

@@ -13,8 +13,8 @@ public class LevelBuilder{
 	String type;
 	int newLvlID, movesnum,timer;
 	
-	public LevelBuilder(String type){
-		this.type = type;
+	public LevelBuilder(){
+		
 	}
 	
 	/**

@@ -8,12 +8,18 @@ public class PuzzleTile extends Tile{
 	
 	}
 	
+	
+	
 	public String toString(){
 		return 	tileID + "\n" 
 				+ row + "\n" 
 				+ column + "\n"
 				+ isValid + "\n"
 				+ "0" + "\n";
+	}
+	
+	public boolean canPickUp(){
+		return true;
 	}
 	
 	
