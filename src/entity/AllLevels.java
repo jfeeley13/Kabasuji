@@ -67,7 +67,7 @@ public class AllLevels {
 		
 		Level l = new Level(5);
 		AllHex allHex =new AllHex();
-		ArrayList <Hexomino> hexList = allHex.getHexominos(0,11,11,0,0, 6, 11, 3, 1, 11, 3,17, 11, 11, 23, 45, 21, 11, 14, 26, 11, 0, 1, 2, 3, 4, 12, 31, 34, 18);
+		ArrayList <Hexomino> hexList = allHex.getHexominos(0,11,11,0,0, 6, 11, 3, 1, 11, 3,17, 11, 11, 23, 22, 21, 11, 14, 26, 11, 0, 1, 2, 3, 4, 12, 31, 34, 18);
 		l.setSolutionPieces(hexList);
 		l.initializeBoard("Puzzle Level", 10, 10);
 		l.setMoves(120);

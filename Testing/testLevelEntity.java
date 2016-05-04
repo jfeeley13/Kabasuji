@@ -17,11 +17,6 @@ import views.*;
 
 public class testLevelEntity {
 
-/*	@Test
-	public void test() {
-		fail("Not yet implemented");
-	}
-*/	
 	@Test
 	public void testMakeElements(){
 		
@@ -37,7 +32,6 @@ public class testLevelEntity {
 		level.setSolutionPieces(hexList);
 		BoardBoss bullpen = new BullPen();
 		BoardBoss inv = new Inventory();
-//		bullpen = level.initializeBullPen();
 		
 		levels.getLightningLevel(1);
 		levels.getReleaseLevel(1);
@@ -70,7 +64,6 @@ public class testLevelEntity {
 		
 		levels.initializeLightningLevels(2);
 
-		
 		/*Level Getters and Setters*/
 		level.setname("TEST");
 		String name = level.getName();
@@ -102,11 +95,26 @@ public class testLevelEntity {
 
 		LoadController loadc = new LoadController("Stuff");
 		
-//		board.liftHex(board.getBoardArray()[3][3], hex)
-//		inv.liftHex(inv., shape)
-
-		
-		
+		int fe =  board2.returnHeight();		
+		int ff =  board2.returnWidth();		
+		board2.setBoard(board.getBoardArray());		
+		Tile[][] fh = board2.returnBoard();
+		board2.clearPen();
+		board2.refillInventory();
+		boolean check =  bp2.isEmpty();
+		bp2.clearPen();
+		int height = bp2.returnHeight();
+		Tile[][] brd = bp2.returnBoard();	
+		int ID = bp2.getID();
+		bp2.redraw();
+		bp2.refresh();
+		bp2.drawHex(bp2.getBoardArray()[2][2], 2, 2, Color.green);
+		inv.refresh();
+		inv.redraw();
+		int qf = inv.getID();
+		int qg = inv.returnHeight();
+		int qh = inv.returnWidth();
+		inv.clearPen();
 	}
 
 }
