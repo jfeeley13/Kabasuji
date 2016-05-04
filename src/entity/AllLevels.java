@@ -4,9 +4,9 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 public class AllLevels {
-	Level[] puzzle = new Level[5];
-	Level[] lightning = new Level[5];
-	Level[] release = new Level[5];
+	Level[] puzzle = new Level[6];
+	Level[] lightning = new Level[6];
+	Level[] release = new Level[6];
 	int xy=0;
 	public void initializePuzzleOne(){
 

@@ -38,7 +38,6 @@ public class Board extends BoardBoss{
 	 *  with specified id tileID
 	 * 
 	 */
-	
 	public boolean addHex(Tile tile, int tileID, Hexomino hex){
 		boolean isOverPiece = false;
 		boolean allTilesEmpty=liftHex(tile, hex);
@@ -246,7 +245,9 @@ public class Board extends BoardBoss{
 
 	}
 	
-	
+	/**
+	 * 
+	 */
 	public Tile[][] returnBoard() {
 		return boardArray;
 	}

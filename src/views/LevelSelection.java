@@ -116,6 +116,7 @@ public class LevelSelection {
 			star = Level.starPArray[i];
 
 			final int level=i+1;
+
 			Puzzlestars[i] = new JLabel(" ");
 			Puzzlestars[i].setHorizontalAlignment(SwingConstants.CENTER);
 			Puzzlestars[i].setFont(new Font("Lucida Grande", Font.ITALIC, 8));
@@ -140,18 +141,17 @@ public class LevelSelection {
 			}
 			else{
 				Puzzlestars[i].setForeground(Color.YELLOW);			//label has a score, make it yellow 
-				Puzzlestars[i+1].setText(" ");						//next label is unlocked
 			}
 			//action listener for each button
 			if(Puzzlestars[i].getText()!="locked"){
+
 				Puzzlebuttons[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						
-						
+
 						Level nw = new Level(level, "Puzzle Level" );
 						
 						frame.dispose();
-						
+
 						Level.openLevel("Puzzle Level",level);
 					}
 				});
@@ -166,9 +166,8 @@ public class LevelSelection {
 			panel.add(Lightningbuttons[i]);
 			panel.add(Lightningstars[i]);
 			
-			starL = Level.starLArray[i];
-			Lightningstars[i].setText(starL);
-			if (starL==(null)){
+			Lightningstars[i].setText(Level.starLArray[level]);
+			if (Lightningstars[i].getText()==(null)){
 				if (level==1){
 					Lightningstars[i].setText(" ");
 				}
@@ -178,14 +177,13 @@ public class LevelSelection {
 			}
 			else{
 				Lightningstars[i].setForeground(Color.YELLOW);
-				Lightningstars[i+1].setText(" ");
 			}
 			if(Lightningstars[i].getText()!="locked"){
 				Lightningbuttons[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						//AllLevels allLevels =  new AllLevels();
 						//allLevels.initializeLightningLevels();
-						Level nw = new Level(level, "Lightning Level" );
+						Level nw = new Level( level, "Lightning Level" );
 						frame.dispose();
 						Level.openLevel("Lightning Level",level);
 					}
@@ -200,9 +198,8 @@ public class LevelSelection {
 			panel_1.add(Releasestars[i]);
 			
 			
-			starR= Level.starRArray[i];
-			Releasestars[i].setText(starR);
-			if (starR==(null)){
+			Releasestars[i].setText(Level.starRArray[level]);
+			if (Releasestars[i].getText()==(null)){
 				if (level==1){
 					Releasestars[i].setText(" ");
 				}
@@ -212,7 +209,6 @@ public class LevelSelection {
 			}
 			else{
 				Releasestars[i].setForeground(Color.YELLOW);
-				Releasestars[i+1].setText(" ");
 			}
 			if(Releasestars[i].getText()!="locked"){
 				Releasebuttons[i].addActionListener(new ActionListener() {

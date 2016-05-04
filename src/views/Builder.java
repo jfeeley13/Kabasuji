@@ -837,27 +837,13 @@ public class Builder extends JFrame{
 	
 	public void rotateFlip(Tile tiles){
 		Tile datboi=tiles;
-		//System.out.println("ROTATE FLIP ");
 
+			btnNewButton_1.addActionListener(new RotateController(MListener.datboi, 1));
+			btnR.addActionListener(new RotateController(MListener.datboi, 2));
+			btnNewButton.addActionListener(new FlipController(MListener.datboi, 1));	
+			btnR_1.addActionListener(new FlipController(MListener.datboi, 2));
+	
 		
-		/*rotate controllers get current selected piece in bullpen
-		Tile currentTile= null;
-		for(int TileRow = 0; TileRow <35;TileRow++){
-			for(int TileCol = 0; TileCol <14;TileCol++){
-				if(penArray[TileCol][TileRow].getBackground()==Color.GREEN){
-					currentTile=penArray[TileCol][TileRow];
-					System.out.println("CURRENT TILE "+currentTile);
-					break;
-				}
-			}
-		}
-			btnNewButton_1.addActionListener(new RotateController(this, currentTile, 1));
-			btnR.addActionListener(new RotateController(this, currentTile, 2));
-			btnNewButton.addActionListener(new FlipController(this, currentTile, 1));	
-			btnR_1.addActionListener(new FlipController(this,currentTile, 2));
-		*/
-		
-		System.out.println("CURRENT TILE1 "+datboi);
 		//datboi is current selected tile
 			RotateCW_btn.addActionListener(new RotateController(MListener.datboi, 1));
 			RotateCCW_btn.addActionListener(new RotateController( MListener.datboi, 2));
