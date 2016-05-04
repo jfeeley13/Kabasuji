@@ -23,7 +23,6 @@ public class AllLevels {
 	
 	public void initializePuzzleTwo(){
 
-		
 		Level l = new Level(2);
 		AllHex allHex =new AllHex();
 		ArrayList <Hexomino> hexList = allHex.getHexominos(0,0,0,0,0,0);
@@ -84,8 +83,7 @@ public class AllLevels {
 		
 	}
 	
-	
-	
+
 	public void initializeLightningLevels(){
 		for(int i=0; i < 5; i++){
 			Level l = new Level(i);

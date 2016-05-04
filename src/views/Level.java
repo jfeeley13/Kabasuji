@@ -65,11 +65,11 @@ public class Level{
 	 * Launch the application.
 	 * @param lblNewLabel 
 	 */
-	public static void openLevel(String type, JLabel lbl) {
+	public static void openLevel(String type, int  num) {
 		gameType = type;
 
 		levelTime= level.getTimer()*timeVar;
-		starLabel = lbl;
+		levelID = num;
 		
 		
 		EventQueue.invokeLater(new Runnable() {
@@ -615,5 +615,7 @@ public class Level{
 			starRArray[levelID+1]="   ";	
 		
 	}
+
 	}
+
 }

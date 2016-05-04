@@ -124,10 +124,12 @@ public class LevelSelection {
 			panel_2.add(Puzzlestars[i]);
 			
 			//check level star array for current score
-			Puzzlestars[i].setText(star);
+			//Puzzlestars[i].setText(star);
 			
 			
 			//if no score label locked
+			Puzzlestars[i].setText(Level.starPArray[level]);
+
 			if (Puzzlestars[i].getText()==(null)){
 				if (level==1){										//level 1 is unlocked
 					Puzzlestars[i].setText(" ");
@@ -149,7 +151,8 @@ public class LevelSelection {
 						Level nw = new Level(level, "Puzzle Level" );
 						
 						frame.dispose();
-						Level.openLevel("Puzzle Level",Puzzlestars[level-1]);
+						
+						Level.openLevel("Puzzle Level",level);
 					}
 				});
 			}
@@ -184,7 +187,7 @@ public class LevelSelection {
 						allLevels.initializeLightningLevels();
 						//Level nw = new Level( allLevels.getLightningLevel(level) );
 						frame.dispose();
-						Level.openLevel("Lightning Level",Lightningstars[level-1]);
+						Level.openLevel("Lightning Level",level);
 					}
 				});
 			}
@@ -217,7 +220,7 @@ public class LevelSelection {
 						AllLevels allLevels = new AllLevels();
 						allLevels.initializeReleaseLevels();
 						//Level nw = new Level( allLevels.getReleaseLevel(level));
-						Level.openLevel("Release Level" ,Releasestars[level-1]);
+						Level.openLevel("Release Level" ,level);
 					}
 				});
 			}
