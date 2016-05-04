@@ -31,6 +31,9 @@ public class LevelBuilder{
 		return level.initializeBoard(this.type,rows,cols);
 	}
 	
+	public BullPen NewLevelBullPen(){
+		return level.initializeBullPen();
+	}
 	/**
 	 * 
 	 * @param color set color
@@ -63,8 +66,7 @@ public class LevelBuilder{
 	
 	public void setTimer(int gameTimer){
 		Level previousState = getLevel();
-		//TODO: Set timer
-		timer=gameTimer;
+		level.timer=gameTimer;
 		Level currentState = getLevel();
 
 		moveDone(previousState, currentState);
@@ -72,8 +74,7 @@ public class LevelBuilder{
 	
 	public void setMoves(int moveCounter){
 		Level previousState = getLevel();
-		//Where is the move attribute
-		movesnum=moveCounter;
+		level.moves=moveCounter;
 		//I see it in BoardBoss, but shouldnt it be only on board? since only the subclass board uses this atttribute
 		Level currentState = getLevel();
 		moveDone(previousState, currentState);
