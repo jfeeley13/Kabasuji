@@ -2,7 +2,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-
+import builderControllers.LoadController;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -11,6 +11,8 @@ import org.junit.Test;
 
 import entity.*;
 import entity.Level;
+import gameControllers.ExitController;
+import gameControllers.LevelTimer;
 import views.*;
 
 public class testLevelEntity {
@@ -66,6 +68,9 @@ public class testLevelEntity {
 			levels.initializeReleaseLevels(index);
 		}		
 		
+		levels.initializeLightningLevels(2);
+
+		
 		/*Level Getters and Setters*/
 		level.setname("TEST");
 		String name = level.getName();
@@ -82,25 +87,26 @@ public class testLevelEntity {
 		level.setStarsAcheived(2);
 		level.levelComplete();
 		Board newBoard = level.setBoardDimensions(12, 12);
-
-//		newBoard.liftHex(newBoard.getBoardArray()[1][1], allhex.getHex(1));
-//		newBoard.addHex(newBoard.getBoardArray()[1][2], 9999, allhex.getHex(1));
 		
 		board.selectedPiece = allhex.getHex(1);
 		board.lifted = true;
-//		board.getBoardArray()[5][5].toggleTile();
-//		board.drawHex(board.getBoardArray()[5][5], 5, 5, Color.ORANGE);
 		Board board2 = new Board();
 		board2.makeBoard(new ReleaseTile[12][12], 12, 12, 1);
-//		board2.getBoardArray()[5][5].setBackground(Color.green);
-//		board2.getGreenTiles();
-//		board2.winAnimation();
-		
-//		inv.liftHex(inv.returnBoard()[2][2], allhex.getHex(2));
-		
-//		board.addHex(board.getBoardArray()[5][5],9999, allhex.getHex(1));
+		LevelBuilder bldr = new LevelBuilder();
+		BullPen bp2 = bldr.NewLevelBullPen();
+		bldr.setTimer(10);
+		bldr.setMoves(8);
+		bldr.undo();
+		bldr.addSolutionPiece(allhex.getHex(5));
+		Level lvl2 = bldr.getLevel();
 
+		LoadController loadc = new LoadController("Stuff");
+		
+//		board.liftHex(board.getBoardArray()[3][3], hex)
+//		inv.liftHex(inv., shape)
 
+		
+		
 	}
 
 }
