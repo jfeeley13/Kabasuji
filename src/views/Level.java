@@ -92,6 +92,10 @@ public class Level{
 	static int rows;
 	static int cols;
 	static Board board;
+	static int penX;
+	static int penY;
+	static int boardX;
+	static int boardY;
 	
 
 	/**
@@ -446,9 +450,6 @@ public class Level{
 		for (int i = 0; i<hexList.size(); i++){
 			pen.addHex(penArray[pen.returnWidth()/2][i*6+1], i, hexList.get(i));
 		}
-		//		pen.addHex(penArray[pen.returnWidth()/2][3], 1, Level.allhex.getHexList().get(pos));
-		//		pen.addHex(penArray[pen.returnWidth()/2][11], 2, Level.allhex.getHexList().get(pos+1));
-		//		pen.addHex(penArray[pen.returnWidth()/2][20], 3, Level.allhex.getHexList().get(pos+2));
 		// end filling bullpen with pieces
 		BoardBoss.bullPenPosition+=1;
 		pen.init=false;
