@@ -35,7 +35,8 @@ public class AllLevels {
 		puzzle[2] = l;		
 	}
 	
-	public void initializePuzzleLevels() {
+	public void initializePuzzleLevels(int i) {
+		if(i==1) initializePuzzleOne();
 		
 	}
 	

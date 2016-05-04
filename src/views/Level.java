@@ -18,6 +18,7 @@ import java.awt.Container;
 import javax.swing.table.DefaultTableModel;
 
 import entity.AllHex;
+import entity.AllLevels;
 import entity.Board;
 import entity.BoardBoss;
 import entity.BoardPen;
@@ -141,14 +142,20 @@ public class Level{
 	/**
 	 * Create the application.
 	 */
-	public Level(entity.Level level) {
-		Level.level = level;
+	public Level(int level ,String type) {
+		AllLevels allLevels = new AllLevels();
+		allLevels.initializePuzzleLevels(level);
+		Level.level = allLevels.getPuzzleLevel(level);
 		initialize();
 		try {
 			gameControllers.LevelTimer.main(this);
 		} catch (Exception e) {
 			
 		}
+	}
+
+	public Level(entity.Level level2) {
+		// TODO Auto-generated constructor stub
 	}
 
 	/**

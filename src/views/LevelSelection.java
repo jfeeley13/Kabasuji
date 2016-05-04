@@ -63,7 +63,6 @@ public class LevelSelection {
 	 */
 	public LevelSelection() {
 		initialize();
-		
 	}
 
 	/**
@@ -142,9 +141,10 @@ public class LevelSelection {
 			if(Puzzlestars[i].getText()!="locked"){
 				Puzzlebuttons[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						AllLevels allLevels =  new AllLevels();
-						allLevels.initializePuzzleLevels();
-						Level nw = new Level(allLevels.getPuzzleLevel(level) );
+						
+						
+						Level nw = new Level(level, "Puzzle Level" );
+						
 						frame.dispose();
 						Level.openLevel("Puzzle Level",Puzzlestars[level-1]);
 					}
@@ -177,7 +177,7 @@ public class LevelSelection {
 					public void actionPerformed(ActionEvent e) {
 						AllLevels allLevels =  new AllLevels();
 						allLevels.initializeLightningLevels();
-						Level nw = new Level( allLevels.getLightningLevel(level) );
+						//Level nw = new Level( allLevels.getLightningLevel(level) );
 						frame.dispose();
 						Level.openLevel("Lightning Level",Lightningstars[level-1]);
 					}
@@ -210,7 +210,7 @@ public class LevelSelection {
 					public void actionPerformed(ActionEvent e) {
 						AllLevels allLevels = new AllLevels();
 						allLevels.initializeReleaseLevels();
-						Level nw = new Level( allLevels.getReleaseLevel(level));
+						//Level nw = new Level( allLevels.getReleaseLevel(level));
 						Level.openLevel("Release Level" ,Releasestars[level-1]);
 					}
 				});
