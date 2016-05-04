@@ -249,6 +249,7 @@ public class Builder extends JFrame{
 				}
 				LevelBuilder.getLevel().setTimer(gameTimer);
 				LevelBuilder.getLevel().setMoves(moveCounter);
+				LevelBuilder.getLevel().setType(gameType);
 				System.out.println("level builder level id "+LevelBuilder.getLevel().getLvlID());
 				System.out.println("level builder level name "+LevelBuilder.getLevel().getName());	
 				System.out.println("level builder level timer "+ LevelBuilder.getLevel().getTimer());	

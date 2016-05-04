@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Level {
 	
 	protected int lvlID, moves, timer;
-	String name;
+	String name, type;
 	protected boolean locked;
 	protected int starsAcheived;
 	protected Board board;
@@ -94,7 +94,7 @@ public class Level {
 
 	public String toString(){
 		starsAcheived=3;
-		return lvlID + System.getProperty("line.separator") + System.getProperty("line.separator") //+ solutionPieces.toString() 
+		return lvlID + System.getProperty("line.separator") +  type + System.getProperty("line.separator") //+ solutionPieces.toString() 
 				+ " Board \n" + board.toString();
 		
 	}
@@ -162,6 +162,11 @@ public class Level {
 
 	public int getMoves() {
 		return moves;
+	}
+
+	public void setType(String gameType) {
+		type= gameType;
+		
 	}
 
 }

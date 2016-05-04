@@ -122,7 +122,7 @@ public class Board extends BoardBoss{
 		for(int i=0; i<6; i++) {
 			int y=0;
 			int x=0;
-			x=selectedPiece.shape[i].row+posx;
+			x=selectedPiece.shape[i].column+posx;
 			try {
 				Tile testTile = boardArray[x][y];
 			} catch (Exception e) {
@@ -140,8 +140,7 @@ public class Board extends BoardBoss{
 			int y=0;
 			int x=0;
 			
-
-			y=selectedPiece.shape[i].column+posy;
+			y=selectedPiece.shape[i].row+posy;
 			
 
 			try {
