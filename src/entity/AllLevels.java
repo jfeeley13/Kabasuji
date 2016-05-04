@@ -20,7 +20,6 @@ public class AllLevels {
 		l.initializeBoard("Puzzle Level", 6, 6);
 		l.setMoves(20);
 		l.initializeBullPen();
-			
 		puzzle[1] = l;		
 	}
 	
@@ -33,7 +32,6 @@ public class AllLevels {
 		l.initializeBoard("Puzzle Level", 6, 6);
 		l.setMoves(20);
 		l.initializeBullPen();
-			
 		puzzle[2] = l;		
 	}
 	public void initializePuzzleThree(){
@@ -46,7 +44,6 @@ public class AllLevels {
 		l.initializeBoard("Puzzle Level", 6, 6);
 		l.setMoves(20);
 		l.initializeBullPen();
-			
 		puzzle[3] = l;		
 	}
 	public void initializePuzzleFour(){
