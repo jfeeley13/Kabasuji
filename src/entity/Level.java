@@ -50,8 +50,8 @@ public class Level {
 		pen.makeBoard(new PuzzleTile[14][35], 14, 35, 2);
 		this.pen.fillBoard();
 		BullPen.init = true;
-		for(int i = 0; i <3; i++){
-			pen.addHex(pen.getBoardArray()[5*i][5], i, solutionPieces.get(i));
+		for(int i = 0; i <2; i++){
+			pen.addHex(pen.getBoardArray()[7*i+1][5], i, solutionPieces.get(i));
 			solutionPieces.remove(i);
 		}
 		BullPen.init = false;

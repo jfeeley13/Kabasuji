@@ -11,9 +11,9 @@ public class AllLevels {
 		for(int i=0; i < 5; i++){
 			Level l = new Level(i);
 			AllHex allHex =new AllHex();
-			ArrayList <Hexomino> hexList = allHex.getHexominos(12,5,7,8,20);
+			ArrayList <Hexomino> hexList = allHex.getHexominos(0,0,0,0,0);
 			l.setSolutionPieces(hexList);
-			l.initializeBoard("Puzzle Level", 9, 9);
+			l.initializeBoard("Puzzle Level", 6, 6);
 			l.setMoves(20);
 			l.initializeBullPen();
 			
