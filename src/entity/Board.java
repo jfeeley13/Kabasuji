@@ -250,9 +250,9 @@ public class Board extends BoardBoss{
 	}
 	public int getGreenTiles() {
 		 		int greenBois=0;
-		 	//	for(int i=0;i<cols;i++)
-		 	//		for(int j=0;j<rows;j++)
-		 	//			if(boardArray[i][j].getBackground()==Color.GREEN) greenBois+=1;
+		 		for(int i=0;i<cols;i++)
+		 			for(int j=0;j<rows;j++)
+		 				if(boardArray[i][j].getBackground()==Color.GREEN) greenBois+=1;
 		 		return greenBois;
 		 	}
 	
