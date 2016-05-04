@@ -33,7 +33,7 @@ public class Level {
 			board.fillBoard(type);
 		}
 
-		else if(type.equals("Lighting Level")){
+		else if(type.equals("Lightning Level")){
 			board.makeBoard(new LightningTile[rows][columns], rows, columns, 1);
 			board.fillBoard(type);
 		}

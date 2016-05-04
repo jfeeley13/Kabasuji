@@ -378,7 +378,7 @@ public class Board extends BoardBoss{
 			for(int j =0; j < cols; j++){
 				if(type.equals("Puzzle Level"))
 					boardArray[i][j] = new PuzzleTile(this, row, col, 999);
-				else if(type.equals("Lighting Level"))
+				else if(type.equals("Lightning Level"))
 					boardArray[i][j] = new LightningTile(this, row, col, 999);
 				else
 					boardArray[i][j] = new ReleaseTile(this, row, col, 999);

@@ -377,7 +377,7 @@ public class Level{
 		for(int i = 0; i < rows; i++){
 			for(int j = 0; j < cols; j++){
 				Tile [][] array = Level.board.getBoardArray();
-				t = array[j][i];
+				t = array[i][j];
 				System.out.println("tile"+ t.getRow() + " " +t.getColumn() );
 				t.setBackground(Color.WHITE);
 				// set border around tile (black border)

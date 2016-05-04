@@ -179,7 +179,7 @@ public class LevelSelection {
 						allLevels.initializePuzzleLevels();
 						Level nw = new Level( allLevels.getPuzzleLevel(1) );
 						frame.dispose();
-						Level.openLevel("Lighting Level",Lightningstars[level-1]);
+						Level.openLevel("Lightning Level",Lightningstars[level-1]);
 					}
 				});
 			}
