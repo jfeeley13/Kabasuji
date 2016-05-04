@@ -6,14 +6,16 @@ public class AllLevels {
 	Level[] puzzle = new Level[5];
 	Level[] lightning = new Level[5];
 	Level[] release = new Level[5];
-	
+	int xy=0;
 	public void initializePuzzleLevels(){
 		for(int i=0; i < 5; i++){
+			if(i==1) xy=6;
+			if(i==2) xy=12;
 			Level l = new Level(i);
 			AllHex allHex =new AllHex();
-			ArrayList <Hexomino> hexList = allHex.getHexominos(0,0,0,0,0);
+			ArrayList <Hexomino> hexList = allHex.getHexominos(0,0,0,0,0,0);
 			l.setSolutionPieces(hexList);
-			l.initializeBoard("Puzzle Level", 6, 6);
+			l.initializeBoard("Puzzle Level", xy, xy);
 			l.setMoves(20);
 			l.initializeBullPen();
 			
