@@ -102,8 +102,8 @@ public class testLevelEntity {
 
 		LoadController loadc = new LoadController("Stuff");
 		
-		board.liftHex(board.getBoardArray()[3][3], hex)
-		inv.liftHex(inv., shape)
+//		board.liftHex(board.getBoardArray()[3][3], hex)
+//		inv.liftHex(inv., shape)
 
 		
 		
