@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import entity.AllLevels;
 import entity.Board;
 import entity.Hexomino;
 import entity.Level;
@@ -27,11 +28,14 @@ public class LoadController {
 	int col;
 	boolean isValid;
 	int type;
+	public static Level customLevel;
 	
 	public static File getStoredDirectory() {
 		String currentDirectory = System.getProperty("user.dir");
-		File f = new File (currentDirectory, "Data/");
-		
+		File f =null;
+		try{
+		f = new File (currentDirectory, "Data/");
+		} catch (Exception e) {};
 		return f;
 	}
 	
@@ -49,11 +53,11 @@ public class LoadController {
 				lvlID = Integer.parseInt(br.readLine());
 				System.out.println("ID "+lvlID);
 
-				starsAchieved = Integer.parseInt(br.readLine());
-				System.out.println("stars "+starsAchieved);
+				int timer = Integer.parseInt(br.readLine());
+				System.out.println("timer "+starsAchieved);
 
-				String pieces = br.readLine();
-				System.out.println("pieces "+pieces);
+				int moves = Integer.parseInt(br.readLine());
+				System.out.println("moves "+moves);
 
 				/*while(!pieces.equals("Board")){
 					int pID = Integer.parseInt(br.readLine());
@@ -109,9 +113,28 @@ public class LoadController {
 					run=false;
 				}
 				board.makeBoard(tileArray, boardWidth, boardHeight, 1);
-				Level level = new Level(lvlID);
-				level.setBoard(board);
-				level.setStarsAcheived(starsAchieved);
+				customLevel = new Level(lvlID);
+				customLevel.setBoard(board);
+				customLevel.setLvlID(lvlID);
+				customLevel.setTimer(timer);
+				customLevel.setMoves(moves);
+				customLevel.setHeight(boardHeight);
+				customLevel.setWidth(boardWidth);
+
+				//level.setStarsAcheived(starsAchieved);
+				
+				if(type == 2){
+					customLevel.setType("Release Level");
+					views.Level.openLevel("Custom Level",lvlID);
+				}
+				else if(type == 1){
+					customLevel.setType("Lightning Level");
+					views.Level.openLevel("Custom Level",lvlID);
+				}else{
+					customLevel.setType("Puzzle Level");
+					views.Level.openLevel("Custom Level",lvlID);
+
+				}
 				
 				
 			} catch (FileNotFoundException e1) {

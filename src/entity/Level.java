@@ -7,10 +7,13 @@ public class Level {
 	
 	protected int lvlID, moves, timer;
 	String name, type;
+	int row, col;
 	protected boolean locked;
 	protected int starsAcheived;
 	protected Board board;
 	protected BullPen pen;
+	int height,width;
+
 	public static ArrayList<Hexomino> solutionPieces; //this attribute will contain the pieces of the level, which will be copied and put into the bullpen
 	//this way we have a copy always of the solution pieces and can always restart easily the bullpen and the game with this.
 	
@@ -84,6 +87,8 @@ public class Level {
 	 * @return the newly created board
 	 */
 	public Board setBoardDimensions(int newRows, int newColumns){
+		row=newRows;
+		col=newColumns;
 		return board.resizeBoardArray(newRows, newColumns);
 	}
 	
@@ -93,9 +98,8 @@ public class Level {
 	AllHex hexList = new AllHex();
 
 	public String toString(){
-		starsAcheived=3;
-		return lvlID + System.getProperty("line.separator") +  type + System.getProperty("line.separator") //+ solutionPieces.toString() 
-				+ " Board \n" + board.toString();
+		return lvlID + System.getProperty("line.separator")  + timer + System.getProperty("line.separator") +moves +   System.getProperty("line.separator")+board.toString(); 
+				//+ solutionPieces.toString() + " Board \n" + board.toString();
 		
 	}
 
@@ -167,6 +171,24 @@ public class Level {
 	public void setType(String gameType) {
 		type= gameType;
 		
+	}
+
+	public int getWidth() {
+		return height;
+	}
+	public int getHeight() {
+		return width;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setHeight(int boardHeight) {
+		height = boardHeight;
+	}
+	public void setWidth(int boardWidth) {
+		width = boardWidth;
 	}
 
 }

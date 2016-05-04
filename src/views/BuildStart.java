@@ -16,9 +16,12 @@ import java.awt.event.ActionEvent;
 import java.awt.Font;
 
 import javax.swing.JToolBar;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 
 public class BuildStart extends JFrame {
+	private JTextField textField;
 
 //	private JFrame frame;
 
@@ -80,7 +83,11 @@ public class BuildStart extends JFrame {
 		JButton btnCustomLevels = new JButton("Load Levels");
 		btnCustomLevels.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new LoadController("game11");	
+				String load = textField.getText();
+				if(new LoadController(load)!=null){
+					new LoadController(load);
+				}
+					
 			}
 		});
 		
@@ -98,6 +105,10 @@ public class BuildStart extends JFrame {
 		toolBar.setFloatable(false);
 		Color myToolbarColor = Color.decode("#4b89d0");
 		toolBar.setBackground(myToolbarColor);		//toolBar.setBackground(UIManager.getColor("MenuBar.selectionBackground"));
+		
+		textField = new JTextField();
+		textField.setHorizontalAlignment(SwingConstants.CENTER);
+		textField.setColumns(10);
 		GroupLayout groupLayout = new GroupLayout(getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -110,9 +121,10 @@ public class BuildStart extends JFrame {
 					.addGap(153)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
 						.addComponent(btnLevelBuilder, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(btnCustomLevels, Alignment.LEADING, 0, 0, Short.MAX_VALUE)
-						.addComponent(btnPlay, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE))
-					.addContainerGap(328, Short.MAX_VALUE))
+						.addComponent(btnCustomLevels, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(btnPlay, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(textField, Alignment.LEADING))
+					.addContainerGap(325, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -122,11 +134,13 @@ public class BuildStart extends JFrame {
 					.addComponent(lblKabasuji, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE)
 					.addGap(12)
 					.addComponent(btnPlay, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(btnCustomLevels)
 					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnCustomLevels)
+					.addGap(5)
 					.addComponent(btnLevelBuilder)
-					.addContainerGap(50, Short.MAX_VALUE))
+					.addContainerGap(29, Short.MAX_VALUE))
 		);
 		getContentPane().setLayout(groupLayout);
 	}

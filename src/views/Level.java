@@ -34,6 +34,8 @@ import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 import javax.swing.ScrollPaneConstants;
 
+import builderControllers.LoadController;
+
 
 public class Level{
 
@@ -68,14 +70,16 @@ public class Level{
 	public static void openLevel(String type, int  num) {
 		gameType = type;
 
-		levelTime= level.getTimer()*timeVar;
+		if(type=="Lightning Level"){
+			levelTime= level.getTimer()*timeVar;
+		}
 		levelID = num;
 		
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Level window = new Level(Level.level);
+					Level window = new Level(levelID, gameType);
 					window.frame.setLocationRelativeTo(null);
 					window.frame.setVisible(true);
 					window.frame.setResizable(false);
@@ -115,11 +119,22 @@ public class Level{
 			allLevels.initializeLightningLevels(level);
 			Level.level = allLevels.getLightningLevel(level);
 		}
+<<<<<<< Updated upstream
 		if(type=="Release Level") {
 			AllLevels allLevels = new AllLevels();
 			allLevels.initializeReleaseLevels(level);
 			Level.level = allLevels.getReleaseLevel(level);
 		}
+=======
+		if(type=="Custom Level") {
+		//	System.out.println(""+LoadController.customLevel.getWidth());
+			AllLevels allLevels = new AllLevels();
+			allLevels.initializeCustomLevel(LoadController.customLevel.getLvlID(), LoadController.customLevel.getType(), LoadController.customLevel.getMoves(), LoadController.customLevel.getTimer(), LoadController.customLevel.getHeight(), LoadController.customLevel.getWidth(), LoadController.customLevel.getBoard());
+			
+			Level.level = allLevels.getCustomLevel(level);
+		}
+		
+>>>>>>> Stashed changes
 		initialize();
 		try {
 			gameControllers.LevelTimer.main(this);
