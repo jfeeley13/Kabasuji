@@ -350,13 +350,12 @@ public class Level{
 		 *  
 		 */
 		
-		int x = 6;
-		int y = 6;
-
-		board.setLayout(new GridLayout(y,x));
-		board.setPreferredSize(new Dimension(384,384));
-		board.setMinimumSize(new Dimension(384,384));
-		board.setMaximumSize(new Dimension(384,384));
+		
+		
+		board.setLayout(new GridLayout(Level.rows,Level.cols));
+		board.setPreferredSize(new Dimension(Level.rows * 32,Level.cols*32));
+		board.setMinimumSize(new Dimension(Level.rows * 32,Level.cols*32));
+		board.setMaximumSize(new Dimension(Level.rows * 32,Level.cols*32));
 		
 		
 		/**
@@ -369,14 +368,17 @@ public class Level{
 		
 		Border BoardTileBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
 		
-		
+		System.out.println(Level.board.toString());
+		Tile t;
 		for(int i = 0; i < rows; i++){
-			for(Tile t: Level.board.getBoardArray()[i]){
+			for(int j = 0; j < cols; j++){
+				Tile [][] array = Level.board.getBoardArray();
+				t = array[i][j];
+				System.out.println("tile"+ t.getRow() + " " +t.getColumn() );
 				t.setBackground(Color.WHITE);
 				// set border around tile (black border)
 				t.setBorder(BoardTileBorder);
 				Level.board.add(t);
-				System.out.println(t.toString());
 			}
 		}
 		
@@ -391,8 +393,8 @@ public class Level{
 		 *  @param y COLUMNS
 		 *  
 		 */
-		x = 14;
-		y = 35;
+		int x = 14;
+		int y = 35;
 		
 		
 		/**

@@ -370,20 +370,23 @@ public class Board extends BoardBoss{
 	 * @param type String representing the type of board it is
 	 */
 	public void fillBoard(String type){
-		Tile t;
-		if(type.equals("Puzzle Level"))
-			t = new PuzzleTile(this, 0, 0, 999);
-		else if(type.equals("Lighting Level"))
-			t = new LightningTile(this, 0, 0, 999);
-		else
-			t = new ReleaseTile(this, 0, 0, 999);
+		int row = 0; 
+		int col =0;
+		
 		
 		for(int i = 0; i < rows; i++){
 			for(int j =0; j < cols; j++){
-				boardArray[i][j] = t;
-				t.setColumn(t.getColumn() + 1);
+				if(type.equals("Puzzle Level"))
+					boardArray[i][j] = new PuzzleTile(this, row, col, 999);
+				else if(type.equals("Lighting Level"))
+					boardArray[i][j] = new LightningTile(this, row, col, 999);
+				else
+					boardArray[i][j] = new ReleaseTile(this, row, col, 999);
+				col++;
 			}
-			t.setRow(t.getRow()+ 1);
+			col = 0;
+			row++;
+			
 		}
 			
 	}

@@ -8,7 +8,7 @@ public class AllLevels {
 	public void initializePuzzleLevels(){
 		for(int i=0; i < 5; i++){
 			Level l = new Level(i);
-			l.initializeBoard("Puzzle Level", 10, 10);
+			l.initializeBoard("Puzzle Level", 12, 12);
 			l.setMoves(20);
 			
 			puzzle[i] = l;

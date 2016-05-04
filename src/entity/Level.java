@@ -26,7 +26,7 @@ public class Level {
 	 * @return the board of the lvel, now initialized
 	 */
 	public Board initializeBoard(String type, int rows, int columns){
-			Board board = new Board();
+		this.board = new Board();
 		
 		if(type.equals("Puzzle Level")){
 			board.makeBoard(new PuzzleTile[rows][columns], rows, columns, 1);
@@ -41,8 +41,6 @@ public class Level {
 			board.makeBoard(new ReleaseTile[rows][columns], rows, columns, 1);
 			board.fillBoard(type);
 		}
-		
-		this.board = board;
 		
 		return board;
 	}
