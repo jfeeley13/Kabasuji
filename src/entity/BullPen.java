@@ -309,7 +309,14 @@ public class BullPen extends BoardBoss{
 			
 	}
 
-
+	public boolean isEmpty() {
+		for(int i=0;i<rows;i++) {
+			for(int j=0;j<cols;j++) {
+				if(boardArray[i][j].isCovered) return false;
+			}
+		}
+		return true;
+	}
 	public Tile[][] getBoardArray() {
 		return boardArray;
 	}

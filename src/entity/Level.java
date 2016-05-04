@@ -12,7 +12,7 @@ public class Level {
 	protected int starsAcheived;
 	protected Board board;
 	protected BullPen pen;
-	ArrayList<Hexomino> solutionPieces; //this attribute will contain the pieces of the level, which will be copied and put into the bullpen
+	public static ArrayList<Hexomino> solutionPieces; //this attribute will contain the pieces of the level, which will be copied and put into the bullpen
 	//this way we have a copy always of the solution pieces and can always restart easily the bullpen and the game with this.
 	
 	public Level(int lvlID){
@@ -52,6 +52,7 @@ public class Level {
 		BullPen.init = true;
 		for(int i = 0; i <3; i++){
 			pen.addHex(pen.getBoardArray()[5*i][5], i, solutionPieces.get(i));
+			solutionPieces.remove(i);
 		}
 		BullPen.init = false;
 		return pen;
