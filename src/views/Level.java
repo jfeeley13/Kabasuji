@@ -119,13 +119,11 @@ public class Level{
 			allLevels.initializeLightningLevels(level);
 			Level.level = allLevels.getLightningLevel(level);
 		}
-<<<<<<< Updated upstream
 		if(type=="Release Level") {
 			AllLevels allLevels = new AllLevels();
 			allLevels.initializeReleaseLevels(level);
 			Level.level = allLevels.getReleaseLevel(level);
 		}
-=======
 		if(type=="Custom Level") {
 		//	System.out.println(""+LoadController.customLevel.getWidth());
 			AllLevels allLevels = new AllLevels();
@@ -134,7 +132,6 @@ public class Level{
 			Level.level = allLevels.getCustomLevel(level);
 		}
 		
->>>>>>> Stashed changes
 		initialize();
 		try {
 			gameControllers.LevelTimer.main(this);

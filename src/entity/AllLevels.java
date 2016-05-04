@@ -160,7 +160,26 @@ public class AllLevels {
 		ArrayList <Hexomino> hexList = allHex.getHexominos(0,0,0,0,0,0,0,0,0,0);
 		l.setSolutionPieces(hexList);
 		l.initializeBoard("Release Level", 6, 6);
-		l.board.boardArray[2][3].addSetNum(1, Color.RED);
+		l.board.boardArray[1][1].addSetNum(1, Color.RED);
+		l.board.boardArray[1][2].addSetNum(2, Color.RED);
+		l.board.boardArray[1][3].addSetNum(3, Color.RED);
+		l.board.boardArray[1][4].addSetNum(4, Color.RED);
+		l.board.boardArray[1][5].addSetNum(5, Color.RED);
+		l.board.boardArray[2][1].addSetNum(6, Color.RED);
+		
+		l.board.boardArray[2][2].addSetNum(1, Color.BLUE);
+		l.board.boardArray[2][3].addSetNum(2, Color.BLUE);
+		l.board.boardArray[2][4].addSetNum(3, Color.BLUE);
+		l.board.boardArray[2][5].addSetNum(4, Color.BLUE);
+		l.board.boardArray[3][1].addSetNum(5, Color.BLUE);
+		l.board.boardArray[3][2].addSetNum(6, Color.BLUE);
+		
+		l.board.boardArray[3][3].addSetNum(1, Color.GREEN);
+		l.board.boardArray[3][4].addSetNum(2, Color.GREEN);
+		l.board.boardArray[3][5].addSetNum(3, Color.GREEN);
+		l.board.boardArray[4][1].addSetNum(4, Color.GREEN);
+		l.board.boardArray[4][2].addSetNum(5, Color.GREEN);
+		l.board.boardArray[4][3].addSetNum(6, Color.GREEN);
 		l.setMoves(20);
 		l.initializeBullPen();
 		
@@ -173,16 +192,68 @@ public class AllLevels {
 		ArrayList <Hexomino> hexList = allHex.getHexominos(0,0,0,0,0,0);
 		l.setSolutionPieces(hexList);
 		l.initializeBoard("Release Level", 6, 6);
+		l.board.boardArray[1][1].addSetNum(1, Color.RED);
+		l.board.boardArray[1][2].addSetNum(2, Color.RED);
+		l.board.boardArray[1][3].addSetNum(3, Color.RED);
+		l.board.boardArray[1][4].addSetNum(4, Color.RED);
+		l.board.boardArray[1][5].addSetNum(5, Color.RED);
+		l.board.boardArray[2][1].addSetNum(6, Color.RED);
+		
+		l.board.boardArray[2][2].addSetNum(1, Color.BLUE);
+		l.board.boardArray[2][3].addSetNum(2, Color.BLUE);
+		l.board.boardArray[2][4].addSetNum(3, Color.BLUE);
+		l.board.boardArray[2][5].addSetNum(4, Color.BLUE);
+		l.board.boardArray[3][1].addSetNum(5, Color.BLUE);
+		l.board.boardArray[3][2].addSetNum(6, Color.BLUE);
+		
+		l.board.boardArray[3][3].addSetNum(1, Color.GREEN);
+		l.board.boardArray[3][4].addSetNum(2, Color.GREEN);
+		l.board.boardArray[3][5].addSetNum(3, Color.GREEN);
+		l.board.boardArray[4][1].addSetNum(4, Color.GREEN);
+		l.board.boardArray[4][2].addSetNum(5, Color.GREEN);
+		l.board.boardArray[4][3].addSetNum(6, Color.GREEN);
 		l.setMoves(20);
 		l.initializeBullPen();
 		
 		release[2] = l;
 	}
 	
+	public void initializeReleaseThree() {
+		Level l = new Level(3);
+		AllHex allHex =new AllHex();
+		ArrayList <Hexomino> hexList = allHex.getHexominos(0,0,0,0,0,0);
+		l.setSolutionPieces(hexList);
+		l.initializeBoard("Release Level", 6, 6);
+		l.board.boardArray[1][1].addSetNum(1, Color.RED);
+		l.board.boardArray[1][2].addSetNum(2, Color.RED);
+		l.board.boardArray[1][3].addSetNum(3, Color.RED);
+		l.board.boardArray[1][4].addSetNum(4, Color.RED);
+		l.board.boardArray[1][5].addSetNum(5, Color.RED);
+		l.board.boardArray[2][1].addSetNum(6, Color.RED);
+		
+		l.board.boardArray[2][2].addSetNum(1, Color.BLUE);
+		l.board.boardArray[2][3].addSetNum(2, Color.BLUE);
+		l.board.boardArray[2][4].addSetNum(3, Color.BLUE);
+		l.board.boardArray[2][5].addSetNum(4, Color.BLUE);
+		l.board.boardArray[3][1].addSetNum(5, Color.BLUE);
+		l.board.boardArray[3][2].addSetNum(6, Color.BLUE);
+		
+		l.board.boardArray[3][3].addSetNum(1, Color.GREEN);
+		l.board.boardArray[3][4].addSetNum(2, Color.GREEN);
+		l.board.boardArray[3][5].addSetNum(3, Color.GREEN);
+		l.board.boardArray[4][1].addSetNum(4, Color.GREEN);
+		l.board.boardArray[4][2].addSetNum(5, Color.GREEN);
+		l.board.boardArray[4][3].addSetNum(6, Color.GREEN);
+		l.setMoves(20);
+		l.initializeBullPen();
+		
+		release[3] = l;
+	}
+	
 	public void initializeReleaseLevels(int i){
 		if(i==1) initializeReleaseOne();
 		if(i==2) initializeReleaseTwo();
-		//if(i==3) initializeLightningThree();
+		if(i==3) initializeLightningThree();
 		//if(i==4) initializeLightningFour();
 		//if(i==5) initializeLightningFive();
 			
