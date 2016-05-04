@@ -17,8 +17,8 @@ public class BullPen extends BoardBoss{
 
 	private static final long serialVersionUID = 1L;
 	protected Tile boardArray[][];
-	int width;
-	int height;
+	int rows;
+	int cols;
 	protected int tileID;
 	protected int boardID = 2;
 	
@@ -34,8 +34,8 @@ public class BullPen extends BoardBoss{
 	
 	public void makeBoard(Tile[][] boardArray, int width, int height, int id){
 		this.boardArray = boardArray;
-		this.width = width;
-		this.height = height;
+		this.rows = width;
+		this.cols = height;
 		this.boardID = id;
 	}
 	
@@ -76,8 +76,8 @@ public class BullPen extends BoardBoss{
 		else {
 			if(selectedPiece!=null && lifted && !penPiece) {
 				selectedPiece=null;
-				for(int i=0; i<width; i++) 
-					for(int j=0; j<height; j++) {
+				for(int i=0; i<rows; i++) 
+					for(int j=0; j<cols; j++) {
 						if(boardArray[i][j].getBackground()==Color.GREEN) {
 							boardArray[i][j].setBackground(Color.WHITE);
 							boardArray[i][j].setBorder(whiteBorder);
@@ -107,8 +107,8 @@ public class BullPen extends BoardBoss{
 				tileID = boardArray[x][y].getTileID();
 				//System.out.println(tileID);
 				System.out.println("Selected Piece!");
-				for(int j=0; j<width; j++) 
-					for(int k=0; k<height; k++) 
+				for(int j=0; j<rows; j++) 
+					for(int k=0; k<cols; k++) 
 						if(boardArray[j][k].tileID==tileID) {
 							boardArray[j][k].isCovered = false;
 							boardArray[j][k].setTileID(tileID+1000);
@@ -207,8 +207,8 @@ public class BullPen extends BoardBoss{
 	 */
 	
 	public void refresh() {
-		for(int j=0; j<width; j++) 
-			for(int k=0; k<height; k++) {
+		for(int j=0; j<rows; j++) 
+			for(int k=0; k<cols; k++) {
 				if(boardArray[j][k].isHighlight) {
 					boardArray[j][k].setBorder(whiteBorder);
 					boardArray[j][k].setBackground(Color.WHITE);
@@ -226,8 +226,8 @@ public class BullPen extends BoardBoss{
 	 */
 	public void redraw() {
 		
-		for(int j=0; j<width; j++) 
-			for(int k=0; k<height; k++) 
+		for(int j=0; j<rows; j++) 
+			for(int k=0; k<cols; k++) 
 				if(boardArray[j][k].tileID<1000) {
 					
 					if(!boardArray[j][k].isHighlight)
@@ -263,7 +263,7 @@ public class BullPen extends BoardBoss{
 				break;
 		}
 
-		if(x>width-2 || y>height-2 || x<0 || y<0) return false;
+		if(x>rows-2 || y>cols-2 || x<0 || y<0) return false;
 		return true;
 	}
 	
@@ -276,7 +276,7 @@ public class BullPen extends BoardBoss{
 
 	
 	public int returnHeight() {
-		return this.height;
+		return this.cols;
 	}
 
 	
@@ -285,8 +285,8 @@ public class BullPen extends BoardBoss{
 	}
 
 	public void clearPen() {
-		for(int i=0;i<width;i++)
-			for(int j=0; j<height;j++) {
+		for(int i=0;i<rows;i++)
+			for(int j=0; j<cols;j++) {
 				boardArray[i][j].isCovered=false;
 				boardArray[i][j].tileID=9999;
 				boardArray[i][j].setBackground(Color.WHITE);
@@ -294,4 +294,39 @@ public class BullPen extends BoardBoss{
 			}
 	}
 
+	 /** Fills the boardArray of the board
+	 * @param type String representing the type of board it is
+	 */
+	public void fillBoard(){
+		int row = 0; 
+		int col =0;
+		Border penTileBorder = BorderFactory.createLineBorder(Color.WHITE, 1);
+		
+		for(int i = 0; i < 14; i++){
+			for(int j =0; j < 35; j++){
+				PuzzleTile t = new PuzzleTile(this, row, col, 999);
+				// the new tile will be empty (white)
+				t.setBackground(Color.WHITE);
+
+				// set border around tile (white border)
+				t.setBorder(penTileBorder);
+				boardArray[i][j] = t;
+				col++;
+			}
+			col = 0;
+			row++;
+			
+		}
+			
+	}
+
+
+	public Tile[][] getBoardArray() {
+		return boardArray;
+	}
+	
+	
+	
+	
+	
 }

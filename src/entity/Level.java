@@ -44,6 +44,31 @@ public class Level {
 		
 		return board;
 	}
+	
+	public BullPen initializeBullPen(){
+		this.pen = new BullPen();
+		pen.makeBoard(new PuzzleTile[14][35], 14, 35, 1);
+		this.pen.fillBoard();
+		BullPen.init = true;
+		for(int i = 0; i < solutionPieces.size(); i++){
+			pen.addHex(pen.getBoardArray()[pen.returnWidth()/2][i*6+1], i, solutionPieces.get(i));
+		}
+		BullPen.init = false;
+		return pen;
+	}
+	
+	
+	
+	
+	
+	public ArrayList<Hexomino> getSolutionPieces() {
+		return solutionPieces;
+	}
+
+	public void setSolutionPieces(ArrayList<Hexomino> solutionPieces) {
+		this.solutionPieces = solutionPieces;
+	}
+
 	/**
 	 * 
 	 * @return

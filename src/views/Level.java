@@ -286,7 +286,7 @@ public class Level{
 					.addGap(34))
 		);
 		
-		BoardBoss pen = new BullPen();
+		BullPen pen = Level.level.getPen();
 		bullpen_scrollPane.setViewportView(pen);
 		
 		boardPen.setBackground(Color.decode("#4169aa"));
@@ -401,12 +401,14 @@ public class Level{
 		int y = 35;
 		
 		
+		
+		
+		
 		/**
 		 *  penArray[][] holds all the tiles
 		 *  of the board being created
 		 * 
 		 */
-		Tile penArray[][] = new Tile[x][y];
 
 		pen.setPreferredSize(new Dimension(140, 350));
 		pen.setMaximumSize(new Dimension(140,350));
@@ -419,40 +421,15 @@ public class Level{
 		 *  go through every single tile at every row and column
 		 * 
 		 */
-		for(int TileRow = 0; TileRow <y;TileRow++){
-			for(int TileCol = 0; TileCol <x;TileCol++){
-				
-				// create a new tile
-				PuzzleTile AddedTile = new PuzzleTile(pen, TileCol,TileRow, 9999);
-				
-				// the new tile will be empty (white)
-				AddedTile.setBackground(Color.WHITE);
-
-				// set border around tile (white border)
-				AddedTile.setBorder(penTileBorder);
-				
-				// add tile to boardArray
-				penArray[TileCol][TileRow] = AddedTile;
+		for(int TileRow = 0; TileRow < 14;TileRow++){
+			for(int TileCol = 0; TileCol < 35;TileCol++){
+				Tile AddedTile = pen.getBoardArray()[TileRow][TileCol] ;
 				pen.add(AddedTile);
 			}
 		}
-		pen.makeBoard(penArray, x, y, 2);
-
 		
-		pen.selectedPiece=null;
-		pen.init=(true);
-		//pen.addHex(penArray[2][2], 1, allhex.getHexList().get(2));
-		//pen.init=(false);
 		
-		// add two pieces
-		int pos = BoardBoss.bullPenPosition;
-		ArrayList <Hexomino> hexList = allhex.getHexominos(12,5,7,8,20);
-		for (int i = 0; i<hexList.size(); i++){
-			pen.addHex(penArray[pen.returnWidth()/2][i*6+1], i, hexList.get(i));
-		}
-		// end filling bullpen with pieces
-		BoardBoss.bullPenPosition+=1;
-		pen.init=false;
+		
 		JPanel panel = new JPanel();
 		panel.setPreferredSize(new Dimension(100,50));
 		panel.setMaximumSize(new Dimension(100,50));
