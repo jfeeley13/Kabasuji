@@ -121,50 +121,15 @@ public class Board extends BoardBoss{
 	 * 	over tiles
 	 */
 	public void drawHex(Tile tile, int posx, int posy, Color c) {
-		int widthOver=0;
-		int heightOver=0;
 		
-		int lastX=0;
-		for(int i=0; i<6; i++) {
-			int y=0;
-			int x=0;
-			x=selectedPiece.shape[i].row+posx;
-			try {
-				Tile testTile = boardArray[x][y];
-			} catch (Exception e) {
-				if(x!=lastX) {
-					if((tile.getCoords()[0]<width/2-1))
-						widthOver-=1;
-					else
-						widthOver+=1;
-				}
-				lastX=x;
-				}
-		}
-		int lastY=0;
-		for(int i=0; i<6; i++) {
-			int y=0;
-			int x=0;
-
-			y=selectedPiece.shape[i].column+posy;
-			
-
-			try {
-				Tile testTile = boardArray[x][y];
-			} catch (Exception e) {
-				if(y>lastY)
-					heightOver+=1;
-				lastY=y;
-				}
-		}
 		
 		for(int i=0; i<6;i++){
 
 			int x = 0;
 			int y = 0;
 			switch(rotated) {
-			case 1:	x=selectedPiece.shape[i].row+posx-widthOver;
-					y=selectedPiece.shape[i].column+posy-heightOver;
+			case 1:	x=selectedPiece.shape[i].column+posx;
+					y=selectedPiece.shape[i].row+posy;
 					break;
 			case 2:	x=selectedPiece.shape[i].column+posx;
 					y=selectedPiece.shape[i].row+posy;
