@@ -31,8 +31,24 @@ public class FlipController implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		tile=MListener.datboi;
-		if(num==1) BoardBoss.flipped=1;
-		else if (num==2) BoardBoss.flipped=2;
+		if(num==1) {
+			if(BoardBoss.flipped==1) 
+				BoardBoss.flipped=2;
+			else if(BoardBoss.flipped==4)
+				BoardBoss.flipped=5;
+			else
+				BoardBoss.flipped=1;
+
+		}
+		else if (num==2) {
+			if(BoardBoss.flipped==4)
+				BoardBoss.flipped=3;
+			else if(BoardBoss.flipped==4 && BoardBoss.flipped==1 || BoardBoss.flipped==2)
+				BoardBoss.flipped=5;
+			else
+				BoardBoss.flipped=4;
+			
+		}
 		this.tile.getBoard().refresh();
 		this.tile.getBoard().drawHex(tile, 1, 1, Color.GREEN);
 		/*//this.tile.getBoard().

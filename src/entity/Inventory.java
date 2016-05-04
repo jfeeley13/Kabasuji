@@ -184,9 +184,16 @@ public class Inventory extends BoardBoss{
 						columns = columns;
 						break;
 				case 2: rows = rows * -1;
-						//columns = columns*-1;
+						break;
+				case 3: columns = columns;
+						break;
+				case 4: columns = columns*-1;
+						break;
+				case 5: rows = rows * -1;
+						columns = columns*-1;
 						break;
 				}
+				
 				switch(rotated) {
 				case 1:	x=rows+orgX-widthOver;
 						y=columns+orgY-heightOver;
