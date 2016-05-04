@@ -538,7 +538,7 @@ public class Level{
 
 				if (gameType == "Puzzle Level"){
 					starPArray[levelID]="    \u2605";					//put current score in star array to be read by level selection screen
-					if(starPArray[levelID+1] == null){
+					if(starPArray[levelID+1] == null  ){
 						starPArray[levelID+1]="   ";	
 					}
 				}
