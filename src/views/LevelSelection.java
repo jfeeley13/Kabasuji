@@ -112,7 +112,7 @@ public class LevelSelection {
 		
 		//In a loop of 5 load arrays buttons/labels
 		String star, starL,starR;
-		for(int i=0;i<=5;i++){
+		for(int i=0;i<5;i++){
 			star = Level.starPArray[i];
 
 			final int level=i+1;
@@ -217,9 +217,10 @@ public class LevelSelection {
 			if(Releasestars[i].getText()!="locked"){
 				Releasebuttons[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						AllLevels allLevels = new AllLevels();
-						allLevels.initializeReleaseLevels();
-						//Level nw = new Level( allLevels.getReleaseLevel(level));
+						//AllLevels allLevels = new AllLevels();
+						//allLevels.initializeReleaseLevels();
+						Level nw = new Level( level, "Release Level");
+						frame.dispose();
 						Level.openLevel("Release Level" ,level);
 					}
 				});

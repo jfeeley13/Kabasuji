@@ -115,6 +115,11 @@ public class Level{
 			allLevels.initializeLightningLevels(level);
 			Level.level = allLevels.getLightningLevel(level);
 		}
+		if(type=="Release Level") {
+			AllLevels allLevels = new AllLevels();
+			allLevels.initializeReleaseLevels(level);
+			Level.level = allLevels.getReleaseLevel(level);
+		}
 		initialize();
 		try {
 			gameControllers.LevelTimer.main(this);

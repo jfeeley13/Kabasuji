@@ -1,5 +1,6 @@
 package entity;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 public class AllLevels {
@@ -151,19 +152,39 @@ public class AllLevels {
 		if(i==4) initializeLightningFour();
 		if(i==5) initializeLightningFive();
 	}
+	public void initializeReleaseOne() {
+		Level l = new Level(1);
+		AllHex allHex =new AllHex();
+		ArrayList <Hexomino> hexList = allHex.getHexominos(0,0,0,0,0,0);
+		l.setSolutionPieces(hexList);
+		l.initializeBoard("Release Level", 6, 6);
+		l.board.boardArray[2][3].addSetNum(1, Color.RED);
+		l.setMoves(20);
+		l.initializeBullPen();
+		
+		release[1] = l;
+	}
 	
-	public void initializeReleaseLevels(){
-		for(int i=0; i < 5; i++){
-			Level l = new Level(i);
-			AllHex allHex =new AllHex();
-			ArrayList <Hexomino> hexList = allHex.getHexominos(12,5,7,8,20);
-			l.setSolutionPieces(hexList);
-			l.initializeBoard("Release Level", 10, 10);
-			l.setMoves(20);
-			l.initializeBullPen();
+	public void initializeReleaseTwo() {
+		Level l = new Level(2);
+		AllHex allHex =new AllHex();
+		ArrayList <Hexomino> hexList = allHex.getHexominos(0,0,0,0,0,0);
+		l.setSolutionPieces(hexList);
+		l.initializeBoard("Release Level", 6, 6);
+		l.setMoves(20);
+		l.initializeBullPen();
+		
+		release[2] = l;
+	}
+	
+	public void initializeReleaseLevels(int i){
+		if(i==1) initializeReleaseOne();
+		if(i==2) initializeReleaseTwo();
+		//if(i==3) initializeLightningThree();
+		//if(i==4) initializeLightningFour();
+		//if(i==5) initializeLightningFive();
 			
-			release[i] = l;
-		}
+
 	}
 	
 	public Level getPuzzleLevel(int id){
