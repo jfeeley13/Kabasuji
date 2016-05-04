@@ -219,7 +219,7 @@ public class Board extends BoardBoss{
 	 * 	both placed and lifted
 	 * 
 	 */
-	public void redraw() {
+	public void redraw() {/**
 		for(int j=0; j<rows; j++) 
 			for(int k=0; k<cols; k++) 
 				if(boardArray[j][k].tileID<1000) {
@@ -229,7 +229,7 @@ public class Board extends BoardBoss{
 					else {
 						boardArray[j][k].setHighlight(false);
 					}
-				}
+				}*/
 
 	}
 	
