@@ -25,7 +25,7 @@ public class AllLevels {
 
 		Level l = new Level(2);
 		AllHex allHex =new AllHex();
-		ArrayList <Hexomino> hexList = allHex.getHexominos(0,0,0,0,0,0);
+		ArrayList <Hexomino> hexList = allHex.getHexominos(11,11,11,11,11,11);
 		l.setSolutionPieces(hexList);
 		l.initializeBoard("Puzzle Level", 6, 6);
 		l.setMoves(20);
@@ -38,7 +38,7 @@ public class AllLevels {
 		
 		Level l = new Level(3);
 		AllHex allHex =new AllHex();
-		ArrayList <Hexomino> hexList = allHex.getHexominos(0,0,0,0,0,0);
+		ArrayList <Hexomino> hexList = allHex.getHexominos(11,11,11,0,0,0);
 		l.setSolutionPieces(hexList);
 		l.initializeBoard("Puzzle Level", 6, 6);
 		l.setMoves(20);
