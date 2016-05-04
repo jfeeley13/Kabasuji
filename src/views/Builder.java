@@ -65,6 +65,7 @@ public class Builder extends JFrame{
 	int moves;
 	int row = 6;
 	int col = 6;
+	JButton btnSave;
 	int boardTileWidth = 32; //Pixels
 	int boardTileHeight = 32;
 	AllHex allhex = new AllHex();
@@ -233,7 +234,7 @@ public class Builder extends JFrame{
 
 		
 		
-		JButton btnSave = new JButton("Save");
+		 btnSave = new JButton("Save");
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				LevelBuilder.getLevel().setLvlID(6);						//levelID starts at 6
