@@ -10,6 +10,9 @@ public class AllLevels {
 	Level[] custom = new Level[60];
 
 	int xy=0;
+	/**
+	 * Initialize levels
+	 */
 	public void initializePuzzleOne(){
 
 	
@@ -320,6 +323,16 @@ public class AllLevels {
 
 	}
 	
+	/**
+	 * initialize custom level with all its attributes
+	 * @param ID
+	 * @param string
+	 * @param moves
+	 * @param timer
+	 * @param boardWidth
+	 * @param boardHeight
+	 * @param board
+	 */
 	public void initializeCustomLevel(int ID, String string, int moves, int timer,  int boardWidth, int boardHeight, Board board){
 
 		Level l = new Level(ID);
@@ -342,6 +355,11 @@ public class AllLevels {
 		}
 	}
 	
+	/**
+	 * get saved levels
+	 * @param id
+	 * @return
+	 */
 	public Level getPuzzleLevel(int id){
 		return puzzle[id];
 	}

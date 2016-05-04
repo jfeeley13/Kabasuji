@@ -137,14 +137,29 @@ public class AllHex {
 		hexList.add(h34);
 		hexList.add(h35);
 		}
+	
+	/**
+	 * return list of all hexominos
+	 * @return
+	 */
 	public ArrayList<Hexomino> getHexList() {
 		return hexList;
 	}
 	
+	/**
+	 * get hexomino of id
+	 * @param id
+	 * @return
+	 */
 	public Hexomino getHex(int id){
 		return hexList.get(id);
 	}
 	
+	/**
+	 * get hexominos of hexNums values
+	 * @param hexNums
+	 * @return
+	 */
 	public ArrayList<Hexomino> getHexominos(int ... hexNums){
 		 ArrayList <Hexomino> hexList = new ArrayList <Hexomino>();
 		 for (int i = 0; i < hexNums.length; i++){

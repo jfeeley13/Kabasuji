@@ -7,6 +7,11 @@ public class HexTile extends Tile{
 		super(board, row, column, tileID);
 	}
 	
+	/**
+	 * change location of hextile
+	 * @param newRow
+	 * @param newCol
+	 */
 	public void changeLocation(int newRow, int newCol){
 		row = newRow;
 		column = newCol;

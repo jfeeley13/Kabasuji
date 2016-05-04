@@ -48,7 +48,9 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 		this.lastTileID = tile.getTileID();
 
 	}
-	
+	/**
+	 * Handles mouse click
+	 */
 	@Override
 	public void mousePressed(MouseEvent e) {
 		
@@ -128,6 +130,9 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 		//}
 	}
 	
+	/**
+	 * generate unique tile identifier
+	 */
 	private void generateRandom() {
 		randint = r.nextInt(993)+7;
 		if(!ids.contains(randint)) ids.add(randint);
@@ -175,6 +180,10 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 	public void mouseWheelMoved(MouseWheelEvent e) {
 	}
 	
+	
+	/**
+	 * handle mouse move event
+	 */
     public void mouseMoved(MouseEvent e) {
   
 

@@ -30,7 +30,11 @@ import views.Level;
 public class LevelTimer{
 	static Timer timer;
 	
-	
+	/**
+	 * start timer for level level
+	 * @param level
+	 * @throws Exception
+	 */
 	public static void main(final Level level) throws Exception{
         ActionListener taskPerformer = new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
