@@ -113,7 +113,8 @@ public class Board extends BoardBoss{
 	 * 	over tiles
 	 */
 	public void drawHex(Tile tile, int posx, int posy, Color c) {
-
+		int orgX =0;
+		int orgY =0;
 		int widthOver=0;
 		int heightOver=0;
 		if(!tile.isValid()) return;
@@ -138,6 +139,7 @@ public class Board extends BoardBoss{
 		for(int i=0; i<6; i++) {
 			int y=0;
 			int x=0;
+			
 
 			y=selectedPiece.shape[i].column+posy;
 			
@@ -153,20 +155,38 @@ public class Board extends BoardBoss{
 		
 		for(int i=0; i<6;i++){
 
+			int rows = selectedPiece.shape[i].row;
+			int columns = selectedPiece.shape[i].column;
 			int x = 0;
 			int y = 0;
+			
+			switch(flipped) {
+			case 1: rows = rows;
+					columns = columns;
+					break;
+			case 2: rows = rows * -1;
+					break;
+			case 3: columns = columns;
+					break;
+			case 4: columns = columns*-1;
+					break;
+			case 5: rows = rows * -1;
+					columns = columns*-1;
+					break;
+			}
+			
 			switch(rotated) {
-			case 1:	x=selectedPiece.shape[i].column+posx;
-					y=selectedPiece.shape[i].row+posy;
+			case 1:	x=rows+orgX-widthOver;
+					y=columns+orgY-heightOver;
 					break;
-			case 2:	x=selectedPiece.shape[i].column+posx;
-					y=selectedPiece.shape[i].row+posy;
+			case 2:	x=columns+orgX;
+					y=rows+orgY;
 					break;
-			case 3:	x=selectedPiece.shape[i].row;
-					y=posy-selectedPiece.shape[5-i].column;
+			case 3:	x=orgX-rows;
+					y=orgY-selectedPiece.shape[5-i].column;
 					break;
-			case 4:	x=posx-selectedPiece.shape[i].column;
-					y=selectedPiece.shape[i].row+posy;
+			case 4:	x=orgX-columns;
+					y=rows+orgY;
 					break;
 			}
 			
