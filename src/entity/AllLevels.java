@@ -13,8 +13,8 @@ public class AllLevels {
 			AllHex allHex =new AllHex();
 			ArrayList <Hexomino> hexList = allHex.getHexominos(12,5,7,8,20);
 			l.setSolutionPieces(hexList);
-			l.initializeBoard("Lightning Level", 10, 10);
-			l.setTimer(20);
+			l.initializeBoard("Puzzle Level", 9, 9);
+			l.setMoves(20);
 			l.initializeBullPen();
 			
 			puzzle[i] = l;
@@ -22,7 +22,44 @@ public class AllLevels {
 		}
 	}
 	
+	public void initializeLightningLevels(){
+		for(int i=0; i < 5; i++){
+			Level l = new Level(i);
+			AllHex allHex =new AllHex();
+			ArrayList <Hexomino> hexList = allHex.getHexominos(12,5,7,8,20);
+			l.setSolutionPieces(hexList);
+			l.initializeBoard("Lightning Level", 8, 8);
+			l.setTimer(20);
+			l.initializeBullPen();
+			
+			lightning[i] = l;
+			
+		}
+	}
+	
+	public void initializeReleaseLevels(){
+		for(int i=0; i < 5; i++){
+			Level l = new Level(i);
+			AllHex allHex =new AllHex();
+			ArrayList <Hexomino> hexList = allHex.getHexominos(12,5,7,8,20);
+			l.setSolutionPieces(hexList);
+			l.initializeBoard("Release Level", 10, 10);
+			l.setMoves(20);
+			l.initializeBullPen();
+			
+			release[i] = l;
+		}
+	}
+	
 	public Level getPuzzleLevel(int id){
 		return puzzle[id];
+	}
+	
+	public Level getLightningLevel(int id){
+		return lightning[id];
+	}
+	
+	public Level getReleaseLevel(int id){
+		return release[id];
 	}
 }
