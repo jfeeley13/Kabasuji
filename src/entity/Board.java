@@ -3,6 +3,7 @@ package entity;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 import gameControllers.MListener;
@@ -91,8 +92,9 @@ public class Board extends BoardBoss{
 		int x=tile.getCoords()[0];
 		int y=tile.getCoords()[1];
 
+		if(!boardArray[x][y].canPickUp()) return false;
 
-		if(boardArray[x][y].canPickUp()==true && selectedPiece==null){
+		if(boardArray[x][y].isCovered() && selectedPiece==null){
 			tileID = boardArray[x][y].getTileID();
 			//System.out.println(tileID);
 			System.out.println("Selected Piece!");
@@ -189,9 +191,13 @@ public class Board extends BoardBoss{
 					if(boardArray[x][y].checkValid()){
 						if(!boardArray[x][y].isCovered())
 							boardArray[x][y].setBackground(c);
-						else boardArray[x][y].setBackground(Color.red);
-					}else boardArray[x][y].setBackground(Color.red);
-
+						else{
+							boardArray[x][y].setBackground(Color.red);
+							boardArray[x][y].setBorder(BorderFactory.createLineBorder(Color.red, 1));
+						}
+					}else{ boardArray[x][y].setBackground(Color.red);
+					boardArray[x][y].setBorder(BorderFactory.createLineBorder(Color.red, 1));
+					}
 					
 				} catch(NullPointerException e) {
 				}
@@ -225,6 +231,7 @@ public class Board extends BoardBoss{
 				}
 				if((!boardArray[j][k].checkValid())){
 					boardArray[j][k].setBackground(Color.decode("#4169aa"));
+					boardArray[j][k].setBorder(BorderFactory.createLineBorder(Color.decode("#4169aa"), 1));
 				}
 			}
 	}

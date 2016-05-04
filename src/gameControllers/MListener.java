@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import javax.swing.BorderFactory;
 import javax.swing.event.MouseInputAdapter;
 
 import entity.AllHex;
@@ -150,13 +151,17 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		System.out.println(e.getButton() == 3);
 		if(e.getButton() == 3){
 			this.tile.toggleTile();
 			if(this.tile.checkValid() && (!this.tile.isCovered() || !this.tile.checkMark())){
 				this.tile.setBackground(Color.WHITE);
-			}else if(!this.tile.checkValid())
+				this.tile.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+			}else if(!this.tile.checkValid()){
 //				System.out.println("IS NOW INVALID");
 				this.tile.setBackground(Color.decode("#4169aa"));
+				this.tile.setBorder(BorderFactory.createLineBorder(Color.decode("#4169aa"), 1));
+			}
 		}
 	}
 
