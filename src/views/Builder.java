@@ -135,6 +135,7 @@ public class Builder extends JFrame{
 	 */
 	private void initialize() {
 		//frame = new JFrame();
+		BoardBoss.isBuilder=true;
 		lvlBuild = new LevelBuilder();
 		entity.Level newlvl = new entity.Level(6);
 		LevelBuilder.setLevel(newlvl);

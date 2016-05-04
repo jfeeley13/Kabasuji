@@ -115,9 +115,16 @@ public class Board extends BoardBoss{
 	public void drawHex(Tile tile, int posx, int posy, Color c) {
 		
 		for(int i=0; i<6;i++){
-
-			int rows = selectedPiece.shape[i].row+posy;
-			int columns = selectedPiece.shape[i].column+posx;
+			int rows = 0;
+			int columns = 0;
+			if(!BoardBoss.isBuilder) {
+				rows = selectedPiece.shape[i].row+posy;
+				columns = selectedPiece.shape[i].column+posx;
+			}
+			else {
+				rows = selectedPiece.shape[i].column+posy;
+				columns = selectedPiece.shape[i].row+posx;
+			}
 			int x = columns;
 			int y = rows;
 			/**
