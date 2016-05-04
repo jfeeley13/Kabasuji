@@ -74,12 +74,11 @@ public class Builder extends JFrame{
 	private JFrame frame;
 	int crossHeight = 348;
 	JTextField txtGame;
-	private JTextField textField;
-	private JTextField textField_1;
 	JButton RotateCW_btn,RotateCCW_btn ,VertFlip_btn,HorFlip_btn, btnNewButton_1,btnR ,btnNewButton,btnR_1;
-	static String gameType;
+	static String gameType, name;
 	private int gameTimer = 0;
 	private int moveCounter = 0;
+	int moves;
 	int row = 6;
 	int col = 6;
 	int boardTileWidth = 32; //Pixels
@@ -136,10 +135,12 @@ public class Builder extends JFrame{
 	/**
 	 * Create the application.
 	 */
-	public Builder(String type, int rows, int cols) {
+	public Builder(String type, int rows, int cols, String names, int movess) {
 		gameType = type;
+		name =names;
 		row = rows;
 		col = cols;
+		moves=movess;
 		this.setLocationRelativeTo(null);
 		initialize();
 	}
@@ -260,14 +261,12 @@ public class Builder extends JFrame{
 				else{
 					moveCounter = Integer.parseInt("0"+timerORMoveTextField.getText());
 				}
-				System.out.println(timerORMoveTextField.getText());
 				LevelBuilder.getLevel().setTimer(gameTimer);
 				LevelBuilder.getLevel().setMoves(moveCounter);
-
 				System.out.println("level builder level id "+LevelBuilder.getLevel().getLvlID());
 				System.out.println("level builder level name "+LevelBuilder.getLevel().getName());	
-				System.out.println("level builder level moves "+ LevelBuilder.getLevel().getTimer());	
-				System.out.println("level builder level timer "+LevelBuilder.getLevel().getMoves());	
+				System.out.println("level builder level timer "+ LevelBuilder.getLevel().getTimer());	
+				System.out.println("level builder level moves "+LevelBuilder.getLevel().getMoves());	
 
 				new SaveController(LevelBuilder.getLevel(), txtGame.getText()).save();	
 			}
@@ -282,7 +281,14 @@ public class Builder extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				row = (Integer) RowSpinner.getValue();
 				col = (Integer) ColSpinner.getValue();
-				new LevelBuilderController(Builder.this).process(levelComboBox.getSelectedItem().toString(), row, col);	
+				if (gameType == "Lightning Level"){
+					gameTimer = Integer.parseInt("0"+timerORMoveTextField.getText());
+					new LevelBuilderController(Builder.this).process(levelComboBox.getSelectedItem().toString(), row, col, name, gameTimer);	
+				}
+				else{
+					moveCounter = Integer.parseInt("0"+timerORMoveTextField.getText());
+					new LevelBuilderController(Builder.this).process(levelComboBox.getSelectedItem().toString(), row, col, name, moveCounter);	
+				}
 			}
 		});
 		
@@ -312,7 +318,16 @@ public class Builder extends JFrame{
 		JButton btnChangeLevel = new JButton("New Level");
 		btnChangeLevel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new LevelBuilderController(Builder.this).process(levelComboBox.getSelectedItem().toString(), row, col);	
+				row = (Integer) RowSpinner.getValue();
+				col = (Integer) ColSpinner.getValue();
+				if (gameType == "Lightning Level"){
+					gameTimer = Integer.parseInt("0"+timerORMoveTextField.getText());
+					new LevelBuilderController(Builder.this).process(levelComboBox.getSelectedItem().toString(), row, col, name, gameTimer);	
+				}
+				else{
+					moveCounter = Integer.parseInt("0"+timerORMoveTextField.getText());
+					new LevelBuilderController(Builder.this).process(levelComboBox.getSelectedItem().toString(), row, col, name, moveCounter);	
+				}	
 			}
 		});
 		
@@ -472,7 +487,7 @@ public class Builder extends JFrame{
 		
 		JPanel panel_2 = new JPanel();
 		inventory_scrollPane.setRowHeaderView(panel_2);
-		panel_2.setPreferredSize(new Dimension(60, 50));
+		panel_2.setPreferredSize(new Dimension(80, 50));
 		panel_2.setLayout(new GridLayout(2, 2, 0, 0));
 		
 		RotateCW_btn = new JButton("\u21BB");
@@ -514,9 +529,33 @@ public class Builder extends JFrame{
 		toolBar.add(lblLevelName);
 		
 		txtGame = new JTextField();
-		txtGame.setText("game1");
+		txtGame.setText(name);
 		toolBar.add(txtGame);
 		txtGame.setColumns(10);
+		txtGame.getDocument().addDocumentListener(new DocumentListener() {
+			  public void warn() {
+				 name=txtGame.getText();
+			  }
+
+			@Override
+			public void changedUpdate(DocumentEvent arg0) {
+				name=txtGame.getText();
+				 
+				  System.out.println("2 "+name);
+				
+			}
+
+			@Override
+			public void insertUpdate(DocumentEvent arg0) {
+				name=txtGame.getText();
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		
 		JLabel label_1 = new JLabel("                ");
 		toolBar.add(label_1);
@@ -529,30 +568,28 @@ public class Builder extends JFrame{
 		else{
 			lblTimer.setText("  Moves:");
 		}
-		
-		
-		textField = new JTextField();
-		textField.setText("00");
-		toolBar.add(textField);
-		textField.setColumns(10);
-		
-		JLabel label = new JLabel(":");
-		toolBar.add(label);
-		if (gameType == "Lightning Level"){
+		/*if (gameType == "Lightning Level"){
 			label.setVisible(true);
 		}
 		else{
 			label.setVisible(false);
 		}
+		if (gameType == "Lightning Level"){
+			textField_1.setVisible(true);
+		}
+		else{
+			textField_1.setVisible(false);
+		}*/
 		
 		timerORMoveTextField = new JTextField();
-		timerORMoveTextField.setText("00");
+		timerORMoveTextField.setText(""+moves);
 		toolBar.add(timerORMoveTextField);
 		timerORMoveTextField.setColumns(10);
 		
 		// Listen for changes in the text
 		timerORMoveTextField.getDocument().addDocumentListener(new DocumentListener() {
 		  public void warn() {
+
 			  //0 is put in to handle nullPointerException, 0 is ignored if actual number is inputed
 		     if (Integer.parseInt("0"+timerORMoveTextField.getText()) != 0){
 		 		if (gameType == "Lightning Level"){
@@ -581,22 +618,12 @@ public class Builder extends JFrame{
 		  }
 		});
 		
-		textField_1 = new JTextField();
-		textField_1.setText("00");
-		toolBar.add(textField_1);
-		textField_1.setColumns(10);
-		if (gameType == "Lightning Level"){
-			textField_1.setVisible(true);
-		}
-		else{
-			textField_1.setVisible(false);
-		}
-		
-		JLabel label_2 = new JLabel("                                      ");
-		toolBar.add(label_2);
 		
 		JLabel lblLevelBuilder = new JLabel("     ");
 		String title = gameType + (" Builder");
+		
+		JLabel label_2 = new JLabel("                                 ");
+		toolBar.add(label_2);
 		
 		lblLevelBuilder.setText(title);
 		
@@ -623,9 +650,12 @@ public class Builder extends JFrame{
 		 *  @param y COLUMNS
 		 *  
 		 */
+		board.setLayout(new GridLayout(col,row));
 
-		board.setLayout(new GridLayout(y,x));
+		//board.setLayout(new GridLayout(y,x));
 		board.setPreferredSize(new Dimension(col*boardTileWidth,row*boardTileHeight));
+		board.setMaximumSize(new Dimension(col*boardTileWidth,row*boardTileHeight));
+		board.setMinimumSize(new Dimension(col*boardTileWidth,row*boardTileHeight));
 
 		//board.setPreferredSize(new Dimension(384,384));
 		//board.setMinimumSize(new Dimension(384,384));
@@ -637,13 +667,13 @@ public class Builder extends JFrame{
 		 * 
 		 */
 		
-		Tile boardArray[][] = new Tile[x][y];
+		Tile boardArray[][] = new Tile[row][col];
 		board.setBackground(Color.decode("#4169aa"));
 		Border BoardTileBorder = BorderFactory.createLineBorder(Color.BLACK, 1);
 
 		
-		for(int TileRow = 0; TileRow <y;TileRow++){
-			for(int TileCol = 0; TileCol <x;TileCol++){
+		for(int TileRow = 0; TileRow <col;TileRow++){
+			for(int TileCol = 0; TileCol <row;TileCol++){
 				
 				PuzzleTile AddedTile = new PuzzleTile(board, TileCol,TileRow, 9999);
 
@@ -656,7 +686,7 @@ public class Builder extends JFrame{
 			}
 		}
 
-		board.makeBoard(boardArray, x, y, 1);
+		board.makeBoard(boardArray, row, col, 1);
 		
 		
 		/**
@@ -755,7 +785,7 @@ public class Builder extends JFrame{
 		BoardBoss.penPieces = 1;
 	
 		
-		x = 240;
+		x = 400;
 		y = 10;
 				
 		Inventory.setPreferredSize(new Dimension(4000, 100));
@@ -763,7 +793,7 @@ public class Builder extends JFrame{
 		//Inventory.setMaximumSize(new Dimension(140, 410));
 		
 		Inventory.setLayout(new GridLayout(y, x));
-		//Tile invArray[][] = new Tile[x][y];
+		Tile invArray[][] = new Tile[x][y];
 		
 
 
@@ -821,7 +851,7 @@ public class Builder extends JFrame{
 	
 	public void rotateFlip(Tile tiles){
 		Tile datboi=tiles;
-		System.out.println("ROTATE FLIP ");
+		//System.out.println("ROTATE FLIP ");
 
 		
 		/*rotate controllers get current selected piece in bullpen

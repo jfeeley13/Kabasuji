@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import entity.BoardBoss;
 import entity.Tile;
 import views.Builder;
 import views.Level;
@@ -29,49 +30,27 @@ public class FlipController implements ActionListener{
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		/*//this.tile.getBoard().
-		if(num==1)//If VFlip
-			//dir = -1;
-			
-			tile.
-		for (int TileNum = 0; TileNum >= 5; TileNum++){
-				int currRow = shape[TileNum].getCoords()[0];
-				int currCol = shape[TileNum].getCoords()[1];
-				shape[TileNum].changeLocation(dir*(-1)*currRow, dir*currCol);
-			}
-		
-		
-		 * 
-		 * 
-		 * 
-		tile = MListener.datboi;
-		if(num==1){
-		this.tile.getBoard().rotated = (this.tile.getBoard().rotated % 4) + 1;
-		   if(this.tile.getBoard().rotateCheck(this.tile)) {
-			   this.tile.getBoard().refresh();
-			   this.tile.getBoard().drawHex(this.tile, 1, 1, Color.GREEN);
-		   }
-		   else {
-			   this.tile.getBoard().rotated = (this.tile.getBoard().rotated % 4) - 1;
-		   }
+		tile=MListener.datboi;
+		if(num==1) {
+			if(BoardBoss.flipped==1) 
+				BoardBoss.flipped=2;
+			else if(BoardBoss.flipped==4)
+				BoardBoss.flipped=5;
+			else
+				BoardBoss.flipped=1;
+
 		}
- 
- 
-	    else {
-		   this.tile.getBoard().rotated = (this.tile.getBoard().rotated % 4) - 1;
-		   if(this.tile.getBoard().rotated<=0) this.tile.getBoard().rotated+=4;
-		   if(this.tile.getBoard().rotateCheck(this.tile)) {
-		   
-			   this.tile.getBoard().refresh();
-			   this.tile.getBoard().drawHex(this.tile, 1, 1, Color.GREEN);
-		   }
-		   else {
-			   if(this.tile.getBoard().rotated==4) 
-				   this.tile.getBoard().rotated-=3;
-			   else
-				   this.tile.getBoard().rotated = (this.tile.getBoard().rotated % 4) + 1;
-		   }
-	   }*/
+		else if (num==2) {
+			if(BoardBoss.flipped==4)
+				BoardBoss.flipped=3;
+			else if(BoardBoss.flipped==4 && BoardBoss.flipped==1 || BoardBoss.flipped==2)
+				BoardBoss.flipped=5;
+			else
+				BoardBoss.flipped=4;
+			
+		}
+		this.tile.getBoard().refresh();
+		this.tile.getBoard().drawHex(tile, 1, 1, Color.GREEN);
 		
 	}
 }

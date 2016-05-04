@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 
 import gameControllers.MListener;
+import views.Level;
 
 import java.awt.Color;
 import java.awt.Point;
@@ -14,7 +15,6 @@ import java.util.ArrayList;
 
 public class Inventory extends BoardBoss{
 	
-
 	private static final long serialVersionUID = 1L;
 	public Tile boardArray[][];
 	int width;
@@ -52,8 +52,19 @@ public class Inventory extends BoardBoss{
 	
 		boolean isOverPiece = false;
 		liftHex(tile, hex);
-		
-		
+		if(BoardBoss.rotated != 1){
+			clearPen();
+			BoardBoss.rotated=1;
+			refillInventory();
+			return false; 
+		}
+		if(BoardBoss.flipped!=1) {
+			clearPen();
+			BoardBoss.flipped=1;
+			refillInventory();
+			selectedPiece=null;
+			return false;
+		}
 		
 		if(selectedPiece==null && !(init || refill)) return false;
 		
@@ -61,8 +72,11 @@ public class Inventory extends BoardBoss{
 		if(init || refill){
 			
 			for(int i=0; i<6;i++){
+				
 				int x=hex.shape[i].row+tile.getCoords()[0];
 				int y=hex.shape[i].column+tile.getCoords()[1];
+				
+				if(i==0) boardArray[x][y].isOrigin=true;
 
 				boardArray[x][y].coverTile();
 				boardArray[x][y].setBackground(Color.BLUE);
@@ -81,9 +95,9 @@ public class Inventory extends BoardBoss{
 				for(int i=0; i<width; i++) 
 					for(int j=0; j<height; j++) {
 						if(boardArray[i][j].getBackground()==Color.GREEN) {
-							boardArray[i][j].setBackground(Color.WHITE);
+							boardArray[i][j].setBackground(Color.BLUE);
 						
-							boardArray[i][j].setBorder(whiteBorder);
+							boardArray[i][j].setBorder(selectBorder);
 							boardArray[i][j].isHighlight=false;
 						
 						}
@@ -111,7 +125,7 @@ public class Inventory extends BoardBoss{
 				//System.out.println(tileID);
 				System.out.println("Selected Piece!");
 				for(int j=0; j<width; j++) 
-					for(int k=0; k<height; k++) 
+					for(int k=0; k<height; k++){ 
 						/*if(boardArray[j][k].tileID==tileID) {
 							boardArray[j][k].isCovered = false;
 							boardArray[j][k].setTileID(tileID+1000);
@@ -119,8 +133,8 @@ public class Inventory extends BoardBoss{
 							boardArray[j][k].setBorder(whiteBorder);
 						}
 						*/
-						boardArray[j][k].setBorder(whiteBorder);
-
+//						boardArray[j][k].setBorder(whiteBorder);
+					}
 				selectedPiece = hex;
 				lifted = false;
 				penPiece = false;
@@ -142,11 +156,67 @@ public class Inventory extends BoardBoss{
 	 * 	over tiles
 	 */
 	public void drawHex(Tile tile, int posx, int posy, Color c) {
-
+		if(selectedPiece==null) return;
 		int widthOver=0;
 		int heightOver=0;
-		
-
+		tileID = tile.getTileID();
+		int orgX =0;
+		int orgY =0;
+		int setX=0;
+		int setY=0;
+		for(int i=0; i<width;i++)
+			for(int j=0; j<height;j++) {
+				if(boardArray[i][j].getTileID()==tileID && boardArray[i][j].isOrigin) {
+					orgX=i;
+					orgY=j;
+//					System.out.println("Origin = (" + orgX +"," + orgY +")" );
+				}
+			}
+		for(int i=0;i<6;i++) {
+				
+				int rows = selectedPiece.shape[i].row;
+				int columns = selectedPiece.shape[i].column;
+				int x = 0;
+				int y = 0;
+				switch(flipped) {
+				case 1: rows = rows;
+						columns = columns;
+						break;
+				case 2: rows = rows * -1;
+						break;
+				case 3: columns = columns;
+						break;
+				case 4: columns = columns*-1;
+						break;
+				case 5: rows = rows * -1;
+						columns = columns*-1;
+						break;
+				}
+				
+				switch(rotated) {
+				case 1:	x=rows+orgX-widthOver;
+						y=columns+orgY-heightOver;
+						break;
+				case 2:	x=columns+orgX;
+						y=rows+orgY;
+						break;
+				case 3:	x=orgX-rows;
+						y=orgY-selectedPiece.shape[5-i].column;
+						break;
+				case 4:	x=orgX-columns;
+						y=rows+orgY;
+						break;
+				}
+				
+				//if(boardArray[x][y].getTileID()==tileID && boardArray[x][y].getTileID()<1000) {
+					boardArray[x][y].setHighlight(true);
+					boardArray[x][y].setBackground(c);
+					boardArray[x][y].setBorder(selectBorder);
+				//}
+					
+					
+			}
+		/*
 		for(int i=0; i<6;i++){
 			int x = 0;
 			int y = 0;
@@ -164,6 +234,7 @@ public class Inventory extends BoardBoss{
 					y=selectedPiece.shape[i].row+posy-widthOver;
 					break;
 			}
+			/*
 			switch(flipped) {
 			case 1:	x=selectedPiece.shape[i].row+posx*-1;
 					y=selectedPiece.shape[i].column+posy-heightOver;
@@ -178,30 +249,27 @@ public class Inventory extends BoardBoss{
 					y=selectedPiece.shape[i].row+posy-widthOver;
 					break;
 			}
-
-
-
+			
+			
 			try {
 				boardArray[x][y].setHighlight(true);
 			
 			
 			try {
-				
-				//if(boardArray[x][y].isCovered) {
+				if(boardArray[x][y].isCovered) {
 					boardArray[x][y].setTileID(1000);
 					
-				//}
-				boardArray[x][y].setBorder(selectBorder);
+				}
+				
 				boardArray[x][y].setBackground(c);
 				
 				
 			} catch(Exception e) {
-
-
 			}
 			} catch (Exception e) {};
-
-		}	
+			
+		}*/
+	
 
 	}
 	
@@ -221,8 +289,8 @@ public class Inventory extends BoardBoss{
 					boardArray[j][k].setBorder(whiteBorder);
 					boardArray[j][k].setBackground(Color.WHITE);
 			}
-			if(boardArray[j][k].isCovered) {
-				boardArray[j][k].setBackground(Color.BLUE);
+			if(boardArray[j][k].isCovered && boardArray[j][k].getTileID()== tileID && boardArray[j][k].getBorder() ==  whiteBorder) {
+				boardArray[j][k].setBackground(Color.WHITE);
 			}
 		}
 	}
@@ -251,7 +319,7 @@ public class Inventory extends BoardBoss{
 	}
 	
 	public int getID() {
-		return boardID;
+		return 4;
 	}
 	
 	public boolean rotateCheck(Tile tile) {
@@ -320,6 +388,14 @@ public class Inventory extends BoardBoss{
 				boardArray[i][j].setBackground(Color.WHITE);
 				boardArray[i][j].setBorder(whiteBorder);
 			}
+	}
+	
+	public void refillInventory() {
+		refill=true;
+		for(int i=1;i<34;i++){
+			addHex(boardArray[i*7][10], i, Level.allhex.getHexList().get(i-1));
+		}
+		refill=false;
 	}
 
 }

@@ -12,6 +12,7 @@ public abstract class Tile extends JPanel{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	public boolean isOrigin;
 	protected int row;
 	protected int column;
 	protected boolean isCovered = false;

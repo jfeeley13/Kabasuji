@@ -30,8 +30,9 @@ public class RotateController implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		tile = MListener.datboi;
-		System.out.println("!!!! tile "+tile);
-
+		//System.out.println("!!!! tile "+tile);
+		System.out.println("TILE NULL =" +this.tile == null);
+		
 		if(num==1){
 		this.tile.getBoard().rotated = (this.tile.getBoard().rotated % 4) + 1;
 		   if(this.tile.getBoard().rotateCheck(this.tile)) {

@@ -107,4 +107,11 @@ public abstract class BoardBoss extends JPanel{
 		return;
 	}
 
+
+
+	public void refillInventory() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

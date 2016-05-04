@@ -90,10 +90,13 @@ public class Level {
 	public void addPiecesToSolution(Hexomino hex){
 		solutionPieces.add(hex);
 	}
-	
+	AllHex hexList = new AllHex();
+
 	public String toString(){
-		return lvlID + "/n" + starsAcheived + "/n" + solutionPieces.toString() 
+		starsAcheived=3;
+		return lvlID + System.getProperty("line.separator") + starsAcheived + System.getProperty("line.separator") //+ solutionPieces.toString() 
 				+ " Board \n" + board.toString();
+		
 	}
 
 	public int getLvlID() {

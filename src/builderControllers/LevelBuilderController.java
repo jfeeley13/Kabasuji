@@ -10,12 +10,12 @@ public class LevelBuilderController  {
 		parent = builder;
 	}
 	
-	public void process(String level, int row, int col) {
+	public void process(String level, int row, int col, String name, int moveCounter) {
 		
 		parent.setVisible(false);
 		parent.dispose();
-		
-		Builder newBuilderWindow = new Builder(level, row, col);
+		System.out.println(level+ row+ col+ name+ moveCounter);
+		Builder newBuilderWindow = new Builder(level, row, col, name, moveCounter);
 		 
 		 //frame.dispose();													//closes current window
 		// newBuilderWindow.openBuildWindow();

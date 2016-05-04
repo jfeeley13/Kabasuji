@@ -48,11 +48,8 @@ public class Board extends BoardBoss{
 	 */
 	
 	public boolean addHex(Tile tile, int tileID, Hexomino hex){
-
-	
 		boolean isOverPiece = false;
 		boolean allTilesEmpty=liftHex(tile, hex);
-		
 		
 		System.out.println("1");
 		if(selectedPiece==null && !init) return false;
@@ -172,7 +169,7 @@ public class Board extends BoardBoss{
 			case 2:	x=selectedPiece.shape[i].column+posx;
 					y=selectedPiece.shape[i].row+posy;
 					break;
-			case 3:	x=selectedPiece.shape[i].row+posx;
+			case 3:	x=selectedPiece.shape[i].row;
 					y=posy-selectedPiece.shape[5-i].column;
 					break;
 			case 4:	x=posx-selectedPiece.shape[i].column;
@@ -209,7 +206,6 @@ public class Board extends BoardBoss{
 	 * 	clear any potential paint artifacts)
 	 */
 	public void refresh() {
-
 		for(int j=0; j<cols; j++) 
 			for(int k=0; k<rows; k++) {
 				if(boardArray[j][k].isHighlight ) {
@@ -254,9 +250,9 @@ public class Board extends BoardBoss{
 	}
 	public int getGreenTiles() {
 		 		int greenBois=0;
-		 		for(int i=0;i<cols;i++)
-		 			for(int j=0;j<rows;j++)
-		 				if(boardArray[i][j].getBackground()==Color.GREEN) greenBois+=1;
+		 	//	for(int i=0;i<cols;i++)
+		 	//		for(int j=0;j<rows;j++)
+		 	//			if(boardArray[i][j].getBackground()==Color.GREEN) greenBois+=1;
 		 		return greenBois;
 		 	}
 	
@@ -269,7 +265,6 @@ public class Board extends BoardBoss{
 		for(int i = 0; i < rows; i++){
 			for(Tile t : boardArray[i]){
 				if(!t.hasWon()) {
-					
 					return true;
 				}
 			}
@@ -298,10 +293,10 @@ public class Board extends BoardBoss{
 				k=(k+1)%3;
 			}
 	}
-	public void setBoard(Tile[][] board) {
- 		boardArray=board.clone();
- 		return;
- 	}
+	//public void setBoard(Tile[][] board) {
+ 	//	boardArray=board.clone();
+ 	//	return;
+ 	//}
 	
 	/**
 	 * Resizes the field boardArray in Board class
@@ -372,7 +367,6 @@ public class Board extends BoardBoss{
 	public void fillBoard(String type){
 		int row = 0; 
 		int col =0;
-		
 		
 		for(int i = 0; i < rows; i++){
 			for(int j =0; j < cols; j++){

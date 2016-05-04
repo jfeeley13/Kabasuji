@@ -15,10 +15,8 @@ public class CreateNewLevelController {
 		parent.setVisible(false);
 		parent.dispose();
 		
-		Builder newBuilderWindow = new Builder("Puzzle Level", 6, 6);
-		 
-		 //frame.dispose();													//closes current window
-		// newBuilderWindow.openBuildWindow();
+		Builder newBuilderWindow = new Builder("Puzzle Level", 6, 6, "game1", 00);
+
 		newBuilderWindow.setVisible(true);
 	}
 }

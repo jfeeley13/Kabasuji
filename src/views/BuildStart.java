@@ -73,7 +73,7 @@ public class BuildStart extends JFrame {
 		btnPlay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				new CreateNewLevelController(BuildStart.this).process();
-				 Builder newBuilderWindow = new Builder("Puzzle Level", 6, 6);
+				// Builder newBuilderWindow = new Builder("Puzzle Level", 6, 6, "game1", 00);
 
 				 //frame.dispose();													//closes current window
 				 //newBuilderWindow.openBuildWindow("Puzzle Level", 6, 6);			//default puzzle with 6x6 board
