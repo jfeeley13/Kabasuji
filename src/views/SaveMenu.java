@@ -3,7 +3,10 @@ package views;
 import gameControllers.QuitController;
 import builderControllers.SaveController;
 import entity.LevelBuilder;
+
 import java.awt.Color;
+import java.awt.Event;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -47,7 +50,10 @@ public class SaveMenu extends JFrame {
 		JButton btnSave = new JButton("Save");
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new SaveController(LevelBuilder.getLevel(), parentView.txtGame.getText()).save();	
+				Event evt = null;
+				//ActionEvent f = new ActionEvent(parentView.btnSave,1234,"CommandToPeform");
+				Object what = null;
+				parentView.btnSave.action(evt, what);
 			}
 		});
 		

@@ -11,6 +11,7 @@ To open Game Player run SplashScreen.java as Java application
 	Stars and moves on the top will update
 	Quit button on the bottom right will go back to level selection screen.
 	Levels will only be unlocked once the previous level has achieved 1 star status.
+	
 
 To open Game Builder run BuilderSplashScreen.java as Java application
 	Select Create Level
@@ -18,3 +19,8 @@ To open Game Builder run BuilderSplashScreen.java as Java application
 	Change levelType in the drop down menu and press create level to create a new level of that type
 	Change board size through the board spinners and press create to  a new level of that board size
 	Select Piece in the Inventory and move to place in the board or bullpen.
+	Create the name of your custom level in the top namefield "game1".
+	Save your game with the right save button. You can exit through the exit button. 
+	You can now write the name of your custom level to load it up. 
+	Select load level.
+	A level view with all your custom level preferences should appear.
