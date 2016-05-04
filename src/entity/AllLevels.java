@@ -20,7 +20,6 @@ public class AllLevels {
 		l.initializeBoard("Puzzle Level", 6, 6);
 		l.setMoves(20);
 		l.initializeBullPen();
-			
 		puzzle[1] = l;		
 	}
 	
@@ -33,7 +32,6 @@ public class AllLevels {
 		l.initializeBoard("Puzzle Level", 6, 6);
 		l.setMoves(20);
 		l.initializeBullPen();
-			
 		puzzle[2] = l;		
 	}
 	public void initializePuzzleThree(){
@@ -46,7 +44,6 @@ public class AllLevels {
 		l.initializeBoard("Puzzle Level", 6, 6);
 		l.setMoves(20);
 		l.initializeBullPen();
-			
 		puzzle[3] = l;		
 	}
 	public void initializePuzzleFour(){
@@ -189,29 +186,29 @@ public class AllLevels {
 	public void initializeReleaseTwo() {
 		Level l = new Level(2);
 		AllHex allHex =new AllHex();
-		ArrayList <Hexomino> hexList = allHex.getHexominos(0,0,0,0,0,0);
+		ArrayList <Hexomino> hexList = allHex.getHexominos(0,0,0,0,0,0,0,0,0,0,0,0);
 		l.setSolutionPieces(hexList);
-		l.initializeBoard("Release Level", 6, 6);
-		l.board.boardArray[1][1].addSetNum(1, Color.PINK);
-		l.board.boardArray[1][2].addSetNum(2, Color.PINK);
-		l.board.boardArray[1][3].addSetNum(3, Color.PINK);
-		l.board.boardArray[1][4].addSetNum(4, Color.PINK);
-		l.board.boardArray[1][5].addSetNum(5, Color.PINK);
-		l.board.boardArray[2][1].addSetNum(6, Color.PINK);
+		l.initializeBoard("Release Level", 12, 12);
+		l.board.boardArray[0][0].addSetNum(1, Color.PINK);
+		l.board.boardArray[0][2].addSetNum(2, Color.PINK);
+		l.board.boardArray[0][4].addSetNum(3, Color.PINK);
+		l.board.boardArray[0][6].addSetNum(4, Color.PINK);
+		l.board.boardArray[0][8].addSetNum(5, Color.PINK);
+		l.board.boardArray[0][10].addSetNum(6, Color.PINK);
 		
-		l.board.boardArray[2][2].addSetNum(1, Color.ORANGE);
-		l.board.boardArray[2][3].addSetNum(2, Color.ORANGE);
-		l.board.boardArray[2][4].addSetNum(3, Color.ORANGE);
-		l.board.boardArray[2][5].addSetNum(4, Color.ORANGE);
-		l.board.boardArray[3][1].addSetNum(5, Color.ORANGE);
-		l.board.boardArray[3][2].addSetNum(6, Color.ORANGE);
+		l.board.boardArray[4][0].addSetNum(1, Color.ORANGE);
+		l.board.boardArray[4][2].addSetNum(2, Color.ORANGE);
+		l.board.boardArray[4][4].addSetNum(3, Color.ORANGE);
+		l.board.boardArray[4][6].addSetNum(4, Color.ORANGE);
+		l.board.boardArray[4][8].addSetNum(5, Color.ORANGE);
+		l.board.boardArray[4][10].addSetNum(6, Color.ORANGE);
 		
-		l.board.boardArray[3][3].addSetNum(1, Color.GREEN);
-		l.board.boardArray[3][4].addSetNum(2, Color.GREEN);
-		l.board.boardArray[3][5].addSetNum(3, Color.GREEN);
-		l.board.boardArray[4][1].addSetNum(4, Color.GREEN);
-		l.board.boardArray[4][2].addSetNum(5, Color.GREEN);
-		l.board.boardArray[4][3].addSetNum(6, Color.GREEN);
+		l.board.boardArray[8][0].addSetNum(1, Color.GREEN);
+		l.board.boardArray[8][2].addSetNum(2, Color.GREEN);
+		l.board.boardArray[8][4].addSetNum(3, Color.GREEN);
+		l.board.boardArray[8][6].addSetNum(4, Color.GREEN);
+		l.board.boardArray[8][8].addSetNum(5, Color.GREEN);
+		l.board.boardArray[8][10].addSetNum(6, Color.GREEN);
 		l.setMoves(20);
 		l.initializeBullPen();
 		

@@ -12,6 +12,7 @@ import java.awt.Color;
 import entity.AllHex;
 import entity.AllLevels;
 import entity.Board;
+import entity.BoardBoss;
 import entity.BoardPen;
 import entity.BullPen;
 import entity.PuzzleTile;
@@ -68,6 +69,7 @@ public class Level{
 	 * @param lblNewLabel 
 	 */
 	public static void openLevel(String type, int  num) {
+		BoardBoss.isBuilder=false;
 		gameType = type;
 
 		if(type=="Lightning Level"){

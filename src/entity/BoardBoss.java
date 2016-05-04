@@ -32,6 +32,7 @@ public abstract class BoardBoss extends JPanel{
 	public static HashMap pieceList = new HashMap();
 	public static int penPieces = 0;
 	public static int bullPenPosition=0;
+	public static boolean isBuilder=false;
 
 	
 	/** Board Creation method 
