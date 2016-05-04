@@ -7,22 +7,39 @@ public class AllLevels {
 	Level[] lightning = new Level[5];
 	Level[] release = new Level[5];
 	int xy=0;
-	public void initializePuzzleLevels(){
-		for(int i=0; i < 5; i++){
-			if(i==1) xy=6;
-			if(i==2) xy=12;
-			Level l = new Level(i);
-			AllHex allHex =new AllHex();
-			ArrayList <Hexomino> hexList = allHex.getHexominos(0,0,0,0,0,0);
-			l.setSolutionPieces(hexList);
-			l.initializeBoard("Puzzle Level", xy, xy);
-			l.setMoves(20);
-			l.initializeBullPen();
+	public void initializePuzzleOne(){
+
+	
+		Level l = new Level(1);
+		AllHex allHex =new AllHex();
+		ArrayList <Hexomino> hexList = allHex.getHexominos(0,0,0,0,0,0);
+		l.setSolutionPieces(hexList);
+		l.initializeBoard("Puzzle Level", 6, 6);
+		l.setMoves(20);
+		l.initializeBullPen();
 			
-			puzzle[i] = l;
-			
-		}
+		puzzle[1] = l;		
 	}
+	
+	public void initializePuzzleTwo(){
+
+		
+		Level l = new Level(2);
+		AllHex allHex =new AllHex();
+		ArrayList <Hexomino> hexList = allHex.getHexominos(1,2,3,4,5,6);
+		l.setSolutionPieces(hexList);
+		l.initializeBoard("Puzzle Level", 12, 12);
+		l.setMoves(20);
+		l.initializeBullPen();
+			
+		puzzle[2] = l;		
+	}
+	
+	public void initializePuzzleLevels() {
+		
+	}
+	
+	
 	
 	public void initializeLightningLevels(){
 		for(int i=0; i < 5; i++){
