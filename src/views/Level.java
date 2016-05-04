@@ -143,9 +143,11 @@ public class Level{
 	 * Create the application.
 	 */
 	public Level(int level ,String type) {
-		AllLevels allLevels = new AllLevels();
-		allLevels.initializePuzzleLevels(level);
-		Level.level = allLevels.getPuzzleLevel(level);
+		if(type=="Puzzle Level") {
+			AllLevels allLevels = new AllLevels();
+			allLevels.initializePuzzleLevels(level);
+			Level.level = allLevels.getPuzzleLevel(level);
+		}
 		initialize();
 		try {
 			gameControllers.LevelTimer.main(this);
