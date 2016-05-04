@@ -106,6 +106,7 @@ public class Level{
 	 */
 	public Level(int level ,String type) {
 		if(type=="Puzzle Level") {
+			System.out.println("AAAAAAAAAAA" +level);
 			AllLevels allLevels = new AllLevels();
 			allLevels.initializePuzzleLevels(level);
 			Level.level = allLevels.getPuzzleLevel(level);
