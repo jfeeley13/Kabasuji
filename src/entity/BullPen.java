@@ -75,7 +75,9 @@ public class BullPen extends BoardBoss{
 		}
 		else {
 			if(selectedPiece!=null && lifted && !penPiece) {
+				entity.Level.solutionPieces.add(selectedPiece);
 				selectedPiece=null;
+				
 				for(int i=0; i<rows; i++) 
 					for(int j=0; j<cols; j++) {
 						if(boardArray[i][j].getBackground()==Color.GREEN) {

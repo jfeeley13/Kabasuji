@@ -1,18 +1,13 @@
 package gameControllers;
 
 import java.awt.Color;
-import java.awt.MouseInfo;
-import java.awt.Point;
-import java.awt.PointerInfo;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Random;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.swing.event.MouseInputAdapter;
 
