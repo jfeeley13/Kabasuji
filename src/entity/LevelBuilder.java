@@ -119,7 +119,5 @@ public class LevelBuilder{
 	public static void setLevel(Level level) {
 		LevelBuilder.level = level;
 	}
-	
-	
 }
 

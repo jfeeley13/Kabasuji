@@ -59,12 +59,14 @@ public class Board extends BoardBoss{
 		if(selectedPiece!=null & lifted) {
 			for(int i=0; i<rows; i++) 
 				for(int j=0; j<cols; j++) 
-					if((boardArray[i][j].getBackground()==Color.GREEN && boardArray[i][j].isCovered) || !boardArray[i][j].isValid())
+					if((boardArray[i][j].getBackground()==Color.GREEN || boardArray[i][j].getBackground()==Color.RED)&& (boardArray[i][j].isCovered||!boardArray[i][j].checkValid())){
 						return false;
+					}
+
 
 			for(int i=0; i<rows; i++) 
 				for(int j=0; j<cols; j++) {
-					if(boardArray[i][j].getBackground()==Color.GREEN && !boardArray[i][j].isCovered) {
+					if(boardArray[i][j].getBackground()==Color.GREEN && !boardArray[i][j].isCovered && boardArray[i][j].checkValid()) {
 						boardArray[i][j].coverTile();
 						boardArray[i][j].setBackground(Color.BLUE);
 						boardArray[i][j].isHighlight=false;
@@ -90,8 +92,7 @@ public class Board extends BoardBoss{
 		int y=tile.getCoords()[1];
 
 
-
-		if(boardArray[x][y].isCovered()==true && selectedPiece==null){
+		if(boardArray[x][y].canPickUp()==true && selectedPiece==null){
 			tileID = boardArray[x][y].getTileID();
 			//System.out.println(tileID);
 			System.out.println("Selected Piece!");
@@ -103,7 +104,6 @@ public class Board extends BoardBoss{
 						boardArray[j][k].isCovered = false;
 						boardArray[j][k].setBackground(Color.WHITE);
 						boardArray[j][k].setTileID(tileID+1000);
-
 					}
 
 			selectedPiece = hex;
@@ -124,7 +124,7 @@ public class Board extends BoardBoss{
 	public void drawHex(Tile tile, int posx, int posy, Color c) {
 		int widthOver=0;
 		int heightOver=0;
-		if(!tile.isValid()) return;
+		if(!tile.checkValid()) return;
 		int lastX=0;
 		for(int i=0; i<6; i++) {
 			int y=0;
@@ -183,13 +183,17 @@ public class Board extends BoardBoss{
 
 
 				try {
-					if(!boardArray[x][y].isCovered) {
+					if(!boardArray[x][y].isCovered()) {
 						boardArray[x][y].setTileID(1000);					
 					}
-					boardArray[x][y].setBackground(c);
+					if(boardArray[x][y].checkValid()){
+						if(!boardArray[x][y].isCovered())
+							boardArray[x][y].setBackground(c);
+						else boardArray[x][y].setBackground(Color.red);
+					}else boardArray[x][y].setBackground(Color.red);
 
+					
 				} catch(NullPointerException e) {
-
 				}
 			} catch(Exception e) {};
 
@@ -210,7 +214,7 @@ public class Board extends BoardBoss{
 
 		for(int j=0; j<cols; j++) 
 			for(int k=0; k<rows; k++) {
-				if(boardArray[j][k].isHighlight ) {
+				if(boardArray[j][k].isHighlight) {
 					boardArray[j][k].setBackground(Color.WHITE);
 				}
 				if(boardArray[j][k].isCovered){
@@ -219,7 +223,7 @@ public class Board extends BoardBoss{
 				if(boardArray[j][k].checkMark()){
 					boardArray[j][k].setBackground(Color.BLUE);
 				}
-				if(!boardArray[j][k].isValid()){
+				if((!boardArray[j][k].checkValid())){
 					boardArray[j][k].setBackground(Color.decode("#4169aa"));
 				}
 			}
@@ -294,8 +298,8 @@ public class Board extends BoardBoss{
 		colorList[1] = Color.RED;
 		colorList[2] = Color.BLUE;
 		for(int i=0; i<width; i++) 
-			for(int j=0; j<height; j++) {
-				boardArray[j][i].setBackground(colorList[1]);
+			for(int j=0; j<rows; j++) {
+				boardArray[j][i].setBackground(colorList[j%3]);
 				k=(k+1)%3;
 			}
 	}

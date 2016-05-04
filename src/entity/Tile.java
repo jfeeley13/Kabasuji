@@ -133,6 +133,9 @@ public abstract class Tile extends JPanel{
 		this.column = column;
 	}
 	
+	public boolean canPickUp(){
+		return false;
+	}
 	
 }
 

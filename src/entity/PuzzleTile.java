@@ -17,4 +17,8 @@ public class PuzzleTile extends Tile{
 	}
 	
 	
+	public boolean canPickUp(){
+		return true;
+	}
+	
 }

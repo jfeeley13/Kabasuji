@@ -155,6 +155,7 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 			if(this.tile.checkValid() && (!this.tile.isCovered() || !this.tile.checkMark())){
 				this.tile.setBackground(Color.WHITE);
 			}else if(!this.tile.checkValid())
+//				System.out.println("IS NOW INVALID");
 				this.tile.setBackground(Color.decode("#4169aa"));
 		}
 	}
@@ -177,7 +178,6 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
     		int tileID= this.tile.getTileID();
     		
     		this.tile.getBoard().refresh();
-    		
     		this.tile.getBoard().drawHex(this.tile, x, y, Color.GREEN);
     		savedBoardState=tile.getBoard().returnBoard();
 			greenbois=tile.getBoard().getGreenTiles();
