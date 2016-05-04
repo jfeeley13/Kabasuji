@@ -31,6 +31,9 @@ public class LevelBuilder{
 		return level.initializeBoard(this.type,rows,cols);
 	}
 	
+	public BullPen NewLevelBullPen(){
+		return level.initializeBullPen();
+	}
 	/**
 	 * 
 	 * @param color set color
