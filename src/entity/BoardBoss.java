@@ -1,14 +1,10 @@
 package entity;
 
-import java.util.List;
-
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
 import java.awt.Color;
-import java.awt.Point;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public abstract class BoardBoss extends JPanel{

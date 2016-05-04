@@ -4,8 +4,6 @@ import builderControllers.CreateNewLevelController;
 import builderControllers.LoadController;
 
 import java.awt.Color;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -18,7 +16,6 @@ import java.awt.event.ActionEvent;
 import java.awt.Font;
 
 import javax.swing.JToolBar;
-import javax.swing.UIManager;
 
 
 public class BuildStart extends JFrame {

@@ -7,7 +7,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import entity.AllHex;
 import entity.Board;
 import entity.Hexomino;
 import entity.Level;

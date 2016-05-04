@@ -3,24 +3,16 @@ package views;
 import java.awt.Color;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
-import javax.swing.UIManager;
 import javax.swing.JLabel;
-import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
 import java.awt.Font;
-import java.util.concurrent.TimeUnit;
 import javax.swing.JTextPane;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.Timer;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.Timer;
 public class SplashScreen {
 
 	private JFrame frame;

@@ -1,12 +1,6 @@
 package entity;
 
-import java.util.List;
-
-import javax.swing.JPanel;
-
 import java.awt.Color;
-import java.awt.Point;
-import java.util.ArrayList;
 
 public class BoardPen extends BoardBoss{
 	

@@ -1,18 +1,9 @@
 package entity;
 
-import java.util.HashMap;
-import java.util.List;
-
 import javax.swing.BorderFactory;
-import javax.swing.JPanel;
-
-import gameControllers.MListener;
-import views.GameOver;
 import views.YouWin;
 
 import java.awt.Color;
-import java.awt.Point;
-import java.util.ArrayList;
 
 public class Board extends BoardBoss{
 	

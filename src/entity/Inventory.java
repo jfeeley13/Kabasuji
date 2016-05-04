@@ -1,17 +1,8 @@
 package entity;
 
-import java.util.List;
-
-import javax.swing.BorderFactory;
-import javax.swing.JPanel;
-import javax.swing.border.Border;
-
-import gameControllers.MListener;
 import views.Level;
 
 import java.awt.Color;
-import java.awt.Point;
-import java.util.ArrayList;
 
 public class Inventory extends BoardBoss{
 	

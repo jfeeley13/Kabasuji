@@ -2,71 +2,36 @@ package views;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.border.LineBorder;
-
 import java.awt.Color;
-import java.awt.Container;
-
-import javax.swing.table.DefaultTableModel;
-
 import entity.AllHex;
 import entity.AllLevels;
 import entity.Board;
-import entity.BoardBoss;
 import entity.BoardPen;
 import entity.BullPen;
-import entity.HexTile;
-import entity.Hexomino;
-import entity.LightningTile;
 import entity.PuzzleTile;
-import entity.ReleaseTile;
 import entity.Tile;
-import gameControllers.MListener;
-
 import javax.swing.JToolBar;
 import javax.swing.JLabel;
-import javax.swing.JTextPane;
-import javax.swing.UIManager;
-import javax.swing.JFormattedTextField;
 import javax.swing.JButton;
 
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-import javax.swing.JRadioButton;
-import javax.swing.JTextField;
 import javax.swing.JScrollPane;
-import javax.swing.JProgressBar;
-import javax.swing.border.MatteBorder;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
-import javax.swing.border.EtchedBorder;
-import javax.swing.JToggleButton;
-import javax.swing.JSplitPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 import java.awt.event.KeyEvent;
-import java.awt.Panel;
-import java.util.ArrayList;
-
-import javax.swing.JScrollBar;
 import javax.swing.ScrollPaneConstants;
 
 
@@ -81,22 +46,19 @@ public class Level{
 	static int timeVar = 25;
 	static JLabel label;
 	public static AllHex allhex = new AllHex();
-	public static String starPArray[] = new String[6];
+	public static  String starPArray[] = new String[6];
 	public static String starLArray[] = new String[6];
 	public static String starRArray[] = new String[6];
-	JLabel stars;
+	static JLabel stars, stars2;
 	static JLabel starLabel;
 	private int rowA,rowB,rowC = 0;
 	private boolean aFlag,bFlag, cFlag = false;
 	public static int levelTime;
 	static entity.Level level;
-	static int rows;
-	static int cols;
+	static int rows,cols;
 	static Board board;
-	static int penX;
-	static int penY;
-	static int boardX;
-	static int boardY;
+	static int penX,penY,boardX, boardY;
+	JToolBar toolBar;
 	
 
 	/**
@@ -178,7 +140,7 @@ public class Level{
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JToolBar toolBar = new JToolBar();
+		 toolBar = new JToolBar();
 		toolBar.setEnabled(false);
 		toolBar.setFloatable(false);
 		Color myToolbarColor = Color.decode("#4b89d0");
@@ -311,8 +273,13 @@ public class Level{
 		toolBar.add(lblLvlNum);
 		
 		//stars is \u2605
-		stars = new JLabel("         ");
+		stars = new JLabel("    ");
+		stars2 = new JLabel("");
+		toolBar.add(stars2);		
+
 		stars.setForeground(Color.YELLOW);
+		stars.setSize(stars.getPreferredSize());
+		stars.setLocation(50, 20);
 		toolBar.add(stars);		
 		
 		
@@ -322,6 +289,7 @@ public class Level{
 		JLabel movesLbl = new JLabel(" ");
 		movesLbl.setFont(new Font("Lucida Grande", Font.ITALIC, 13));
 		toolBar.add(movesLbl);
+
 
 		if (gameType == "Lightning Level"){
 			movesLbl.setText("Timer:");
@@ -362,7 +330,8 @@ public class Level{
 		 */
 		
 		
-		
+		//board.setLayout(new GridLayout(6,6));
+
 		board.setLayout(new GridLayout(Level.rows,Level.cols));
 		board.setPreferredSize(new Dimension(Level.rows * 32,Level.cols*32));
 		board.setMinimumSize(new Dimension(Level.rows * 32,Level.cols*32));
@@ -559,10 +528,12 @@ public class Level{
 					}
 				}
 			}
-		
+			
 			//1 star if 12 tiles uncovered (2 pieces)
 			if(covered==all-12){
-				stars.setText("    \u2605");				
+				
+				stars.setText("    \u2605");					
+
 				if (gameType == "Puzzle Level"){
 					starPArray[levelID]="    \u2605";					//put current score in star array to be read by level selection screen
 					if(starPArray[levelID+1] == null){
@@ -610,6 +581,7 @@ public class Level{
 					starRArray[levelID]="    \u2605\u2605\u2605";
 				}
 			}
+
 		}
 	 else if(gameType == "Release Level"){
 		int checkRowA = 0;

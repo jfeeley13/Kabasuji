@@ -2,8 +2,6 @@ package entity;
 
 import java.util.ArrayList;
 
-import javax.swing.plaf.basic.BasicScrollPaneUI.HSBChangeListener;
-
 public class AllHex {
 
 

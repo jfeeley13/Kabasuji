@@ -2,7 +2,6 @@ package entity;
 
 import java.util.ArrayList;
 
-import javax.swing.Box.Filler;
 
 public class Level {
 	
@@ -165,13 +164,5 @@ public class Level {
 		return moves;
 	}
 
-
-
-
-	
-	
-	
-	
-	
 }
 

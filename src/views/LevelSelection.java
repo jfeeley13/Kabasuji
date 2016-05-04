@@ -17,7 +17,6 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 import java.awt.Font;
 
-import javax.swing.UIManager;
 
 import java.awt.GridLayout;
 
@@ -69,7 +68,7 @@ public class LevelSelection {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		
+
 		frame = new JFrame();
 		Color myColor = Color.decode("#4b89d0");
 		frame.getContentPane().setBackground(myColor); //frame.getContentPane().setBackground(UIManager.getColor("ComboBox.selectionBackground"));
@@ -112,7 +111,10 @@ public class LevelSelection {
 		});
 		
 		//In a loop of 5 load arrays buttons/labels
+		String star, starL,starR;
 		for(int i=0;i<5;i++){
+			star = Level.starPArray[i];
+
 			final int level=i+1;
 			Puzzlestars[i] = new JLabel(" ");
 			Puzzlestars[i].setHorizontalAlignment(SwingConstants.CENTER);
@@ -122,7 +124,8 @@ public class LevelSelection {
 			panel_2.add(Puzzlestars[i]);
 			
 			//check level star array for current score
-			Puzzlestars[i].setText(Level.starPArray[level]);
+			Puzzlestars[i].setText(star);
+			
 			
 			//if no score label locked
 			if (Puzzlestars[i].getText()==(null)){
@@ -150,6 +153,7 @@ public class LevelSelection {
 					}
 				});
 			}
+			
 
 
 			Lightningstars[i]= new JLabel("locked ");
@@ -159,8 +163,9 @@ public class LevelSelection {
 			panel.add(Lightningbuttons[i]);
 			panel.add(Lightningstars[i]);
 			
-			Lightningstars[i].setText(Level.starLArray[level]);
-			if (Lightningstars[i].getText()==(null)){
+			starL = Level.starLArray[i];
+			Lightningstars[i].setText(starL);
+			if (starL==(null)){
 				if (level==1){
 					Lightningstars[i].setText(" ");
 				}
@@ -192,8 +197,9 @@ public class LevelSelection {
 			panel_1.add(Releasestars[i]);
 			
 			
-			Releasestars[i].setText(Level.starRArray[level]);
-			if (Releasestars[i].getText()==(null)){
+			starR= Level.starRArray[i];
+			Releasestars[i].setText(starR);
+			if (starR==(null)){
 				if (level==1){
 					Releasestars[i].setText(" ");
 				}
