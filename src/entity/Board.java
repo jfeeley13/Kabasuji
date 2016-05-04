@@ -113,52 +113,14 @@ public class Board extends BoardBoss{
 	 * 	over tiles
 	 */
 	public void drawHex(Tile tile, int posx, int posy, Color c) {
-		int orgX =0;
-		int orgY =0;
-		int widthOver=0;
-		int heightOver=0;
-		if(!tile.isValid()) return;
-		int lastX=0;
-		for(int i=0; i<6; i++) {
-			int y=0;
-			int x=0;
-			x=selectedPiece.shape[i].column+posx;
-			try {
-				Tile testTile = boardArray[x][y];
-			} catch (Exception e) {
-				if(x!=lastX) {
-					if((tile.getCoords()[0]<width/2-1))
-						widthOver-=1;
-					else
-						widthOver+=1;
-				}
-				lastX=x;
-				}
-		}
-		int lastY=0;
-		for(int i=0; i<6; i++) {
-			int y=0;
-			int x=0;
-			
-			y=selectedPiece.shape[i].row+posy;
-			
-
-			try {
-				Tile testTile = boardArray[x][y];
-			} catch (Exception e) {
-				if(y>lastY)
-					heightOver+=1;
-				lastY=y;
-				}
-		}
 		
 		for(int i=0; i<6;i++){
 
-			int rows = selectedPiece.shape[i].row;
-			int columns = selectedPiece.shape[i].column;
-			int x = 0;
-			int y = 0;
-			
+			int rows = selectedPiece.shape[i].row+posy;
+			int columns = selectedPiece.shape[i].column+posx;
+			int x = columns;
+			int y = rows;
+			/**
 			switch(flipped) {
 			case 1: rows = rows;
 					columns = columns;
@@ -188,7 +150,7 @@ public class Board extends BoardBoss{
 					y=rows+orgY;
 					break;
 			}
-			
+			*/
 			try{
 				boardArray[x][y].setHighlight(true);
 			

@@ -2,16 +2,13 @@ package views;
 
 import java.awt.Dimension;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
-
 import java.awt.Color;
-
 import entity.AllHex;
 import entity.AllLevels;
 import entity.Board;
@@ -19,10 +16,6 @@ import entity.BoardPen;
 import entity.BullPen;
 import entity.PuzzleTile;
 import entity.Tile;
-import gameControllers.FlipController;
-import gameControllers.MListener;
-import gameControllers.RotateController;
-
 import javax.swing.JToolBar;
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -39,7 +32,6 @@ import javax.swing.SwingConstants;
 
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
-
 import javax.swing.ScrollPaneConstants;
 
 
@@ -67,8 +59,6 @@ public class Level{
 	static Board board;
 	static int penX,penY,boardX, boardY;
 	JToolBar toolBar;
-	JButton RotateCW_btn,RotateCCW_btn ,VertFlip_btn,HorFlip_btn, btnNewButton_1,btnR ,btnNewButton,btnR_1;
-
 	
 
 	/**
@@ -124,6 +114,11 @@ public class Level{
 			AllLevels allLevels = new AllLevels();
 			allLevels.initializeLightningLevels(level);
 			Level.level = allLevels.getLightningLevel(level);
+		}
+		if(type=="Release Level") {
+			AllLevels allLevels = new AllLevels();
+			allLevels.initializeReleaseLevels(level);
+			Level.level = allLevels.getReleaseLevel(level);
 		}
 		initialize();
 		try {
@@ -191,8 +186,15 @@ public class Level{
 		JButton rotateButton = new JButton("\u21BB");
 		rotateButton.setPreferredSize(new Dimension(50, 20));
 		
+
+
+		
 		JButton flipButton = new JButton("\u21C4");
 		flipButton.setPreferredSize(new Dimension(50, 20));	
+		
+		
+		
+		
 		
 		JLabel lblBoard = new JLabel("Board");
 		JPanel releasePanel = new JPanel();
@@ -422,16 +424,20 @@ public class Level{
 		bullpen_scrollPane.setColumnHeaderView(panel);
 		panel.setLayout(new GridLayout(2, 2, 0, 0));
 		
-		 RotateCW_btn = new JButton("\u21BB");
+		JButton RotateCW_btn = new JButton("\u21BB");
 		panel.add(RotateCW_btn);
 		
-		 RotateCCW_btn = new JButton("\u21BA");
+		JButton RotateCCW_btn = new JButton("\u21BA");
+		RotateCCW_btn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		panel.add(RotateCCW_btn);
 		
-		 HorFlip_btn = new JButton("\u21C4");
+		JButton HorFlip_btn = new JButton("\u21C4");
 		panel.add(HorFlip_btn);
 		
-		 VertFlip_btn = new JButton("\u21C5");
+		JButton VertFlip_btn = new JButton("\u21C5");
 		panel.add(VertFlip_btn);
 		
 		
@@ -488,16 +494,6 @@ public class Level{
 
 	}
 	
-	public void rotateFlip(Tile tiles){
-		Tile datboi=tiles;
-		
-		//datboi is current selected tile
-			RotateCW_btn.addActionListener(new RotateController(MListener.datboi, 1));
-			RotateCCW_btn.addActionListener(new RotateController( MListener.datboi, 2));
-			VertFlip_btn.addActionListener(new FlipController(MListener.datboi, 1));	
-			HorFlip_btn.addActionListener(new FlipController(MListener.datboi, 2));	
-	}
-	
 	/**
 	 *  Updates UI elements such as moves left and timer
 	 * 
@@ -550,19 +546,19 @@ public class Level{
 
 				if (gameType == "Puzzle Level"){
 					starPArray[levelID]="    \u2605";					//put current score in star array to be read by level selection screen
-					if(starPArray[levelID+1] == null && levelID !=5 ){
+					if(starPArray[levelID+1] == null  ){
 						starPArray[levelID+1]="   ";	
 					}
 				}
 				else if (gameType == "Lightning Level"){
 					starLArray[levelID]="    \u2605";
-					if(starLArray[levelID+1] == null && levelID !=5){
+					if(starLArray[levelID+1] == null){
 						starLArray[levelID+1]="   ";	
 					}
 				}
 				else{
 					starRArray[levelID]="    \u2605";
-					if(starRArray[levelID+1] == null && levelID !=5){
+					if(starRArray[levelID+1] == null){
 						starRArray[levelID+1]="   ";	
 					}
 				}

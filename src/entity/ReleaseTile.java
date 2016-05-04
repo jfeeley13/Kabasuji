@@ -44,7 +44,7 @@ public class ReleaseTile extends Tile{
 		tileText.setHorizontalAlignment(SwingConstants.CENTER);
 		tileText.setFont(new Font("Lucida Grande", Font.BOLD, 25));
 		this.add(tileText);
-}
+	}
 
 	public String toString(){
 		return 	tileID + "\n" 
@@ -65,8 +65,6 @@ public class ReleaseTile extends Tile{
 			}else if(setColor == Color.PINK){
 				pArray[2][setNum-1].setBackground(setColor);
 			}
-
-
 		}
 	}
 	

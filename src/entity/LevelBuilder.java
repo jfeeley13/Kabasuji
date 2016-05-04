@@ -59,8 +59,6 @@ public class LevelBuilder{
 		Level currentState = getLevel();
 		moveDone(previousState, currentState);
 		return returnBoard;
-		
-		
 	}
 	
 	public void setTimer(int gameTimer){
@@ -89,7 +87,6 @@ public class LevelBuilder{
 		LevelBuilderMove newMove = new LevelBuilderMove(previousState);
 		newMove.doMove(currentState);
 		moves.push(newMove);
-		
 	}
 	/**
 	 * Undoes the last move done by the user
@@ -98,8 +95,8 @@ public class LevelBuilder{
 		IMove unknownMove = moves.pop();
 		LevelBuilderMove notSaveMove = (LevelBuilderMove) unknownMove; 
 		notSaveMove.revertMove();
-
 	}
+	
 	/**
 	 * Adds a hexomino onto the set of solutionPieces of level.
 	 * This hex should come from the inventory.

@@ -30,6 +30,9 @@ public class RotateController implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		tile = MListener.datboi;
+		this.tile.getBoard().rotated+=1;
+		this.tile.getBoard().drawHex(this.tile, 1, 1, Color.GREEN);
+		if(true) return;
 		//System.out.println("!!!! tile "+tile);
 		System.out.println("TILE NULL =" +this.tile == null);
 		
@@ -60,5 +63,4 @@ public class RotateController implements ActionListener {
 		   }
 	   }
 	}
-		
-	}
+}

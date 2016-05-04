@@ -51,6 +51,7 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 	
 	@Override
 	public void mousePressed(MouseEvent e) {
+		
 		if(tile.getBoard().getID()==2) bullPen=(BullPen)tile.getBoard();
 		lastID = tile.getBoard().getID();
 
@@ -59,14 +60,11 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 		//System.out.println("Piece id: " + ids.get(ids.size()-1));
 		
 		generateRandom();
-	
-		
+
 		Hexomino hex;
 		if(BoardBoss.selectedPiece==null) {
 			hex = (Hexomino) BoardBoss.pieceList.get(tile.getTileID());
 			System.out.println("Stuff...yo");
-			
-
 		}
 		else {
 			hex=BoardBoss.selectedPiece;
@@ -181,7 +179,10 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
   
 
     	if(tile.getBoard().selectedPiece!=null && tile.getBoard().lifted && !tile.getBoard().penPiece && tile.getBoard().getID()!=4){
-    		
+    		if(tile.getBoard().getID()==2 && lastBoard.getID()==3) {
+    			lastBoard.refresh();
+    			return;
+    		}
      		int x = this.tile.getCoords()[0];
     		int y = this.tile.getCoords()[1];
     		

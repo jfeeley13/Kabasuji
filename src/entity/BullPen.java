@@ -131,7 +131,6 @@ public class BullPen extends BoardBoss{
 	public void drawHex(Tile tile, int posx, int posy, Color c) {
 		
 
-
 		for(int i=0; i<6;i++){
 			int x = 0;
 			int y = 0;
@@ -207,11 +206,9 @@ public class BullPen extends BoardBoss{
 		for(int j=0; j<rows; j++) 
 			for(int k=0; k<cols; k++) 
 				if(boardArray[j][k].tileID<1000) {
-					
 					if(!boardArray[j][k].isHighlight)
 						boardArray[j][k].setBackground(Color.BLUE);
 					else {
-
 						boardArray[j][k].setHighlight(false);
 					}
 				}
