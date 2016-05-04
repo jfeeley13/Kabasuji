@@ -72,6 +72,66 @@ public class AllLevels {
 			
 		puzzle[5] = l;		
 	}
+	
+	public void initializeLightningOne() {
+		Level l = new Level(1);
+		AllHex allHex =new AllHex();
+		ArrayList <Hexomino> hexList = allHex.getHexominos(0,0,0,0,0,0);
+		l.setSolutionPieces(hexList);
+		l.initializeBoard("Lightning Level", 6, 6);
+		l.setTimer(20);
+		l.initializeBullPen();
+		
+		lightning[1] = l;
+	}
+	
+	public void initializeLightningTwo() {
+		Level l = new Level(2);
+		AllHex allHex =new AllHex();
+		ArrayList <Hexomino> hexList = allHex.getHexominos(0,0,0,0,0,0);
+		l.setSolutionPieces(hexList);
+		l.initializeBoard("Lightning Level", 6, 6);
+		l.setTimer(20);
+		l.initializeBullPen();
+		
+		lightning[2] = l;
+	}
+	
+	public void initializeLightningThree() {
+		Level l = new Level(3);
+		AllHex allHex =new AllHex();
+		ArrayList <Hexomino> hexList = allHex.getHexominos(0,0,0,0,0,0);
+		l.setSolutionPieces(hexList);
+		l.initializeBoard("Lightning Level", 6, 6);
+		l.setTimer(20);
+		l.initializeBullPen();
+		
+		lightning[3] = l;
+	}
+	
+	public void initializeLightningFour() {
+		Level l = new Level(4);
+		AllHex allHex =new AllHex();
+		ArrayList <Hexomino> hexList = allHex.getHexominos(0,0,0,0,0,0);
+		l.setSolutionPieces(hexList);
+		l.initializeBoard("Lightning Level", 6, 6);
+		l.setTimer(20);
+		l.initializeBullPen();
+		
+		lightning[4] = l;
+	}
+	
+	public void initializeLightningFive() {
+		Level l = new Level(5);
+		AllHex allHex =new AllHex();
+		ArrayList <Hexomino> hexList = allHex.getHexominos(0,0,0,0,0,0);
+		l.setSolutionPieces(hexList);
+		l.initializeBoard("Lightning Level", 6, 6);
+		l.setTimer(20);
+		l.initializeBullPen();
+		
+		lightning[5] = l;
+	}
 
 	
 	public void initializePuzzleLevels(int i) {
@@ -84,19 +144,12 @@ public class AllLevels {
 	}
 	
 
-	public void initializeLightningLevels(){
-		for(int i=0; i < 5; i++){
-			Level l = new Level(i);
-			AllHex allHex =new AllHex();
-			ArrayList <Hexomino> hexList = allHex.getHexominos(12,5,7,8,20);
-			l.setSolutionPieces(hexList);
-			l.initializeBoard("Lightning Level", 8, 8);
-			l.setTimer(20);
-			l.initializeBullPen();
-			
-			lightning[i] = l;
-			
-		}
+	public void initializeLightningLevels(int i){
+		if(i==1) initializeLightningOne();
+		if(i==2) initializeLightningTwo();
+		if(i==3) initializeLightningThree();
+		if(i==4) initializeLightningFour();
+		if(i==5) initializeLightningFive();
 	}
 	
 	public void initializeReleaseLevels(){

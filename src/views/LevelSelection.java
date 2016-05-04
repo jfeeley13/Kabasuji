@@ -112,7 +112,7 @@ public class LevelSelection {
 		
 		//In a loop of 5 load arrays buttons/labels
 		String star, starL,starR;
-		for(int i=0;i<5;i++){
+		for(int i=0;i<=5;i++){
 			star = Level.starPArray[i];
 
 			final int level=i+1;
@@ -183,9 +183,9 @@ public class LevelSelection {
 			if(Lightningstars[i].getText()!="locked"){
 				Lightningbuttons[i].addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						AllLevels allLevels =  new AllLevels();
-						allLevels.initializeLightningLevels();
-						//Level nw = new Level( allLevels.getLightningLevel(level) );
+						//AllLevels allLevels =  new AllLevels();
+						//allLevels.initializeLightningLevels();
+						Level nw = new Level(level, "Lightning Level" );
 						frame.dispose();
 						Level.openLevel("Lightning Level",level);
 					}

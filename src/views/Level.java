@@ -110,6 +110,11 @@ public class Level{
 			allLevels.initializePuzzleLevels(level);
 			Level.level = allLevels.getPuzzleLevel(level);
 		}
+		if(type=="Lightning Level") {
+			AllLevels allLevels = new AllLevels();
+			allLevels.initializeLightningLevels(level);
+			Level.level = allLevels.getLightningLevel(level);
+		}
 		initialize();
 		try {
 			gameControllers.LevelTimer.main(this);
