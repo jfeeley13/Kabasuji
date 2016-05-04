@@ -182,9 +182,12 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
 			greenbois=tile.getBoard().getGreenTiles();
 
 			if(greenbois==6) {
-				lastBoardState=savedBoardState.clone();
-        		System.out.println("saved ");
+				this.tile.getBoard().drawHex(this.tile, x, y, Color.GREEN);
 			}
+			//this.tile.getBoard().redraw();
+    		if(greenbois<6) {
+    			this.tile.getBoard().drawHex(this.tile, x, y, Color.RED);
+    		}
 			
 
     		int id = tile.getBoard().getID();
@@ -194,13 +197,7 @@ public class MListener extends MouseInputAdapter implements MouseListener, Mouse
     		}
     		
     		
-    			//this.tile.getBoard().redraw();
-        		if(greenbois<6) {
-            		//System.out.println("less than 6 ");
-
-        			this.tile.getBoard().setBoard(lastBoardState);
-        			this.tile.getBoard().drawHex(this.tile, x, y, Color.GREEN);
-        		}
+    			
     		
   
     		lastTileID=tileID;

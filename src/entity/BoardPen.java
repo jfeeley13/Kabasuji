@@ -138,7 +138,7 @@ public class BoardPen extends BoardBoss{
 	public void refresh() {
 		for(int j=0; j<width; j++) 
 			for(int k=0; k<height; k++) 
-				if(boardArray[j][k].isHighlight) {
+				if(boardArray[j][k].isHighlight || boardArray[j][k].getBackground()==Color.GREEN) {
 					boardArray[j][k].setBorder(boardPenBorder);
 					boardArray[j][k].setBackground(Color.decode("#4169aa"));
 				}
@@ -165,7 +165,13 @@ public class BoardPen extends BoardBoss{
 	public boolean rotateCheck(Tile tile) {
 		return true;
 	}
-
+	public int getGreenTiles() {
+ 		int greenBois=0;
+ 		for(int i=0;i<width;i++)
+ 			for(int j=0;j<height;j++)
+ 				if(boardArray[i][j].getBackground()==Color.GREEN) greenBois+=1;
+ 		return greenBois;
+ 	}
 	
 	/**
 	 * 	is piece at Tile tile escaping borders?

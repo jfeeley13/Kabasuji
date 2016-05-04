@@ -410,10 +410,10 @@ public class Level{
 		 * 
 		 */
 
-		pen.setPreferredSize(new Dimension(140, 350));
-		pen.setMaximumSize(new Dimension(140,350));
-		pen.setMinimumSize(new Dimension(140,350));
-		pen.setLayout(new GridLayout(35, 14));
+		pen.setPreferredSize(new Dimension(350, 140));
+		pen.setMaximumSize(new Dimension(350,140));
+		pen.setMinimumSize(new Dimension(350,140));
+		pen.setLayout(new GridLayout(14, 35));
 
 		Border penTileBorder = BorderFactory.createLineBorder(Color.WHITE, 1);
 		

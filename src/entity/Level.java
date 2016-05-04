@@ -47,11 +47,11 @@ public class Level {
 	
 	public BullPen initializeBullPen(){
 		this.pen = new BullPen();
-		pen.makeBoard(new PuzzleTile[14][35], 14, 35, 1);
+		pen.makeBoard(new PuzzleTile[14][35], 14, 35, 2);
 		this.pen.fillBoard();
 		BullPen.init = true;
 		for(int i = 0; i < solutionPieces.size(); i++){
-			pen.addHex(pen.getBoardArray()[pen.returnWidth()/2][i*6+1], i, solutionPieces.get(i));
+			pen.addHex(pen.getBoardArray()[7][i*6+1], i, solutionPieces.get(i));
 		}
 		BullPen.init = false;
 		return pen;

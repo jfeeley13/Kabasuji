@@ -283,7 +283,13 @@ public class BullPen extends BoardBoss{
 	public Tile[][] returnBoard() {
 		return boardArray;
 	}
-
+	public int getGreenTiles() {
+ 		int greenBois=0;
+ 		for(int i=0;i<width;i++)
+ 			for(int j=0;j<height;j++)
+ 				if(boardArray[i][j].getBackground()==Color.GREEN) greenBois+=1;
+ 		return greenBois;
+ 	}
 	public void clearPen() {
 		for(int i=0;i<rows;i++)
 			for(int j=0; j<cols;j++) {
